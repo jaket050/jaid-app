@@ -40,6 +40,8 @@
   padding: 20px 32px;
   border-bottom: 1px solid var(--border);
   align-items: center;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 .btn-study {
@@ -183,7 +185,7 @@
   display: flex;
   gap: 8px;
   margin-top: 14px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .btn-hint {
@@ -431,4 +433,18 @@
 
 .btn-back-to-browse:hover {
   filter: brightness(1.08);
+}
+
+@media (max-width: 600px) {
+  .app-header {
+    padding-bottom: 1.5rem;
+  }
+  .word-card__actions {
+    gap: 6px;
+  }
+  .btn-complete,
+  .btn-hint {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
 }
