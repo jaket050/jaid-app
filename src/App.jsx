@@ -10,6 +10,7 @@ function App() {
   const [words, setWords] = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState("all")
+  const [category, setCategory] = useState("all")
   const [view, setView] = useState("browse")
   const [error, setError] = useState(null)
   const [completedIds, toggleId] = useCompletedIds()
@@ -33,17 +34,23 @@ function App() {
     loadWords()
   }, [])
 
-  const filteredWords = filter === "all"
-    ? words
-    : words.filter((item) => item.type === filter)
+  const filteredWords = words.filter((word) => {
+    const typeMatch = filter === "all" || word.type === filter
+    const categoryMatch = category === "all" || word.category === category
+    return typeMatch && categoryMatch
+  })
 
   const completedCount = words.filter((item) => completedIds.has(item.id)).length
 
+  const inCategory = (item) => category === "all" || item.category === category
   const counts = {
-    all: words.length,
-    words: words.filter((item) => item.type === "word").length,
-    sayings: words.filter((item) => item.type === "saying").length
+    all: words.filter(inCategory).length,
+    words: words.filter((item) => item.type === "word" && inCategory(item)).length,
+    sayings: words.filter((item) => item.type === "saying" && inCategory(item)).length
   }
+
+  const categoryValues = [...new Set(words.filter(w => w.category).map(w => w.category))].sort()
+  const categories = ["all", ...categoryValues]
 
   if (loading) return <p>Loading JAID vocabulary...</p>
   if (error) return <p>{error}</p>
@@ -70,6 +77,9 @@ function App() {
       <FilterBar
         filter={filter}
         onFilterChange={setFilter}
+        category={category}
+        onCategoryChange={setCategory}
+        categories={categories}
         counts={counts}
         onStartStudy={() => setView("study")}
         studyDisabled={filteredWords.length === 0}
