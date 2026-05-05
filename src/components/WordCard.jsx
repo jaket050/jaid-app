@@ -7,7 +7,7 @@ function WordCard({ chamorro, english, type, difficulty, culturalNote, isComplet
   const getHint = async () => {
     setLoadingHint(true)
     try {
-      const response = await fetch('http://localhost:3001/api/hint', {
+      const response = await fetch('https://jaid-server-production.up.railway.app/api/hint', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chamorro, english, culturalNote })

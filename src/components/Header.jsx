@@ -14,7 +14,7 @@ function Header({ totalWords, completedCount, words, completedIds }) {
       const completedDifficulty1 = words.filter(w => w.difficulty === 1 && completedIds.has(w.id)).length
       const completedDifficulty2 = words.filter(w => w.difficulty === 2 && completedIds.has(w.id)).length
 
-      const response = await fetch('http://localhost:3001/api/study-suggestion', {
+      const response = await fetch('http://jaid-server-production.up.railway.app/api/study-suggestion', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

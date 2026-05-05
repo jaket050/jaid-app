@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     const loadWords = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/vocabulary')
+        const response = await fetch('https://jaid-server-production.up.railway.app/api/vocabulary')
         if (!response.ok) {
           throw new Error(`Server error: ${response.status}`)
         }
