@@ -34,6 +34,62 @@
   color: var(--text);
 }
 
+.hero-section { position: relative; }
+
+.hero-image-wrapper { position: relative; width: 100%; height: 480px; overflow: hidden; }
+
+.hero-image { width: 100%; height: 100%; object-fit: cover; object-position: center 60%; display: block; }
+
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(5,25,20,0.3) 50%, rgba(5,25,20,0.75) 100%); }
+
+.hero-content { background: rgba(5,25,20,0.92); padding: 1.5rem 2rem 2rem; text-align: center; }
+
+.hero-content h1 { color: #ffffff; font-size: 3.5rem; letter-spacing: -1px; margin: 0 0 0.25rem; }
+
+.hero-content .header-subtitle { color: rgba(255,255,255,0.7); }
+
+.hero-content p { color: rgba(255,255,255,0.5); }
+
+.hero-content .progress { color: rgba(255,255,255,0.6); }
+
+.hero-content .progress-bar { background: rgba(255,255,255,0.12); }
+
+.hero-content .btn-suggestion { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); background: transparent; }
+
+.photo-credit { position: absolute; bottom: 6px; right: 10px; font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; }
+
+.hero-title-block {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-title-block h1 {
+  color: #ffffff;
+  font-size: 5rem;
+  font-weight: 700;
+  letter-spacing: -3px;
+  line-height: 1;
+  margin: 0;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+
+.hero-title-block .header-subtitle {
+  color: rgba(255,255,255,0.9);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+}
+
 .filter-bar {
   display: flex;
   gap: 8px;
@@ -446,5 +502,8 @@
   .btn-hint {
     font-size: 11px;
     padding: 6px 12px;
+  }
+  .hero-image-wrapper {
+    height: 300px;
   }
 }

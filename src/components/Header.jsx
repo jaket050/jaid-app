@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function Header({ totalWords, completedCount, words, completedIds }) {
+function Header({ totalWords, completedCount }) {
   const [suggestion, setSuggestion] = useState(null)
   const [loadingSuggestion, setLoadingSuggestion] = useState(false)
 
@@ -11,17 +11,12 @@ function Header({ totalWords, completedCount, words, completedIds }) {
   const getSuggestion = async () => {
     setLoadingSuggestion(true)
     try {
-      const completedDifficulty1 = words.filter(w => w.difficulty === 1 && completedIds.has(w.id)).length
-      const completedDifficulty2 = words.filter(w => w.difficulty === 2 && completedIds.has(w.id)).length
-
       const response = await fetch('http://jaid-server-production.up.railway.app/api/study-suggestion', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           completedCount,
-          totalCount: totalWords,
-          completedDifficulty1,
-          completedDifficulty2
+          totalCount: totalWords
         })
       })
       const data = await response.json()
@@ -34,25 +29,34 @@ function Header({ totalWords, completedCount, words, completedIds }) {
   }
 
   return (
-    <div className="app-header">
-      <h1>JAID</h1>
-      <h2 className="header-subtitle">Joining Ancestors In Dialogue</h2>
-      <p>Chamorro Language Learning</p>
-      <p className="progress">
-        {completedCount} of {totalWords} words completed{' '}
-        <span className="counter">{percentage}%</span>
-      </p>
-      <div className="progress-bar">
-        <div className="progress-bar__fill" style={{ width: `${percentage}%` }} />
+    <div className="hero-section">
+      <div className="hero-image-wrapper">
+        <img src="/tumon-bay.jpg" alt="Tumon Bay, Guam" className="hero-image" />
+        <div className="hero-overlay" />
+        <div className="hero-title-block">
+          <h1>JAID</h1>
+          <h2 className="header-subtitle">Joining Ancestors In Dialogue</h2>
+        </div>
+        <span className="photo-credit">Photo: Sung Jin Cho / Unsplash</span>
       </div>
-      <button
-        className="btn-suggestion"
-        onClick={getSuggestion}
-        disabled={loadingSuggestion}
-      >
-        {loadingSuggestion ? "Thinking..." : suggestion ? "New Suggestion" : "Get Study Suggestion"}
-      </button>
-      {suggestion && <p className="suggestion">{suggestion}</p>}
+      <div className="hero-content">
+        <p>Chamorro Language Learning</p>
+        <p className="progress">
+          {completedCount} of {totalWords} words completed{' '}
+          <span className="counter">{percentage}%</span>
+        </p>
+        <div className="progress-bar">
+          <div className="progress-bar__fill" style={{ width: `${percentage}%` }} />
+        </div>
+        <button
+          className="btn-suggestion"
+          onClick={getSuggestion}
+          disabled={loadingSuggestion}
+        >
+          {loadingSuggestion ? "Thinking..." : suggestion ? "New Suggestion" : "Get Study Suggestion"}
+        </button>
+        {suggestion && <p className="suggestion">{suggestion}</p>}
+      </div>
     </div>
   )
 }
