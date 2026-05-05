@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --text: #0D1A14;
+  --text-h: #0D1A14;
+  --text-secondary: #4A8A80;
+  --bg: #F7FAF9;
+  --card-bg: #ffffff;
+  --border: #D0E8E2;
+  --code-bg: rgba(11, 122, 106, 0.08);
+  --accent: #0B7A6A;
+  --accent-bg: #EEF7F5;
+  --accent-border: #D0E8E2;
+  --gold: #C4922A;
+  --gold-bg: #FBF6ED;
+  --gold-border: rgba(196, 146, 42, 0.4);
+  --gold-text: #6B4F2A;
+  --social-bg: rgba(247, 250, 249, 0.5);
+  --shadow:
+    rgba(13, 26, 20, 0.08) 0 4px 12px -2px, rgba(13, 26, 20, 0.04) 0 2px 4px -1px;
+
+  --sans: 'Nunito', system-ui, sans-serif;
+  --heading: 'Playfair Display', Georgia, serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  font-weight: 600;
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #ffffff;
+    --text-h: #ffffff;
+    --bg: #0D2E57;
+    --card-bg: #163A6B;
+    --border: #1e4a80;
+    --code-bg: #1a3d6e;
+    --accent: #1D9E75;
+    --accent-bg: rgba(29, 158, 117, 0.12);
+    --accent-border: rgba(29, 158, 117, 0.45);
+    --gold: #D4A82A;
+    --gold-bg: rgba(212, 168, 42, 0.12);
+    --gold-border: rgba(212, 168, 42, 0.45);
+    --gold-text: #ffffff;
+    --social-bg: rgba(22, 58, 107, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 4px 12px -2px, rgba(0, 0, 0, 0.25) 0 2px 4px -1px;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 4.5rem;
+  letter-spacing: -2px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 3rem;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 1.5rem;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
