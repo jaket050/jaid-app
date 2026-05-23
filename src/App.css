@@ -515,3 +515,32 @@
     height: 300px;
   }
 }
+
+.study-mode__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--color-earth, #1a3a2a);
+}
+
+.btn-exit-study {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 0.4rem 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.btn-exit-study:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.study-mode__progress {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}

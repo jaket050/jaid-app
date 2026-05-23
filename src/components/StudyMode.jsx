@@ -48,6 +48,10 @@ function StudyMode({ words, completedIds, toggleId, onExit }) {
 
   return (
     <div className="study-mode">
+      <div className="study-mode__header">
+        <button className="btn-exit-study" onClick={onExit}>← Home</button>
+        <span className="study-mode__progress">{gotItIds.size} learned · {queue.length} to go</span>
+      </div>
       <FlashCard
         key={`${card.id}-${queue.length}`}
         chamorro={card.chamorro}
