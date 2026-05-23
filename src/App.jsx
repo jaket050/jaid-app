@@ -4,6 +4,7 @@ import WordCard from './components/WordCard'
 import Header from './components/Header'
 import FilterBar from './components/FilterBar'
 import StudyMode from './components/StudyMode'
+import Alphabet from './components/Alphabet'
 import { useCompletedIds } from './hooks/useCompletedIds'
 
 function App() {
@@ -66,6 +67,12 @@ function App() {
     )
   }
 
+  if (view === "alphabet") {
+    return (
+      <Alphabet onExit={() => setView("browse")} />
+    )
+  }
+
   return (
     <div>
       <Header
@@ -83,6 +90,7 @@ function App() {
         counts={counts}
         onStartStudy={() => setView("study")}
         studyDisabled={filteredWords.length === 0}
+        onShowAlphabet={() => setView("alphabet")}
       />
       <div className="card-list">
         {filteredWords.length === 0 ? (

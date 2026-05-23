@@ -1,4 +1,4 @@
-function FilterBar({ filter, onFilterChange, category, onCategoryChange, categories, counts, onStartStudy, studyDisabled }) {
+function FilterBar({ filter, onFilterChange, category, onCategoryChange, categories, counts, onStartStudy, studyDisabled, onShowAlphabet }) {
   const studyCount =
     filter === 'all' ? counts.all : filter === 'word' ? counts.words : counts.sayings
 
@@ -29,6 +29,9 @@ function FilterBar({ filter, onFilterChange, category, onCategoryChange, categor
           disabled={studyDisabled}
         >
           Practice ({studyCount})
+        </button>
+        <button className="btn-alphabet" onClick={onShowAlphabet}>
+          I Atfabetu
         </button>
       </div>
       {categories.length > 1 && (
