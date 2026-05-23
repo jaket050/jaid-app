@@ -705,9 +705,9 @@
 }
 
 .btn-alphabet {
-  background: transparent;
-  border: 1px solid #1a3a5c;
-  color: #1a3a5c;
+  background: #2d6a4f;
+  border: 1px solid #2d6a4f;
+  color: #fff;
   padding: 0.5rem 1.1rem;
   border-radius: 4px;
   cursor: pointer;
@@ -717,6 +717,6 @@
 }
 
 .btn-alphabet:hover {
-  background: #1a3a5c;
-  color: #fff;
+  background: #1e4d38;
+  border-color: #1e4d38;
 }
