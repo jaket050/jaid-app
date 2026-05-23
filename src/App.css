@@ -54,8 +54,6 @@
 
 .hero-content .progress-bar { background: rgba(255,255,255,0.12); }
 
-.hero-content .btn-suggestion { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); background: transparent; }
-
 .photo-credit { position: absolute; bottom: 6px; right: 10px; font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; }
 
 .hero-title-block {
@@ -286,46 +284,6 @@
   padding: 8px 12px;
   border-radius: 0 6px 6px 0;
   margin: 10px 0 0;
-  font-style: italic;
-}
-
-.btn-suggestion {
-  margin-top: 12px;
-  padding: 8px 18px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 13px;
-  font-family: var(--sans);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  border: 1px solid var(--accent-border);
-  color: var(--accent);
-  background: var(--accent-bg);
-  transition: all 0.2s;
-}
-
-.btn-suggestion:hover {
-  background: var(--accent);
-  color: var(--bg);
-}
-
-.btn-suggestion:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.suggestion {
-  font-size: 14px;
-  color: var(--text);
-  background: var(--accent-bg);
-  border-left: 3px solid var(--accent);
-  padding: 10px 14px;
-  border-radius: 0 6px 6px 0;
-  margin-top: 12px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
   font-style: italic;
 }
 

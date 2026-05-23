@@ -1,32 +1,7 @@
-import { useState } from 'react'
-
 function Header({ totalWords, completedCount }) {
-  const [suggestion, setSuggestion] = useState(null)
-  const [loadingSuggestion, setLoadingSuggestion] = useState(false)
-
   const percentage = totalWords > 0
     ? Math.round((completedCount / totalWords) * 100)
     : 0
-
-  const getSuggestion = async () => {
-    setLoadingSuggestion(true)
-    try {
-      const response = await fetch('http://jaid-server-production.up.railway.app/api/study-suggestion', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          completedCount,
-          totalCount: totalWords
-        })
-      })
-      const data = await response.json()
-      setSuggestion(data.suggestion)
-    } catch {
-      setSuggestion("Could not load suggestion. Please try again.")
-    } finally {
-      setLoadingSuggestion(false)
-    }
-  }
 
   return (
     <div className="hero-section">
@@ -49,14 +24,6 @@ function Header({ totalWords, completedCount }) {
         <div className="progress-bar">
           <div className="progress-bar__fill" style={{ width: `${percentage}%` }} />
         </div>
-        <button
-          className="btn-suggestion"
-          onClick={getSuggestion}
-          disabled={loadingSuggestion}
-        >
-          {loadingSuggestion ? "Thinking..." : suggestion ? "New Suggestion" : "Get Study Suggestion"}
-        </button>
-        {suggestion && <p className="suggestion">{suggestion}</p>}
       </div>
     </div>
   )
