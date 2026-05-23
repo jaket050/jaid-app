@@ -517,6 +517,7 @@
 }
 
 .study-mode__header {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -537,6 +538,16 @@
 
 .btn-exit-study:hover {
   background: rgba(255,255,255,0.1);
+}
+
+.study-mode__brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--heading);
+  color: #fff;
+  letter-spacing: 0.15em;
+  font-size: 1rem;
 }
 
 .study-mode__progress {

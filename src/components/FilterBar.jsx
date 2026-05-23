@@ -28,7 +28,7 @@ function FilterBar({ filter, onFilterChange, category, onCategoryChange, categor
           onClick={onStartStudy}
           disabled={studyDisabled}
         >
-          Study ({studyCount})
+          Practice ({studyCount})
         </button>
       </div>
       {categories.length > 1 && (

@@ -50,6 +50,7 @@ function StudyMode({ words, completedIds, toggleId, onExit }) {
     <div className="study-mode">
       <div className="study-mode__header">
         <button className="btn-exit-study" onClick={onExit}>← Home</button>
+        <span className="study-mode__brand">JAID</span>
         <span className="study-mode__progress">{gotItIds.size} learned · {queue.length} to go</span>
       </div>
       <FlashCard
