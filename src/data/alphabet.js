@@ -22,7 +22,7 @@ export const chamorroAlphabet = [
   { letter: "S", name: "s", type: "consonant", pronunciation: "as in English", example: "sångan", exampleEnglish: "to say, to tell" },
   { letter: "T", name: "t", type: "consonant", pronunciation: "as in English", example: "tohgi", exampleEnglish: "to stand" },
   { letter: "U", name: "u", type: "vowel", pronunciation: "as in tube or glue", example: "Unai", exampleEnglish: "sand" },
-  { letter: "Y", name: "y", type: "consonant", pronunciation: "as in jar or juice", example: "yu'", exampleEnglish: "me, I" }
+  { letter: "Y", name: "y", type: "consonant", pronunciation: "sounds like Z, as in zoo", example: "yu'", exampleEnglish: "me, I" }
 ]
 
 export const vowels = ["A", "Å", "E", "I", "O", "U"]
