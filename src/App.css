@@ -1,6 +1,6 @@
 .counter {
+  display: none;
   font-family: var(--mono);
-  display: inline-flex;
   border-radius: 4px;
   font-size: 15px;
   padding: 4px 10px;
@@ -512,8 +512,9 @@
 .study-mode__progress {
   text-align: right;
   color: rgba(255,255,255,0.7);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .alphabet-page {
