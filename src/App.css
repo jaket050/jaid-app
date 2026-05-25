@@ -694,3 +694,16 @@
 .btn-alphabet:hover {
   filter: brightness(1.08);
 }
+
+@media (max-width: 768px) {
+  .flashcard {
+    max-height: 60vh;
+    min-height: 0;
+  }
+
+  .study-mode {
+    padding: 1rem;
+    align-items: flex-start;
+    padding-top: 1.5rem;
+  }
+}
