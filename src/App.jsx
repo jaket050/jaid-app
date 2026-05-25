@@ -50,6 +50,9 @@ function App() {
     sayings: words.filter((item) => item.type === "saying" && inCategory(item)).length
   }
 
+  const studyCount =
+    filter === 'all' ? counts.all : filter === 'word' ? counts.words : counts.sayings
+
   const categoryValues = [...new Set(words.filter(w => w.category).map(w => w.category))].sort()
   const categories = ["all", ...categoryValues]
 
@@ -81,6 +84,18 @@ function App() {
         words={words}
         completedIds={completedIds}
       />
+      <div className="action-bar">
+        <button
+          className="btn-study"
+          onClick={() => setView("study")}
+          disabled={filteredWords.length === 0}
+        >
+          PRACTICE ({studyCount})
+        </button>
+        <button className="btn-alphabet" onClick={() => setView("alphabet")}>
+          I ATFABETU
+        </button>
+      </div>
       <FilterBar
         filter={filter}
         onFilterChange={setFilter}
@@ -88,9 +103,6 @@ function App() {
         onCategoryChange={setCategory}
         categories={categories}
         counts={counts}
-        onStartStudy={() => setView("study")}
-        studyDisabled={filteredWords.length === 0}
-        onShowAlphabet={() => setView("alphabet")}
       />
       <div className="card-list">
         {filteredWords.length === 0 ? (

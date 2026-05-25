@@ -674,6 +674,22 @@
   text-transform: uppercase;
 }
 
+.action-bar {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.action-bar .btn-study {
+  flex: 1;
+}
+
+.action-bar .btn-alphabet {
+  flex: 1;
+}
+
 .btn-alphabet:hover {
   background: #1e4d38;
   border-color: #1e4d38;
