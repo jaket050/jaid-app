@@ -305,11 +305,16 @@
 .study-mode {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 4rem 2rem;
-  min-height: calc(100vh - 60px);
+  min-height: 100dvh;
   background: #1a3a5c;
-  box-sizing: border-box;
+}
+
+.study-mode__card-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
 .flashcard {
@@ -696,18 +701,7 @@
 }
 
 @media (max-width: 768px) {
-  .study-mode {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100dvh;
-    padding: 1rem;
-    box-sizing: border-box;
-  }
-
   .flashcard {
-    width: 100%;
     max-height: 55vh;
     min-height: 0;
   }

@@ -53,15 +53,17 @@ function StudyMode({ words, completedIds, toggleId, onExit }) {
         <span className="study-mode__brand">JAID</span>
         <span className="study-mode__progress">{gotItIds.size} learned · {queue.length} to go</span>
       </div>
-      <FlashCard
-        key={`${card.id}-${queue.length}`}
-        chamorro={card.chamorro}
-        english={card.english}
-        revealed={revealed}
-        onReveal={() => setRevealed(true)}
-        onGotIt={handleGotIt}
-        onPracticeMore={handlePracticeMore}
-      />
+      <div className="study-mode__card-area">
+        <FlashCard
+          key={`${card.id}-${queue.length}`}
+          chamorro={card.chamorro}
+          english={card.english}
+          revealed={revealed}
+          onReveal={() => setRevealed(true)}
+          onGotIt={handleGotIt}
+          onPracticeMore={handlePracticeMore}
+        />
+      </div>
     </div>
   )
 }
