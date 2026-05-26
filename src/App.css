@@ -705,4 +705,21 @@
     max-height: 55vh;
     min-height: 0;
   }
+
+  .filter-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .filter-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-row .filter-btn {
+    flex-shrink: 0;
+  }
 }
