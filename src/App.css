@@ -703,7 +703,6 @@
 
   .study-mode {
     padding: 1rem;
-    align-items: flex-start;
-    padding-top: 1.5rem;
+    align-items: center;
   }
 }
