@@ -307,7 +307,7 @@
   flex-direction: column;
   align-items: center;
   padding: 4rem 2rem;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   background: #1a3a5c;
   box-sizing: border-box;
 }
@@ -697,7 +697,7 @@
 
 @media (max-width: 768px) {
   .flashcard {
-    max-height: 60vh;
+    max-height: 55vh;
     min-height: 0;
   }
 
