@@ -696,13 +696,19 @@
 }
 
 @media (max-width: 768px) {
-  .flashcard {
-    max-height: 55vh;
-    min-height: 0;
+  .study-mode {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+    padding: 1rem;
+    box-sizing: border-box;
   }
 
-  .study-mode {
-    padding: 1rem;
-    align-items: center;
+  .flashcard {
+    width: 100%;
+    max-height: 55vh;
+    min-height: 0;
   }
 }
