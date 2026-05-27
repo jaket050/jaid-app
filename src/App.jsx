@@ -4,6 +4,7 @@ import WordCard from './components/WordCard'
 import Header from './components/Header'
 import FilterBar from './components/FilterBar'
 import StudyMode from './components/StudyMode'
+import DeckSelect from './components/DeckSelect'
 import Alphabet from './components/Alphabet'
 import { useCompletedIds } from './hooks/useCompletedIds'
 
@@ -76,6 +77,20 @@ function App() {
     )
   }
 
+  if (view === "deck-select") {
+    return (
+      <DeckSelect
+        words={words}
+        onSelectDeck={(selectedCategory) => {
+          setFilter("all")
+          setCategory(selectedCategory)
+          setView("study")
+        }}
+        onExit={() => setView("browse")}
+      />
+    )
+  }
+
   return (
     <div>
       <Header
@@ -87,7 +102,7 @@ function App() {
       <div className="action-bar">
         <button
           className="btn-study"
-          onClick={() => setView("study")}
+          onClick={() => setView("deck-select")}
           disabled={filteredWords.length === 0}
         >
           PRACTICE ({studyCount})

@@ -727,3 +727,81 @@
     flex-shrink: 0;
   }
 }
+.deck-select {
+  min-height: 100dvh;
+  background: #1a3a5c;
+  display: flex;
+  flex-direction: column;
+}
+
+.deck-select__content {
+  flex: 1;
+  padding: 2rem 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.deck-select__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 0.25rem;
+  text-align: center;
+}
+
+.deck-select__subtitle {
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.deck-select__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.deck-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 1.25rem 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.deck-card:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.deck-card--all {
+  background: rgba(45,106,79,0.4);
+  border-color: rgba(45,106,79,0.8);
+  grid-column: 1 / -1;
+}
+
+.deck-card--all:hover {
+  background: rgba(45,106,79,0.6);
+}
+
+.deck-card__name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  color: #fff;
+  display: block;
+}
+
+.deck-card__count {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.05em;
+  display: block;
+}
