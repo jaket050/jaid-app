@@ -250,6 +250,10 @@
   flex-wrap: nowrap;
 }
 
+.hint-section {
+  margin-top: 0.75rem;
+}
+
 .btn-hint {
   margin-top: 0;
   padding: 8px 18px;
