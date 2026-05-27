@@ -726,12 +726,21 @@
   .filter-row .filter-btn {
     flex-shrink: 0;
   }
+
+  .deck-select__content {
+    padding: 1.5rem 1rem;
+  }
+
+  .deck-select__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 .deck-select {
   min-height: 100dvh;
   background: #1a3a5c;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .deck-select__content {
@@ -740,6 +749,7 @@
   max-width: 800px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .deck-select__title {
