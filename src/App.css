@@ -861,15 +861,15 @@
 }
 
 .wave-divider {
-  width: 100%;
-  margin: 1.75rem 0;
-  overflow: hidden;
+  text-align: center;
+  margin: 2rem 0;
 }
 
-.wave-divider svg {
-  width: 100%;
-  height: 30px;
-  display: block;
+.wave-divider__ornament {
+  color: #2d6a4f;
+  font-size: 0.5rem;
+  letter-spacing: 0.6em;
+  opacity: 0.6;
 }
 
 .about-section {
