@@ -6,6 +6,7 @@ import FilterBar from './components/FilterBar'
 import StudyMode from './components/StudyMode'
 import DeckSelect from './components/DeckSelect'
 import Alphabet from './components/Alphabet'
+import About from './components/About'
 import { useCompletedIds } from './hooks/useCompletedIds'
 
 function App() {
@@ -77,6 +78,10 @@ function App() {
     )
   }
 
+  if (view === "about") {
+    return <About onExit={() => setView("browse")} />
+  }
+
   if (view === "deck-select") {
     return (
       <DeckSelect
@@ -136,6 +141,11 @@ function App() {
             />
           ))
         )}
+      </div>
+      <div className="app-footer">
+        <button className="btn-about" onClick={() => setView("about")}>
+          About JAID
+        </button>
       </div>
     </div>
   )
