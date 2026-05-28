@@ -929,9 +929,9 @@
 }
 
 .about-pullquote {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  font-size: 1.2rem;
+  font-family: var(--font-script);
+  font-style: normal;
+  font-size: 1.6rem;
   color: #1a3a5c;
   text-align: center;
   margin: 2rem auto;
@@ -947,11 +947,11 @@
 }
 
 .about-dedication__text {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  font-size: 1rem;
+  font-family: var(--font-script);
+  font-style: normal;
+  font-size: 1.5rem;
   color: #2d6a4f;
-  line-height: 1.9;
+  line-height: 2;
   letter-spacing: 0.02em;
 }
 

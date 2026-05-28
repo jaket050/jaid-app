@@ -22,6 +22,7 @@
   --sans: 'Nunito', system-ui, sans-serif;
   --heading: 'Playfair Display', Georgia, serif;
   --mono: ui-monospace, Consolas, monospace;
+  --font-script: 'Pinyon Script', cursive;
 
   font: 18px/145% var(--sans);
   font-weight: 600;
