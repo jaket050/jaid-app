@@ -50,7 +50,7 @@ function About({ onExit }) {
         <div className="about-section">
           <div className="about-section__diamond">◆</div>
           <h2 className="about-section__title">What Is Coming</h2>
-          <p className="about-section__body">Native speaker audio recordings, thematic lessons, spaced repetition, and community features are all on the roadmap. If you are CHamoru and want to be part of shaping what JAID becomes, we want to hear from you.</p>
+          <p className="about-section__body">Native speaker audio recordings, thematic lessons, spaced repetition, and community features are all on the roadmap.</p>
         </div>
 
         <WaveDivider />
