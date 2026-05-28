@@ -737,6 +737,24 @@
   .deck-select__grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .action-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+  }
+
+  .action-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .action-bar .btn-study,
+  .action-bar .btn-alphabet,
+  .action-bar .btn-about-nav {
+    flex: 0 0 auto;
+    min-width: 120px;
+  }
 }
 .deck-select {
   min-height: 100dvh;
