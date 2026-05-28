@@ -930,29 +930,28 @@
 
 .about-pullquote {
   font-family: var(--font-script);
-  font-style: normal;
-  font-size: 1.6rem;
-  color: #1a3a5c;
+  font-size: 1.85rem;
+  color: #111111;
   text-align: center;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  line-height: 1.7;
+  margin: 2.5rem auto;
+  padding: 1rem 0.5rem;
+  line-height: 1.8;
   border: none;
   max-width: 480px;
 }
 
 .about-dedication {
   text-align: center;
-  padding: 2.5rem 1rem;
+  padding: 3.5rem 1rem;
 }
 
 .about-dedication__text {
   font-family: var(--font-script);
-  font-style: normal;
-  font-size: 1.5rem;
-  color: #2d6a4f;
-  line-height: 2;
+  font-size: 1.75rem;
+  color: #111111;
+  line-height: 2.1;
   letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .about-footer {
