@@ -682,6 +682,7 @@
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 .action-bar {
@@ -842,7 +843,7 @@
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 3rem;
   color: #1a3a5c;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.6rem;
   letter-spacing: 0.08em;
 }
 
@@ -851,6 +852,7 @@
   font-style: italic;
   font-size: 1.1rem;
   color: #2d6a4f;
+  margin-top: 0.4rem;
   margin-bottom: 1.25rem;
 }
 
@@ -861,15 +863,17 @@
 }
 
 .wave-divider {
-  text-align: center;
-  margin: 2rem 0;
-}
-
-.wave-divider__ornament {
-  color: #2d6a4f;
-  font-size: 0.5rem;
-  letter-spacing: 0.6em;
-  opacity: 0.6;
+  margin: 2rem auto;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(26, 58, 92, 0.3) 20%,
+    rgba(26, 58, 92, 0.3) 80%,
+    transparent
+  );
+  border: none;
 }
 
 .about-section {
@@ -955,6 +959,7 @@
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-weight: 600;
   flex: 1;
 }
 
