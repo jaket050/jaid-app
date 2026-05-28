@@ -115,6 +115,9 @@ function App() {
         <button className="btn-alphabet" onClick={() => setView("alphabet")}>
           I ATFABETU
         </button>
+        <button className="btn-about-nav" onClick={() => setView("about")}>
+          ABOUT
+        </button>
       </div>
       <FilterBar
         filter={filter}
@@ -141,11 +144,6 @@ function App() {
             />
           ))
         )}
-      </div>
-      <div className="app-footer">
-        <button className="btn-about" onClick={() => setView("about")}>
-          About JAID
-        </button>
       </div>
     </div>
   )
