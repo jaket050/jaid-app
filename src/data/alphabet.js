@@ -14,14 +14,14 @@ export const chamorroAlphabet = [
   { letter: "L", name: "l", type: "consonant", pronunciation: "as in English", example: "låpes", exampleEnglish: "pencil" },
   { letter: "M", name: "m", type: "consonant", pronunciation: "as in English", example: "ma'estra", exampleEnglish: "female teacher" },
   { letter: "N", name: "n", type: "consonant", pronunciation: "as in English", example: "nå'an", exampleEnglish: "name" },
-  { letter: "Ñ", name: "ñ", type: "consonant", pronunciation: "as in onion", example: "Ñåhlang", exampleEnglish: "hungry" },
-  { letter: "NG", name: "ng", type: "consonant", pronunciation: "semi-consonant, as in sing or jingle", example: "Ngelu", exampleEnglish: "to peek" },
+  { letter: "Ñ", name: "ñ", type: "consonant", pronunciation: "as in onion", example: "ñåhlang", exampleEnglish: "hungry" },
+  { letter: "NG", name: "ng", type: "consonant", pronunciation: "semi-consonant, as in sing or jingle", example: "ngelu", exampleEnglish: "to peek" },
   { letter: "O", name: "o", type: "vowel", pronunciation: "as in toe or go", example: "ora", exampleEnglish: "time, hour" },
   { letter: "P", name: "p", type: "consonant", pronunciation: "as in English", example: "på'gu", exampleEnglish: "today, now" },
-  { letter: "R", name: "r", type: "consonant", pronunciation: "as in English", example: "Respeti", exampleEnglish: "respect" },
+  { letter: "R", name: "r", type: "consonant", pronunciation: "as in English", example: "respeti", exampleEnglish: "respect" },
   { letter: "S", name: "s", type: "consonant", pronunciation: "as in English", example: "sångan", exampleEnglish: "to say, to tell" },
   { letter: "T", name: "t", type: "consonant", pronunciation: "as in English", example: "tohgi", exampleEnglish: "to stand" },
-  { letter: "U", name: "u", type: "vowel", pronunciation: "as in tube or glue", example: "Unai", exampleEnglish: "sand" },
+  { letter: "U", name: "u", type: "vowel", pronunciation: "as in tube or glue", example: "unai", exampleEnglish: "sand" },
   { letter: "Y", name: "y", type: "consonant", pronunciation: "sounds like Z, as in zoo", example: "yu'", exampleEnglish: "me, I" }
 ]
 
