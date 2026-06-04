@@ -17,7 +17,7 @@ export const chamorroAlphabet = [
   { letter: "Ñ", name: "ñ", type: "consonant", pronunciation: "as in onion", example: "ñåhlang", exampleEnglish: "hungry" },
   { letter: "NG", name: "ng", type: "consonant", pronunciation: "semi-consonant, as in sing or jingle", example: "ngelu", exampleEnglish: "to peek" },
   { letter: "O", name: "o", type: "vowel", pronunciation: "as in toe or go", example: "ora", exampleEnglish: "time, hour" },
-  { letter: "P", name: "p", type: "consonant", pronunciation: "as in English", example: "på'gu", exampleEnglish: "today, now" },
+  { letter: "P", name: "p", type: "consonant", pronunciation: "as in English", example: "på'go", exampleEnglish: "today, now" },
   { letter: "R", name: "r", type: "consonant", pronunciation: "as in English", example: "respetu", exampleEnglish: "respect" },
   { letter: "S", name: "s", type: "consonant", pronunciation: "as in English", example: "sångan", exampleEnglish: "to say, to tell" },
   { letter: "T", name: "t", type: "consonant", pronunciation: "as in English", example: "tohgi", exampleEnglish: "to stand" },
