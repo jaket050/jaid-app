@@ -1,7 +1,7 @@
 export const chamorroAlphabet = [
   { letter: "' (Glotta)", name: "glottal stop", type: "consonant", pronunciation: "A brief stop of breath, like the pause in uh-oh. Can change the meaning of a word.", example: "ma'estru", exampleEnglish: "male teacher", note: "The glottal sound can distinctly alter the meaning and translation of a word." },
   { letter: "A", name: "a", type: "vowel", pronunciation: "as in apple", example: "adios", exampleEnglish: "goodbye" },
-  { letter: "Å", name: "å", type: "vowel", pronunciation: "as in father", example: "åhi'", exampleEnglish: "no" },
+  { letter: "Å", name: "å", type: "vowel", pronunciation: "as in father", example: "åhe'", exampleEnglish: "no" },
   { letter: "B", name: "b", type: "consonant", pronunciation: "as in English", example: "buenas", exampleEnglish: "hello" },
   { letter: "CH", name: "ch", type: "consonant", pronunciation: "semi-consonant", example: "che'lu", exampleEnglish: "sibling" },
   { letter: "D", name: "d", type: "consonant", pronunciation: "as in English", example: "dångkolo", exampleEnglish: "big, large, great" },
