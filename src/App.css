@@ -569,26 +569,68 @@
   margin-bottom: 3rem;
 }
 
-.alphabet-card {
-  background: #fff;
+.alphabet-flip-container {
+  perspective: 1000px;
+  cursor: pointer;
+  min-height: 180px;
+}
+
+.alphabet-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.alphabet-flip-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.alphabet-card--front,
+.alphabet-card--back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 1.2rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  box-sizing: border-box;
+  background: #fff;
 }
 
-.alphabet-card--vowel {
+.alphabet-card--back {
+  transform: rotateY(180deg);
+  background: #f0faf4;
+  border-color: #2d6a4f;
+}
+
+.alphabet-card--vowel.alphabet-card--front {
   border-color: #2d6a4f;
   background: #f0faf4;
 }
 
+.alphabet-card--vowel.alphabet-card--back {
+  background: #e6f5ec;
+  border-color: #1e4d38;
+}
+
 .alphabet-card__letter {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #1a1410;
   line-height: 1;
+}
+
+.alphabet-card__letter--small {
+  font-size: 1.2rem;
 }
 
 .alphabet-card__type {
@@ -606,13 +648,14 @@
   font-size: 0.82rem;
   color: #4a5568;
   margin: 0;
+  flex: 1;
 }
 
 .alphabet-card__example {
-  margin-top: 0.4rem;
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
+  margin-top: 0.4rem;
 }
 
 .alphabet-card__chamorro {
@@ -631,7 +674,6 @@
   font-size: 0.75rem;
   color: #e07b39;
   margin: 0;
-  margin-top: 0.3rem;
 }
 
 .alphabet-card__pending {
@@ -639,6 +681,15 @@
   color: #a0aec0;
   font-style: italic;
   margin: 0;
+}
+
+.alphabet-card__tap-hint {
+  font-size: 0.7rem;
+  color: #a0aec0;
+  letter-spacing: 0.05em;
+  margin: 0;
+  margin-top: auto;
+  text-align: center;
 }
 
 .pronunciation-notes {

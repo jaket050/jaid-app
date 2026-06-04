@@ -1,6 +1,21 @@
+import { useState } from 'react'
 import { chamorroAlphabet, vowels, pronunciationNotes } from '../data/alphabet'
 
 function Alphabet({ onExit }) {
+  const [flippedCards, setFlippedCards] = useState(new Set())
+
+  const toggleCard = (letter) => {
+    setFlippedCards(prev => {
+      const next = new Set(prev)
+      if (next.has(letter)) {
+        next.delete(letter)
+      } else {
+        next.add(letter)
+      }
+      return next
+    })
+  }
+
   return (
     <div className="alphabet-page">
       <div className="study-mode__header">
@@ -20,18 +35,35 @@ function Alphabet({ onExit }) {
           {chamorroAlphabet.map((item) => (
             <div
               key={item.letter}
-              className={`alphabet-card ${vowels.includes(item.letter) ? 'alphabet-card--vowel' : ''}`}
+              className="alphabet-flip-container"
+              onClick={() => toggleCard(item.letter)}
             >
-              <span className="alphabet-card__letter">{item.letter}</span>
-              <span className="alphabet-card__type">{item.type}</span>
-              <p className="alphabet-card__pronunciation">{item.pronunciation}</p>
-              <div className="alphabet-card__example">
-                <span className="alphabet-card__chamorro">{item.example}</span>
-                <span className="alphabet-card__english">{item.exampleEnglish}</span>
+              <div className={`alphabet-flip-inner ${flippedCards.has(item.letter) ? 'is-flipped' : ''}`}>
+
+                <div className={`alphabet-card alphabet-card--front ${vowels.includes(item.letter) ? 'alphabet-card--vowel' : ''}`}>
+                  <span className="alphabet-card__letter">{item.letter}</span>
+                  <span className="alphabet-card__type">{item.type}</span>
+                  <p className="alphabet-card__tap-hint">Tap to learn</p>
+                </div>
+
+                <div className={`alphabet-card alphabet-card--back ${vowels.includes(item.letter) ? 'alphabet-card--vowel' : ''}`}>
+                  <span className="alphabet-card__letter alphabet-card__letter--small">{item.letter}</span>
+                  <p className="alphabet-card__pronunciation">{item.pronunciation}</p>
+                  {item.example ? (
+                    <div className="alphabet-card__example">
+                      <span className="alphabet-card__chamorro">{item.example}</span>
+                      <span className="alphabet-card__english">{item.exampleEnglish}</span>
+                    </div>
+                  ) : (
+                    <p className="alphabet-card__pending">Example coming soon</p>
+                  )}
+                  {item.note && (
+                    <p className="alphabet-card__note">{item.note}</p>
+                  )}
+                  <p className="alphabet-card__tap-hint">Tap to flip back</p>
+                </div>
+
               </div>
-              {item.note && (
-                <p className="alphabet-card__note">{item.note}</p>
-              )}
             </div>
           ))}
         </div>
