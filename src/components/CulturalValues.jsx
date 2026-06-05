@@ -23,7 +23,7 @@ function CulturalValues() {
   return (
     <div className="cultural-values">
       <div className="cultural-values__header">
-        <span className="cultural-values__label">I Pinedda' Siha · Core Values</span>
+        <span className="cultural-values__label">Core Values</span>
       </div>
       <div className="cultural-values__grid">
         {values.map((value) => (
