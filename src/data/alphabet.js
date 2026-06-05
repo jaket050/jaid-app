@@ -3,13 +3,13 @@ export const chamorroAlphabet = [
   { letter: "A", name: "a", type: "vowel", pronunciation: "as in apple", example: "adios", exampleEnglish: "goodbye" },
   { letter: "Å", name: "å", type: "vowel", pronunciation: "as in father", example: "åhe'", exampleEnglish: "no" },
   { letter: "B", name: "b", type: "consonant", pronunciation: "as in English", example: "buenas", exampleEnglish: "hello" },
-  { letter: "CH", name: "ch", type: "consonant", pronunciation: "semi-consonant", example: "che'lu", exampleEnglish: "sibling" },
+  { letter: "CH", name: "ch", type: "consonant", pronunciation: "sounds like 'ts' as in tsar or tsunami, not the English 'ch' sound", example: "che'lu", exampleEnglish: "sibling" },
   { letter: "D", name: "d", type: "consonant", pronunciation: "as in English", example: "dångkolo", exampleEnglish: "big, large, great" },
-  { letter: "E", name: "e", type: "vowel", pronunciation: "as in even", example: "ekkunguk", exampleEnglish: "listen" },
+  { letter: "E", name: "e", type: "vowel", pronunciation: "as in egg (short e)", example: "ekkunguk", exampleEnglish: "listen" },
   { letter: "F", name: "f", type: "consonant", pronunciation: "as in English", example: "fotgon", exampleEnglish: "wet" },
   { letter: "G", name: "g", type: "consonant", pronunciation: "as in English", example: "gå'ga'", exampleEnglish: "animal" },
   { letter: "H", name: "h", type: "consonant", pronunciation: "as in English", example: "hågu", exampleEnglish: "you" },
-  { letter: "I", name: "i", type: "vowel", pronunciation: "as in even", example: "iyo-mu", exampleEnglish: "yours" },
+  { letter: "I", name: "i", type: "vowel", pronunciation: "as in it (short i)", example: "iyo-mu", exampleEnglish: "yours" },
   { letter: "K", name: "k", type: "consonant", pronunciation: "as in English", example: "kulehu", exampleEnglish: "college" },
   { letter: "L", name: "l", type: "consonant", pronunciation: "as in English", example: "låpes", exampleEnglish: "pencil" },
   { letter: "M", name: "m", type: "consonant", pronunciation: "as in English", example: "ma'estra", exampleEnglish: "female teacher" },
@@ -21,8 +21,8 @@ export const chamorroAlphabet = [
   { letter: "R", name: "r", type: "consonant", pronunciation: "as in English", example: "respetu", exampleEnglish: "respect" },
   { letter: "S", name: "s", type: "consonant", pronunciation: "as in English", example: "sångan", exampleEnglish: "to say, to tell" },
   { letter: "T", name: "t", type: "consonant", pronunciation: "as in English", example: "tohgi", exampleEnglish: "to stand" },
-  { letter: "U", name: "u", type: "vowel", pronunciation: "as in tube or glue", example: "unai", exampleEnglish: "sand" },
-  { letter: "Y", name: "y", type: "consonant", pronunciation: "sounds like Z, as in zoo", example: "yu'", exampleEnglish: "me, I" }
+  { letter: "U", name: "u", type: "vowel", pronunciation: "as in full", example: "unai", exampleEnglish: "sand" },
+  { letter: "Y", name: "y", type: "consonant", pronunciation: "sounds like 'dz' as in floods or adze", example: "yu'", exampleEnglish: "me, I" }
 ]
 
 export const vowels = ["A", "Å", "E", "I", "O", "U"]
