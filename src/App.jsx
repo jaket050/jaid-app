@@ -9,6 +9,7 @@ import Alphabet from './components/Alphabet'
 import About from './components/About'
 import WordOfTheDay from './components/WordOfTheDay'
 import CulturalValues from './components/CulturalValues'
+import LearningPaths from './components/LearningPaths'
 import { useCompletedIds } from './hooks/useCompletedIds'
 
 function App() {
@@ -19,6 +20,11 @@ function App() {
   const [view, setView] = useState("browse")
   const [error, setError] = useState(null)
   const [completedIds, toggleId] = useCompletedIds()
+
+  const handleSelectCategory = (cat) => {
+    setCategory(cat)
+    setView("deck-select")
+  }
 
   useEffect(() => {
     const loadWords = async () => {
@@ -56,9 +62,6 @@ function App() {
 
   const studyCount =
     filter === 'all' ? counts.all : filter === 'word' ? counts.words : counts.sayings
-
-  const categoryValues = [...new Set(words.filter(w => w.category).map(w => w.category))].sort()
-  const categories = ["all", ...categoryValues]
 
   if (loading) return <p>Loading JAID vocabulary...</p>
   if (error) return <p>{error}</p>
@@ -123,12 +126,10 @@ function App() {
       </div>
       <WordOfTheDay words={words} onPractice={() => setView("deck-select")} />
       <CulturalValues />
+      <LearningPaths words={words} onSelectCategory={handleSelectCategory} />
       <FilterBar
         filter={filter}
         onFilterChange={setFilter}
-        category={category}
-        onCategoryChange={setCategory}
-        categories={categories}
         counts={counts}
       />
       <div className="card-list">
