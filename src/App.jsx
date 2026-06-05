@@ -8,6 +8,7 @@ import DeckSelect from './components/DeckSelect'
 import Alphabet from './components/Alphabet'
 import About from './components/About'
 import WordOfTheDay from './components/WordOfTheDay'
+import CulturalValues from './components/CulturalValues'
 import { useCompletedIds } from './hooks/useCompletedIds'
 
 function App() {
@@ -121,6 +122,7 @@ function App() {
         </button>
       </div>
       <WordOfTheDay words={words} onPractice={() => setView("deck-select")} />
+      <CulturalValues />
       <FilterBar
         filter={filter}
         onFilterChange={setFilter}
