@@ -1065,7 +1065,7 @@
 }
 
 .wotd__icon {
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.75);
 }
 
 .wotd__label {
@@ -1073,7 +1073,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.75);
 }
 
 .wotd__body {
