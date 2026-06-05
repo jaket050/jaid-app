@@ -1,7 +1,7 @@
 function CulturalValues() {
   const values = [
     {
-      chamorro: "Respitu",
+      chamorro: "Respetu",
       english: "Respect",
       description: "Honoring elders, family, and community through words and actions. At the heart of every CHamoru relationship.",
       icon: "respitu"
