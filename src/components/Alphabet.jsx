@@ -77,6 +77,19 @@ function Alphabet({ onExit }) {
             </div>
           ))}
         </div>
+
+        <div className="dialect-note">
+          <h3 className="dialect-note__title">A Note on Dialect</h3>
+          <p className="dialect-note__text">
+            JAID follows the official CHamoru orthography established
+            by Kumision i Fino' CHamoru, which reflects the Guåhan
+            standard. CHamoru is also spoken in the Northern Mariana
+            Islands with some differences in vocabulary and spelling.
+            Both dialects are part of the living language and carry
+            equal cultural value. As JAID grows we aim to acknowledge
+            and honor both.
+          </p>
+        </div>
       </div>
     </div>
   )

@@ -1414,3 +1414,26 @@
   transform: translateY(1px);
   border-bottom-width: 1px;
 }
+
+.dialect-note {
+  background: #fff8f0;
+  border: 1px solid #fed7aa;
+  border-left: 4px solid #e8821a;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.dialect-note__title {
+  font-family: var(--heading);
+  font-size: 1rem;
+  color: #1a3a5c;
+  margin-bottom: 0.5rem;
+}
+
+.dialect-note__text {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: #4a5568;
+  line-height: 1.75;
+}
