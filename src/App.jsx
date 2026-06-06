@@ -10,6 +10,7 @@ import WordOfTheDay from './components/WordOfTheDay'
 import CulturalValues from './components/CulturalValues'
 import LearningPaths from './components/LearningPaths'
 import SearchBar from './components/SearchBar'
+import { supabase } from './lib/supabase'
 import { useCompletedIds } from './hooks/useCompletedIds'
 
 function App() {
@@ -29,13 +30,13 @@ function App() {
   useEffect(() => {
     const loadWords = async () => {
       try {
-        const response = await fetch('https://jaid-server-production.up.railway.app/api/vocabulary')
-        if (!response.ok) {
-          throw new Error(`Server error: ${response.status}`)
-        }
-        const data = await response.json()
+        const { data, error } = await supabase
+          .from('vocabulary')
+          .select('id, chamorro, english, type, difficulty, category, culturalNote:cultural_note')
+          .order('id')
+        if (error) throw error
         // Server's isCompleted is ignored — localStorage is the source of truth (see useCompletedIds).
-        setWords(data)
+        setWords(data ?? [])
       } catch {
         setError("Could not connect to JAID server. Please try again.")
       } finally {
