@@ -10,6 +10,7 @@ import About from './components/About'
 import WordOfTheDay from './components/WordOfTheDay'
 import CulturalValues from './components/CulturalValues'
 import LearningPaths from './components/LearningPaths'
+import SearchBar from './components/SearchBar'
 import { useCompletedIds } from './hooks/useCompletedIds'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   const [category, setCategory] = useState("all")
   const [view, setView] = useState("browse")
   const [error, setError] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('')
   const [completedIds, toggleId] = useCompletedIds()
 
   const handleSelectCategory = (cat) => {
@@ -47,8 +49,10 @@ function App() {
 
   const filteredWords = words.filter((word) => {
     const typeMatch = filter === "all" || word.type === filter
-    const categoryMatch = category === "all" || word.category === category
-    return typeMatch && categoryMatch
+    const searchMatch = searchQuery === '' ||
+      word.chamorro.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      word.english.toLowerCase().includes(searchQuery.toLowerCase())
+    return typeMatch && searchMatch
   })
 
   const completedCount = words.filter((item) => completedIds.has(item.id)).length
@@ -124,6 +128,7 @@ function App() {
           ABOUT
         </button>
       </div>
+      <SearchBar onSearch={setSearchQuery} />
       <WordOfTheDay words={words} onPractice={() => setView("deck-select")} />
       <CulturalValues />
       <LearningPaths words={words} onSelectCategory={handleSelectCategory} />
