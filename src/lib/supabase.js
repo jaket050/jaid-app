@@ -1,3 +1,4 @@
+// Supabase client singleton — env vars must be set in Netlify at build time.
 import { createClient } from '@supabase/supabase-js'
 
 const url = import.meta.env.VITE_SUPABASE_URL
