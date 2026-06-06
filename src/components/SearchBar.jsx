@@ -15,7 +15,9 @@ const CHAMORU_CHARS = [
 
 function SearchBar({ onSearch }) {
   const [query, setQuery] = useState('')
-  const [showKeyboard, setShowKeyboard] = useState(false)
+  const [showKeyboard, setShowKeyboard] = useState(
+    window.innerWidth <= 768
+  )
   const inputRef = useRef(null)
 
   const handleInput = (value) => {
@@ -55,7 +57,11 @@ function SearchBar({ onSearch }) {
           value={query}
           onChange={(e) => handleInput(e.target.value)}
           onFocus={() => setShowKeyboard(true)}
-          onBlur={() => setTimeout(() => setShowKeyboard(false), 200)}
+          onBlur={() => {
+            if (window.innerWidth > 768) {
+              setTimeout(() => setShowKeyboard(false), 200)
+            }
+          }}
         />
         {query && (
           <button className="search-bar__clear" onClick={clearSearch}>
