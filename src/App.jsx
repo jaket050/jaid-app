@@ -130,14 +130,20 @@ function App() {
         </button>
       </div>
       <SearchBar onSearch={setSearchQuery} />
-      <WordOfTheDay words={words} onPractice={() => setView("deck-select")} />
-      <CulturalValues />
-      <LearningPaths words={words} onSelectCategory={handleSelectCategory} />
-      <FilterBar
-        filter={filter}
-        onFilterChange={setFilter}
-        counts={counts}
-      />
+      {searchQuery === '' && (
+        <>
+          <WordOfTheDay words={words} onPractice={() => setView("deck-select")} />
+          <CulturalValues />
+          <LearningPaths words={words} onSelectCategory={handleSelectCategory} />
+        </>
+      )}
+      {searchQuery === '' && (
+        <FilterBar
+          filter={filter}
+          onFilterChange={setFilter}
+          counts={counts}
+        />
+      )}
       <div className="card-list">
         {filteredWords.length === 0 ? (
           <p>No results found for this filter.</p>
