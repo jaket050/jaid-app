@@ -764,7 +764,7 @@
 }
 .deck-select {
   min-height: 100dvh;
-  background: #1a3a5c;
+  background: #0D1B2A;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -802,8 +802,8 @@
 }
 
 .deck-card {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: #132030;
+  border: 1px solid #1E3448;
   border-radius: 10px;
   padding: 1.25rem 1rem;
   cursor: pointer;
@@ -811,22 +811,22 @@
   flex-direction: column;
   gap: 0.4rem;
   text-align: left;
-  transition: background 0.15s;
+  transition: background 0.15s, border-color 0.15s;
 }
 
 .deck-card:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.3);
+  background: #1A2A3F;
+  border-color: #C9A84C;
 }
 
 .deck-card--all {
-  background: rgba(45,106,79,0.4);
-  border-color: rgba(45,106,79,0.8);
+  background: #132030;
+  border-color: #C9A84C;
   grid-column: 1 / -1;
 }
 
 .deck-card--all:hover {
-  background: rgba(45,106,79,0.6);
+  background: #1A2A3F;
 }
 
 .deck-card__name {
@@ -838,7 +838,7 @@
 
 .deck-card__count {
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.55);
+  color: #E8DCC8;
   letter-spacing: 0.05em;
   display: block;
 }

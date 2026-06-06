@@ -23,7 +23,7 @@ function App() {
 
   const handleSelectCategory = (cat) => {
     setCategory(cat)
-    setView("deck-select")
+    setView("study")
   }
 
   useEffect(() => {
