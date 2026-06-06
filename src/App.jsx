@@ -130,6 +130,28 @@ function App() {
         </button>
       </div>
       <SearchBar onSearch={setSearchQuery} />
+      {searchQuery !== '' && (
+        <div className="card-list">
+          {filteredWords.length === 0 ? (
+            <p className="no-results">
+              No results found for "{searchQuery}"
+            </p>
+          ) : (
+            filteredWords.map((item) => (
+              <WordCard
+                key={item.id}
+                chamorro={item.chamorro}
+                english={item.english}
+                type={item.type}
+                difficulty={item.difficulty}
+                culturalNote={item.culturalNote}
+                isCompleted={completedIds.has(item.id)}
+                onToggle={() => toggleId(item.id)}
+              />
+            ))
+          )}
+        </div>
+      )}
       {searchQuery === '' && (
         <>
           <WordOfTheDay words={words} onPractice={() => setView("deck-select")} />
@@ -144,24 +166,6 @@ function App() {
           counts={counts}
         />
       )}
-      <div className="card-list">
-        {filteredWords.length === 0 ? (
-          <p>No results found for this filter.</p>
-        ) : (
-          filteredWords.map((item) => (
-            <WordCard
-              key={item.id}
-              chamorro={item.chamorro}
-              english={item.english}
-              type={item.type}
-              difficulty={item.difficulty}
-              culturalNote={item.culturalNote}
-              isCompleted={completedIds.has(item.id)}
-              onToggle={() => toggleId(item.id)}
-            />
-          ))
-        )}
-      </div>
     </div>
   )
 }

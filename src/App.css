@@ -1437,3 +1437,11 @@
   color: #4a5568;
   line-height: 1.75;
 }
+
+.no-results {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: #a0aec0;
+  text-align: center;
+  padding: 2rem;
+}
