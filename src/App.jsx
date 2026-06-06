@@ -49,10 +49,11 @@ function App() {
 
   const filteredWords = words.filter((word) => {
     const typeMatch = filter === "all" || word.type === filter
+    const categoryMatch = category === "all" || word.category === category
     const searchMatch = searchQuery === '' ||
       word.chamorro.toLowerCase().includes(searchQuery.toLowerCase()) ||
       word.english.toLowerCase().includes(searchQuery.toLowerCase())
-    return typeMatch && searchMatch
+    return typeMatch && categoryMatch && searchMatch
   })
 
   const completedCount = words.filter((item) => completedIds.has(item.id)).length

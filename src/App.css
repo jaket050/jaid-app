@@ -1326,6 +1326,8 @@
 .search-bar__input-row:focus-within {
   border-color: #2d6a4f;
   box-shadow: 0 0 0 3px rgba(45,106,79,0.08);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .search-bar__icon {
