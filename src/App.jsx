@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import WordCard from './components/WordCard'
 import Header from './components/Header'
-import FilterBar from './components/FilterBar'
 import StudyMode from './components/StudyMode'
 import DeckSelect from './components/DeckSelect'
 import Alphabet from './components/Alphabet'
@@ -16,7 +15,6 @@ import { useCompletedIds } from './hooks/useCompletedIds'
 function App() {
   const [words, setWords] = useState([])
   const [loading, setLoading] = useState(true)
-  const [filter, setFilter] = useState("all")
   const [category, setCategory] = useState("all")
   const [view, setView] = useState("browse")
   const [error, setError] = useState(null)
@@ -48,25 +46,14 @@ function App() {
   }, [])
 
   const filteredWords = words.filter((word) => {
-    const typeMatch = filter === "all" || word.type === filter
     const categoryMatch = category === "all" || word.category === category
     const searchMatch = searchQuery === '' ||
       word.chamorro.toLowerCase().includes(searchQuery.toLowerCase()) ||
       word.english.toLowerCase().includes(searchQuery.toLowerCase())
-    return typeMatch && categoryMatch && searchMatch
+    return categoryMatch && searchMatch
   })
 
   const completedCount = words.filter((item) => completedIds.has(item.id)).length
-
-  const inCategory = (item) => category === "all" || item.category === category
-  const counts = {
-    all: words.filter(inCategory).length,
-    words: words.filter((item) => item.type === "word" && inCategory(item)).length,
-    sayings: words.filter((item) => item.type === "saying" && inCategory(item)).length
-  }
-
-  const studyCount =
-    filter === 'all' ? counts.all : filter === 'word' ? counts.words : counts.sayings
 
   if (loading) return <p>Loading JAID vocabulary...</p>
   if (error) return <p>{error}</p>
@@ -97,7 +84,6 @@ function App() {
       <DeckSelect
         words={words}
         onSelectDeck={(selectedCategory) => {
-          setFilter("all")
           setCategory(selectedCategory)
           setView("study")
         }}
@@ -120,7 +106,7 @@ function App() {
           onClick={() => setView("deck-select")}
           disabled={filteredWords.length === 0}
         >
-          PRACTICE ({studyCount})
+          PRACTICE ({words.length})
         </button>
         <button className="btn-alphabet" onClick={() => setView("alphabet")}>
           I ATFABETU
@@ -158,13 +144,6 @@ function App() {
           <CulturalValues />
           <LearningPaths words={words} onSelectCategory={handleSelectCategory} />
         </>
-      )}
-      {searchQuery === '' && (
-        <FilterBar
-          filter={filter}
-          onFilterChange={setFilter}
-          counts={counts}
-        />
       )}
     </div>
   )
