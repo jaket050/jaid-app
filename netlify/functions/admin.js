@@ -15,7 +15,7 @@ const SUPABASE_URL = process.env.SUPABASE_URL
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
 
 const ALLOWED_TYPES = ['word', 'phrase', 'saying']
-const DEFAULT_SOURCE = 'Kumision i Fino CHamoru 2025'
+const DEFAULT_SOURCE = "Kumision i Fino' CHamoru 2025"
 
 function b64urlEncode(buf) {
   return Buffer.from(buf)
@@ -133,6 +133,33 @@ export default async (req) => {
         const id = parseInt(payload.id, 10)
         if (!id) return json({ error: 'Missing id' }, 400)
         const fields = {}
+        if ('chamorro' in payload) {
+          const v = String(payload.chamorro || '').trim()
+          if (!v) return json({ error: 'chamorro cannot be empty' }, 400)
+          fields.chamorro = v
+        }
+        if ('english' in payload) {
+          const v = String(payload.english || '').trim()
+          if (!v) return json({ error: 'english cannot be empty' }, 400)
+          fields.english = v
+        }
+        if ('type' in payload) {
+          const v = String(payload.type || '').toLowerCase()
+          if (!ALLOWED_TYPES.includes(v)) {
+            return json({ error: `Invalid type. Must be one of: ${ALLOWED_TYPES.join(', ')}` }, 400)
+          }
+          fields.type = v
+        }
+        if ('difficulty' in payload) {
+          const v = parseInt(payload.difficulty, 10)
+          if (!v) return json({ error: 'Invalid difficulty' }, 400)
+          fields.difficulty = v
+        }
+        if ('category' in payload) {
+          fields.category = payload.category
+            ? String(payload.category).trim().toLowerCase()
+            : null
+        }
         if ('cultural_note' in payload) {
           fields.cultural_note = payload.cultural_note
             ? String(payload.cultural_note).trim()

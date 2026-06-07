@@ -57,6 +57,7 @@ function AdminPanel({ token, onLogout }) {
         <WordList
           token={token}
           words={words}
+          categories={categories}
           loading={loading}
           error={error}
           onChanged={refresh}

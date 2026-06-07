@@ -12,7 +12,7 @@ const DIFFICULTY_OPTIONS = [
   { value: 2, label: '2 — Intermediate' },
 ]
 
-const DEFAULT_SOURCE = 'Kumision i Fino CHamoru 2025'
+const DEFAULT_SOURCE = "Kumision i Fino' CHamoru 2025"
 
 const blankForm = {
   chamorro: '',

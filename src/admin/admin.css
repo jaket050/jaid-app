@@ -364,3 +364,47 @@
 .admin-cell__empty {
   color: var(--admin-muted);
 }
+
+/* ─── Full row editor ──────────────────────────────────────────── */
+
+.admin-row-editor-row td {
+  background: var(--admin-bg);
+  padding: 0;
+}
+
+.admin-row-editor {
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  border-left: 3px solid var(--admin-gold);
+}
+
+.admin-row-editor__title {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--admin-gold);
+}
+
+.admin-row-editor__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+
+.admin-row-editor__full {
+  grid-column: 1 / -1;
+}
+
+.admin-row-editor__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 720px) {
+  .admin-row-editor__grid {
+    grid-template-columns: 1fr;
+  }
+}
