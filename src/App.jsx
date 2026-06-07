@@ -109,6 +109,12 @@ function App() {
         >
           PRACTICE ({words.length})
         </button>
+        <button
+          className="btn-match"
+          onClick={() => { window.location.href = '/practice/family' }}
+        >
+          FAMILY MATCH
+        </button>
         <button className="btn-alphabet" onClick={() => setView("alphabet")}>
           I ATFABETU
         </button>

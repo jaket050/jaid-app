@@ -1,0 +1,218 @@
+/* Family Match game — uses learner-app brand variables from index.css. */
+
+.match-game {
+  min-height: 100dvh;
+  background: var(--bg, #f5f0e8);
+  display: flex;
+  flex-direction: column;
+}
+
+.match-game__header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: #1a3a5c;
+  box-sizing: border-box;
+}
+
+.match-game__home {
+  width: fit-content;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 0.4rem 0.9rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  font-family: var(--sans, sans-serif);
+}
+
+.match-game__home:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.match-game__brand {
+  text-align: center;
+  font-family: var(--heading, 'Playfair Display', Georgia, serif);
+  color: #fff;
+  letter-spacing: 0.15em;
+  font-size: 1rem;
+}
+
+.match-game__progress {
+  text-align: right;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  font-family: var(--sans, sans-serif);
+}
+
+.match-game__status {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text, #1a1410);
+  font-family: var(--sans, sans-serif);
+}
+
+.match-game__status--error {
+  color: #b00020;
+}
+
+/* ─── Board ───────────────────────────────────────────────────── */
+
+.match-board {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width: 800px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.match-board__column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.match-board__col-title {
+  font-family: var(--sans, sans-serif);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary, #718096);
+  margin: 0 0 0.25rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ─── Card ────────────────────────────────────────────────────── */
+
+.match-card {
+  background: var(--card-bg, #fff);
+  border: 2px solid var(--border, #e2e8f0);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  font-family: var(--heading, 'Playfair Display', Georgia, serif);
+  font-size: 1.05rem;
+  color: var(--text, #1a1410);
+  cursor: pointer;
+  text-align: center;
+  word-break: break-word;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s, color 0.15s;
+}
+
+.match-card:hover:not(:disabled) {
+  border-color: #c9a84c;
+}
+
+.match-card--selected {
+  border-color: #c9a84c;
+  background: #fff8e8;
+  transform: scale(1.02);
+}
+
+.match-card--matched {
+  background: #2d6a4f;
+  border-color: #2d6a4f;
+  color: #fff;
+  cursor: default;
+  opacity: 0.75;
+  transform: none;
+}
+
+.match-card--wrong {
+  background: #e07b39;
+  border-color: #e07b39;
+  color: #fff;
+  animation: match-shake 0.4s ease-in-out;
+}
+
+@keyframes match-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(2px); }
+}
+
+/* ─── Overlays (round complete / exhausted / empty deck) ─────── */
+
+.match-game__overlay {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.match-game__overlay-title {
+  font-family: var(--heading, 'Playfair Display', Georgia, serif);
+  font-size: 1.8rem;
+  color: var(--text, #1a1410);
+  margin: 0;
+}
+
+.match-game__overlay-text {
+  color: var(--text-secondary, #4a5568);
+  font-family: var(--sans, sans-serif);
+  font-size: 0.95rem;
+  max-width: 360px;
+  margin: 0;
+}
+
+.match-game__btn {
+  display: inline-block;
+  background: #c9a84c;
+  border: 1px solid #c9a84c;
+  color: #1a1410;
+  padding: 0.7rem 1.4rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--sans, sans-serif);
+  font-weight: 800;
+  text-decoration: none;
+  margin-top: 0.5rem;
+}
+
+.match-game__btn:hover {
+  background: #e8c97a;
+  border-color: #e8c97a;
+}
+
+/* ─── Mobile ──────────────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .match-game__header {
+    padding: 0.75rem 0.9rem;
+  }
+
+  .match-game__brand {
+    font-size: 0.85rem;
+  }
+
+  .match-game__progress {
+    font-size: 0.7rem;
+  }
+
+  .match-board {
+    margin: 1rem auto;
+    gap: 0.6rem;
+  }
+
+  .match-card {
+    padding: 0.7rem 0.6rem;
+    font-size: 0.95rem;
+  }
+}
