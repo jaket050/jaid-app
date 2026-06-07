@@ -81,8 +81,10 @@ function MatchGame() {
   }, [loading, allWords, chList.length, deckExhausted, seenIds])
 
   // Resolve a pair once both columns have a selection.
+  // Match → record + clear; mismatch → mark wrongPair only.
   useEffect(() => {
-    if (selectedCh === null || selectedEn === null || wrongPair) return
+    if (selectedCh === null || selectedEn === null) return
+    if (wrongPair) return
     if (selectedCh === selectedEn) {
       setMatchedIds((prev) => new Set(prev).add(selectedCh))
       setSelectedCh(null)
@@ -90,13 +92,20 @@ function MatchGame() {
       return
     }
     setWrongPair({ chId: selectedCh, enId: selectedEn })
+  }, [selectedCh, selectedEn, wrongPair])
+
+  // Separately, when a wrongPair is in flight, schedule its clear.
+  // Owning the timeout in its own effect avoids the cleanup-cancels-timer
+  // race that occurs when one effect mutates a value in its own deps.
+  useEffect(() => {
+    if (!wrongPair) return
     const t = setTimeout(() => {
       setWrongPair(null)
       setSelectedCh(null)
       setSelectedEn(null)
     }, WRONG_FLASH_MS)
     return () => clearTimeout(t)
-  }, [selectedCh, selectedEn, wrongPair])
+  }, [wrongPair])
 
   const selectCh = (id) => {
     if (matchedIds.has(id) || wrongPair) return
