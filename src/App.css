@@ -1415,20 +1415,21 @@
 
 .cultural-values-wrapper {
   position: relative;
-  padding: 4rem 2rem;
+  padding: 5rem 3rem 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .cultural-values-lei {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 105%;
-  height: 100%;
-  object-fit: fill;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 110%;
+  object-fit: contain;
   pointer-events: none;
   z-index: 0;
   opacity: 0.95;
