@@ -1415,7 +1415,7 @@
 
 .cultural-values-wrapper {
   position: relative;
-  padding: 6rem 4rem;
+  padding: 8rem 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1427,8 +1427,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 130%;
-  height: 130%;
+  width: 150%;
+  height: 150%;
   object-fit: contain;
   pointer-events: none;
   z-index: 0;
