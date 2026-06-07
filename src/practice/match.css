@@ -1,11 +1,17 @@
-/* Family Match game — uses learner-app brand variables from index.css. */
+/* Family Match game — JAID brand palette (deep navy + gold + cream).
+   Hardcoded brand colors match the rest of the app's dark surfaces
+   (DeckSelect, StudyMode, Admin). Fonts come from index.css variables. */
 
 .match-game {
   min-height: 100dvh;
-  background: var(--bg, #f5f0e8);
+  background: #0D1B2A;
+  color: #E8DCC8;
+  font-family: var(--sans);
   display: flex;
   flex-direction: column;
 }
+
+/* ─── Header strip ────────────────────────────────────────────── */
 
 .match-game__header {
   display: grid;
@@ -13,52 +19,57 @@
   align-items: center;
   width: 100%;
   padding: 1rem 1.5rem;
-  background: #1a3a5c;
+  background: #132030;
+  border-bottom: 1px solid #1E3448;
   box-sizing: border-box;
 }
 
 .match-game__home {
   width: fit-content;
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.3);
-  color: #fff;
+  border: 1px solid rgba(232, 220, 200, 0.3);
+  color: #E8DCC8;
   padding: 0.4rem 0.9rem;
   border-radius: 4px;
   font-size: 0.85rem;
   letter-spacing: 0.05em;
   text-decoration: none;
-  font-family: var(--sans, sans-serif);
+  font-family: var(--sans);
+  transition: background 0.15s, border-color 0.15s;
 }
 
 .match-game__home:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(232, 220, 200, 0.08);
+  border-color: #C9A84C;
 }
 
 .match-game__brand {
   text-align: center;
-  font-family: var(--heading, 'Playfair Display', Georgia, serif);
-  color: #fff;
+  font-family: var(--heading);
+  color: #ffffff;
   letter-spacing: 0.15em;
   font-size: 1rem;
 }
 
 .match-game__progress {
   text-align: right;
-  color: rgba(255,255,255,0.7);
+  color: rgba(232, 220, 200, 0.65);
   font-size: 0.85rem;
   letter-spacing: 0.05em;
-  font-family: var(--sans, sans-serif);
+  font-family: var(--sans);
 }
+
+/* ─── Status / error rows ─────────────────────────────────────── */
 
 .match-game__status {
   text-align: center;
   padding: 3rem 1.5rem;
-  color: var(--text, #1a1410);
-  font-family: var(--sans, sans-serif);
+  color: #E8DCC8;
+  font-family: var(--sans);
 }
 
 .match-game__status--error {
-  color: #b00020;
+  color: #e07b39;
 }
 
 /* ─── Board ───────────────────────────────────────────────────── */
@@ -70,7 +81,7 @@
   max-width: 800px;
   width: 100%;
   margin: 2rem auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   box-sizing: border-box;
 }
 
@@ -81,12 +92,12 @@
 }
 
 .match-board__col-title {
-  font-family: var(--sans, sans-serif);
+  font-family: var(--sans);
   font-size: 0.7rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--text-secondary, #718096);
-  margin: 0 0 0.25rem;
+  color: #C9A84C;
+  margin: 0 0 0.5rem;
   font-weight: 700;
   text-align: center;
 }
@@ -94,13 +105,13 @@
 /* ─── Card ────────────────────────────────────────────────────── */
 
 .match-card {
-  background: var(--card-bg, #fff);
-  border: 2px solid var(--border, #e2e8f0);
+  background: #132030;
+  border: 1px solid #1E3448;
   border-radius: 10px;
-  padding: 0.9rem 1rem;
-  font-family: var(--heading, 'Playfair Display', Georgia, serif);
+  padding: 0.95rem 1rem;
+  font-family: var(--heading);
   font-size: 1.05rem;
-  color: var(--text, #1a1410);
+  color: #E8DCC8;
   cursor: pointer;
   text-align: center;
   word-break: break-word;
@@ -108,28 +119,31 @@
 }
 
 .match-card:hover:not(:disabled) {
-  border-color: #c9a84c;
+  background: #1A2A3F;
+  border-color: #C9A84C;
 }
 
 .match-card--selected {
-  border-color: #c9a84c;
-  background: #fff8e8;
+  background: #1A2A3F;
+  border-color: #C9A84C;
+  color: #E8C97A;
   transform: scale(1.02);
+  box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.18);
 }
 
 .match-card--matched {
   background: #2d6a4f;
   border-color: #2d6a4f;
-  color: #fff;
+  color: #ffffff;
   cursor: default;
-  opacity: 0.75;
+  opacity: 0.85;
   transform: none;
 }
 
 .match-card--wrong {
   background: #e07b39;
   border-color: #e07b39;
-  color: #fff;
+  color: #ffffff;
   animation: match-shake 0.4s ease-in-out;
 }
 
@@ -152,43 +166,47 @@
   gap: 0.75rem;
   padding: 2rem 1.5rem;
   text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .match-game__overlay-title {
-  font-family: var(--heading, 'Playfair Display', Georgia, serif);
+  font-family: var(--heading);
   font-size: 1.8rem;
-  color: var(--text, #1a1410);
+  color: #ffffff;
   margin: 0;
 }
 
 .match-game__overlay-text {
-  color: var(--text-secondary, #4a5568);
-  font-family: var(--sans, sans-serif);
+  color: rgba(232, 220, 200, 0.65);
+  font-family: var(--sans);
   font-size: 0.95rem;
-  max-width: 360px;
+  max-width: 380px;
   margin: 0;
+  line-height: 1.55;
 }
 
 .match-game__btn {
   display: inline-block;
-  background: #c9a84c;
-  border: 1px solid #c9a84c;
-  color: #1a1410;
+  background: #C9A84C;
+  border: 1px solid #C9A84C;
+  color: #0D1B2A;
   padding: 0.7rem 1.4rem;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.85rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-family: var(--sans, sans-serif);
+  font-family: var(--sans);
   font-weight: 800;
   text-decoration: none;
   margin-top: 0.5rem;
+  transition: background 0.15s, border-color 0.15s;
 }
 
 .match-game__btn:hover {
-  background: #e8c97a;
-  border-color: #e8c97a;
+  background: #E8C97A;
+  border-color: #E8C97A;
 }
 
 /* ─── Mobile ──────────────────────────────────────────────────── */
@@ -209,10 +227,15 @@
   .match-board {
     margin: 1rem auto;
     gap: 0.6rem;
+    padding: 0 0.9rem;
   }
 
   .match-card {
     padding: 0.7rem 0.6rem;
     font-size: 0.95rem;
+  }
+
+  .match-game__overlay-title {
+    font-size: 1.4rem;
   }
 }
