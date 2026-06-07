@@ -42,9 +42,14 @@ function AdminPanel({ token, onLogout }) {
     <div className="admin-page">
       <header className="admin-header">
         <h1 className="admin-header__title">JAID Admin</h1>
-        <button className="admin-btn admin-btn--ghost" onClick={onLogout}>
-          Log out
-        </button>
+        <div className="admin-header__actions">
+          <a className="admin-btn admin-btn--ghost" href="/admin/coverage">
+            Coverage
+          </a>
+          <button className="admin-btn admin-btn--ghost" onClick={onLogout}>
+            Log out
+          </button>
+        </div>
       </header>
 
       <main className="admin-main">
