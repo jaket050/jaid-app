@@ -336,7 +336,7 @@
 
 .admin-cell--readonly {
   background: none;
-  border: 1px dashed transparent;
+  border: 1px dashed var(--admin-border);
   color: var(--admin-cream);
   padding: 0.25rem 0.4rem;
   border-radius: 4px;
