@@ -72,6 +72,20 @@
   color: #e07b39;
 }
 
+/* ─── Instruction line ────────────────────────────────────────── */
+
+.match-game__instructions {
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: rgba(232, 220, 200, 0.55);
+  max-width: 540px;
+  margin: 1.5rem auto 0;
+  padding: 0 1.5rem;
+  line-height: 1.55;
+  font-style: italic;
+}
+
 /* ─── Board ───────────────────────────────────────────────────── */
 
 .match-board {
@@ -105,8 +119,8 @@
 /* ─── Card ────────────────────────────────────────────────────── */
 
 .match-card {
-  background: #132030;
-  border: 1px solid #1E3448;
+  background: #1A2A3F;
+  border: 1px solid #2D4361;
   border-radius: 10px;
   padding: 0.95rem 1rem;
   font-family: var(--heading);
@@ -115,20 +129,21 @@
   cursor: pointer;
   text-align: center;
   word-break: break-word;
-  transition: background 0.15s, border-color 0.15s, transform 0.1s, color 0.15s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: background 0.15s, border-color 0.15s, transform 0.1s, color 0.15s, box-shadow 0.15s;
 }
 
 .match-card:hover:not(:disabled) {
-  background: #1A2A3F;
+  background: #243A52;
   border-color: #C9A84C;
 }
 
 .match-card--selected {
-  background: #1A2A3F;
+  background: #243A52;
   border-color: #C9A84C;
   color: #E8C97A;
   transform: scale(1.02);
-  box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.18);
+  box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.22), 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .match-card--matched {

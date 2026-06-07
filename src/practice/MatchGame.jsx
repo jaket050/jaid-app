@@ -203,16 +203,21 @@ function MatchGame() {
           </button>
         </div>
       ) : (
-        <MatchBoard
-          chList={chList}
-          enList={enList}
-          matchedIds={matchedIds}
-          selectedCh={selectedCh}
-          selectedEn={selectedEn}
-          wrongPair={wrongPair}
-          onSelectCh={selectCh}
-          onSelectEn={selectEn}
-        />
+        <>
+          <p className="match-game__instructions">
+            Match each CHamoru word to its English equivalent. Tap a word from each column to make a pair.
+          </p>
+          <MatchBoard
+            chList={chList}
+            enList={enList}
+            matchedIds={matchedIds}
+            selectedCh={selectedCh}
+            selectedEn={selectedEn}
+            wrongPair={wrongPair}
+            onSelectCh={selectCh}
+            onSelectEn={selectEn}
+          />
+        </>
       )}
     </div>
   )
