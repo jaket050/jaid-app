@@ -1412,3 +1412,30 @@
   text-align: center;
   padding: 2rem;
 }
+
+.cultural-values-wrapper {
+  position: relative;
+  padding: 4rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cultural-values-lei {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 105%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.95;
+}
+
+.cultural-values-wrapper .cultural-values {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
