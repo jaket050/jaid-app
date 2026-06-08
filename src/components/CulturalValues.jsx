@@ -28,6 +28,12 @@ function CulturalValues() {
         className="cultural-values-lei"
         aria-hidden="true"
       />
+      <img
+        src="/ti-leaf-mobile.png"
+        alt=""
+        className="cultural-values-lei-mobile"
+        aria-hidden="true"
+      />
       <div className="cultural-values">
         <div className="cultural-values__header">
           <span className="cultural-values__label">Core Values</span>
