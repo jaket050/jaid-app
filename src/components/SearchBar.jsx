@@ -6,11 +6,10 @@ const CHAMORU_CHARS = [
   { char: 'Å', label: 'Å' },
   { char: 'ñ', label: 'ñ' },
   { char: 'Ñ', label: 'Ñ' },
-  { char: 'ch', label: 'ch' },
-  { char: 'Ch', label: 'Ch' },
+  { char: 'ch', label: 'CH' },
   { char: 'ng', label: 'ng' },
   { char: 'Ng', label: 'Ng' },
-  { char: "'", label: "' glota" },
+  { char: "'", label: "glota'" },
 ]
 
 function SearchBar({ onSearch }) {
