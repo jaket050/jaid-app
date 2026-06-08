@@ -1078,24 +1078,6 @@
   max-width: 360px;
 }
 
-.wotd__cta {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: 7px;
-  font-family: var(--sans);
-  font-size: 0.78rem;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: background 0.15s;
-}
-
-.wotd__cta:hover {
-  background: rgba(255,255,255,0.15);
-}
-
 .cultural-values {
   padding: 1.5rem 0 0.5rem;
 }
