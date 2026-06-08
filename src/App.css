@@ -1106,6 +1106,12 @@
   padding: 0 0.25rem;
 }
 
+@media (min-width: 769px) {
+  .cultural-values__header {
+    margin-bottom: -2rem;
+  }
+}
+
 .cultural-values__label {
   font-family: var(--sans);
   font-size: 0.7rem;
