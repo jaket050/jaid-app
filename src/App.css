@@ -1446,10 +1446,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90%;
-  height: 160%;
-  object-fit: cover;
-  object-position: center top;
+  width: 100%;
+  height: auto;
   pointer-events: none;
   z-index: 0;
   opacity: 0.95;
@@ -1469,7 +1467,7 @@
   }
 
   .cultural-values-wrapper {
-    padding: 2rem 1rem;
+    padding: 4rem 1rem;
     overflow: hidden;
   }
 
