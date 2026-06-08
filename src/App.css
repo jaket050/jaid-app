@@ -1440,7 +1440,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 115%;
+  width: 100%;
   height: 110%;
   object-fit: cover;
   pointer-events: none;
@@ -1458,7 +1458,8 @@
   }
 
   .cultural-values-wrapper {
-    padding: 2rem 2.5rem;
+    padding: 2rem 1rem;
+    overflow: hidden;
   }
 
   .cultural-values-wrapper .value-card {
