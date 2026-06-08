@@ -21,34 +21,36 @@ function CulturalValues() {
   ]
 
   return (
-    <div className="cultural-values-wrapper">
-      <img
-        src="/ti-leaf.png"
-        alt=""
-        className="cultural-values-lei"
-        aria-hidden="true"
-      />
-      <img
-        src="/ti-leaf-mobile.png"
-        alt=""
-        className="cultural-values-lei-mobile"
-        aria-hidden="true"
-      />
-      <div className="cultural-values">
-        <div className="cultural-values__header">
-          <span className="cultural-values__label">Core Values</span>
-        </div>
-        <div className="cultural-values__grid">
-          {values.map((value) => (
-            <div key={value.chamorro} className="value-card">
-              <h3 className="value-card__chamorro">{value.chamorro}</h3>
-              <p className="value-card__english">{value.english}</p>
-              <p className="value-card__desc">{value.description}</p>
-            </div>
-          ))}
+    <>
+      <div className="cultural-values__header">
+        <span className="cultural-values__label">Core Values</span>
+      </div>
+      <div className="cultural-values-wrapper">
+        <img
+          src="/ti-leaf.png"
+          alt=""
+          className="cultural-values-lei"
+          aria-hidden="true"
+        />
+        <img
+          src="/ti-leaf-mobile.png"
+          alt=""
+          className="cultural-values-lei-mobile"
+          aria-hidden="true"
+        />
+        <div className="cultural-values">
+          <div className="cultural-values__grid">
+            {values.map((value) => (
+              <div key={value.chamorro} className="value-card">
+                <h3 className="value-card__chamorro">{value.chamorro}</h3>
+                <p className="value-card__english">{value.english}</p>
+                <p className="value-card__desc">{value.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
