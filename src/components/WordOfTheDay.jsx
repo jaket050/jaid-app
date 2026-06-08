@@ -1,6 +1,6 @@
 import { Calendar } from 'lucide-react'
 
-function WordOfTheDay({ words, onPractice }) {
+function WordOfTheDay({ words }) {
   if (!words || words.length === 0) return null
 
   const verifiedWords = words.filter(w => w.verified !== false)
@@ -25,12 +25,6 @@ function WordOfTheDay({ words, onPractice }) {
             <p className="wotd__note">{word.culturalNote}</p>
           )}
         </div>
-        <button
-          className="wotd__cta"
-          onClick={() => onPractice && onPractice()}
-        >
-          Practice →
-        </button>
       </div>
     </div>
   )

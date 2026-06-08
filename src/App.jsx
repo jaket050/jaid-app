@@ -113,7 +113,7 @@ function App() {
           className="btn-match"
           onClick={() => { window.location.href = '/practice/family' }}
         >
-          FAMILY MATCH
+          CARD MATCH
         </button>
         <button className="btn-alphabet" onClick={() => setView("alphabet")}>
           I ATFABETU
@@ -147,7 +147,7 @@ function App() {
       )}
       {searchQuery === '' && (
         <>
-          <WordOfTheDay words={words} onPractice={() => setView("deck-select")} />
+          <WordOfTheDay words={words} />
           <CulturalValues />
           <LearningPaths words={words} onSelectCategory={handleSelectCategory} />
         </>
