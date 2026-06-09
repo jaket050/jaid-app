@@ -13,10 +13,10 @@ function CulturalValues() {
       icon: "inafamaolek"
     },
     {
-      chamorro: "Fama'taotao",
+      chamorro: "Fa'taotao",
       english: "Human Dignity",
       description: "To treat each person as a full human being deserving of care, dignity, and respect.",
-      icon: "famataotao"
+      icon: "fataotao"
     }
   ]
 

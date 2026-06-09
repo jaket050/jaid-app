@@ -6,8 +6,8 @@ const CHAMORU_CHARS = [
   { char: 'Å', label: 'Å' },
   { char: 'ñ', label: 'ñ' },
   { char: 'Ñ', label: 'Ñ' },
-  { char: 'ch', label: 'CH' },
-  { char: 'ng', label: 'NG' },
+  { char: 'CH', label: 'CH' },
+  { char: 'NG', label: 'NG' },
   { char: "'", label: "Glota'" },
 ]
 
