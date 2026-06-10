@@ -10,22 +10,28 @@ function shuffle(arr) {
   return out
 }
 
-function StudyMode({ words, completedIds, toggleId, onExit }) {
+function StudyMode({ words, completedIds, toggleId, totalWords, onExit }) {
   const [queue, setQueue] = useState(() => shuffle(words))
   const [revealed, setRevealed] = useState(false)
   const [gotItIds, setGotItIds] = useState(() => new Set())
-  const [practiceCount, setPracticeCount] = useState(0)
 
   if (queue.length === 0) {
     return (
       <div className="study-summary">
-        <h2 className="study-summary__title">Session complete</h2>
-        <p className="study-summary__stat">
-          <span className="study-summary__num">{gotItIds.size}</span> words learned
-        </p>
-        <p className="study-summary__stat">
-          <span className="study-summary__num">{practiceCount}</span> to practice more
-        </p>
+        <div className="study-summary__phrase">
+          <h2 className="study-summary__chamorro">Si Yu'os Ma'åse'</h2>
+          <p className="study-summary__english">Thank you</p>
+        </div>
+        <div className="study-summary__stats">
+          <div className="study-summary__stat">
+            <span className="study-summary__num">{gotItIds.size}</span>
+            <span className="study-summary__label">words practiced</span>
+          </div>
+          <div className="study-summary__stat">
+            <span className="study-summary__num">{completedIds.size}</span>
+            <span className="study-summary__label">of {totalWords} total</span>
+          </div>
+        </div>
         <button className="btn-back-to-browse" onClick={onExit}>Back to browse</button>
       </div>
     )
@@ -41,7 +47,6 @@ function StudyMode({ words, completedIds, toggleId, onExit }) {
   }
 
   const handlePracticeMore = () => {
-    setPracticeCount(c => c + 1)
     setQueue(prev => [...prev.slice(1), prev[0]])
     setRevealed(false)
   }
@@ -58,6 +63,7 @@ function StudyMode({ words, completedIds, toggleId, onExit }) {
           key={`${card.id}-${queue.length}`}
           chamorro={card.chamorro}
           english={card.english}
+          category={card.category}
           revealed={revealed}
           onReveal={() => setRevealed(true)}
           onGotIt={handleGotIt}

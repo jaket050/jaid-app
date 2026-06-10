@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import './App.css'
 import WordCard from './components/WordCard'
 import Header from './components/Header'
@@ -12,6 +12,7 @@ import LearningPaths from './components/LearningPaths'
 import SearchBar from './components/SearchBar'
 import { supabase } from './lib/supabase'
 import { useCompletedIds } from './hooks/useCompletedIds'
+import { useDailyPractice } from './hooks/useDailyPractice'
 
 function App() {
   const [words, setWords] = useState([])
@@ -21,6 +22,12 @@ function App() {
   const [error, setError] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [completedIds, toggleId] = useCompletedIds()
+  const { hasPracticedToday, markPracticed } = useDailyPractice()
+
+  const toggleIdWithPractice = useCallback((id) => {
+    toggleId(id)
+    markPracticed()
+  }, [toggleId, markPracticed])
 
   const handleSelectCategory = (cat) => {
     setCategory(cat)
@@ -74,7 +81,8 @@ function App() {
       <StudyMode
         words={filteredWords}
         completedIds={completedIds}
-        toggleId={toggleId}
+        toggleId={toggleIdWithPractice}
+        totalWords={words.length}
         onExit={() => setView("browse")}
       />
     )
@@ -110,6 +118,7 @@ function App() {
         completedCount={completedCount}
         words={words}
         completedIds={completedIds}
+        hasPracticedToday={hasPracticedToday}
       />
       <div className="action-bar">
         <button
@@ -148,7 +157,7 @@ function App() {
                 type={item.type}
                 difficulty={item.difficulty}
                 isCompleted={completedIds.has(item.id)}
-                onToggle={() => toggleId(item.id)}
+                onToggle={() => toggleIdWithPractice(item.id)}
               />
             ))
           )}

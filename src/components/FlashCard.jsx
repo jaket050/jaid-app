@@ -1,4 +1,4 @@
-function FlashCard({ chamorro, english, revealed, onReveal, onGotIt, onPracticeMore }) {
+function FlashCard({ chamorro, english, category, revealed, onReveal, onGotIt, onPracticeMore }) {
   return (
     <div
       className={`flashcard${revealed ? ' is-revealed' : ''}`}
@@ -11,6 +11,7 @@ function FlashCard({ chamorro, english, revealed, onReveal, onGotIt, onPracticeM
       {revealed ? (
         <>
           <p className="flashcard__english">{english}</p>
+          {category && <span className="flashcard__category">{category}</span>}
           <div className="flashcard__actions">
             <button className="btn-got-it" onClick={onGotIt}>Got it</button>
             <button className="btn-practice" onClick={onPracticeMore}>Practice more</button>

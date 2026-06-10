@@ -1,4 +1,4 @@
-function Header({ totalWords, completedCount }) {
+function Header({ totalWords, completedCount, hasPracticedToday }) {
   const percentage = totalWords > 0
     ? Math.round((completedCount / totalWords) * 100)
     : 0
@@ -19,6 +19,9 @@ function Header({ totalWords, completedCount }) {
       <div className="hero-content">
         <p className="progress">
           {completedCount} of {totalWords} words completed{' '}
+          {hasPracticedToday && (
+            <span className="practice-dot" aria-label="Practiced today">●</span>
+          )}
           <span className="counter">{percentage}%</span>
         </p>
         <div className="progress-bar">
