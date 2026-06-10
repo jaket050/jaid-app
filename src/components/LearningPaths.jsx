@@ -2,35 +2,34 @@ import {
   MessageCircle, Users, Utensils, Hash, Calendar,
   CalendarDays, Heart, Leaf, Box, MapPin, Compass,
   Zap, User, Palette, Star, Clock, Church, HelpCircle,
-  Fingerprint, UsersRound, CloudSun, TreeDeciduous, Droplets,
+  UsersRound, CloudSun, TreeDeciduous, Droplets,
   Landmark, BookOpen
 } from 'lucide-react'
 
 const CATEGORY_CONFIG = {
-  greetings:  { icon: MessageCircle,  label: 'Greetings' },
-  family:     { icon: Users,          label: 'Family' },
-  food:       { icon: Utensils,       label: 'Food' },
-  numbers:    { icon: Hash,           label: 'Numbers' },
-  days:       { icon: CalendarDays,   label: 'Days' },
-  months:     { icon: Calendar,       label: 'Months' },
-  emotions:   { icon: Heart,          label: 'Emotions' },
-  nature:     { icon: Leaf,           label: 'Nature' },
-  objects:    { icon: Box,            label: 'Objects' },
-  places:     { icon: MapPin,         label: 'Places' },
-  directions: { icon: Compass,        label: 'Directions' },
-  verbs:      { icon: Zap,            label: 'Verbs' },
-  pronouns:   { icon: User,           label: 'Pronouns' },
-  adjectives: { icon: Palette,        label: 'Adjectives' },
-  values:     { icon: Star,           label: 'Values' },
-  time:       { icon: Clock,          label: 'Time' },
-  holidays:   { icon: Church,         label: 'Holidays' },
-  questions:  { icon: HelpCircle,     label: 'Questions' },
-  identity:   { icon: Fingerprint,    label: 'Identity' },
-  people:     { icon: UsersRound,     label: 'People' },
-  weather:    { icon: CloudSun,       label: 'Weather' },
-  genealogy:  { icon: TreeDeciduous,  label: 'Genealogy' },
-  baptism:    { icon: Droplets,       label: 'Baptism' },
-  culture:    { icon: Landmark,       label: 'Culture' },
+  'Adjectives':            { icon: Palette,       label: 'Adjectives' },
+  'Baptism':               { icon: Droplets,      label: 'Baptism' },
+  'Culture':               { icon: Landmark,      label: 'Culture' },
+  'Days of the Week':      { icon: CalendarDays,  label: 'Days of the Week' },
+  'Directions':            { icon: Compass,       label: 'Directions' },
+  'Emotions':              { icon: Heart,         label: 'Emotions' },
+  'Family':                { icon: Users,         label: 'Family' },
+  'Food':                  { icon: Utensils,      label: 'Food' },
+  'Genealogy':             { icon: TreeDeciduous, label: 'Genealogy' },
+  'Greetings':             { icon: MessageCircle, label: 'Greetings' },
+  'Holidays and Religion': { icon: Church,        label: 'Holidays and Religion' },
+  'Months of the Year':    { icon: Calendar,      label: 'Months of the Year' },
+  'Nature':                { icon: Leaf,          label: 'Nature' },
+  'Numbers':               { icon: Hash,          label: 'Numbers' },
+  'Objects':               { icon: Box,           label: 'Objects' },
+  'People':                { icon: UsersRound,    label: 'People' },
+  'Places':                { icon: MapPin,        label: 'Places' },
+  'Pronouns':              { icon: User,          label: 'Pronouns' },
+  'Questions':             { icon: HelpCircle,    label: 'Questions' },
+  'Time':                  { icon: Clock,         label: 'Time' },
+  'Values':                { icon: Star,          label: 'Values' },
+  'Verbs':                 { icon: Zap,           label: 'Verbs' },
+  'Weather':               { icon: CloudSun,      label: 'Weather' },
 }
 
 const DEFAULT_CONFIG = { icon: BookOpen, label: '' }
@@ -58,7 +57,7 @@ function LearningPaths({ words, completedIds, onSelectCategory }) {
             label: cat.charAt(0).toUpperCase() + cat.slice(1),
           }
           const IconComponent = config.icon
-          const isStart = cat === 'greetings'
+          const isStart = cat === 'Greetings'
           const pct = total > 0 ? Math.round((done / total) * 100) : 0
 
           return (
