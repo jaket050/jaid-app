@@ -56,8 +56,18 @@ function App() {
 
   const completedCount = words.filter((item) => completedIds.has(item.id)).length
 
-  if (loading) return <p>Loading JAID vocabulary...</p>
-  if (error) return <p>{error}</p>
+  if (loading) return (
+    <div className="app-status app-status--loading">
+      <span className="app-status__brand">JAID</span>
+      <p className="app-status__text">Loading vocabulary…</p>
+    </div>
+  )
+  if (error) return (
+    <div className="app-status app-status--error">
+      <p className="app-status__title">Couldn't load JAID</p>
+      <p className="app-status__text">{error}</p>
+    </div>
+  )
 
   if (view === "study") {
     return (
@@ -94,7 +104,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="browse-view">
       <Header
         totalWords={words.length}
         completedCount={completedCount}
@@ -149,9 +159,16 @@ function App() {
         <>
           <WordOfTheDay words={words} />
           <CulturalValues />
-          <LearningPaths words={words} onSelectCategory={handleSelectCategory} />
+          <LearningPaths
+            words={words}
+            completedIds={completedIds}
+            onSelectCategory={handleSelectCategory}
+          />
         </>
       )}
+      <footer className="browse-footer">
+        Vocabulary sourced from Kumision i Fino' CHamoru
+      </footer>
     </div>
   )
 }
