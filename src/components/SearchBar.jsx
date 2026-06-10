@@ -8,7 +8,7 @@ const CHAMORU_CHARS = [
   { char: 'Ñ', label: 'Ñ' },
   { char: 'CH', label: 'CH' },
   { char: 'NG', label: 'NG' },
-  { char: "'", label: "Glota'" },
+  { char: "'", label: "Glota" },
 ]
 
 function SearchBar({ onSearch }) {

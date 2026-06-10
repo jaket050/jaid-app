@@ -166,16 +166,6 @@
   border-radius: 0;
 }
 
-.cultural-note {
-  font-size: 15px;
-  color: var(--text);
-  border-left: 2px solid var(--accent);
-  background: var(--gold-bg);
-  padding: 8px 12px;
-  border-radius: 0 6px 6px 0;
-  margin: 14px 0;
-}
-
 .btn-complete {
   margin-top: 4px;
   padding: 8px 18px;
@@ -209,47 +199,6 @@
   gap: 8px;
   margin-top: 14px;
   flex-wrap: nowrap;
-}
-
-.hint-section {
-  margin-top: 0.75rem;
-}
-
-.btn-hint {
-  margin-top: 0;
-  padding: 8px 18px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 13px;
-  font-family: var(--sans);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  border: 1px solid var(--accent-border);
-  color: var(--accent);
-  background: var(--accent-bg);
-  transition: all 0.2s;
-}
-
-.btn-hint:hover {
-  background: var(--accent);
-  color: var(--bg);
-}
-
-.btn-hint:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.hint {
-  font-size: 14px;
-  color: var(--text);
-  border-left: 3px solid var(--accent);
-  background: var(--accent-bg);
-  padding: 8px 12px;
-  border-radius: 0 6px 6px 0;
-  margin: 10px 0 0;
-  font-style: italic;
 }
 
 .progress-bar {
@@ -435,8 +384,7 @@
   .word-card__actions {
     gap: 6px;
   }
-  .btn-complete,
-  .btn-hint {
+  .btn-complete {
     font-size: 11px;
     padding: 6px 12px;
   }

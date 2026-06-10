@@ -1,8 +1,4 @@
-import { useState } from 'react'
-
-function WordCard({ chamorro, english, type, difficulty, culturalNote, isCompleted, onToggle }) {
-  const [showHint, setShowHint] = useState(false)
-
+function WordCard({ chamorro, english, type, difficulty, isCompleted, onToggle }) {
   return (
     <div className={`word-card${isCompleted ? " completed" : ""}`}>
       <h2>{chamorro}</h2>
@@ -20,14 +16,6 @@ function WordCard({ chamorro, english, type, difficulty, culturalNote, isComplet
           {isCompleted ? "Mark Incomplete" : "Mark Complete"}
         </button>
       </div>
-      {culturalNote && (
-        <div className="hint-section">
-          <button className="btn-hint" onClick={() => setShowHint(!showHint)}>
-            {showHint ? 'Hide Hint' : 'Hint'}
-          </button>
-          {showHint && <p className="cultural-note">{culturalNote}</p>}
-        </div>
-      )}
     </div>
   )
 }

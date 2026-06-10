@@ -107,9 +107,8 @@
 
 .match-board__col-title {
   font-family: var(--sans);
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
   color: #C9A84C;
   margin: 0 0 0.5rem;
   font-weight: 700;

@@ -147,7 +147,6 @@ function App() {
                 english={item.english}
                 type={item.type}
                 difficulty={item.difficulty}
-                culturalNote={item.culturalNote}
                 isCompleted={completedIds.has(item.id)}
                 onToggle={() => toggleId(item.id)}
               />
