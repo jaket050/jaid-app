@@ -1022,10 +1022,12 @@
 }
 
 .wotd {
-  background: #1a3a5c;
+  background: radial-gradient(ellipse at center, #1e4570 0%, #1a3a5c 70%);
+  border-top: 3px solid #C9A84C;
   border-radius: 10px;
   padding: 2rem 22px;
   margin: 0 0 0;
+  box-shadow: 0 0 24px 4px rgba(201, 168, 76, 0.15);
 }
 
 .wotd__header {
@@ -1059,9 +1061,19 @@
   flex: 1;
 }
 
+.wotd__category {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  margin-bottom: 4px;
+}
+
 .wotd__word {
   font-family: var(--heading);
-  font-size: 2rem;
+  font-size: 3rem;
   color: #fff;
   margin-bottom: 4px;
   line-height: 1.1;
@@ -1168,6 +1180,7 @@
 
 .learning-paths {
   padding: 1.5rem 0 0.5rem;
+  background: #0D1B2A;
 }
 
 .learning-paths__header {
