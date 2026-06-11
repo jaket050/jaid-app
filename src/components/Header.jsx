@@ -1,4 +1,36 @@
-function Header({ totalWords, completedCount, hasPracticedToday }) {
+import { useState, useEffect, useRef } from 'react'
+
+// Animate a number upward over `duration` ms; jump instantly on any decrease.
+function useCountUp(target, duration = 600) {
+  const [display, setDisplay] = useState(target)
+  const prevRef = useRef(target)
+
+  useEffect(() => {
+    const from = prevRef.current
+    prevRef.current = target
+    let rafId
+    if (target <= from) {
+      // Decrease (or no change): jump instantly, deferred a frame so this is
+      // not a synchronous setState in the effect body.
+      rafId = requestAnimationFrame(() => setDisplay(target))
+      return () => cancelAnimationFrame(rafId)
+    }
+    let startTs = null
+    const tick = (ts) => {
+      if (startTs === null) startTs = ts
+      const p = Math.min((ts - startTs) / duration, 1)
+      setDisplay(Math.round(from + (target - from) * p))
+      if (p < 1) rafId = requestAnimationFrame(tick)
+    }
+    rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
+  }, [target, duration])
+
+  return display
+}
+
+function Header({ totalWords, completedCount, hasPracticedToday, streakCount }) {
+  const animatedCount = useCountUp(completedCount)
   const percentage = totalWords > 0
     ? Math.round((completedCount / totalWords) * 100)
     : 0
@@ -18,9 +50,14 @@ function Header({ totalWords, completedCount, hasPracticedToday }) {
       </div>
       <div className="hero-content">
         <p className="progress">
-          {completedCount} of {totalWords} words completed{' '}
+          {animatedCount} of {totalWords} words completed{' '}
           {hasPracticedToday && (
-            <span className="practice-dot" aria-label="Practiced today">●</span>
+            <>
+              <span className="practice-dot" aria-label="Practiced today">●</span>
+              {streakCount > 0 && (
+                <span className="hero-streak">Day {streakCount}</span>
+              )}
+            </>
           )}
           <span className="counter">{percentage}%</span>
         </p>

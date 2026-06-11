@@ -3,7 +3,7 @@ import {
   CalendarDays, Heart, Leaf, Box, MapPin, Compass,
   Zap, User, Palette, Star, Clock, Church, HelpCircle,
   UsersRound, CloudSun, TreeDeciduous, Droplets,
-  Landmark, BookOpen
+  Landmark, BookOpen, Check
 } from 'lucide-react'
 
 const CATEGORY_CONFIG = {
@@ -59,13 +59,19 @@ function LearningPaths({ words, completedIds, onSelectCategory }) {
           const IconComponent = config.icon
           const isStart = cat === 'Greetings'
           const pct = total > 0 ? Math.round((done / total) * 100) : 0
+          const isComplete = total > 0 && done === total
+          const isEmpty = total > 0 && done === 0
 
           return (
             <button
               key={cat}
-              className={`path-card ${isStart ? 'path-card--start' : ''}`}
+              className={`path-card ${isStart ? 'path-card--start' : ''} ${isComplete ? 'path-card--complete' : ''}`}
               onClick={() => onSelectCategory(cat)}
+              aria-label={`Practice ${config.label} vocabulary, ${done} of ${total} completed`}
             >
+              {isComplete && (
+                <span className="path-card__complete-check"><Check size={14} /></span>
+              )}
               <div className="path-card__icon">
                 <IconComponent size={20} />
               </div>
@@ -83,6 +89,9 @@ function LearningPaths({ words, completedIds, onSelectCategory }) {
                   style={{ width: `${pct}%` }}
                 />
               </div>
+              {isEmpty && (
+                <span className="path-card__hint">Tap to begin</span>
+              )}
               {isStart && (
                 <span className="path-card__badge">Start here</span>
               )}

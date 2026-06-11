@@ -1,6 +1,6 @@
-import { Calendar } from 'lucide-react'
+import { Calendar, Check } from 'lucide-react'
 
-function WordOfTheDay({ words }) {
+function WordOfTheDay({ words, completedIds }) {
   if (!words || words.length === 0) return null
 
   const verifiedWords = words.filter(w => w.verified !== false)
@@ -10,6 +10,7 @@ function WordOfTheDay({ words }) {
   const today = new Date()
   const dayIndex = Math.floor((today - start) / (1000 * 60 * 60 * 24))
   const word = verifiedWords[dayIndex % verifiedWords.length]
+  const isLearned = completedIds?.has(word.id)
 
   return (
     <div className="wotd">
@@ -24,6 +25,9 @@ function WordOfTheDay({ words }) {
           )}
           <h2 className="wotd__word">{word.chamorro}</h2>
           <p className="wotd__english">{word.english}</p>
+          {isLearned && (
+            <p className="wotd__learned"><Check size={14} /> Learned</p>
+          )}
           {word.culturalNote && (
             <p className="wotd__note">{word.culturalNote}</p>
           )}

@@ -1,6 +1,13 @@
 import { useState } from 'react'
 import FlashCard from './FlashCard'
 
+const LEARNING_PATH_ORDER = [
+  'Greetings', 'Family', 'Numbers', 'Days of the Week', 'Months of the Year',
+  'Time', 'Holidays and Religion', 'Baptism', 'Weather', 'Places', 'Food',
+  'Culture', 'Values', 'Genealogy', 'Pronouns', 'Verbs', 'Adjectives',
+  'Directions', 'Objects', 'Emotions', 'Nature', 'People', 'Questions',
+]
+
 function shuffle(arr) {
   const out = [...arr]
   for (let i = out.length - 1; i > 0; i--) {
@@ -10,12 +17,32 @@ function shuffle(arr) {
   return out
 }
 
-function StudyMode({ words, completedIds, toggleId, totalWords, onExit }) {
-  const [queue, setQueue] = useState(() => shuffle(words))
+// Difficulty ascending; shuffle within each difficulty group.
+function orderByDifficulty(words) {
+  const groups = {}
+  words.forEach(w => {
+    const d = w.difficulty ?? 0
+    ;(groups[d] = groups[d] || []).push(w)
+  })
+  return Object.keys(groups)
+    .map(Number)
+    .sort((a, b) => a - b)
+    .flatMap(d => shuffle(groups[d]))
+}
+
+function nextCategory(category) {
+  const idx = LEARNING_PATH_ORDER.indexOf(category)
+  if (idx === -1 || idx === LEARNING_PATH_ORDER.length - 1) return 'Greetings'
+  return LEARNING_PATH_ORDER[idx + 1]
+}
+
+function StudyMode({ words, completedIds, toggleId, totalWords, category, onSelectDeck, onExit }) {
+  const [queue, setQueue] = useState(() => orderByDifficulty(words))
   const [revealed, setRevealed] = useState(false)
   const [gotItIds, setGotItIds] = useState(() => new Set())
 
   if (queue.length === 0) {
+    const suggestion = nextCategory(category)
     return (
       <div className="study-summary">
         <div className="study-summary__phrase">
@@ -33,6 +60,11 @@ function StudyMode({ words, completedIds, toggleId, totalWords, onExit }) {
           </div>
         </div>
         <button className="btn-back-to-browse" onClick={onExit}>Back to browse</button>
+        {onSelectDeck && (
+          <button className="btn-next-deck" onClick={() => onSelectDeck(suggestion)}>
+            Try next: {suggestion}
+          </button>
+        )}
       </div>
     )
   }
@@ -54,7 +86,9 @@ function StudyMode({ words, completedIds, toggleId, totalWords, onExit }) {
   return (
     <div className="study-mode">
       <div className="study-mode__header">
-        <button className="btn-exit-study" onClick={onExit}>← Home</button>
+        <button className="btn-exit-study" onClick={onExit}>
+          {category && category !== 'all' ? `← Back to ${category}` : '← Home'}
+        </button>
         <span className="study-mode__brand">JAID</span>
         <span className="study-mode__progress">{gotItIds.size} learned · {queue.length} to go</span>
       </div>

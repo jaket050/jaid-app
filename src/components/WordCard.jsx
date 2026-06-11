@@ -1,4 +1,4 @@
-function WordCard({ chamorro, english, type, difficulty, isCompleted, onToggle }) {
+function WordCard({ chamorro, english, type, difficulty, isCompleted, onToggle, onPractice }) {
   return (
     <div className={`word-card${isCompleted ? " completed" : ""}`}>
       <h2>{chamorro}</h2>
@@ -15,6 +15,11 @@ function WordCard({ chamorro, english, type, difficulty, isCompleted, onToggle }
         >
           {isCompleted ? "Mark Incomplete" : "Mark Complete"}
         </button>
+        {onPractice && (
+          <button className="btn-practice-word" onClick={onPractice}>
+            Practice
+          </button>
+        )}
       </div>
     </div>
   )

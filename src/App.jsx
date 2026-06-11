@@ -10,6 +10,7 @@ import WordOfTheDay from './components/WordOfTheDay'
 import CulturalValues from './components/CulturalValues'
 import LearningPaths from './components/LearningPaths'
 import SearchBar from './components/SearchBar'
+import Toast from './components/Toast'
 import { supabase } from './lib/supabase'
 import { useCompletedIds } from './hooks/useCompletedIds'
 import { useDailyPractice } from './hooks/useDailyPractice'
@@ -21,16 +22,30 @@ function App() {
   const [view, setView] = useState("browse")
   const [error, setError] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
+  const [studyWords, setStudyWords] = useState(null)
+  const [toast, setToast] = useState(null)
   const [completedIds, toggleId] = useCompletedIds()
-  const { hasPracticedToday, markPracticed } = useDailyPractice()
+  const { hasPracticedToday, markPracticed, streakCount } = useDailyPractice()
 
   const toggleIdWithPractice = useCallback((id) => {
+    const becomingComplete = !completedIds.has(id)
     toggleId(id)
     markPracticed()
-  }, [toggleId, markPracticed])
+    if (becomingComplete) {
+      const w = words.find(x => x.id === id)
+      if (w) setToast({ id: Date.now(), chamorro: w.chamorro })
+    }
+  }, [completedIds, toggleId, markPracticed, words])
 
   const handleSelectCategory = (cat) => {
+    setStudyWords(null)
     setCategory(cat)
+    setView("study")
+  }
+
+  const handlePracticeWord = (word) => {
+    setStudyWords([word])
+    setCategory(word.category ?? 'all')
     setView("study")
   }
 
@@ -79,11 +94,14 @@ function App() {
   if (view === "study") {
     return (
       <StudyMode
-        words={filteredWords}
+        key={studyWords ? `single-${studyWords[0].id}` : `cat-${category}`}
+        words={studyWords ?? filteredWords}
         completedIds={completedIds}
         toggleId={toggleIdWithPractice}
         totalWords={words.length}
-        onExit={() => setView("browse")}
+        category={category}
+        onSelectDeck={(cat) => { setStudyWords(null); setCategory(cat); setView("study") }}
+        onExit={() => { setStudyWords(null); setView("browse") }}
       />
     )
   }
@@ -102,7 +120,9 @@ function App() {
     return (
       <DeckSelect
         words={words}
+        category={category}
         onSelectDeck={(selectedCategory) => {
+          setStudyWords(null)
           setCategory(selectedCategory)
           setView("study")
         }}
@@ -119,6 +139,7 @@ function App() {
         words={words}
         completedIds={completedIds}
         hasPracticedToday={hasPracticedToday}
+        streakCount={streakCount}
       />
       <div className="action-bar">
         <button
@@ -158,6 +179,7 @@ function App() {
                 difficulty={item.difficulty}
                 isCompleted={completedIds.has(item.id)}
                 onToggle={() => toggleIdWithPractice(item.id)}
+                onPractice={() => handlePracticeWord(item)}
               />
             ))
           )}
@@ -165,7 +187,7 @@ function App() {
       )}
       {searchQuery === '' && (
         <>
-          <WordOfTheDay words={words} />
+          <WordOfTheDay words={words} completedIds={completedIds} />
           <CulturalValues />
           <LearningPaths
             words={words}
@@ -177,6 +199,9 @@ function App() {
       <footer className="browse-footer">
         Vocabulary sourced from Kumision i Fino' CHamoru
       </footer>
+      {toast && (
+        <Toast key={toast.id} chamorro={toast.chamorro} onDismiss={() => setToast(null)} />
+      )}
     </div>
   )
 }

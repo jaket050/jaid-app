@@ -1,4 +1,4 @@
-function DeckSelect({ words, onSelectDeck, onExit }) {
+function DeckSelect({ words, category, onSelectDeck, onExit }) {
   const categoryCounts = {}
   words.forEach(word => {
     if (word.category) {
@@ -12,7 +12,9 @@ function DeckSelect({ words, onSelectDeck, onExit }) {
   return (
     <div className="deck-select">
       <div className="study-mode__header">
-        <button className="btn-exit-study" onClick={onExit}>← Home</button>
+        <button className="btn-exit-study" onClick={onExit}>
+          {category && category !== 'all' ? `← Back to ${category}` : '← Home'}
+        </button>
         <span className="study-mode__brand">JAID</span>
         <span className="study-mode__progress">Choose a Deck</span>
       </div>
