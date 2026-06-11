@@ -26,7 +26,7 @@ function About({ onExit }) {
           <blockquote className="about-pullquote">
             "That relationship, and the love behind it, is the reason this app exists."
           </blockquote>
-          <p className="about-section__body">I am Hawaiian, Kanaka Maoli, not CHamoru. I am an ally who believes that endangered languages deserve modern tools built with care and humility.</p>
+          <p className="about-section__body">I am Hawaiian, Kānaka Maoli, not CHamoru. I am an ally who believes that endangered languages deserve modern tools built with care and humility.</p>
         </div>
 
         <WaveDivider />
@@ -50,7 +50,7 @@ function About({ onExit }) {
         <div className="about-section">
           <div className="about-section__diamond">◆</div>
           <h2 className="about-section__title">Built With the Community</h2>
-          <p className="about-section__body">JAID is seeking a formal partnership with Kumision i Fino' CHamoru to ensure the app is built the right way for current and future generations of CHamoru learners. The people who hold this language should guide how it is taught.</p>
+          <p className="about-section__body">JAID is being built in partnership with Kumision i Fino' CHamoru to ensure the app serves current and future generations of CHamoru learners. The people who hold this language guide how it is taught.</p>
         </div>
 
         <WaveDivider />
