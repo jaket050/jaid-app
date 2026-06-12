@@ -89,7 +89,7 @@ function LearningPaths({ words, completedIds, onSelectCategory }) {
                   style={{ width: `${pct}%` }}
                 />
               </div>
-              {isEmpty && (
+              {isEmpty && !isStart && (
                 <span className="path-card__hint">Tap to begin</span>
               )}
               {isStart && (

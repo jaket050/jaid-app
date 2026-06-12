@@ -221,7 +221,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
-  background: #1a3a5c;
+  background: #0D1B2A;
 }
 
 .study-mode__card-area {
@@ -450,7 +450,7 @@
   align-items: center;
   width: 100%;
   padding: 1rem 1.5rem;
-  background: #1a3a5c;
+  background: #0D1B2A;
   box-sizing: border-box;
 }
 
@@ -715,7 +715,7 @@
   gap: 1rem;
   padding: 1rem 1.5rem;
   background: rgba(232, 220, 200, 0.18);
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.3);
 }
 
 .action-bar .btn-study {
@@ -1026,7 +1026,7 @@
   border-top: 3px solid #C9A84C;
   border-radius: 10px;
   padding: 2rem 22px;
-  margin: 0 0 0;
+  margin: 2rem 0;
   box-shadow: 0 0 24px 4px rgba(201, 168, 76, 0.15);
 }
 
@@ -1112,12 +1112,23 @@
 }
 
 .cultural-values__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   font-family: var(--sans);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #1a3a5c;
+  color: #C9A84C;
+}
+
+.cultural-values__label::before,
+.cultural-values__label::after {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: #C9A84C;
 }
 
 .cultural-values__grid {
@@ -1166,7 +1177,7 @@
 
 .value-card__desc {
   font-family: var(--sans);
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   color: rgba(255,255,255,0.6);
   line-height: 1.7;
 }
@@ -1270,8 +1281,8 @@
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #fff;
-  background: #2d6a4f;
+  color: #0D1B2A;
+  background: #C9A84C;
   padding: 2px 7px;
   border-radius: 3px;
   margin-top: 2px;
@@ -1453,6 +1464,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .cultural-values-lei {
@@ -1694,4 +1706,71 @@
     min-height: 120px;
     padding: 1rem 0.75rem;
   }
+}
+
+/* ─── Final polish sprint: progress spans, study stats, map preview ─── */
+
+.progress__count {
+  font-family: var(--heading);
+  font-weight: 700;
+  color: #C9A84C;
+}
+
+.progress__total {
+  color: #E8DCC8;
+}
+
+.progress__muted {
+  font-size: 0.85em;
+  color: rgba(232, 220, 200, 0.7);
+}
+
+.study-mode__stat-learned {
+  color: #C9A84C;
+}
+
+.study-mode__stat-remaining {
+  color: #E8DCC8;
+}
+
+.map-preview {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: #0D1B2A;
+}
+
+.map-preview__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.map-preview__title {
+  font-family: var(--heading);
+  font-size: 2.5rem;
+  color: #C9A84C;
+  margin: 0;
+}
+
+.map-preview__subtitle {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #E8DCC8;
+  margin: 0;
+}
+
+.map-preview__note {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-style: italic;
+  color: rgba(232, 220, 200, 0.6);
+  margin: 0;
 }

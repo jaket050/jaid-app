@@ -50,7 +50,10 @@ function Header({ totalWords, completedCount, hasPracticedToday, streakCount }) 
       </div>
       <div className="hero-content">
         <p className="progress">
-          {animatedCount} of {totalWords} words completed{' '}
+          <span className="progress__count">{animatedCount}</span>{' '}
+          <span className="progress__muted">of</span>{' '}
+          <span className="progress__total">{totalWords}</span>{' '}
+          <span className="progress__muted">words completed</span>{' '}
           {hasPracticedToday && (
             <>
               <span className="practice-dot" aria-label="Practiced today">●</span>

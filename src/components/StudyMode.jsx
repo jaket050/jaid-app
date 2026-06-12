@@ -90,7 +90,11 @@ function StudyMode({ words, completedIds, toggleId, totalWords, category, onSele
           {category && category !== 'all' ? `← Back to ${category}` : '← Home'}
         </button>
         <span className="study-mode__brand">JAID</span>
-        <span className="study-mode__progress">{gotItIds.size} learned · {queue.length} to go</span>
+        <span className="study-mode__progress">
+          <span className="study-mode__stat-learned">{gotItIds.size} learned</span>
+          {' · '}
+          <span className="study-mode__stat-remaining">{queue.length} to go</span>
+        </span>
       </div>
       <div className="study-mode__card-area">
         <FlashCard

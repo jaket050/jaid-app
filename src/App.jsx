@@ -11,6 +11,7 @@ import CulturalValues from './components/CulturalValues'
 import LearningPaths from './components/LearningPaths'
 import SearchBar from './components/SearchBar'
 import Toast from './components/Toast'
+import MapPreview from './components/MapPreview'
 import { supabase } from './lib/supabase'
 import { useCompletedIds } from './hooks/useCompletedIds'
 import { useDailyPractice } from './hooks/useDailyPractice'
@@ -116,6 +117,10 @@ function App() {
     return <About onExit={() => setView("browse")} />
   }
 
+  if (view === "map") {
+    return <MapPreview onExit={() => setView("browse")} />
+  }
+
   if (view === "deck-select") {
     return (
       <DeckSelect
@@ -160,6 +165,9 @@ function App() {
         </button>
         <button className="btn-about-nav" onClick={() => setView("about")}>
           ABOUT
+        </button>
+        <button className="btn-about-nav" onClick={() => setView("map")}>
+          I Tåno'
         </button>
       </div>
       <SearchBar onSearch={setSearchQuery} />
