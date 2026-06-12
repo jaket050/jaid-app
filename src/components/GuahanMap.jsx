@@ -146,7 +146,7 @@ export default function GuahanMap({ onExit }) {
               </div>
             ) : (
               <p className={styles.emptyDeck}>
-                Vocabulary for this municipality is coming soon.
+                Historical and cultural information coming soon.
               </p>
             )}
           </>
