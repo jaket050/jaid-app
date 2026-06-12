@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react'
 import './App.css'
 import WordCard from './components/WordCard'
 import Header from './components/Header'
@@ -11,8 +11,9 @@ import CulturalValues from './components/CulturalValues'
 import LearningPaths from './components/LearningPaths'
 import SearchBar from './components/SearchBar'
 import Toast from './components/Toast'
-import MapPreview from './components/MapPreview'
 import { supabase } from './lib/supabase'
+
+const GuahanMap = lazy(() => import('./components/GuahanMap'))
 import { useCompletedIds } from './hooks/useCompletedIds'
 import { useDailyPractice } from './hooks/useDailyPractice'
 
@@ -118,7 +119,11 @@ function App() {
   }
 
   if (view === "map") {
-    return <MapPreview onExit={() => setView("browse")} />
+    return (
+      <Suspense fallback={null}>
+        <GuahanMap onExit={() => setView("browse")} />
+      </Suspense>
+    )
   }
 
   if (view === "deck-select") {
