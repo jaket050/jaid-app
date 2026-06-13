@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import { useSessionId } from '../hooks/useSessionId'
+import { logEvent } from '../utils/logEvent'
 import MatchBoard from './MatchBoard'
 import './match.css'
 
@@ -16,6 +18,7 @@ function shuffle(arr) {
 }
 
 function MatchGame() {
+  useSessionId() // ensure an anonymous session id exists for event logging
   const [allWords, setAllWords] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -86,11 +89,13 @@ function MatchGame() {
     if (selectedCh === null || selectedEn === null) return
     if (wrongPair) return
     if (selectedCh === selectedEn) {
+      logEvent('card_game_pair_flipped', { word_id: selectedCh, pair_matched: true })
       setMatchedIds((prev) => new Set(prev).add(selectedCh))
       setSelectedCh(null)
       setSelectedEn(null)
       return
     }
+    logEvent('card_game_pair_flipped', { word_id: selectedCh, pair_matched: false })
     setWrongPair({ chId: selectedCh, enId: selectedEn })
   }, [selectedCh, selectedEn, wrongPair])
 

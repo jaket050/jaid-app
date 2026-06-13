@@ -12,10 +12,12 @@ import LearningPaths from './components/LearningPaths'
 import SearchBar from './components/SearchBar'
 import Toast from './components/Toast'
 import { supabase } from './lib/supabase'
-
-const GuahanMap = lazy(() => import('./components/GuahanMap'))
 import { useCompletedIds } from './hooks/useCompletedIds'
 import { useDailyPractice } from './hooks/useDailyPractice'
+import { useSessionId } from './hooks/useSessionId'
+import { logEvent } from './utils/logEvent'
+
+const GuahanMap = lazy(() => import('./components/GuahanMap'))
 
 function App() {
   const [words, setWords] = useState([])
@@ -28,6 +30,7 @@ function App() {
   const [toast, setToast] = useState(null)
   const [completedIds, toggleId] = useCompletedIds()
   const { hasPracticedToday, markPracticed, streakCount } = useDailyPractice()
+  useSessionId() // ensure an anonymous session id exists for event logging
 
   const toggleIdWithPractice = useCallback((id) => {
     const becomingComplete = !completedIds.has(id)
@@ -43,6 +46,7 @@ function App() {
     setStudyWords(null)
     setCategory(cat)
     setView("study")
+    logEvent('category_viewed', { category: cat })
   }
 
   const handlePracticeWord = (word) => {
@@ -79,6 +83,21 @@ function App() {
   })
 
   const completedCount = words.filter((item) => completedIds.has(item.id)).length
+
+  // Debounced search logging — fire one event 600ms after the learner stops
+  // typing, so we capture meaningful searches rather than one row per keystroke.
+  const resultCount = filteredWords.length
+  useEffect(() => {
+    if (searchQuery.trim() === '') return
+    const t = setTimeout(() => {
+      logEvent(resultCount > 0 ? 'search_success' : 'search_no_results', {
+        search_term: searchQuery,
+        category,
+        result_count: resultCount,
+      })
+    }, 600)
+    return () => clearTimeout(t)
+  }, [searchQuery, category, resultCount])
 
   if (loading) return (
     <div className="app-status app-status--loading">
@@ -210,7 +229,10 @@ function App() {
         </>
       )}
       <footer className="browse-footer">
-        Vocabulary sourced from Kumision i Fino' CHamoru
+        <p>Vocabulary sourced from Kumision i Fino' CHamoru</p>
+        <p className="browse-footer__privacy">
+          JAID collects anonymous usage data to help the Kumision i Fino' CHamoru understand diaspora learner needs. No personal information is collected.
+        </p>
       </footer>
       {toast && (
         <Toast key={toast.id} chamorro={toast.chamorro} onDismiss={() => setToast(null)} />

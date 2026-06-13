@@ -1559,6 +1559,15 @@
   border-top: 1px solid rgba(201, 168, 76, 0.2);
 }
 
+.browse-footer__privacy {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  color: rgba(232, 220, 200, 0.7);
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ─── Daily-practice dot in hero progress line ────────────────── */
 
 .practice-dot {

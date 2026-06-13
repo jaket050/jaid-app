@@ -1,15 +1,28 @@
+import { useEffect } from 'react'
 import { Calendar, Check } from 'lucide-react'
+import { logEvent } from '../utils/logEvent'
 
 function WordOfTheDay({ words, completedIds }) {
-  if (!words || words.length === 0) return null
-
-  const verifiedWords = words.filter(w => w.verified !== false)
-  if (verifiedWords.length === 0) return null
+  const verifiedWords = (words ?? []).filter(w => w.verified !== false)
 
   const start = new Date('2026-01-01')
   const today = new Date()
   const dayIndex = Math.floor((today - start) / (1000 * 60 * 60 * 24))
-  const word = verifiedWords[dayIndex % verifiedWords.length]
+  const word = verifiedWords.length > 0
+    ? verifiedWords[dayIndex % verifiedWords.length]
+    : null
+
+  const wordId = word?.id ?? null
+  const wordCategory = word?.category ?? null
+
+  // Fire-and-forget: one view event per day's word.
+  useEffect(() => {
+    if (wordId == null) return
+    logEvent('word_of_day_viewed', { word_id: wordId, category: wordCategory })
+  }, [wordId, wordCategory])
+
+  if (!word) return null
+
   const isLearned = completedIds?.has(word.id)
 
   return (
