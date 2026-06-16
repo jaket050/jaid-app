@@ -4,6 +4,7 @@ import WordCard from './components/WordCard'
 import Header from './components/Header'
 import StudyMode from './components/StudyMode'
 import DeckSelect from './components/DeckSelect'
+import QuizMode from './components/QuizMode'
 import Alphabet from './components/Alphabet'
 import About from './components/About'
 import WordOfTheDay from './components/WordOfTheDay'
@@ -160,6 +161,34 @@ function App() {
     )
   }
 
+  if (view === "quiz") {
+    return (
+      <DeckSelect
+        words={words}
+        category={category}
+        minWords={4}
+        subtitle="Choose a category to quiz"
+        onSelectDeck={(selectedCategory) => {
+          setCategory(selectedCategory)
+          setView("quiz-run")
+        }}
+        onExit={() => setView("browse")}
+      />
+    )
+  }
+
+  if (view === "quiz-run") {
+    return (
+      <QuizMode
+        key={`quiz-${category}`}
+        words={words}
+        category={category}
+        onSelectDeck={(cat) => { setCategory(cat); setView("quiz-run") }}
+        onExit={() => setView("browse")}
+      />
+    )
+  }
+
   return (
     <div className="browse-view">
       <Header
@@ -177,6 +206,9 @@ function App() {
           disabled={filteredWords.length === 0}
         >
           PRACTICE ({words.length})
+        </button>
+        <button className="btn-about-nav" onClick={() => setView("quiz")}>
+          QUIZ
         </button>
         <button
           className="btn-match"

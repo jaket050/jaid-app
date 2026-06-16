@@ -1,14 +1,6 @@
 import { useState } from 'react'
 import FlashCard from './FlashCard'
-
-const LEARNING_PATH_ORDER = [
-  'Greetings', 'Family', 'Values', 'Holidays and Religion', 'Baptism',
-  'Food', 'Drinks', 'Body Parts', 'Home', 'School', 'Animals', 'Plants',
-  'Water', 'Weather', 'Land', 'Places', 'Numbers', 'Colors', 'Shapes',
-  'Days of the Week', 'Months of the Year', 'Time', 'Money', 'Genealogy',
-  'Pronouns', 'Verbs', 'Adjectives', 'Directions', 'Objects', 'Emotions',
-  'Nature', 'People', 'Questions', 'Culture',
-]
+import { nextCategory } from '../utils/learningPath'
 
 function shuffle(arr) {
   const out = [...arr]
@@ -30,12 +22,6 @@ function orderByDifficulty(words) {
     .map(Number)
     .sort((a, b) => a - b)
     .flatMap(d => shuffle(groups[d]))
-}
-
-function nextCategory(category) {
-  const idx = LEARNING_PATH_ORDER.indexOf(category)
-  if (idx === -1 || idx === LEARNING_PATH_ORDER.length - 1) return 'Greetings'
-  return LEARNING_PATH_ORDER[idx + 1]
 }
 
 function StudyMode({ words, completedIds, toggleId, totalWords, category, onSelectDeck, onExit }) {

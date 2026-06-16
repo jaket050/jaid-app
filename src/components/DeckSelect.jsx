@@ -1,4 +1,4 @@
-function DeckSelect({ words, category, onSelectDeck, onExit }) {
+function DeckSelect({ words, category, onSelectDeck, onExit, minWords = 0, subtitle = 'What do you want to practice?' }) {
   const categoryCounts = {}
   words.forEach(word => {
     if (word.category) {
@@ -21,7 +21,7 @@ function DeckSelect({ words, category, onSelectDeck, onExit }) {
 
       <div className="deck-select__content">
         <h2 className="deck-select__title">Choose a Deck</h2>
-        <p className="deck-select__subtitle">What do you want to practice?</p>
+        <p className="deck-select__subtitle">{subtitle}</p>
 
         <div className="deck-select__grid">
           <button
@@ -32,20 +32,26 @@ function DeckSelect({ words, category, onSelectDeck, onExit }) {
             <span className="deck-card__count">{words.length} words</span>
           </button>
 
-          {categories.map(([cat, count]) => (
-            <button
-              key={cat}
-              className="deck-card"
-              onClick={() => onSelectDeck(cat)}
-            >
-              <span className="deck-card__name">
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              </span>
-              <span className="deck-card__count">
-                {count} {count === 1 ? 'word' : 'words'}
-              </span>
-            </button>
-          ))}
+          {categories.map(([cat, count]) => {
+            const locked = count < minWords
+            return (
+              <button
+                key={cat}
+                className="deck-card"
+                onClick={() => onSelectDeck(cat)}
+                disabled={locked}
+              >
+                <span className="deck-card__name">
+                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </span>
+                <span className="deck-card__count">
+                  {locked
+                    ? `Need ${minWords}+ words`
+                    : `${count} ${count === 1 ? 'word' : 'words'}`}
+                </span>
+              </button>
+            )
+          })}
         </div>
       </div>
     </div>
