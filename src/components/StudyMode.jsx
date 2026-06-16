@@ -2,10 +2,12 @@ import { useState } from 'react'
 import FlashCard from './FlashCard'
 
 const LEARNING_PATH_ORDER = [
-  'Greetings', 'Family', 'Numbers', 'Days of the Week', 'Months of the Year',
-  'Time', 'Holidays and Religion', 'Baptism', 'Weather', 'Places', 'Food',
-  'Culture', 'Values', 'Genealogy', 'Pronouns', 'Verbs', 'Adjectives',
-  'Directions', 'Objects', 'Emotions', 'Nature', 'People', 'Questions',
+  'Greetings', 'Family', 'Values', 'Holidays and Religion', 'Baptism',
+  'Food', 'Drinks', 'Body Parts', 'Home', 'School', 'Animals', 'Plants',
+  'Water', 'Weather', 'Land', 'Places', 'Numbers', 'Colors', 'Shapes',
+  'Days of the Week', 'Months of the Year', 'Time', 'Money', 'Genealogy',
+  'Pronouns', 'Verbs', 'Adjectives', 'Directions', 'Objects', 'Emotions',
+  'Nature', 'People', 'Questions', 'Culture',
 ]
 
 function shuffle(arr) {
