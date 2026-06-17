@@ -13,7 +13,7 @@
   --admin-muted: rgba(232, 220, 200, 0.55);
   --admin-danger: #E5484D;
   --admin-success: #6BCB7A;
-  --admin-font-sans: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --admin-font-sans: var(--sans);
   --admin-font-heading: 'Playfair Display', Georgia, serif;
 }
 
