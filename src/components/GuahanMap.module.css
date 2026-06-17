@@ -4,7 +4,7 @@
   overflow: hidden;
   background: radial-gradient(circle at 40% 50%, #1B6CA8 0%, #0D4F8C 50%, #0A3D6E 100%);
   color: #E8DCC8;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--sans);
 }
 
 .mapHeader {
