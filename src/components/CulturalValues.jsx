@@ -7,7 +7,7 @@ function CulturalValues() {
       icon: "respitu"
     },
     {
-      chamorro: "Inafa'maolek",
+      chamorro: "Ináfa'maolek",
       english: "Interdependence",
       description: "The spirit of making things good for one another. In CHamoru culture, no one stands alone.",
       icon: "inafamaolek"
