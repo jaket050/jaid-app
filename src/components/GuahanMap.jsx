@@ -66,7 +66,7 @@ export default function GuahanMap({ onExit }) {
         <span className="study-mode__progress">I Tåno'</span>
       </div>
       <div className={styles.mapHeader}>
-        <p className={styles.eyebrow}>Kumision i Fino' CHamoru</p>
+        <p className={styles.eyebrow}>In partnership with the Kumision i Fino' CHamoru</p>
         <h2>I Tåno' — Guåhan</h2>
         <p className={styles.mapSubtitle}>
           Tap a municipality to explore its CHamoru name.
