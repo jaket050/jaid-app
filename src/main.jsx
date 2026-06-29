@@ -8,10 +8,17 @@ import App from './App.jsx'
 const AdminApp = lazy(() => import('./admin/AdminApp.jsx'))
 // eslint-disable-next-line react-refresh/only-export-components
 const MatchGame = lazy(() => import('./practice/MatchGame.jsx'))
+// eslint-disable-next-line react-refresh/only-export-components
+const MatchModeSelect = lazy(() => import('./practice/MatchModeSelect.jsx'))
 
 const path = window.location.pathname.replace(/\/+$/, '')
 const isAdmin = path.startsWith('/admin')
-const isFamilyMatch = path === '/practice/family'
+const isPractice = path.startsWith('/practice')
+// practiceSlug: '' = mode selector, 'family'|'weather'|'food'|'antonyms' = specific game
+const practiceSlug = isPractice ? path.slice('/practice'.length).replace(/^\//, '') : ''
+
+// '/practice/family' existed before the mode selector — treat it as 'kinship'.
+const practiceMode = practiceSlug === 'family' ? 'kinship' : practiceSlug
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -19,9 +26,13 @@ createRoot(document.getElementById('root')).render(
       <Suspense fallback={<p>Loading admin…</p>}>
         <AdminApp />
       </Suspense>
-    ) : isFamilyMatch ? (
+    ) : isPractice && practiceMode ? (
       <Suspense fallback={<p>Loading game…</p>}>
-        <MatchGame />
+        <MatchGame mode={practiceMode} />
+      </Suspense>
+    ) : isPractice ? (
+      <Suspense fallback={<p>Loading…</p>}>
+        <MatchModeSelect />
       </Suspense>
     ) : (
       <App />

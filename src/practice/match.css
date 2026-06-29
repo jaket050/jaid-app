@@ -223,6 +223,92 @@
   border-color: #E8C97A;
 }
 
+/* ─── Mode selector ───────────────────────────────────────────── */
+
+.match-mode-select {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1.5rem 3rem;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.match-mode-select__title {
+  font-family: var(--heading);
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin: 0 0 0.5rem;
+  text-align: center;
+}
+
+.match-mode-select__subtitle {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: rgba(232, 220, 200, 0.65);
+  margin: 0 0 2.5rem;
+  text-align: center;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.match-mode-select__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+.match-mode-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 1.5rem 1rem;
+  background: #1A2A3F;
+  border: 1px solid #2D4361;
+  border-radius: 12px;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  transition: background 0.15s, border-color 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+
+.match-mode-card:hover {
+  background: #243A52;
+  border-color: #C9A84C;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.match-mode-card__label {
+  font-family: var(--heading);
+  font-size: 1.25rem;
+  color: #E8DCC8;
+  letter-spacing: 0.03em;
+}
+
+.match-mode-card__subtitle {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  color: rgba(232, 220, 200, 0.6);
+  letter-spacing: 0.04em;
+}
+
+.match-mode-card__count {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  color: #C9A84C;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 0.15rem;
+}
+
 /* ─── Mobile ──────────────────────────────────────────────────── */
 
 @media (max-width: 600px) {
@@ -251,5 +337,21 @@
 
   .match-game__overlay-title {
     font-size: 1.4rem;
+  }
+
+  .match-mode-select {
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .match-mode-select__title {
+    font-size: 1.4rem;
+  }
+
+  .match-mode-card {
+    padding: 1.1rem 0.75rem;
+  }
+
+  .match-mode-card__label {
+    font-size: 1.05rem;
   }
 }

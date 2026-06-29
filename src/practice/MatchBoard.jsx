@@ -15,6 +15,7 @@ function MatchBoard({
   wrongPair,
   onSelectCh,
   onSelectEn,
+  colBTitle = 'English',
 }) {
   return (
     <div className="match-board">
@@ -41,7 +42,7 @@ function MatchBoard({
       </div>
 
       <div className="match-board__column">
-        <h3 className="match-board__col-title">English</h3>
+        <h3 className="match-board__col-title">{colBTitle}</h3>
         {enList.map((w) => {
           const isMatched = matchedIds.has(w.id)
           return (

@@ -212,7 +212,7 @@ function App() {
         </button>
         <button
           className="btn-match"
-          onClick={() => { window.location.href = '/practice/family' }}
+          onClick={() => { window.location.href = '/practice' }}
         >
           CARD MATCH
         </button>
