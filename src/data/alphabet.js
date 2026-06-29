@@ -5,7 +5,7 @@ export const chamorroAlphabet = [
   { letter: "B", name: "b", type: "consonant", pronunciation: "as in English", example: "buenas", exampleEnglish: "hello" },
   { letter: "CH", name: "ch", type: "consonant", pronunciation: "sounds like 'ts' as in tsar or tsunami, not the English 'ch' sound", example: "che'lu", exampleEnglish: "sibling" },
   { letter: "D", name: "d", type: "consonant", pronunciation: "as in English", example: "dångkolo", exampleEnglish: "big, large, great" },
-  { letter: "E", name: "e", type: "vowel", pronunciation: "as in egg (short e)", example: "ékunguk", exampleEnglish: "listen" },
+  { letter: "E", name: "e", type: "vowel", pronunciation: "as in egg (short e)", example: "ékungok", exampleEnglish: "listen" },
   { letter: "F", name: "f", type: "consonant", pronunciation: "as in English", example: "fotgon", exampleEnglish: "wet" },
   { letter: "G", name: "g", type: "consonant", pronunciation: "as in English", example: "gå'ga'", exampleEnglish: "animal" },
   { letter: "H", name: "h", type: "consonant", pronunciation: "as in English", example: "hågu", exampleEnglish: "you" },
