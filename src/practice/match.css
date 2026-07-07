@@ -422,11 +422,11 @@
 }
 
 .muni-name--locked {
-  background: #1e5e3f;
-  border-color: #2d7a53;
-  color: #a8dfbf;
+  background: #1a7a48;
+  border-color: #2dce7a;
+  color: #c6f5de;
   cursor: default;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 /* ── Map column ─────────── */
@@ -456,7 +456,13 @@
   stroke: #3d8a5a;
   stroke-width: 1;
   cursor: pointer;
+  outline: none;
   transition: fill 0.1s;
+}
+
+.muni-shape:focus-visible {
+  fill: rgba(100, 200, 140, 0.5);
+  outline: none;
 }
 
 .muni-map--active .muni-shape:not(.muni-shape--locked) {
@@ -468,9 +474,10 @@
 }
 
 .muni-shape--locked {
-  fill: #1e5e3f;
-  stroke: #13422c;
+  fill: #2dce7a;
+  stroke: #1a9e56;
   cursor: default;
+  outline: none;
 }
 
 .muni-shape--wrong {
@@ -488,7 +495,7 @@
 }
 
 .muni-dot--locked {
-  fill: #a8dfbf;
+  fill: #c6f5de;
 }
 
 .muni-dot--wrong {
