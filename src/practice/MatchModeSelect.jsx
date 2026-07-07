@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { supabase } from '../lib/supabase'
 import './match.css'
 
 const MODES = [
@@ -28,6 +30,16 @@ const MODES = [
 ]
 
 function MatchModeSelect() {
+  const [pairCount, setPairCount] = useState(null)
+
+  useEffect(() => {
+    supabase
+      .from('antonym_pairs')
+      .select('*', { count: 'exact', head: true })
+      .eq('verified', true)
+      .then(({ count }) => { if (count !== null) setPairCount(count) })
+  }, [])
+
   return (
     <div className="match-game">
       <header className="match-game__header">
@@ -52,7 +64,9 @@ function MatchModeSelect() {
               <span className="match-mode-card__label">{m.label}</span>
               <span className="match-mode-card__subtitle">{m.subtitle}</span>
               <span className="match-mode-card__count">
-                {m.count !== null ? `${m.count} words` : 'Coming soon'}
+                {m.slug === 'antonyms'
+                  ? (pairCount !== null ? `${pairCount} pairs` : '…')
+                  : `${m.count} words`}
               </span>
             </a>
           ))}
