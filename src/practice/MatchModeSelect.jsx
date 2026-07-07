@@ -27,6 +27,12 @@ const MODES = [
     subtitle: 'Opposites match',
     count: null,
   },
+  {
+    slug: 'map',
+    label: 'Municipalities',
+    subtitle: 'Place names on the map',
+    count: 19,
+  },
 ]
 
 function MatchModeSelect() {
@@ -66,6 +72,8 @@ function MatchModeSelect() {
               <span className="match-mode-card__count">
                 {m.slug === 'antonyms'
                   ? (pairCount !== null ? `${pairCount} pairs` : '…')
+                  : m.slug === 'map'
+                  ? '19 places'
                   : `${m.count} words`}
               </span>
             </a>

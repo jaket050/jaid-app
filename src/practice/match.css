@@ -355,3 +355,161 @@
     font-size: 1.05rem;
   }
 }
+
+/* ─── Municipality Map Match game ─────────────────────────────── */
+
+.muni-game {
+  height: 100dvh;
+  background: #0D1B2A;
+  color: #E8DCC8;
+  font-family: var(--sans);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.muni-game__layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 0.75rem;
+  padding: 0.25rem 0.75rem 0.75rem;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Names list ─────────── */
+
+.muni-game__names {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  overflow-y: auto;
+}
+
+.muni-name {
+  background: #1A2A3F;
+  border: 1px solid #2D4361;
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  font-family: var(--heading);
+  font-size: 0.82rem;
+  color: #E8DCC8;
+  cursor: pointer;
+  text-align: left;
+  line-height: 1.25;
+  word-break: break-word;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+
+.muni-name:hover:not(:disabled) {
+  background: #243A52;
+  border-color: #C9A84C;
+}
+
+.muni-name--selected {
+  background: #243A52;
+  border-color: #C9A84C;
+  color: #E8C97A;
+  box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.2);
+}
+
+.muni-name--wrong {
+  background: #5c2b0a;
+  border-color: #e07b39;
+  color: #f5c28a;
+  animation: match-shake 0.4s ease-in-out;
+}
+
+.muni-name--locked {
+  background: #1e5e3f;
+  border-color: #2d7a53;
+  color: #a8dfbf;
+  cursor: default;
+  opacity: 0.9;
+}
+
+/* ── Map column ─────────── */
+
+.muni-game__map-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.muni-map {
+  width: auto;
+  height: calc(100dvh - 130px);
+  max-width: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Activates pointer-crosshair on the map when a name is selected */
+.muni-map--active {
+  cursor: crosshair;
+}
+
+.muni-shape {
+  fill: rgba(100, 200, 140, 0.18);
+  stroke: #3d8a5a;
+  stroke-width: 1;
+  cursor: pointer;
+  transition: fill 0.1s;
+}
+
+.muni-map--active .muni-shape:not(.muni-shape--locked) {
+  fill: rgba(100, 200, 140, 0.28);
+}
+
+.muni-map--active .muni-shape:not(.muni-shape--locked):hover {
+  fill: rgba(100, 200, 140, 0.5);
+}
+
+.muni-shape--locked {
+  fill: #1e5e3f;
+  stroke: #13422c;
+  cursor: default;
+}
+
+.muni-shape--wrong {
+  fill: #c0531a;
+  stroke: #e07b39;
+  animation: match-shake 0.4s ease-in-out;
+}
+
+.muni-dot {
+  fill: #5aad7a;
+  stroke: #0D1B2A;
+  stroke-width: 1;
+  pointer-events: none;
+  transition: fill 0.1s;
+}
+
+.muni-dot--locked {
+  fill: #a8dfbf;
+}
+
+.muni-dot--wrong {
+  fill: #f5c28a;
+}
+
+/* ── Mobile ─────────────── */
+
+@media (max-width: 600px) {
+  .muni-game__layout {
+    grid-template-columns: 145px 1fr;
+    gap: 0.4rem;
+    padding: 0.25rem 0.4rem 0.4rem;
+  }
+
+  .muni-name {
+    font-size: 0.73rem;
+    padding: 0.35rem 0.45rem;
+  }
+
+  .muni-map {
+    height: calc(100dvh - 120px);
+  }
+}

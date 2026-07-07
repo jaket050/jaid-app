@@ -10,6 +10,8 @@ const AdminApp = lazy(() => import('./admin/AdminApp.jsx'))
 const MatchGame = lazy(() => import('./practice/MatchGame.jsx'))
 // eslint-disable-next-line react-refresh/only-export-components
 const MatchModeSelect = lazy(() => import('./practice/MatchModeSelect.jsx'))
+// eslint-disable-next-line react-refresh/only-export-components
+const MunicipalityGame = lazy(() => import('./practice/MunicipalityGame.jsx'))
 
 const path = window.location.pathname.replace(/\/+$/, '')
 const isAdmin = path.startsWith('/admin')
@@ -25,6 +27,10 @@ createRoot(document.getElementById('root')).render(
     {isAdmin ? (
       <Suspense fallback={<p>Loading admin…</p>}>
         <AdminApp />
+      </Suspense>
+    ) : isPractice && practiceMode === 'map' ? (
+      <Suspense fallback={<p>Loading game…</p>}>
+        <MunicipalityGame />
       </Suspense>
     ) : isPractice && practiceMode ? (
       <Suspense fallback={<p>Loading game…</p>}>
