@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { adminApi } from './adminApi'
 
 function EditableCell({ value, onSave, multiline = false }) {
@@ -238,6 +238,12 @@ function EditingRow({ row, categories, onSave, onCancel }) {
 function WordList({ token, words, categories, loading, error, onChanged }) {
   const [rowError, setRowError] = useState(null) // { id, message }
   const [editingId, setEditingId] = useState(null)
+  const [categoryFilter, setCategoryFilter] = useState('')
+
+  const visibleWords = useMemo(() => {
+    if (!categoryFilter) return words
+    return words.filter((w) => w.category === categoryFilter)
+  }, [words, categoryFilter])
 
   const updateField = async (id, field, value) => {
     setRowError(null)
@@ -271,7 +277,24 @@ function WordList({ token, words, categories, loading, error, onChanged }) {
 
   return (
     <section className="admin-card">
-      <h2 className="admin-card__title">All Vocabulary ({words.length})</h2>
+      <div className="admin-list-toolbar">
+        <h2 className="admin-card__title">
+          {categoryFilter ? `${categoryFilter} (${visibleWords.length})` : `All Vocabulary (${visibleWords.length})`}
+        </h2>
+        <label className="admin-field admin-list-toolbar__filter">
+          <span className="admin-field__label">Category</span>
+          <select
+            className="admin-field__input"
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+          >
+            <option value="">All categories</option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
+          </select>
+        </label>
+      </div>
 
       <div className="admin-table-wrap">
         <table className="admin-table">
@@ -289,7 +312,7 @@ function WordList({ token, words, categories, loading, error, onChanged }) {
             </tr>
           </thead>
           <tbody>
-            {words.map((row) =>
+            {visibleWords.map((row) =>
               editingId === row.id ? (
                 <EditingRow
                   key={row.id}
@@ -348,9 +371,11 @@ function WordList({ token, words, categories, loading, error, onChanged }) {
                 </tr>
               )
             )}
-            {words.length === 0 && (
+            {visibleWords.length === 0 && (
               <tr>
-                <td colSpan={9} className="admin-table__empty">No words yet.</td>
+                <td colSpan={9} className="admin-table__empty">
+                  {categoryFilter ? `No words in "${categoryFilter}".` : 'No words yet.'}
+                </td>
               </tr>
             )}
           </tbody>

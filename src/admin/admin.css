@@ -277,6 +277,23 @@
 
 /* ─── Table ─────────────────────────────────────────────────────── */
 
+.admin-list-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.admin-list-toolbar .admin-card__title {
+  margin: 0;
+}
+
+.admin-list-toolbar__filter {
+  min-width: 220px;
+}
+
 .admin-table-wrap {
   overflow-x: auto;
   border: 1px solid var(--admin-border);

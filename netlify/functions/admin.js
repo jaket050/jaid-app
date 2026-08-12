@@ -73,7 +73,7 @@ function sanitizeAdd(p) {
     english: String(p.english).trim(),
     type,
     difficulty,
-    category: p.category ? String(p.category).trim().toLowerCase() : null,
+    category: p.category ? String(p.category).trim() : null,
     cultural_note: p.cultural_note ? String(p.cultural_note).trim() : null,
     source: p.source ? String(p.source).trim() : DEFAULT_SOURCE,
     verified: p.verified !== false, // default true unless explicitly false
@@ -157,7 +157,7 @@ export default async (req) => {
         }
         if ('category' in payload) {
           fields.category = payload.category
-            ? String(payload.category).trim().toLowerCase()
+            ? String(payload.category).trim()
             : null
         }
         if ('cultural_note' in payload) {
