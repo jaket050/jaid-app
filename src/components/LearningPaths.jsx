@@ -10,9 +10,9 @@ import {
 
 const CATEGORY_CONFIG = {
   'Adjectives':            { icon: Palette,       label: 'Adjectives' },
+  'Anatomy':               { icon: Stethoscope,   label: 'Anatomy' },
   'Animals':               { icon: PawPrint,      label: 'Animals' },
   'Baptism':               { icon: Droplets,      label: 'Baptism' },
-  'Body Parts':            { icon: Stethoscope,   label: 'Body Parts' },
   'Colors':                { icon: Pipette,       label: 'Colors' },
   'Culture':               { icon: Landmark,      label: 'Culture' },
   'Days of the Week':      { icon: CalendarDays,  label: 'Days of the Week' },

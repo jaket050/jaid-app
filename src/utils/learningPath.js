@@ -2,7 +2,7 @@
 // shared by StudyMode and QuizMode for the "Try next deck" suggestion.
 export const LEARNING_PATH_ORDER = [
   'Greetings', 'Family', 'Values', 'Holidays and Religion', 'Baptism',
-  'Food', 'Drinks', 'Body Parts', 'Home', 'School', 'Animals', 'Plants',
+  'Food', 'Drinks', 'Anatomy', 'Home', 'School', 'Animals', 'Plants',
   'Water', 'Weather', 'Land', 'Places', 'Numbers', 'Colors', 'Shapes',
   'Days of the Week', 'Months of the Year', 'Time', 'Money', 'Genealogy',
   'Pronouns', 'Verbs', 'Adjectives', 'Directions', 'Objects', 'Emotions',
