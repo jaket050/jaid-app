@@ -12,6 +12,8 @@ const MatchGame = lazy(() => import('./practice/MatchGame.jsx'))
 const MatchModeSelect = lazy(() => import('./practice/MatchModeSelect.jsx'))
 // eslint-disable-next-line react-refresh/only-export-components
 const MunicipalityGame = lazy(() => import('./practice/MunicipalityGame.jsx'))
+// eslint-disable-next-line react-refresh/only-export-components
+const AnatomyGame = lazy(() => import('./practice/AnatomyGame.jsx'))
 
 const path = window.location.pathname.replace(/\/+$/, '')
 const isAdmin = path.startsWith('/admin')
@@ -31,6 +33,10 @@ createRoot(document.getElementById('root')).render(
     ) : isPractice && practiceMode === 'map' ? (
       <Suspense fallback={<p>Loading game…</p>}>
         <MunicipalityGame />
+      </Suspense>
+    ) : isPractice && practiceMode === 'anatomy' ? (
+      <Suspense fallback={<p>Loading game…</p>}>
+        <AnatomyGame />
       </Suspense>
     ) : isPractice && practiceMode ? (
       <Suspense fallback={<p>Loading game…</p>}>

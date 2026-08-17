@@ -33,6 +33,12 @@ const MODES = [
     subtitle: 'Place names on the map',
     count: 19,
   },
+  {
+    slug: 'anatomy',
+    label: 'Anatomy',
+    subtitle: 'Body parts on the figure',
+    count: 22,
+  },
 ]
 
 function MatchModeSelect() {

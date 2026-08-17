@@ -358,6 +358,19 @@
 
 /* ─── Municipality Map Match game ─────────────────────────────── */
 
+/* Every route — including these full-viewport game shells — renders
+   inside the same #root the marketing site uses (src/index.css), which
+   caps it at width:1126px and centers it. That's correct for the
+   article-style marketing pages but boxes these edge-to-edge games into
+   a centered column with dead space on both sides on any wider screen.
+   Escape that constraint specifically when a .muni-game shell (used by
+   both the Municipality map and the Anatomy board) is mounted. */
+body:has(.muni-game) #root {
+  width: 100%;
+  max-width: 100%;
+  border-inline: none;
+}
+
 .muni-game {
   height: 100dvh;
   background: #0D1B2A;
@@ -405,6 +418,14 @@
 .muni-name:hover:not(:disabled) {
   background: #243A52;
   border-color: #C9A84C;
+}
+
+/* English gloss, e.g. "sehas (Eyebrow)" — Anatomy mode only. */
+.muni-name__en {
+  font-family: var(--sans);
+  font-weight: 600;
+  opacity: 0.6;
+  font-size: 0.85em;
 }
 
 .muni-name--selected {
@@ -518,5 +539,230 @@
 
   .muni-map {
     height: calc(100dvh - 120px);
+  }
+}
+
+/* ─── Anatomy Match game ───────────────────────────────────────── */
+/* Reuses .muni-game / .muni-game__layout / .muni-game__names / .muni-name
+   for the page shell and name list — only the tap-target surface differs
+   (three <img>s with absolutely-positioned dots instead of an SVG map).
+   Default (wide-viewport) layout: all three boards side by side in one
+   row, sized by height so a typical laptop screen — now that #root isn't
+   capping the width above — can fit the whole name list and all three
+   diagrams without scrolling. Below 768px there isn't enough width for
+   that, so it falls back to face-on-top / front+back-row-below instead
+   (see the media query at the bottom of this section). */
+
+.anatomy-boards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+/* On wide viewports this is unwrapped via display:contents so front/back
+   become direct flex items of .anatomy-boards, sitting in the same row
+   as face. The media query below turns it back into a real row-within-
+   the-column for the narrow/stacked layout. */
+.anatomy-boards__row {
+  display: contents;
+}
+
+.anatomy-board {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* width:100%/height:100% + an explicit aspect-ratio matching the source
+   image (below) keeps the board's box and the image's rendered box
+   identical at all times. Dots are positioned as % of .anatomy-board, so
+   any mismatch between that box and the visible picture (e.g. the old
+   height:100%/width:auto/max-width:100% combo letterboxing under
+   object-fit:contain when width got clamped) would silently misalign
+   every dot — aspect-ratio removes the mismatch instead of the symptom. */
+.anatomy-board__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.anatomy-board--active {
+  cursor: crosshair;
+}
+
+/* Face is 1:1 and front/back are 1:3, so at equal heights face's width is
+   always exactly 3x each front/back's width (60% of the row) no matter
+   what the shared height value is — that's what made face dominant.
+   Deliberately mismatched heights below break that: shrinking face's
+   height shrinks its width directly (it's square), while giving
+   front/back their own taller height grows their width independently.
+   44vh / 84vh puts face at ~44% of the row and front+back at ~28% each. */
+.anatomy-board--face {
+  height: 44vh;
+  aspect-ratio: 1 / 1; /* anatomy-face.png is 1254×1254 */
+}
+
+/* Front/back are narrow portrait crops (single figure, not the combined
+   image). Sized by height, same as face, now that a full row has room —
+   the 768px media query below switches them back to width-driven sizing
+   for the stacked mobile layout, where height-driven would make them
+   comically tall. */
+.anatomy-board--front,
+.anatomy-board--back {
+  height: 84vh;
+  aspect-ratio: 1 / 3; /* anatomy-figure-front/back.png are 512×1536 */
+}
+
+/* Star tap markers — two stacked clip-path layers (a slightly larger dark
+   outline star behind a smaller solid-color fill star) instead of an SVG,
+   so every state below only has to swap two background-colors. Solid fill
+   (not the old semi-transparent green) is deliberate: transparency is what
+   let the previous dots blend into skin/navy/gold-shorts backgrounds. */
+.anatomy-dot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  padding: 0;
+  background: transparent;
+  border: none;
+  transition: transform 0.1s;
+}
+
+.anatomy-dot::before,
+.anatomy-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.anatomy-dot::before {
+  width: 145%;
+  height: 145%;
+  transform: translate(-50%, -50%);
+  background: #12202C;
+}
+
+/* White fill (not gold) is the persistent default — gold reads great on
+   skin and navy but nearly disappears against the gold shorts, exactly
+   the blending problem this redesign is meant to fix. Gold is instead
+   reserved for the hover accent below, a transient cursor-driven state
+   rather than something that ever sits statically on the shorts. */
+.anatomy-dot::after {
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background: #FFFFFF;
+}
+
+.anatomy-dot--face {
+  width: 9px;
+  height: 9px;
+}
+
+.anatomy-dot--front,
+.anatomy-dot--back {
+  width: 7px;
+  height: 7px;
+}
+
+.anatomy-board--active .anatomy-dot:not(.anatomy-dot--locked) {
+  filter: drop-shadow(0 0 2px #E8C97A) drop-shadow(0 0 2px #E8C97A);
+}
+
+.anatomy-dot:hover:not(.anatomy-dot--locked) {
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+.anatomy-dot:hover:not(.anatomy-dot--locked)::after {
+  background: #E8C97A;
+}
+
+.anatomy-dot:focus-visible {
+  outline: 2px solid #E8C97A;
+  outline-offset: 2px;
+}
+
+.anatomy-dot--locked {
+  cursor: default;
+}
+
+.anatomy-dot--locked::before {
+  background: #12522f;
+}
+
+.anatomy-dot--locked::after {
+  background: #2dce7a;
+}
+
+.anatomy-dot--wrong {
+  animation: match-shake 0.4s ease-in-out;
+}
+
+.anatomy-dot--wrong::before {
+  background: #5c2b0a;
+}
+
+.anatomy-dot--wrong::after {
+  background: #e07b39;
+}
+
+@media (max-width: 768px) {
+  /* Not enough width for a 4-up row (names + 3 boards) — fall back to
+     face-on-top, front+back-row-below, all sized by width again. */
+  .anatomy-boards {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .anatomy-boards__row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .anatomy-board--face {
+    height: 32vh;
+    width: auto;
+  }
+
+  .anatomy-board--front,
+  .anatomy-board--back {
+    height: auto;
+    width: 55%;
+    max-width: 260px;
+  }
+}
+
+@media (max-width: 600px) {
+  .anatomy-board--face {
+    height: 28vh;
+  }
+
+  .anatomy-board--front,
+  .anatomy-board--back {
+    width: 62%;
+    max-width: 220px;
+  }
+
+  .anatomy-dot--face {
+    width: 8px;
+    height: 8px;
+  }
+
+  .anatomy-dot--front,
+  .anatomy-dot--back {
+    width: 6px;
+    height: 6px;
   }
 }
