@@ -2,11 +2,25 @@ import { useState, useRef } from 'react'
 import { Search, X } from 'lucide-react'
 
 const CHAMORU_CHARS = [
+  { char: 'á', label: 'á' },
+  { char: 'Á', label: 'Á' },
   { char: 'å', label: 'å' },
   { char: 'Å', label: 'Å' },
+  { char: 'ǻ', label: 'ǻ' },
+  { char: 'Ǻ', label: 'Ǻ' },
+  { char: 'é', label: 'é' },
+  { char: 'É', label: 'É' },
+  { char: 'í', label: 'í' },
+  { char: 'Í', label: 'Í' },
+  { char: 'ó', label: 'ó' },
+  { char: 'Ó', label: 'Ó' },
+  { char: 'ú', label: 'ú' },
+  { char: 'Ú', label: 'Ú' },
+  { char: 'ch', label: 'ch' },
+  { char: 'CH', label: 'CH' },
   { char: 'ñ', label: 'ñ' },
   { char: 'Ñ', label: 'Ñ' },
-  { char: 'CH', label: 'CH' },
+  { char: 'ng', label: 'ng' },
   { char: 'NG', label: 'NG' },
   { char: "'", label: "Glota" },
 ]
