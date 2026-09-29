@@ -523,6 +523,31 @@ body:has(.muni-game) #root {
   fill: #f5c28a;
 }
 
+/* Locked-shape name label — font-size set inline per shape (MunicipalityMap.jsx).
+   paint-order + stroke gives it a dark halo so it reads over the green fill
+   regardless of what's underneath. */
+.muni-label {
+  font-family: var(--heading);
+  fill: #E8DCC8;
+  stroke: #0D1B2A;
+  stroke-width: 3px;
+  paint-order: stroke fill;
+  pointer-events: none;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+/* Connects an offset label (LEADER_LABEL_POS in MunicipalityMap.jsx) back
+   to its shape's actual centroid dot. Subtle by design — the label and the
+   colored shape are what carry the information, the line just ties them
+   together. */
+.muni-leader-line {
+  stroke: #E8DCC8;
+  stroke-width: 1;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
 /* ── Mobile ─────────────── */
 
 @media (max-width: 600px) {
