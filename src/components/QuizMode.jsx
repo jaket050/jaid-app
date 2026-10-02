@@ -15,8 +15,12 @@ function shuffle(arr) {
 }
 
 // Build a fixed question set: each is a category word plus four English options
-// (its own english + three distinct distractors drawn from the full vocabulary).
-// All text comes directly from Supabase data — nothing is generated.
+// (its own english + three distinct distractors). Distractors are drawn from
+// the word's own category first, so options are plausible (e.g. a Colors
+// question offers other colors, not "Flying fish" or "Heart") — falling back
+// to the full vocabulary only for categories too small to supply 3 distinct
+// same-category distractors on their own. All text comes directly from
+// Supabase data — nothing is generated.
 function buildQuestions(words, category) {
   const pool = category === 'all'
     ? words
@@ -25,12 +29,23 @@ function buildQuestions(words, category) {
 
   return questionWords.map((word) => {
     const correct = word.english
-    const distractorPool = [...new Set(
+    const sameCategoryPool = [...new Set(
       words
-        .filter((w) => w.english && w.english !== correct)
+        .filter((w) => w.category === word.category && w.english && w.english !== correct)
         .map((w) => w.english)
     )]
-    const distractors = shuffle(distractorPool).slice(0, 3)
+
+    let distractors = shuffle(sameCategoryPool).slice(0, 3)
+    if (distractors.length < 3) {
+      const chosen = new Set(distractors)
+      const fallbackPool = [...new Set(
+        words
+          .filter((w) => w.english && w.english !== correct && !chosen.has(w.english))
+          .map((w) => w.english)
+      )]
+      distractors = distractors.concat(shuffle(fallbackPool).slice(0, 3 - distractors.length))
+    }
+
     return { word, correct, options: shuffle([correct, ...distractors]) }
   })
 }
