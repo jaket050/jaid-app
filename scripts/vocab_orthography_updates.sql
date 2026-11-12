@@ -50,8 +50,8 @@ WHERE id = 187 AND chamorro = 'Filis Nabidåt';
 UPDATE vocabulary SET chamorro = 'Ha''ånen Mafañågon Jesukristo', source = 'Kumision i Fino'' CHamoru 2026'
 WHERE id = 188 AND chamorro = 'Ha''ånen Mafañågun Jesukristo';
 
--- id 234 (Culture, Traditional healer), line 173: yo'åmte -> Yó'amte
-UPDATE vocabulary SET chamorro = 'Yó''amte', source = 'Kumision i Fino'' CHamoru 2026'
+-- id 234 (Culture, Traditional healer), line 173: yo'åmte -> yó'amte
+UPDATE vocabulary SET chamorro = 'yó''amte', source = 'Kumision i Fino'' CHamoru 2026'
 WHERE id = 234 AND chamorro = 'yo''åmte';
 
 -- id 241 (Greetings, Until we meet again), line 98 [held]: Ástaki umáli'e' hit ta'lo -> Åstaki Umali'e' Hit Ta'lo
