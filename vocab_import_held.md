@@ -76,6 +76,8 @@ The spelling is updated to the CSV form; `verified` is left unchanged (all curre
 - **Casing.** Other CSV casing is kept as printed; house style is not retrofitted onto unrelated rows.
 - **Type and source.** *Word* for single words, *Phrase* for multi-word, comma and slash entries. New rows and respelled rows carry the source *Kumision i Fino' CHamoru 2026*; rows that only move keep their source.
 - **verified.** Every new row is false; no existing row's verified value is changed.
+- **Difficulty.** New rows in Legal, Government, Self Determination, Years and Centuries and Numbers Ansiånu are difficulty 2 (specialized civic vocabulary; heritage usage). All other new rows are 1.
+- **Alternate usages on kept rows.** *saina* (58) gets *Tan/Tun/Nan* and *yó'amte* (234) gets *Suruhåna/Suruhånu*, verbatim. These are gendered honorific forms; any gender or usage note in cultural_note waits for a separate pass with Kumision input.
 
 ## 5. Kumision touchpoint list
 

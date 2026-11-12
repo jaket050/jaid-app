@@ -5,14 +5,20 @@
 -- of vocabulary (613 rows). Held rows are listed in vocab_import_held.md.
 --
 -- PREREQUISITE: supabase/migrations/20261112_vocabulary_alternate_chamoru.sql
--- (People rows below write alternate_chamoru).
+-- (People rows and section 4 write alternate_chamoru).
 --
 -- Every row written here is verified = false. Nothing in this file changes
 -- verified on an existing row. Re-running is safe: the category rename and
--- moves are guarded by their current values, and each insert skips a row whose
--- chamorro already exists in the same category (case-insensitive).
+-- moves are guarded by their current values, each insert skips a row whose
+-- chamorro already exists in the same category (case-insensitive), and the
+-- alternate usages are only set while alternate_chamoru is still empty.
 --
--- Expected: rename 10 rows, move 6 rows, insert 211 rows (613 -> 824).
+-- Difficulty for new rows: 2 for Legal, Government, Self Determination, Years
+-- and Centuries and Numbers Ansiånu (specialized civic vocabulary and heritage
+-- usage); 1 for every other category. Existing rows keep their difficulty.
+--
+-- Expected: rename 10 rows, move 6 rows, insert 211 rows (613 -> 824), set
+-- alternate_chamoru on 2 existing rows.
 -- The spelling updates are in vocab_orthography_updates.sql (part 2).
 
 BEGIN;
@@ -52,7 +58,7 @@ WHERE NOT EXISTS (SELECT 1 FROM vocabulary x WHERE x.category = 'Numbers Prisent
 
 -- Numbers Ansiånu (22)
 INSERT INTO vocabulary (chamorro, english, type, difficulty, category, source, verified)
-SELECT v.chamorro, v.english, v.type, 1, 'Numbers Ansiånu', 'Kumision i Fino'' CHamoru 2026', false
+SELECT v.chamorro, v.english, v.type, 2, 'Numbers Ansiånu', 'Kumision i Fino'' CHamoru 2026', false
 FROM (VALUES
   ('håcha', 'One (1)', 'Word'),  -- line 71
   ('hugua', 'Two (2)', 'Word'),  -- line 72
@@ -208,7 +214,7 @@ WHERE NOT EXISTS (SELECT 1 FROM vocabulary x WHERE x.category = 'Technology' AND
 
 -- Years and Centuries (13)
 INSERT INTO vocabulary (chamorro, english, type, difficulty, category, source, verified)
-SELECT v.chamorro, v.english, v.type, 1, 'Years and Centuries', 'Kumision i Fino'' CHamoru 2026', false
+SELECT v.chamorro, v.english, v.type, 2, 'Years and Centuries', 'Kumision i Fino'' CHamoru 2026', false
 FROM (VALUES
   ('Siklon Disisaís', '1500-1599 (1600''s)', 'Phrase'),  -- line 139 [held]
   ('Siklon Disisiette', '1600-1699 (1700''s)', 'Phrase'),  -- line 140
@@ -228,7 +234,7 @@ WHERE NOT EXISTS (SELECT 1 FROM vocabulary x WHERE x.category = 'Years and Centu
 
 -- Legal (19)
 INSERT INTO vocabulary (chamorro, english, type, difficulty, category, source, verified)
-SELECT v.chamorro, v.english, v.type, 1, 'Legal', 'Kumision i Fino'' CHamoru 2026', false
+SELECT v.chamorro, v.english, v.type, 2, 'Legal', 'Kumision i Fino'' CHamoru 2026', false
 FROM (VALUES
   ('Kotte', 'Court', 'Word'),  -- line 211
   ('Lai', 'Law', 'Word'),  -- line 212
@@ -254,7 +260,7 @@ WHERE NOT EXISTS (SELECT 1 FROM vocabulary x WHERE x.category = 'Legal' AND lowe
 
 -- Government (15)
 INSERT INTO vocabulary (chamorro, english, type, difficulty, category, source, verified)
-SELECT v.chamorro, v.english, v.type, 1, 'Government', 'Kumision i Fino'' CHamoru 2026', false
+SELECT v.chamorro, v.english, v.type, 2, 'Government', 'Kumision i Fino'' CHamoru 2026', false
 FROM (VALUES
   ('Råmas Eksekutibu', 'Executive Branch', 'Phrase'),  -- line 230 [section header]
   ('Ufisinan i Maga''håga/Maga''låhi', 'Governor''s Office', 'Phrase'),  -- line 231
@@ -276,7 +282,7 @@ WHERE NOT EXISTS (SELECT 1 FROM vocabulary x WHERE x.category = 'Government' AND
 
 -- Self Determination (35)
 INSERT INTO vocabulary (chamorro, english, type, difficulty, category, source, verified)
-SELECT v.chamorro, v.english, v.type, 1, 'Self Determination', 'Kumision i Fino'' CHamoru 2026', false
+SELECT v.chamorro, v.english, v.type, 2, 'Self Determination', 'Kumision i Fino'' CHamoru 2026', false
 FROM (VALUES
   ('Asusiasión Linibre', 'Free Association', 'Phrase'),  -- line 265
   ('Deklarasión', 'Declaration', 'Word'),  -- line 266
@@ -339,5 +345,13 @@ FROM (VALUES
   ('Ulåkas', 'Farallon de Pajaros', 'Word')  -- line 316
 ) AS v(chamorro, english, type)
 WHERE NOT EXISTS (SELECT 1 FROM vocabulary x WHERE x.category = 'Islands' AND lower(x.chamorro) = lower(v.chamorro));
+
+-- 4. Alternate usages printed in Position Titles for two existing rows whose
+--    CSV copies were skipped (each stays in its current category). Stored
+--    verbatim; source and cultural_note are left unchanged.
+UPDATE vocabulary SET alternate_chamoru = 'Tan/Tun/Nan'
+WHERE id = 58 AND chamorro = 'saina' AND alternate_chamoru IS NULL;  -- Family, Elder (line 152)
+UPDATE vocabulary SET alternate_chamoru = 'Suruhåna/Suruhånu'
+WHERE id = 234 AND alternate_chamoru IS NULL;  -- Culture, Traditional healer (line 173)
 
 COMMIT;
