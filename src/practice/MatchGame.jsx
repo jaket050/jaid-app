@@ -85,6 +85,28 @@ function shuffle(arr) {
   return out
 }
 
+// The Kumision prints some words both inside a slash entry and on their own
+// ("tiempon uchan/fanuchånan" and "fanuchånan"). Both rows exist, but a round
+// must not put the same word on two cards.
+function slashSegments(chamorro) {
+  return chamorro.split('/').map((s) => s.trim().toLowerCase()).filter(Boolean)
+}
+
+// Up to ROUND_SIZE words, no two of which share a slash segment. Skipped
+// words stay unplayed and are dealt in a later round.
+function dealRound(words) {
+  const used = new Set()
+  const round = []
+  for (const w of shuffle(words)) {
+    const segments = slashSegments(w.chamorro)
+    if (segments.some((s) => used.has(s))) continue
+    segments.forEach((s) => used.add(s))
+    round.push(w)
+    if (round.length === ROUND_SIZE) break
+  }
+  return round
+}
+
 // ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
@@ -136,7 +158,7 @@ function MatchGame({ mode = 'kinship' }) {
       setDeckExhausted(true)
       return
     }
-    const next = shuffle(unplayed).slice(0, ROUND_SIZE)
+    const next = dealRound(unplayed)
     setChList(shuffle(next))
     setEnList(shuffle(next))
     setSeenIds((prev) => {
