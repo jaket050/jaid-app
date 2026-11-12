@@ -5,7 +5,8 @@ import {
   UsersRound, CloudSun, TreeDeciduous, Droplets,
   Landmark, BookOpen, Check, Waves, Mountain, GraduationCap,
   PawPrint, Flower2, Stethoscope, House, Pipette, Shapes,
-  Coffee, Banknote
+  Coffee, Banknote, ListOrdered, Laptop, Hourglass, Scale,
+  Building2, Flag, TreePalm
 } from 'lucide-react'
 
 const CATEGORY_CONFIG = {
@@ -22,14 +23,18 @@ const CATEGORY_CONFIG = {
   'Family':                { icon: Users,         label: 'Family' },
   'Food':                  { icon: Utensils,      label: 'Food' },
   'Genealogy':             { icon: TreeDeciduous, label: 'Genealogy' },
+  'Government':            { icon: Building2,     label: 'Government' },
   'Greetings':             { icon: MessageCircle, label: 'Greetings' },
   'Holidays and Religion': { icon: Church,        label: 'Holidays and Religion' },
   'Home':                  { icon: House,         label: 'Home' },
+  'Islands':               { icon: TreePalm,      label: 'Islands' },
   'Land':                  { icon: Mountain,      label: 'Land' },
+  'Legal':                 { icon: Scale,         label: 'Legal' },
   'Money':                 { icon: Banknote,      label: 'Money' },
   'Months of the Year':    { icon: Calendar,      label: 'Months of the Year' },
   'Nature':                { icon: Leaf,          label: 'Nature' },
-  'Numbers':               { icon: Hash,          label: 'Numbers' },
+  'Numbers Ansiånu':       { icon: ListOrdered,   label: 'Numbers Ansiånu' },
+  'Numbers Prisente':      { icon: Hash,          label: 'Numbers Prisente' },
   'Objects':               { icon: Box,           label: 'Objects' },
   'People':                { icon: UsersRound,    label: 'People' },
   'Places':                { icon: MapPin,        label: 'Places' },
@@ -37,12 +42,15 @@ const CATEGORY_CONFIG = {
   'Pronouns':              { icon: User,          label: 'Pronouns' },
   'Questions':             { icon: HelpCircle,    label: 'Questions' },
   'School':                { icon: GraduationCap, label: 'School' },
+  'Self Determination':    { icon: Flag,          label: 'Self Determination' },
   'Shapes':                { icon: Shapes,        label: 'Shapes' },
+  'Technology':            { icon: Laptop,        label: 'Technology' },
   'Time':                  { icon: Clock,         label: 'Time' },
   'Values':                { icon: Star,          label: 'Values' },
   'Verbs':                 { icon: Zap,           label: 'Verbs' },
   'Water':                 { icon: Waves,         label: 'Water' },
   'Weather':               { icon: CloudSun,      label: 'Weather' },
+  'Years and Centuries':   { icon: Hourglass,     label: 'Years and Centuries' },
 }
 
 const DEFAULT_CONFIG = { icon: BookOpen, label: '' }

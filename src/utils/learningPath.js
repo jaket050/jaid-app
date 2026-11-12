@@ -3,7 +3,7 @@
 export const LEARNING_PATH_ORDER = [
   'Greetings', 'Family', 'Values', 'Holidays and Religion', 'Baptism',
   'Food', 'Drinks', 'Anatomy', 'Home', 'School', 'Animals', 'Plants',
-  'Water', 'Weather', 'Land', 'Places', 'Numbers', 'Colors', 'Shapes',
+  'Water', 'Weather', 'Land', 'Places', 'Numbers Prisente', 'Colors', 'Shapes',
   'Days of the Week', 'Months of the Year', 'Time', 'Money', 'Genealogy',
   'Pronouns', 'Verbs', 'Adjectives', 'Directions', 'Objects', 'Emotions',
   'Nature', 'People', 'Questions', 'Culture',
