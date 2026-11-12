@@ -17,19 +17,23 @@ async function fetchVocab(category) {
     .from('vocabulary')
     .select('id, chamorro, english')
     .ilike('category', category)
+    .eq('verified', true)
   if (error) throw error
   return data ?? []
 }
 
 async function fetchAntonyms() {
+  // !inner drops a pair unless both of its words are verified too.
   const { data, error } = await supabase
     .from('antonym_pairs')
     .select(`
       id,
-      word_a:vocabulary!antonym_pairs_word_a_id_fkey(chamorro),
-      word_b:vocabulary!antonym_pairs_word_b_id_fkey(chamorro)
+      word_a:vocabulary!antonym_pairs_word_a_id_fkey!inner(chamorro),
+      word_b:vocabulary!antonym_pairs_word_b_id_fkey!inner(chamorro)
     `)
     .eq('verified', true)
+    .eq('word_a.verified', true)
+    .eq('word_b.verified', true)
   if (error) throw error
   // Reuse the { id, chamorro, english } shape the board already understands.
   // The "english" slot holds the antonym's CHamoru word; the column title

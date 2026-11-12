@@ -47,8 +47,13 @@ function MatchModeSelect() {
   useEffect(() => {
     supabase
       .from('antonym_pairs')
-      .select('*', { count: 'exact', head: true })
+      .select(
+        'id, word_a:vocabulary!antonym_pairs_word_a_id_fkey!inner(id), word_b:vocabulary!antonym_pairs_word_b_id_fkey!inner(id)',
+        { count: 'exact', head: true }
+      )
       .eq('verified', true)
+      .eq('word_a.verified', true)
+      .eq('word_b.verified', true)
       .then(({ count }) => { if (count !== null) setPairCount(count) })
   }, [])
 

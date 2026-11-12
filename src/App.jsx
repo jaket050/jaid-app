@@ -72,6 +72,7 @@ function App() {
         const { data, error } = await supabase
           .from('vocabulary')
           .select('id, chamorro, english, type, difficulty, category, culturalNote:cultural_note')
+          .eq('verified', true)
           .order('id')
         if (error) throw error
         // Server's isCompleted is ignored — localStorage is the source of truth (see useCompletedIds).

@@ -3,7 +3,8 @@ import { Calendar, Check } from 'lucide-react'
 import { logEvent } from '../utils/logEvent'
 
 function WordOfTheDay({ words, completedIds }) {
-  const verifiedWords = (words ?? []).filter(w => w.verified !== false)
+  // App.jsx only loads verified rows, so every word here is already verified.
+  const verifiedWords = words ?? []
 
   const start = new Date('2026-01-01')
   const today = new Date()
