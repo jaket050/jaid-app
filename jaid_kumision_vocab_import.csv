@@ -1,0 +1,316 @@
+source_image,category,section,chamoru,alternate_chamoru,english,row_type,cross_check_vs_project_pdfs,needs_review,review_note
+IMG_9100,Weather and Climate,,géfha'an,,sunny,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,chátha'an,,rainy,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,guaifon,,windy,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,guaifon metgot,,wind gale,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,påkyo,,typhoon,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,mattiempo,,tropical depression,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,kumékepåkyo,,stormy conditions,word,"word or meaning change vs WeatherandClimate.pdf: PDF reads kumékepakyo, gloss tropical storm",yes,Not just a respelling. Hold for Kumision confirmation. Do not update the existing row.
+IMG_9100,Weather and Climate,,uchan,,rain,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,måtmon uchan,,heavy rain,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,måsmai,,saturated,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,tehte/såtpon,,drizzle/sprinkle,word,updated vs WeatherandClimate.pdf: PDF reads te'i/tete/såtpon,no,"Updated orthography. The screenshot spelling supersedes the 2025 PDF. If an existing row has the old spelling it needs an update, not a skip."
+IMG_9100,Weather and Climate,,maipe,,warm/hot,word,word or meaning change vs WeatherandClimate.pdf: PDF gloss is warm only,yes,Not just a respelling. Hold for Kumision confirmation. Do not update the existing row.
+IMG_9100,Weather and Climate,,fresko,,fresh,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,úmidu,,humid,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,ånglo',,dry,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,fotgon,,wet,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,tiempon uchan/fanuchånan,,rainy/wet season,word,word or meaning change vs WeatherandClimate.pdf: PDF lists tiempon uchan (monsoon) and fanuchånan (wet season) as separate entries,yes,Not just a respelling. Hold for Kumision confirmation. Do not update the existing row.
+IMG_9100,Weather and Climate,,tiempon somnak/fañomnåkan,,sunny/dry season,word,word or meaning change vs WeatherandClimate.pdf: PDF lists tiempon somnak (summer time) and fañomnåkan (dry season) separately,yes,Not just a respelling. Hold for Kumision confirmation. Do not update the existing row.
+IMG_9100,Weather and Climate,,låmlam,,lightning,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,hulu,,thunder,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,någa/dilubiu,,flood,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,någan gotpe,,flash flood,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,milak fache',,mudslide,word,word or meaning change vs WeatherandClimate.pdf: PDF reads måtmon fache',yes,Not just a respelling. Hold for Kumision confirmation. Do not update the existing row.
+IMG_9100,Weather and Climate,,rimulinu,,tornado,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,linao,,earthquake,word,matches WeatherandClimate.pdf,no,
+IMG_9100,Weather and Climate,,långat,,tsunami,word,matches WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,rimulinon hånom,,water spout,word,matches WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,fanuchånan,,wet season,word,matches WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,fañomnåkan,,dry season,word,matches WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,tiempon somnak,,summer time,word,matches WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,kánopbladu,,partly cloudy,word,updated vs WeatherandClimate.pdf: PDF reads kánopblådu,no,"Updated orthography. The screenshot spelling supersedes the 2025 PDF. If an existing row has the old spelling it needs an update, not a skip."
+IMG_9101,Weather and Climate,,lánopbladu,,mostly cloudy,word,updated vs WeatherandClimate.pdf: PDF reads lánopblådu,no,"Updated orthography. The screenshot spelling supersedes the 2025 PDF. If an existing row has the old spelling it needs an update, not a skip."
+IMG_9101,Weather and Climate,,nopblådu,,cloudy,word,matches WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,essok mapagåhes,,cumulus clouds,word,not in WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,nåpon tåsi,,ocean swell,word,word or meaning change vs WeatherandClimate.pdf: PDF gloss is swell,yes,Not just a respelling. Hold for Kumision confirmation. Do not update the existing row.
+IMG_9101,Weather and Climate,,nåpu,,waves,word,matches WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,kuriente,,current,word,matches WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,malinao,,calm ocean,word,not in WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,hafñot/missen i tasi,,high tide,word,word or meaning change vs WeatherandClimate.pdf: PDF reads håfno'/håfnot,yes,Not just a respelling. Hold for Kumision confirmation. Do not update the existing row.
+IMG_9101,Weather and Climate,,må'te,,low tide,word,matches WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,gualåfon,,full moon,word,not in WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,sinahi,,crescent moon,word,not in WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,hinemhom pulan,,new moon,word,not in WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,kiniles åtdao,,solar eclipse,word,not in WeatherandClimate.pdf,no,
+IMG_9101,Weather and Climate,,kiniles pulan,,lunar eclipse,word,not in WeatherandClimate.pdf,no,
+IMG_9102,Official Holidays,,Ha'ånen Åñu Nuebu,,New Years Day,word,,no,
+IMG_9102,Official Holidays,,Ha'ånen Martin Luther King Jr.,,MLK Day,word,,no,
+IMG_9102,Official Holidays,,Ha'ånen Hila' Nåna,,Mother Tongue Day,word,,no,
+IMG_9102,Official Holidays,,Ha'ånen Irensian CHamoru,,Guam History and CHamoru Heritage Day,word,,no,
+IMG_9102,Official Holidays,,Ha'ånen Mimuriåt,,Memorial Day,word,,yes,Accent or final letter glyph is unclear in the screenshot. Confirm against the source document.
+IMG_9102,Official Holidays,,Ha'ånen Endependensian Amérika,,U.S. Independence Day,word,,no,
+IMG_9102,Official Holidays,,Ha'ånen Libirasión Guåhan,,Guam Liberation Day,word,,no,
+IMG_9102,Official Holidays,,Ha'ånen Hotnaleru,,Labor Day,word,,no,
+IMG_9102,Official Holidays,,Ha'ånen Ånimas,,All Souls Day,word,,no,
+IMG_9102,Official Holidays,,Ha'ånen Betterånu,,Veteran's Day,word,,no,
+IMG_9102,Official Holidays,,Ha'ånen Mannå'i Gråsia,,Thanksgiving Day,word,,no,
+IMG_9102,Official Holidays,,Ha'ånen Sånta Marian Kåmalen,,Santa Marian Kamalen Day,word,,no,
+IMG_9102,Official Holidays,,Ha'ånen Mafañågon Jesukristo,,Christmas Day,word,,no,
+IMG_9103,Technology Terms,,Teknoloyiha,,Technology,word,,no,
+IMG_9103,Technology Terms,,Kompiuta,,Computer,word,,no,
+IMG_9103,Technology Terms,,Imel,,E-mail,word,,no,
+IMG_9103,Technology Terms,,Inachetton,,Attachment,word,,no,
+IMG_9103,Technology Terms,,Yum,,Zoom,word,,no,
+IMG_9103,Technology Terms,,Huebsait,,Website,word,,no,
+IMG_9103,Technology Terms,,Estatistek,,Statistics,word,,no,
+IMG_9103,Technology Terms,,Tekngo' Prugråman Kompiuta,,Software Developer or Programmer,word,,no,
+IMG_9103,Technology Terms,,Kualidåt,,Quality,word,,yes,Accent or final letter glyph is unclear in the screenshot. Confirm against the source document.
+IMG_9103,Technology Terms,,Púpbleko,,Public,word,,no,
+IMG_9103,Technology Terms,,Tilifón Sel,,Cellphone,word,,no,
+IMG_9104,Numbers,,Håcha,Unu,One,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Hugua,Dos,Two,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Tulu,Tres,Three,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Fatfat,Kuåttro,Four,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Lima,Singko,Five,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Gunom,Sais,Six,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Fiti,Siette,Seven,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Guålo,Ocho,Eight,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Sigua,Nuebi,Nine,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Månot,Dies,Ten,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Månot na gai Håcha,Onse,Eleven,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Månot na gai Hugua,Dosse,Twelve,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Månot na gai Tulu,Tresse,Thirteen,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Månot na gai Fatfat,Katotse,Fourteen,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Månot na gai Lima,Kinse,Fifteen,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Månot na gai Gunom,Disisais,Sixteen,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Månot na gai Fiti,Disisiette,Seventeen,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Månot na gai Guålo,Disiocho,Eighteen,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Månot na gai Sigua,Disinuebi,Nineteen,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Hugua na Fulu,Bente,Twenty,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Hugua na Fulu na gai Håcha,Bente Unu,Twenty One,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9104,Numbers,,Tulu na Fulu na gai Guålo,Trentai Ocho,Thirty Eight,word,,no,"chamoru column is Ansiånu, alternate_chamoru column is Prisente (both from the source table)"
+IMG_9105,Salutations and Holiday Greetings,,Håfa Adai,,Hello,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Manana Si Yu'os/Buenas Dihas,,Good Morning,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Buenas Tåtdes,,Good Afternoon,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Buenas Noches,,Good Evening,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Adiós,,Goodbye,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Åstaki Umali'e' Hit Ta'lo,,Until we meet again,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Komple'åños/Biba Ha'ånen Mafañågu-mu,,Happy Birthday,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Komple'åños Umåkkamo'/Kasamiento,,Happy Wedding Anniversary,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Mafañågon Niñu Jesus/Filís Nabidåt,,Merry Christmas,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Åñu Nuebu,,Happy New Year,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Guinaiya,,Happy Valentines Day,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Mes CHamoru,,Happy CHamoru Month,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Nåna,,Happy Mother's Day,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Tåta,,Happy Father's Day,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Betterånu,,Happy Veteran's Day,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Hotnaleru,,Happy Labor Day,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Mannå'i Gråsia,,Happy Thanksgiving,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Gupot Mañåntos,,Happy All Saints Day,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Graduhasión,,Happy Graduation Day,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Kinahulo' Jesukristo,,Happy Easter,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Mimuriåt,,Happy Memorial Day,word,,yes,Accent or final letter glyph is unclear in the screenshot. Confirm against the source document.
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Endependente,,Happy 4th of July/Happy Independence Day,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Linibette,,Happy Liberation Day,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Taotao Tåno' Siha,,Happy Indigenous Peoples' Day,word,,no,
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Fåfa'ñahgue,,Happy Halloween,word,,yes,In the screenshot this row has the English in the CHamoru column and the CHamoru in the English column. Entered here with the sides corrected. Confirm against the source. Also: Accent or final letter glyph is unclear in the screenshot. Confirm against the source document.
+IMG_9105,Salutations and Holiday Greetings,,Biba Ha'ånen Anten Manmåtai,,Happy All Souls' Day,word,,yes,In the screenshot this row has the English in the CHamoru column and the CHamoru in the English column. Entered here with the sides corrected. Confirm against the source.
+IMG_9106,Time,,ha'åni/diha,,day,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,simåna,,week,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,ma'pos na simåna,,last week,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,ma'posña na simåna,,week before last,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,mámaila' na simåna,,next week,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,mamailá'ña na simåna,,two weeks from now,word,updated vs TermsRelatedtoTime.pdf: PDF reads mámaila ña na simåna,no,"Updated orthography. The screenshot spelling supersedes the 2025 PDF. If an existing row has the old spelling it needs an update, not a skip."
+IMG_9106,Time,,på'go na simåna,,this week,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,åñu,,year,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,siklo,,century,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,astakí,,until,word,updated vs TermsRelatedtoTime.pdf: PDF reads ástaki,no,"Updated orthography. The screenshot spelling supersedes the 2025 PDF. If an existing row has the old spelling it needs an update, not a skip."
+IMG_9106,Time,,desde,,from,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,åntes,,before,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,åntesdi,,before an event or thing,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,på'go,,now,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,agupa',,tomorrow,word,updated vs TermsRelatedtoTime.pdf: PDF reads ågupa,no,"Updated orthography. The screenshot spelling supersedes the 2025 PDF. If an existing row has the old spelling it needs an update, not a skip."
+IMG_9106,Time,,agupá'ña/inakpå'ña,,day after tomorrow,word,updated vs TermsRelatedtoTime.pdf: PDF reads ågupa ña/nakpå'ña,no,"Updated orthography. The screenshot spelling supersedes the 2025 PDF. If an existing row has the old spelling it needs an update, not a skip."
+IMG_9106,Time,,nigap,,yesterday,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,nigapña,,day before yesterday,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,halacha,,recent past,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9106,Time,,despues/despuesdi,,after/after an event,word,matches TermsRelatedtoTime.pdf,no,
+IMG_9107,Years and Centuries,,Siklon Disisaís,,1500-1599 (1600's),word,,no,Gloss transcribed verbatim. Not a transcription error: the range is the century by ordinal count (for example the 16th century is 1500 to 1599) and the parenthetical is its common name (the 1600s). Do not change either part.
+IMG_9107,Years and Centuries,,Siklon Disisiette,,1600-1699 (1700's),word,,no,Gloss transcribed verbatim. Not a transcription error: the range is the century by ordinal count (for example the 16th century is 1500 to 1599) and the parenthetical is its common name (the 1600s). Do not change either part.
+IMG_9107,Years and Centuries,,Siklon Disi'ocho,,1700-1799 (1800's),word,,no,Gloss transcribed verbatim. Not a transcription error: the range is the century by ordinal count (for example the 16th century is 1500 to 1599) and the parenthetical is its common name (the 1600s). Do not change either part.
+IMG_9107,Years and Centuries,,Siklon Disinuebi,,1800-1899 (1900's),word,,no,Gloss transcribed verbatim. Not a transcription error: the range is the century by ordinal count (for example the 16th century is 1500 to 1599) and the parenthetical is its common name (the 1600s). Do not change either part.
+IMG_9107,Years and Centuries,,Siklon Bente,,1900-1999 (2000's),word,,no,Gloss transcribed verbatim. Not a transcription error: the range is the century by ordinal count (for example the 16th century is 1500 to 1599) and the parenthetical is its common name (the 1600s). Do not change either part.
+IMG_9107,Years and Centuries,,Siklon Bente Unu,,2000-2099 (2100's),word,,no,Gloss transcribed verbatim. Not a transcription error: the range is the century by ordinal count (for example the 16th century is 1500 to 1599) and the parenthetical is its common name (the 1600s). Do not change either part.
+IMG_9107,Years and Centuries,,Mit Disinuebi Sisenta,,1960,word,,no,
+IMG_9107,Years and Centuries,,Mit Disinuebi Sitentai Tres,,1973,word,,no,
+IMG_9107,Years and Centuries,,Mit Disinuebi Uchentai Nuebi,,1989,word,,no,
+IMG_9107,Years and Centuries,,Mit Disinuebi Nubenta,,1990,word,,no,
+IMG_9107,Years and Centuries,,Dos Mit,,2000,word,,no,
+IMG_9107,Years and Centuries,,Dos Mit Bente,,2020,word,,no,
+IMG_9107,Years and Centuries,,Dos Mit Bente Sais,,2026,word,,no,
+IMG_9108,Position Titles,,Saina,Tan/Tun/Nan,Elder,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Siñora/Siñot,,Ms./Mrs./Mr.,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Maga'håga/Maga'låhi,Gubietno/Gubetno,Governor,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Sigundo Maga'håga/Maga'låhi,Tiñente Gubietno/Gubetno,Lieutenant Governor,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Gé'helo',Må'gas,Chairperson,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Bisa Gé'helo',Sigundo Må'gas,Vice Chairperson,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Mahót,Atkådi/Kumísiona,Mayor,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Bisa Mahót,Sigundo Mahót,Vice Mayor,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Prensepåt,Prínsepo',Principal,word,,yes,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column. Accent or final letter glyph is unclear in the screenshot. Confirm against the source document."
+IMG_9108,Position Titles,,Bisa Prensepåt,Sigundo Prínsepo',Vice Principal,word,,yes,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column. Accent or final letter glyph is unclear in the screenshot. Confirm against the source document."
+IMG_9108,Position Titles,,Eksekutibu,Atmenestradora/Atmenestradót,Executive Director/Administrator,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Káma'gas,Direktora/Direktót,Director,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Káka'ma'gas,Bisa Direktora/Direktót,Deputy Director,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Ayudånten Ufisina,Sikritåria/Sikritåriu,Secretary,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Membron Lehislatura,Sinadora/Sinadót,Senator,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Sísigon Bås,Draiban Bås,Bus Driver,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Manna'homlo',Emfetmera/Emfetmeru,Nurse,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Pattera,Emfetmeran Muna'fañågu,Midwife,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Fåfa'na'gue,Ma'estra/Ma'estro,Teacher,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Atbesót,Konseheran Eskuela,School Counselor,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Taotao Fanlepbluyan,Laibirihadora/dót,Librarian,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Yó'amte,Suruhåna/Suruhånu,Traditional Healer,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Techa,,Traditional Prayer Leader,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Påle',Pådre,Priest,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Etmåna,Mådri,Nun,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Må'gas Kusina,Kapuråt,Head Chef/Head Cook,word,,yes,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column. Accent or final letter glyph is unclear in the screenshot. Confirm against the source document. Applies to the alternate form Kapuråt."
+IMG_9108,Position Titles,,Taotao Kusina,Kusinera/u,Cafeteria Worker,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9108,Position Titles,,Taotao Numá'gasgas,Nána'gasgas,Janitor,word,,yes,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column. Accent or final letter glyph is unclear in the screenshot. Confirm against the source document. Applies to the alternate form Nána'gasgas."
+IMG_9108,Position Titles,,Såstre,Lálakse,Seamstress,word,,no,"chamoru column is the main title, alternate_chamoru is the Alternate Usages column."
+IMG_9109,Geographic Features,,yiugráfiku,,geographic,word,,no,
+IMG_9109,Geographic Features,,tåno',,country/land,word,,no,
+IMG_9109,Geographic Features,,isla,,island,word,,no,
+IMG_9109,Geographic Features,,siudåt,,city,word,,yes,Accent or final letter glyph is unclear in the screenshot. Confirm against the source document.
+IMG_9109,Geographic Features,,destritu,,district,word,,no,
+IMG_9109,Geographic Features,,estådu,,state,word,,no,
+IMG_9109,Geographic Features,,songsong,,village,word,,no,
+IMG_9109,Geographic Features,,påtten songsong,,locale,word,,no,
+IMG_9109,Geographic Features,,tåsi,,ocean/sea,word,,no,
+IMG_9109,Geographic Features,,såddok,,river,word,,no,
+IMG_9109,Geographic Features,,hagoi,,lake,word,,no,
+IMG_9109,Geographic Features,,sabåna,,mountain,word,,no,
+IMG_9109,Geographic Features,,sabaneta,,meadow/grassy flat land/plain,word,,no,
+IMG_9109,Geographic Features,,okso',,hill,word,,no,
+IMG_9109,Geographic Features,,ma'tingan,,reef,word,,no,
+IMG_9109,Geographic Features,,palaspas hånom,,waterfall,word,,no,
+IMG_9109,Geographic Features,,måtan hånom,,water lens,word,,no,
+IMG_9109,Geographic Features,,bo'bo',,underwater spring,word,,no,
+IMG_9110,Months of the Year,,Ineru,,January,word,matches MonthsoftheYear.pdf,no,
+IMG_9110,Months of the Year,,Fibreru,,February,word,matches MonthsoftheYear.pdf,no,
+IMG_9110,Months of the Year,,Måtso,,March,word,matches MonthsoftheYear.pdf,no,
+IMG_9110,Months of the Year,,Abrít,,April,word,matches MonthsoftheYear.pdf,no,
+IMG_9110,Months of the Year,,Måyu,,May,word,matches MonthsoftheYear.pdf,no,
+IMG_9110,Months of the Year,,Hunño,,June,word,matches MonthsoftheYear.pdf,no,
+IMG_9110,Months of the Year,,Hulio,,July,word,matches MonthsoftheYear.pdf,no,
+IMG_9110,Months of the Year,,Agosto,,August,word,matches MonthsoftheYear.pdf,no,
+IMG_9110,Months of the Year,,Septiembre/Septembre,,September,word,matches MonthsoftheYear.pdf,no,
+IMG_9110,Months of the Year,,Oktubri,,October,word,matches MonthsoftheYear.pdf,no,
+IMG_9110,Months of the Year,,Nubiembre/Nubembre,,November,word,matches MonthsoftheYear.pdf,no,
+IMG_9110,Months of the Year,,Disiembre/Disembre,,December,word,matches MonthsoftheYear.pdf,no,
+IMG_9111,Legal Terms,,Kotte,,Court,word,,no,
+IMG_9111,Legal Terms,,Lai,,Law,word,,no,
+IMG_9111,Legal Terms,,Hues,,Judge,word,,no,Also appears in Branches of Government with the same gloss.
+IMG_9111,Legal Terms,,Hostisia,,Justice,word,,no,Also appears in Self-Determination Terms with the same gloss.
+IMG_9111,Legal Terms,,Kaosa,,Lawsuit,word,,no,
+IMG_9111,Legal Terms,,Kaosadót,,Plaintiff,word,,no,
+IMG_9111,Legal Terms,,Abugáo Difensót,,Defense Attorney,word,,no,
+IMG_9111,Legal Terms,,Abugáo/Abugådu,,Lawyer,word,,no,
+IMG_9111,Legal Terms,,Kontråta,,Contract,word,,no,
+IMG_9111,Legal Terms,,Niñegan i Kontråta,,To break a contract,word,,no,
+IMG_9111,Legal Terms,,Upiñón,,Opinion,word,,no,
+IMG_9111,Legal Terms,,Títestegu,,Witness,word,,no,
+IMG_9111,Legal Terms,,Akusa,,To Prosecute,word,,no,
+IMG_9111,Legal Terms,,Manakúkusa,,Prosecutor,word,,no,
+IMG_9111,Legal Terms,,Inagang Kotte,,Subpoena,word,,no,
+IMG_9111,Legal Terms,,Huisio,,Verdict,word,,no,
+IMG_9111,Legal Terms,,"Linibettå, masotta",,Acquittal,word,,yes,Accent or final letter glyph is unclear in the screenshot. Confirm against the source document.
+IMG_9111,Legal Terms,,Kontråriu,,Defendant,word,,no,
+IMG_9111,Legal Terms,,Abugáo Púpbleko,,Public Defender,word,,no,
+IMG_9112,Branches of Government,,Råmas Eksekutibu,,Executive Branch,section_header,,no,
+IMG_9112,Branches of Government,Råmas Eksekutibu,Ufisinan i Maga'håga/Maga'låhi,,Governor's Office,word,,no,
+IMG_9112,Branches of Government,Råmas Eksekutibu,Dipåttamento yan Ahensia Siha,,Departments and Agencies,word,,no,
+IMG_9112,Branches of Government,Råmas Eksekutibu,Konsehilon Mahót Guåhan Siha,,Mayors Council of Guam,word,,no,
+IMG_9112,Branches of Government,,Råmas Liheslatura,,Legislative Branch,section_header,,no,
+IMG_9112,Branches of Government,Råmas Liheslatura,Liheslaturan Guåhan,,Guam Legislature,word,,no,
+IMG_9112,Branches of Government,Råmas Liheslatura,Kuíkuentos,,Speaker,word,,no,
+IMG_9112,Branches of Government,Råmas Liheslatura,Bisa Kuíkuentos,,Vice Speaker,word,,no,
+IMG_9112,Branches of Government,Råmas Liheslatura,Sikritårian Liheslatura,,Legislative Secretary,word,,no,
+IMG_9112,Branches of Government,Råmas Liheslatura,Sinadót/Sinadora,,Senator,word,,no,Also appears in Position Titles as Sinadora/Sinadót.
+IMG_9112,Branches of Government,,Råmas Hudisiåt,,Judiciary Branch,section_header,,yes,Accent or final letter glyph is unclear in the screenshot. Confirm against the source document.
+IMG_9112,Branches of Government,Råmas Hudisiåt,Kotten Supiriåt Guåhan,,Superior Court of Guam,word,,no,
+IMG_9112,Branches of Government,Råmas Hudisiåt,Etmås Gé'helo' na Hues,,Presiding Judge,word,,no,
+IMG_9112,Branches of Government,Råmas Hudisiåt,Hues,,Judge,word,,no,Also appears in Legal Terms with the same gloss.
+IMG_9112,Branches of Government,Råmas Hudisiåt,Kotten Destriton Estådos Unidos Guåhan,,U.S. District Court of Guam,word,,no,
+IMG_9113,Municipalities of Guåhan,,Hagåtña,,Agana,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Agaña Heights-Tutuhan,,Agana Heights-Tutuhan,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Hågat,,Agat,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Assan-Ma'ina,,Asan-Maina,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Barigåda,,Barrigada,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,CHålan Pågu,,Chalan Pago,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Dédidu,,Dededo,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Inalåhan,,Inarajan,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Mongmong-To'to-Maite',,Monmong-Toto-Maite,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Mangilao,,Mangilao,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Malesso',,Merizo,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Otdot,,Ordot,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Piti,,Piti,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Sånta Rita-Sumai,,Santa Rita-Sumay,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Sinahånña,,Sinajana,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Talo'fo'fo',,Talofofo,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Tamuneng-Tomhom,,Tamuning-Tumon,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Humåtak,,Umatac,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Yigu,,Yigo,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9113,Municipalities of Guåhan,,Yo'ña,,Yona,word,matches MunicipalitiesofGuam1.pdf and likely already in the Municipality Match game,no,
+IMG_9114,Self Determination Terms,,Asusiasión Linibre,,Free Association,word,,no,
+IMG_9114,Self Determination Terms,,Deklarasión,,Declaration,word,,no,
+IMG_9114,Self Determination Terms,,Diknedåt,,Dignity,word,,yes,Accent or final letter glyph is unclear in the screenshot. Confirm against the source document.
+IMG_9114,Self Determination Terms,,Dimukrasiha,,Democracy,word,,no,
+IMG_9114,Self Determination Terms,,Dinitetminasión Maisa,,Self-Determination,word,,no,
+IMG_9114,Self Determination Terms,,Direcho,,Rights,word,,no,Screenshot gloss is Rights.
+IMG_9114,Self Determination Terms,,Direchon I Taotao Tåno',,The Rights of a People,word,,no,
+IMG_9114,Self Determination Terms,,Endependensia,,Independence,word,,no,
+IMG_9114,Self Determination Terms,,Endíhinu,,Indigenous,word,,no,
+IMG_9114,Self Determination Terms,,Estådon Amérika,,Statehood,word,,no,
+IMG_9114,Self Determination Terms,,Estáo Kuluniha,,Status Quo/Status of Colony,word,,yes,Accent or final letter glyph is unclear in the screenshot. Confirm against the source document.
+IMG_9114,Self Determination Terms,,Estao Pulitikåt,,Political Status,word,,yes,Accent or final letter glyph is unclear in the screenshot. Confirm against the source document.
+IMG_9114,Self Determination Terms,,Fa'sangi,,To be Excluded,word,,no,
+IMG_9114,Self Determination Terms,,Fama'taotao,,Treat with Dignity,word,,yes,"Your notes say the correct spelling is Fa'taotao, not Fama'taotao. The screenshot reads Fama'taotao. Check the source page before inserting or approving."
+IMG_9114,Self Determination Terms,,Finaloffan i Taotao Tåno',,Indigenous History,word,,no,
+IMG_9114,Self Determination Terms,,"Fininas Hinasso, Tinigo' yan Lina'la'",,Colonial Indoctrination/Assimilation,word,,no,
+IMG_9114,Self Determination Terms,,"Fininas Taotao, Fino' yan Tåno'",,Genocide,word,,no,
+IMG_9114,Self Determination Terms,,Ginepten i Tinaotao-ta,,Cultural Sovereignty,word,,no,
+IMG_9114,Self Determination Terms,,Guailaye,,Agency/Power,word,,no,
+IMG_9114,Self Determination Terms,,Guinaha,,Resources,word,,no,
+IMG_9114,Self Determination Terms,,Hinatme,,Occupation,word,,no,
+IMG_9114,Self Determination Terms,,Hinemlo',,Healing,word,,no,
+IMG_9114,Self Determination Terms,,Hineño',,Oppression,word,,no,
+IMG_9114,Self Determination Terms,,Hinilat,,Overcome,word,,no,
+IMG_9114,Self Determination Terms,,Hinipa,,Displacement,word,,no,
+IMG_9114,Self Determination Terms,,Hostisia,,Justice,word,,no,Also appears in Legal Terms with the same gloss.
+IMG_9114,Self Determination Terms,,Kinahulo' Tinaotao,,Nation Building,word,,no,
+IMG_9114,Self Determination Terms,,Mumuyi,,Fight for/Champion a cause,word,,no,
+IMG_9116,Self Determination Terms,,Repestu,,Respect,word,,yes,"Screenshot reads Repestu, but the row for Tai Respetu spells it Respetu. Likely a source typo. Confirm the spelling."
+IMG_9116,Self Determination Terms,,Sin Makuluniha,,Decolonization,word,,no,
+IMG_9116,Self Determination Terms,,Tai Respetu,,Disrespectful,word,,no,
+IMG_9116,Self Determination Terms,,Tailaye,,Injustice,word,,no,
+IMG_9116,Self Determination Terms,,Tinaotao-ta,,Peoplehood,word,,no,
+IMG_9116,Self Determination Terms,,Tinilaika,,Change,word,,no,
+IMG_9116,Self Determination Terms,,Umitde,,Humble,word,,no,
+IMG_9115,Marianas Archipelago,,Tåno' Låguas,,Southern Islands in the Marianas Archipelago,section_header,,no,
+IMG_9115,Marianas Archipelago,Tåno' Låguas,Guåhan,,Guam,word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Låguas,Luta,,Rota,word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Låguas,Aguiguan,,Aguiguan,word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Låguas,Tini'an,,Tinian,word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Låguas,Sa'ipan,,Saipan,word,,no,
+IMG_9115,Marianas Archipelago,,Tåno' Gåni,,Northern Islands in the Marianas Archipelago,section_header,,no,
+IMG_9115,Marianas Archipelago,Tåno' Gåni,No'os,,Farallon de Medinilla,word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Gåni,Anatåhan,,Anatahan,word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Gåni,Saligan,,Sariguan,word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Gåni,Gugu'an,,Guguan,word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Gåni,Alamågan,,Alamagan,word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Gåni,Pågan,,Pagan,word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Gåni,Akligan,,Agrihan,word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Gåni,As Songsong,,Asuncion,word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Gåni,Må'ok,,Maug (Maug Islands),word,,no,
+IMG_9115,Marianas Archipelago,Tåno' Gåni,Ulåkas,,Farallon de Pajaros,word,,no,
