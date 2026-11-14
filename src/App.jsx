@@ -9,6 +9,7 @@ import Alphabet from './components/Alphabet'
 import About from './components/About'
 import CulturalValues from './components/CulturalValues'
 import LearningPaths from './components/LearningPaths'
+import CategoryLibrary from './components/CategoryLibrary'
 import SearchBar from './components/SearchBar'
 import Toast from './components/Toast'
 import { supabase } from './lib/supabase'
@@ -16,18 +17,9 @@ import { useCompletedIds } from './hooks/useCompletedIds'
 import { useDailyPractice } from './hooks/useDailyPractice'
 import { useSessionId } from './hooks/useSessionId'
 import { logEvent } from './utils/logEvent'
+import { normalizeChamorro } from './utils/normalize'
 
 const GuahanMap = lazy(() => import('./components/GuahanMap'))
-
-// Strips CHamoru diacritics (a, n, e, etc.) and the glota (') so search can
-// match plain-ASCII input like "hafa" or "chelu" against the accented forms.
-function normalizeChamorro(str) {
-  return str
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/'/g, '')
-    .toLowerCase()
-}
 
 function App() {
   const [words, setWords] = useState([])
@@ -37,6 +29,8 @@ function App() {
   const [error, setError] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [studyWords, setStudyWords] = useState(null)
+  // Where exiting study goes: "library" when the category was opened there.
+  const [studyReturnView, setStudyReturnView] = useState("browse")
   const [toast, setToast] = useState(null)
   const [completedIds, toggleId] = useCompletedIds()
   const { hasPracticedToday, markPracticed, streakCount } = useDailyPractice()
@@ -52,9 +46,10 @@ function App() {
     }
   }, [completedIds, toggleId, markPracticed, words])
 
-  const handleSelectCategory = (cat) => {
+  const handleSelectCategory = (cat, returnView = "browse") => {
     setStudyWords(null)
     setCategory(cat)
+    setStudyReturnView(returnView)
     setView("study")
     logEvent('category_viewed', { category: cat })
   }
@@ -133,7 +128,18 @@ function App() {
         totalWords={words.length}
         category={category}
         onSelectDeck={(cat) => { setStudyWords(null); setCategory(cat); setView("study") }}
-        onExit={() => { setStudyWords(null); setView("browse") }}
+        onExit={() => { setStudyWords(null); setView(studyReturnView); setStudyReturnView("browse") }}
+      />
+    )
+  }
+
+  if (view === "library") {
+    return (
+      <CategoryLibrary
+        words={words}
+        completedIds={completedIds}
+        onSelectCategory={(cat) => handleSelectCategory(cat, "library")}
+        onExit={() => setView("browse")}
       />
     )
   }
@@ -265,7 +271,8 @@ function App() {
           <LearningPaths
             words={words}
             completedIds={completedIds}
-            onSelectCategory={handleSelectCategory}
+            onSelectCategory={(cat) => handleSelectCategory(cat)}
+            onBrowseAll={() => setView("library")}
           />
         </>
       )}
