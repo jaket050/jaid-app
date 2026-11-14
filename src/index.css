@@ -58,6 +58,25 @@
   --ui-strip-track: rgba(26, 58, 92, 0.12);
   --ui-bar-track: rgba(26, 58, 92, 0.12);
 
+  /* Practice, Study, Quiz and Card Match */
+  --ui-heading: #1a3a5c;
+  --ui-white-muted: #4A5D73;
+  --ui-white-soft: #4A5D73;
+  --ui-text-instructions: #4A5D73;
+  --ui-surface-hover: #EEF2F6;
+  --ui-surface-card: #FFFFFF;
+  --ui-card-hover: #EEF2F6;
+  --ui-card-selected: #FBF3DC;
+  --ui-card-selected-text: #7A5C12;
+  --ui-border-card: rgba(26, 58, 92, 0.15);
+  --ui-border-game: rgba(26, 58, 92, 0.2);
+  --ui-border-hover: rgba(26, 58, 92, 0.3);
+  --ui-ghost-border: rgba(26, 58, 92, 0.35);
+  --ui-ghost-hover: rgba(26, 58, 92, 0.06);
+  --ui-home-border: rgba(26, 58, 92, 0.35);
+  --ui-home-hover: rgba(26, 58, 92, 0.06);
+  --ui-danger-text: #A3461A;
+
   font: 18px/145% var(--sans);
   font-weight: 600;
   letter-spacing: 0.18px;
@@ -123,6 +142,24 @@
     --ui-link-hover: #E8C97A;
     --ui-strip-track: rgba(255, 255, 255, 0.12);
     --ui-bar-track: rgba(201, 168, 76, 0.18);
+
+    --ui-heading: #ffffff;
+    --ui-white-muted: rgba(255, 255, 255, 0.6);
+    --ui-white-soft: rgba(255, 255, 255, 0.7);
+    --ui-text-instructions: rgba(232, 220, 200, 0.85);
+    --ui-surface-hover: #1A2A3F;
+    --ui-surface-card: #1A2A3F;
+    --ui-card-hover: #243A52;
+    --ui-card-selected: #243A52;
+    --ui-card-selected-text: #E8C97A;
+    --ui-border-card: #1E3448;
+    --ui-border-game: #2D4361;
+    --ui-border-hover: rgba(201, 168, 76, 0.45);
+    --ui-ghost-border: rgba(255,255,255,0.3);
+    --ui-ghost-hover: rgba(255,255,255,0.1);
+    --ui-home-border: rgba(232, 220, 200, 0.3);
+    --ui-home-hover: rgba(232, 220, 200, 0.08);
+    --ui-danger-text: #e07b39;
   }
 }
 

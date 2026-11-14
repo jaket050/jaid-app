@@ -4,8 +4,8 @@
 
 .match-game {
   min-height: 100dvh;
-  background: #0D1B2A;
-  color: #E8DCC8;
+  background: var(--ui-surface);
+  color: var(--ui-text);
   font-family: var(--sans);
   display: flex;
   flex-direction: column;
@@ -19,16 +19,16 @@
   align-items: center;
   width: 100%;
   padding: 1rem 1.5rem;
-  background: #132030;
-  border-bottom: 1px solid #1E3448;
+  background: var(--ui-surface-raised);
+  border-bottom: 1px solid var(--ui-border-card);
   box-sizing: border-box;
 }
 
 .match-game__home {
   width: fit-content;
   background: transparent;
-  border: 1px solid rgba(232, 220, 200, 0.3);
-  color: #E8DCC8;
+  border: 1px solid var(--ui-home-border);
+  color: var(--ui-text);
   padding: 0.4rem 0.9rem;
   border-radius: 4px;
   font-size: 0.85rem;
@@ -39,21 +39,21 @@
 }
 
 .match-game__home:hover {
-  background: rgba(232, 220, 200, 0.08);
-  border-color: #C9A84C;
+  background: var(--ui-home-hover);
+  border-color: var(--ui-accent);
 }
 
 .match-game__brand {
   text-align: center;
   font-family: var(--heading);
-  color: #ffffff;
+  color: var(--ui-heading);
   letter-spacing: 0.15em;
   font-size: 1rem;
 }
 
 .match-game__progress {
   text-align: right;
-  color: #E8DCC8;
+  color: var(--ui-text);
   font-size: 0.85rem;
   letter-spacing: 0.05em;
   font-family: var(--sans);
@@ -64,12 +64,12 @@
 .match-game__status {
   text-align: center;
   padding: 3rem 1.5rem;
-  color: #E8DCC8;
+  color: var(--ui-text);
   font-family: var(--sans);
 }
 
 .match-game__status--error {
-  color: #e07b39;
+  color: var(--ui-danger-text);
 }
 
 /* ─── Instruction line ────────────────────────────────────────── */
@@ -78,7 +78,7 @@
   text-align: center;
   font-family: var(--sans);
   font-size: 0.85rem;
-  color: rgba(232, 220, 200, 0.85);
+  color: var(--ui-text-instructions);
   max-width: 540px;
   margin: 1.5rem auto 0;
   padding: 0 1.5rem;
@@ -109,7 +109,7 @@
   font-family: var(--sans);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
-  color: #C9A84C;
+  color: var(--ui-accent-text);
   margin: 0 0 0.5rem;
   font-weight: 700;
   text-align: center;
@@ -118,13 +118,13 @@
 /* ─── Card ────────────────────────────────────────────────────── */
 
 .match-card {
-  background: #1A2A3F;
-  border: 1px solid #2D4361;
+  background: var(--ui-surface-card);
+  border: 1px solid var(--ui-border-game);
   border-radius: 10px;
   padding: 0.95rem 1rem;
   font-family: var(--heading);
   font-size: 1.05rem;
-  color: #E8DCC8;
+  color: var(--ui-text);
   cursor: pointer;
   text-align: center;
   word-break: break-word;
@@ -133,14 +133,14 @@
 }
 
 .match-card:hover:not(:disabled) {
-  background: #243A52;
-  border-color: #C9A84C;
+  background: var(--ui-card-hover);
+  border-color: var(--ui-accent);
 }
 
 .match-card--selected {
-  background: #243A52;
-  border-color: #C9A84C;
-  color: #E8C97A;
+  background: var(--ui-card-selected);
+  border-color: var(--ui-accent);
+  color: var(--ui-card-selected-text);
   transform: scale(1.02);
   box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.22), 0 2px 6px rgba(0, 0, 0, 0.3);
 }
@@ -155,8 +155,8 @@
 }
 
 .match-card--wrong {
-  background: #e07b39;
-  border-color: #e07b39;
+  background: #B4531F;
+  border-color: #B4531F;
   color: #ffffff;
   animation: match-shake 0.4s ease-in-out;
 }
@@ -187,12 +187,12 @@
 .match-game__overlay-title {
   font-family: var(--heading);
   font-size: 1.8rem;
-  color: #ffffff;
+  color: var(--ui-heading);
   margin: 0;
 }
 
 .match-game__overlay-text {
-  color: rgba(232, 220, 200, 0.65);
+  color: var(--ui-text-muted);
   font-family: var(--sans);
   font-size: 0.95rem;
   max-width: 380px;
@@ -240,7 +240,7 @@
 .match-mode-select__title {
   font-family: var(--heading);
   font-size: 1.8rem;
-  color: #ffffff;
+  color: var(--ui-heading);
   margin: 0 0 0.5rem;
   text-align: center;
 }
@@ -248,7 +248,7 @@
 .match-mode-select__subtitle {
   font-family: var(--sans);
   font-size: 0.9rem;
-  color: rgba(232, 220, 200, 0.65);
+  color: var(--ui-text-muted);
   margin: 0 0 2.5rem;
   text-align: center;
   font-style: italic;
@@ -269,8 +269,8 @@
   justify-content: center;
   gap: 0.35rem;
   padding: 1.5rem 1rem;
-  background: #1A2A3F;
-  border: 1px solid #2D4361;
+  background: var(--ui-surface-card);
+  border: 1px solid var(--ui-border-game);
   border-radius: 12px;
   text-decoration: none;
   text-align: center;
@@ -279,8 +279,8 @@
 }
 
 .match-mode-card:hover {
-  background: #243A52;
-  border-color: #C9A84C;
+  background: var(--ui-card-hover);
+  border-color: var(--ui-accent);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
@@ -288,21 +288,21 @@
 .match-mode-card__label {
   font-family: var(--heading);
   font-size: 1.25rem;
-  color: #E8DCC8;
+  color: var(--ui-text);
   letter-spacing: 0.03em;
 }
 
 .match-mode-card__subtitle {
   font-family: var(--sans);
   font-size: 0.75rem;
-  color: rgba(232, 220, 200, 0.6);
+  color: var(--ui-text-icon);
   letter-spacing: 0.04em;
 }
 
 .match-mode-card__count {
   font-family: var(--sans);
   font-size: 0.7rem;
-  color: #C9A84C;
+  color: var(--ui-accent-text);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -373,8 +373,8 @@ body:has(.muni-game) #root {
 
 .muni-game {
   height: 100dvh;
-  background: #0D1B2A;
-  color: #E8DCC8;
+  background: var(--ui-surface);
+  color: var(--ui-text);
   font-family: var(--sans);
   display: flex;
   flex-direction: column;
@@ -401,13 +401,13 @@ body:has(.muni-game) #root {
 }
 
 .muni-name {
-  background: #1A2A3F;
-  border: 1px solid #2D4361;
+  background: var(--ui-surface-card);
+  border: 1px solid var(--ui-border-game);
   border-radius: 6px;
   padding: 0.45rem 0.65rem;
   font-family: var(--heading);
   font-size: 0.82rem;
-  color: #E8DCC8;
+  color: var(--ui-text);
   cursor: pointer;
   text-align: left;
   line-height: 1.25;
@@ -416,8 +416,8 @@ body:has(.muni-game) #root {
 }
 
 .muni-name:hover:not(:disabled) {
-  background: #243A52;
-  border-color: #C9A84C;
+  background: var(--ui-card-hover);
+  border-color: var(--ui-accent);
 }
 
 /* English gloss, e.g. "sehas (Eyebrow)" — Anatomy mode only. */
@@ -429,9 +429,9 @@ body:has(.muni-game) #root {
 }
 
 .muni-name--selected {
-  background: #243A52;
-  border-color: #C9A84C;
-  color: #E8C97A;
+  background: var(--ui-card-selected);
+  border-color: var(--ui-accent);
+  color: var(--ui-card-selected-text);
   box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.2);
 }
 
@@ -457,6 +457,9 @@ body:has(.muni-game) #root {
   align-items: flex-start;
   justify-content: center;
   overflow-y: auto;
+  /* The map board stays dark in both modes; its regions and labels are
+     drawn for a navy background. */
+  background: #0D1B2A;
 }
 
 .muni-map {
