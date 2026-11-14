@@ -1,6 +1,24 @@
-import { useEffect } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Calendar, Check } from 'lucide-react'
 import { logEvent } from '../utils/logEvent'
+
+// Lets the browser wrap a slash form ("Septiembre/Septembre") after each "/".
+// <wbr> adds no character, so the text read aloud and copied is unchanged.
+function withSlashBreaks(text) {
+  const parts = text.split('/')
+  return parts.map((part, i) => (
+    <Fragment key={i}>
+      {part}
+      {i < parts.length - 1 && <>/<wbr /></>}
+    </Fragment>
+  ))
+}
+
+// True when the word has an unbroken run of 13 or more characters (no space,
+// slash or hyphen to wrap at), so it gets a slightly smaller size on desktop.
+function hasLongRun(text) {
+  return text.split(/[\s/-]+/).some((seg) => Array.from(seg).length >= 13)
+}
 
 function WordOfTheDay({ words, completedIds }) {
   // App.jsx only loads verified rows, so every word here is already verified.
@@ -40,7 +58,9 @@ function WordOfTheDay({ words, completedIds }) {
       <div className="wotd__body">
         <div className="wotd__left">
           <div className="wotd__term">
-            <h2 className="wotd__word">{word.chamorro}</h2>
+            <h2 className={`wotd__word${hasLongRun(word.chamorro) ? ' wotd__word--long' : ''}`}>
+              {withSlashBreaks(word.chamorro)}
+            </h2>
             <p className="wotd__english">{word.english}</p>
           </div>
           {isLearned && (
