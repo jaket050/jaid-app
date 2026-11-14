@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import WordOfTheDay from './WordOfTheDay'
 
 // Animate a number upward over `duration` ms; jump instantly on any decrease.
 function useCountUp(target, duration = 600) {
@@ -29,7 +30,7 @@ function useCountUp(target, duration = 600) {
   return display
 }
 
-function Header({ totalWords, completedCount, hasPracticedToday, streakCount }) {
+function Header({ totalWords, completedCount, words, completedIds, hasPracticedToday, streakCount }) {
   const animatedCount = useCountUp(completedCount)
   const percentage = totalWords > 0
     ? Math.round((completedCount / totalWords) * 100)
@@ -46,6 +47,7 @@ function Header({ totalWords, completedCount, hasPracticedToday, streakCount }) 
           <h2 className="header-subtitle">Joining Ancestors In Dialogue</h2>
           <p className="hero-tagline">Preserving the language of Guåhan</p>
         </div>
+        <WordOfTheDay words={words} completedIds={completedIds} />
         <span className="photo-credit">Photo: Sung Jin Cho / Unsplash</span>
       </div>
       <div className="hero-content">

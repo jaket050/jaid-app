@@ -7,7 +7,6 @@ import DeckSelect from './components/DeckSelect'
 import QuizMode from './components/QuizMode'
 import Alphabet from './components/Alphabet'
 import About from './components/About'
-import WordOfTheDay from './components/WordOfTheDay'
 import CulturalValues from './components/CulturalValues'
 import LearningPaths from './components/LearningPaths'
 import SearchBar from './components/SearchBar'
@@ -262,7 +261,6 @@ function App() {
       )}
       {searchQuery === '' && (
         <>
-          <WordOfTheDay words={words} completedIds={completedIds} />
           <CulturalValues />
           <LearningPaths
             words={words}

@@ -1,59 +1,50 @@
-import {
-  MessageCircle, Users, Utensils, Hash, Calendar,
-  CalendarDays, Heart, Leaf, Box, MapPin, Compass,
-  Zap, User, Palette, Star, Clock, Church, HelpCircle,
-  UsersRound, CloudSun, TreeDeciduous, Droplets,
-  Landmark, BookOpen, Check, Waves, Mountain, GraduationCap,
-  PawPrint, Flower2, Stethoscope, House, Pipette, Shapes,
-  Coffee, Banknote, ListOrdered, Laptop, Hourglass, Scale,
-  Building2, Flag, TreePalm
-} from 'lucide-react'
+import { Check } from 'lucide-react'
 
 const CATEGORY_CONFIG = {
-  'Adjectives':            { icon: Palette,       label: 'Adjectives' },
-  'Anatomy':               { icon: Stethoscope,   label: 'Anatomy' },
-  'Animals':               { icon: PawPrint,      label: 'Animals' },
-  'Baptism':               { icon: Droplets,      label: 'Baptism' },
-  'Colors':                { icon: Pipette,       label: 'Colors' },
-  'Culture':               { icon: Landmark,      label: 'Culture' },
-  'Days of the Week':      { icon: CalendarDays,  label: 'Days of the Week' },
-  'Directions':            { icon: Compass,       label: 'Directions' },
-  'Drinks':                { icon: Coffee,        label: 'Drinks' },
-  'Emotions':              { icon: Heart,         label: 'Emotions' },
-  'Family':                { icon: Users,         label: 'Family' },
-  'Food':                  { icon: Utensils,      label: 'Food' },
-  'Genealogy':             { icon: TreeDeciduous, label: 'Genealogy' },
-  'Government':            { icon: Building2,     label: 'Government' },
-  'Greetings':             { icon: MessageCircle, label: 'Greetings' },
-  'Holidays and Religion': { icon: Church,        label: 'Holidays and Religion' },
-  'Home':                  { icon: House,         label: 'Home' },
-  'Islands':               { icon: TreePalm,      label: 'Islands' },
-  'Land':                  { icon: Mountain,      label: 'Land' },
-  'Legal':                 { icon: Scale,         label: 'Legal' },
-  'Money':                 { icon: Banknote,      label: 'Money' },
-  'Months of the Year':    { icon: Calendar,      label: 'Months of the Year' },
-  'Nature':                { icon: Leaf,          label: 'Nature' },
-  'Numbers Ansiånu':       { icon: ListOrdered,   label: 'Numbers Ansiånu' },
-  'Numbers Prisente':      { icon: Hash,          label: 'Numbers Prisente' },
-  'Objects':               { icon: Box,           label: 'Objects' },
-  'People':                { icon: UsersRound,    label: 'People' },
-  'Places':                { icon: MapPin,        label: 'Places' },
-  'Plants':                { icon: Flower2,       label: 'Plants' },
-  'Pronouns':              { icon: User,          label: 'Pronouns' },
-  'Questions':             { icon: HelpCircle,    label: 'Questions' },
-  'School':                { icon: GraduationCap, label: 'School' },
-  'Self Determination':    { icon: Flag,          label: 'Self Determination' },
-  'Shapes':                { icon: Shapes,        label: 'Shapes' },
-  'Technology':            { icon: Laptop,        label: 'Technology' },
-  'Time':                  { icon: Clock,         label: 'Time' },
-  'Values':                { icon: Star,          label: 'Values' },
-  'Verbs':                 { icon: Zap,           label: 'Verbs' },
-  'Water':                 { icon: Waves,         label: 'Water' },
-  'Weather':               { icon: CloudSun,      label: 'Weather' },
-  'Years and Centuries':   { icon: Hourglass,     label: 'Years and Centuries' },
+  'Adjectives':            { label: 'Adjectives' },
+  'Anatomy':               { label: 'Anatomy' },
+  'Animals':               { label: 'Animals' },
+  'Baptism':               { label: 'Baptism' },
+  'Colors':                { label: 'Colors' },
+  'Culture':               { label: 'Culture' },
+  'Days of the Week':      { label: 'Days of the Week' },
+  'Directions':            { label: 'Directions' },
+  'Drinks':                { label: 'Drinks' },
+  'Emotions':              { label: 'Emotions' },
+  'Family':                { label: 'Family' },
+  'Food':                  { label: 'Food' },
+  'Genealogy':             { label: 'Genealogy' },
+  'Government':            { label: 'Government' },
+  'Greetings':             { label: 'Greetings' },
+  'Holidays and Religion': { label: 'Holidays and Religion' },
+  'Home':                  { label: 'Home' },
+  'Islands':               { label: 'Islands' },
+  'Land':                  { label: 'Land' },
+  'Legal':                 { label: 'Legal' },
+  'Money':                 { label: 'Money' },
+  'Months of the Year':    { label: 'Months of the Year' },
+  'Nature':                { label: 'Nature' },
+  'Numbers Ansiånu':       { label: 'Numbers Ansiånu' },
+  'Numbers Prisente':      { label: 'Numbers Prisente' },
+  'Objects':               { label: 'Objects' },
+  'People':                { label: 'People' },
+  'Places':                { label: 'Places' },
+  'Plants':                { label: 'Plants' },
+  'Pronouns':              { label: 'Pronouns' },
+  'Questions':             { label: 'Questions' },
+  'School':                { label: 'School' },
+  'Self Determination':    { label: 'Self Determination' },
+  'Shapes':                { label: 'Shapes' },
+  'Technology':            { label: 'Technology' },
+  'Time':                  { label: 'Time' },
+  'Values':                { label: 'Values' },
+  'Verbs':                 { label: 'Verbs' },
+  'Water':                 { label: 'Water' },
+  'Weather':               { label: 'Weather' },
+  'Years and Centuries':   { label: 'Years and Centuries' },
 }
 
-const DEFAULT_CONFIG = { icon: BookOpen, label: '' }
+const DEFAULT_CONFIG = { label: '' }
 
 function LearningPaths({ words, completedIds, onSelectCategory }) {
   const stats = {}
@@ -71,51 +62,34 @@ function LearningPaths({ words, completedIds, onSelectCategory }) {
       <div className="learning-paths__header">
         <span className="learning-paths__label">Start Learning</span>
       </div>
-      <div className="learning-paths__grid">
+      <div className="learning-paths__chips">
         {categories.map(([cat, { total, done }]) => {
           const config = CATEGORY_CONFIG[cat] || {
             ...DEFAULT_CONFIG,
             label: cat.charAt(0).toUpperCase() + cat.slice(1),
           }
-          const IconComponent = config.icon
           const isStart = cat === 'Greetings'
           const pct = total > 0 ? Math.round((done / total) * 100) : 0
           const isComplete = total > 0 && done === total
-          const isEmpty = total > 0 && done === 0
 
           return (
             <button
               key={cat}
-              className={`path-card ${isStart ? 'path-card--start' : ''} ${isComplete ? 'path-card--complete' : ''}`}
+              className={`path-chip ${isStart ? 'path-chip--start' : ''} ${isComplete ? 'path-chip--complete' : ''}`}
               onClick={() => onSelectCategory(cat)}
               aria-label={`Practice ${config.label} vocabulary, ${done} of ${total} completed`}
             >
               {isComplete && (
-                <span className="path-card__complete-check"><Check size={14} /></span>
+                <Check size={12} className="path-chip__check" aria-hidden="true" />
               )}
-              <div className="path-card__icon">
-                <IconComponent size={20} />
-              </div>
-              <span className="path-card__name">{config.label}</span>
-              <span className="path-card__count">{done} of {total}</span>
-              <div
-                className="path-card__progress"
-                role="progressbar"
-                aria-valuenow={pct}
-                aria-valuemin={0}
-                aria-valuemax={100}
-              >
-                <div
-                  className="path-card__progress-fill"
+              <span className="path-chip__name">{config.label}</span>
+              <span className="path-chip__count">{done}/{total}</span>
+              <span className="path-chip__progress" aria-hidden="true">
+                <span
+                  className="path-chip__progress-fill"
                   style={{ width: `${pct}%` }}
                 />
-              </div>
-              {isEmpty && !isStart && (
-                <span className="path-card__hint">Tap to begin</span>
-              )}
-              {isStart && (
-                <span className="path-card__badge">Start here</span>
-              )}
+              </span>
             </button>
           )
         })}

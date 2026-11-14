@@ -29,16 +29,20 @@ function WordOfTheDay({ words, completedIds }) {
   return (
     <div className="wotd">
       <div className="wotd__header">
-        <Calendar size={14} className="wotd__icon" />
-        <span className="wotd__label">Fino' i Ha'åni · Word of the Day</span>
+        <span className="wotd__label-row">
+          <Calendar size={14} className="wotd__icon" />
+          <span className="wotd__label">Fino' i Ha'åni · Word of the Day</span>
+        </span>
+        {word.category && (
+          <span className="wotd__category">{word.category}</span>
+        )}
       </div>
       <div className="wotd__body">
         <div className="wotd__left">
-          {word.category && (
-            <span className="wotd__category">{word.category}</span>
-          )}
-          <h2 className="wotd__word">{word.chamorro}</h2>
-          <p className="wotd__english">{word.english}</p>
+          <div className="wotd__term">
+            <h2 className="wotd__word">{word.chamorro}</h2>
+            <p className="wotd__english">{word.english}</p>
+          </div>
           {isLearned && (
             <p className="wotd__learned"><Check size={14} /> Learned</p>
           )}

@@ -36,11 +36,26 @@
 
 .hero-section { position: relative; }
 
-.hero-image-wrapper { position: relative; width: 100%; height: 480px; overflow: hidden; }
+/* The hero grows with its content (title block + Word of the Day card) and
+   never shrinks below the photo's original 480px. */
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 2rem 1.5rem 2.25rem;
+  box-sizing: border-box;
+}
 
-.hero-image { width: 100%; height: 100%; object-fit: cover; object-position: center 60%; display: block; }
+.hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; display: block; }
 
-.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(5,25,20,0.3) 50%, rgba(5,25,20,0.75) 100%); }
+/* Bottom scrim keeps the tagline and card readable over the lighter reef. */
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(5,25,20,0.25) 35%, rgba(5,25,20,0.6) 65%, rgba(5,25,20,0.88) 100%); }
 
 .hero-content { background: rgba(5,25,20,0.92); padding: 1.5rem 2rem 2rem; text-align: center; }
 
@@ -54,13 +69,11 @@
 
 .hero-content .progress-bar { background: rgba(255,255,255,0.12); }
 
-.photo-credit { position: absolute; bottom: 6px; right: 10px; font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; }
+.photo-credit { position: absolute; bottom: 6px; right: 10px; z-index: 1; font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; }
 
 .hero-title-block {
-  position: absolute;
-  bottom: 2rem;
-  left: 0;
-  right: 0;
+  position: relative;
+  z-index: 1;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -440,7 +453,9 @@
     padding: 6px 12px;
   }
   .hero-image-wrapper {
-    height: 300px;
+    min-height: 300px;
+    gap: 1rem;
+    padding: 1.5rem 16px 2rem;
   }
 }
 
@@ -1021,21 +1036,40 @@
   color: #0D1B2A;
 }
 
+/* Word of the Day: compact glass card over the hero photo. */
 .wotd {
-  background: radial-gradient(ellipse at center, #1e4570 0%, #1a3a5c 70%);
-  border-top: 3px solid #C9A84C;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  box-sizing: border-box;
+  background: rgba(13, 27, 42, 0.7);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(201, 168, 76, 0.6);
   border-radius: 10px;
-  padding: 2rem 22px;
-  margin: 2rem 0;
-  box-shadow: 0 0 24px 4px rgba(201, 168, 76, 0.15);
+  padding: 1rem 1.25rem 1.1rem;
+  text-align: center;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .wotd {
+    background: rgba(13, 27, 42, 0.9);
+  }
 }
 
 .wotd__header {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.wotd__label-row {
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 14px;
 }
 
 .wotd__icon {
@@ -1050,32 +1084,20 @@
   color: rgba(255,255,255,0.75);
 }
 
-.wotd__body {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.wotd__left {
-  flex: 1;
-}
-
 .wotd__category {
   display: block;
   font-family: var(--sans);
-  font-size: 0.65rem;
+  font-size: 0.85rem;
+  font-variant-caps: all-small-caps;
   letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: #C9A84C;
-  margin-bottom: 4px;
 }
 
 .wotd__word {
   font-family: var(--heading);
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #fff;
-  margin-bottom: 4px;
+  margin: 0 0 2px;
   line-height: 1.1;
 }
 
@@ -1086,14 +1108,54 @@
   font-weight: 600;
 }
 
+/* Never clamped: cultural notes wrap in full and the card grows. */
 .wotd__note {
   font-family: var(--sans);
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.7);
   margin-top: 8px;
   line-height: 1.6;
   font-style: italic;
-  max-width: 360px;
+}
+
+@media (max-width: 600px) {
+  .wotd {
+    padding: 0.75rem 1rem 0.85rem;
+  }
+
+  .wotd__header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px 0.6rem;
+  }
+
+  /* Room for label and category on one line; long categories wrap below. */
+  .wotd__icon {
+    display: none;
+  }
+
+  .wotd__label {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+
+  .wotd__category {
+    font-size: 0.8rem;
+  }
+
+  .wotd__term {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0 0.6rem;
+  }
+
+  .wotd__word {
+    font-size: 1.75rem;
+    margin: 0;
+  }
 }
 
 .cultural-values {
@@ -1219,103 +1281,108 @@
   background: #C9A84C;
 }
 
-.learning-paths__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 0.75rem;
-}
-
-.path-card {
-  background: #132030;
-  border: 1px solid #1E3448;
-  border-radius: 10px;
-  padding: 1rem;
-  cursor: pointer;
+/* Category shortcuts: one wrapping row of chips. Selecting a chip opens
+   that category's study session (no filter state on the home view). */
+.learning-paths__chips {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.35rem;
-  text-align: left;
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-  position: relative;
-}
-
-.path-card:hover {
-  border-color: #C9A84C;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-  transform: translateY(-2px);
-}
-
-.path-card--start {
-  border-color: #C9A84C;
-  background: #1A2A3F;
-}
-
-.path-card__icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 0.2rem;
+  gap: 8px;
+  padding: 0 1rem;
+}
+
+.path-chip {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 40px;
+  padding: 0.4rem 0.9rem;
+  box-sizing: border-box;
+  background: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.55);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--sans);
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.path-chip:hover {
   background: rgba(201, 168, 76, 0.12);
-  color: #C9A84C;
+  border-color: #C9A84C;
 }
 
-.path-card__name {
-  font-family: var(--heading);
-  font-size: 1.1rem;
+.path-chip:focus-visible {
+  outline: 2px solid #E8C97A;
+  outline-offset: 2px;
+}
+
+.path-chip__name {
+  font-size: 0.85rem;
   font-weight: 700;
   color: #C9A84C;
 }
 
-.path-card__count {
-  font-family: var(--sans);
-  font-size: 0.78rem;
-  color: #E8DCC8;
+.path-chip__count {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(232, 220, 200, 0.6);
 }
 
-.path-card__badge {
-  font-family: var(--sans);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: #0D1B2A;
-  background: #C9A84C;
-  padding: 2px 7px;
-  border-radius: 3px;
-  margin-top: 2px;
+.path-chip__check {
+  color: #C9A84C;
+  flex-shrink: 0;
 }
 
-.path-card__progress {
-  width: 100%;
+.path-chip__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: 2px;
   background: rgba(201, 168, 76, 0.18);
-  border-radius: 999px;
-  overflow: hidden;
-  margin-top: 0.35rem;
 }
 
-.path-card__progress-fill {
+.path-chip__progress-fill {
+  display: block;
   height: 100%;
   background: #C9A84C;
   transition: width 0.3s ease;
 }
 
+/* Greetings: solid gold "start here" accent, same treatment as PRACTICE. */
+.path-chip--start {
+  background: #C9A84C;
+  border-color: #C9A84C;
+}
+
+.path-chip--start:hover {
+  background: #E8C97A;
+  border-color: #E8C97A;
+}
+
+.path-chip--start .path-chip__name,
+.path-chip--start .path-chip__check {
+  color: #0D1B2A;
+}
+
+.path-chip--start .path-chip__count {
+  color: rgba(13, 27, 42, 0.65);
+}
+
+.path-chip--start .path-chip__progress {
+  background: rgba(13, 27, 42, 0.2);
+}
+
+.path-chip--start .path-chip__progress-fill {
+  background: #0D1B2A;
+}
+
 @media (max-width: 768px) {
-  .learning-paths__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem;
-  }
-
-  .path-card {
-    padding: 0.75rem;
-  }
-
-  .path-card__icon {
-    width: 32px;
-    height: 32px;
+  .path-chip {
+    min-height: 44px;
   }
 }
 
@@ -1601,31 +1668,21 @@
   margin-top: 6px;
 }
 
-.path-card__hint {
-  font-family: var(--sans);
-  font-size: 0.65rem;
-  font-style: italic;
-  color: #E8DCC8;
-  margin-top: 0.35rem;
-}
-
-.path-card__complete-check {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  color: #C9A84C;
-  display: inline-flex;
-}
-
-@keyframes path-card-shimmer {
-  0%   { border-color: #1E3448; }
+@keyframes path-chip-shimmer {
+  0%   { border-color: rgba(201, 168, 76, 0.35); }
   50%  { border-color: #E8C97A; }
   100% { border-color: #C9A84C; }
 }
 
-.path-card--complete {
+.path-chip--complete {
   border-color: #C9A84C;
-  animation: path-card-shimmer 1.2s ease-out 1;
+  animation: path-chip-shimmer 1.2s ease-out 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .path-chip--complete {
+    animation: none;
+  }
 }
 
 .btn-practice-word {
@@ -1702,19 +1759,6 @@
   font-family: var(--sans);
   font-size: 0.8rem;
   color: #E8DCC8;
-}
-
-/* ─── Category grid — 2-col at very narrow viewports ─────────── */
-
-@media (max-width: 480px) {
-  .learning-paths__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
-  }
-  .path-card {
-    min-height: 120px;
-    padding: 1rem 0.75rem;
-  }
 }
 
 /* ─── Quiz mode ─────────────────────────────────────────────── */
