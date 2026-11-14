@@ -24,6 +24,40 @@
   --mono: ui-monospace, Consolas, monospace;
   --font-script: 'Pinyon Script', cursive;
 
+  /* Home and library theme. Light values here, dark values in the
+     prefers-color-scheme block below. A future theme toggle only needs a
+     :root[data-theme="dark"] block repeating the dark values. */
+  --ui-surface: #F7FAF9;
+  --ui-surface-raised: #FFFFFF;
+  --ui-strip: #FFFFFF;
+  --ui-field: #FFFFFF;
+  --ui-page-tint: transparent;
+  --ui-text: #1a3a5c;
+  --ui-text-strong: #1a3a5c;
+  --ui-text-muted: #4A5D73;
+  --ui-text-soft: #4A5D73;
+  --ui-text-count: #4A5D73;
+  --ui-text-icon: #4A5D73;
+  --ui-text-note: #4A5D73;
+  --ui-placeholder: #4A5D73;
+  --ui-border: rgba(26, 58, 92, 0.15);
+  --ui-border-strong: rgba(26, 58, 92, 0.15);
+  --ui-divider: rgba(26, 58, 92, 0.15);
+  --ui-hover: rgba(26, 58, 92, 0.05);
+  --ui-accent: #C9A84C;
+  --ui-accent-text: #7A5C12;
+  --ui-accent-text-page: #7A5C12;
+  --ui-focus: #7A5C12;
+  --ui-focus-soft: rgba(122, 92, 18, 0.35);
+  --ui-field-focus: #7A5C12;
+  --ui-field-icon: #4A5D73;
+  --ui-clear: #4A5D73;
+  --ui-clear-hover: #1a3a5c;
+  --ui-no-results: #4A5D73;
+  --ui-link-hover: #1a3a5c;
+  --ui-strip-track: rgba(26, 58, 92, 0.12);
+  --ui-bar-track: rgba(26, 58, 92, 0.12);
+
   font: 18px/145% var(--sans);
   font-weight: 600;
   letter-spacing: 0.18px;
@@ -58,6 +92,37 @@
     --social-bg: rgba(22, 58, 107, 0.5);
     --shadow:
       rgba(0, 0, 0, 0.4) 0 4px 12px -2px, rgba(0, 0, 0, 0.25) 0 2px 4px -1px;
+
+    --ui-surface: #0D1B2A;
+    --ui-surface-raised: #132030;
+    --ui-strip: rgba(5, 25, 20, 0.92);
+    --ui-field: #1a3a5c;
+    --ui-page-tint: rgba(232, 220, 200, 0.18);
+    --ui-text: #E8DCC8;
+    --ui-text-strong: #F0E6D0;
+    --ui-text-muted: rgba(232, 220, 200, 0.65);
+    --ui-text-soft: rgba(232, 220, 200, 0.7);
+    --ui-text-count: rgba(232, 220, 200, 0.55);
+    --ui-text-icon: rgba(232, 220, 200, 0.6);
+    --ui-text-note: rgba(232, 220, 200, 0.75);
+    --ui-placeholder: rgba(232, 220, 200, 0.65);
+    --ui-border: rgba(201, 168, 76, 0.25);
+    --ui-border-strong: rgba(201, 168, 76, 0.35);
+    --ui-divider: rgba(232, 220, 200, 0.12);
+    --ui-hover: rgba(201, 168, 76, 0.06);
+    --ui-accent: #C9A84C;
+    --ui-accent-text: #C9A84C;
+    --ui-accent-text-page: #E8C97A;
+    --ui-focus: #E8C97A;
+    --ui-focus-soft: rgba(232, 201, 122, 0.45);
+    --ui-field-focus: #C9A84C;
+    --ui-field-icon: rgba(232, 220, 200, 0.5);
+    --ui-clear: #a0aec0;
+    --ui-clear-hover: #4a5568;
+    --ui-no-results: #E8DCC8;
+    --ui-link-hover: #E8C97A;
+    --ui-strip-track: rgba(255, 255, 255, 0.12);
+    --ui-bar-track: rgba(201, 168, 76, 0.18);
   }
 }
 

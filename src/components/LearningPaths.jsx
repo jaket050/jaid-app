@@ -102,7 +102,6 @@ function LearningPaths({ words, completedIds, onSelectCategory, onBrowseAll }) {
             Browse all {categoryCount} categories
             <ArrowRight size={14} aria-hidden="true" />
           </button>
-          <p className="browse-all__hint">Grouped by theme, with a category finder</p>
         </div>
       </div>
     </div>
