@@ -55,14 +55,19 @@ function LearningPaths({ words, completedIds, onSelectCategory }) {
     if (completedIds && completedIds.has(w.id)) stats[w.category].done++
   })
 
-  const categories = Object.entries(stats).sort((a, b) => b[1].total - a[1].total)
+  // Greetings is pinned first; everything else stays largest deck first.
+  const categories = Object.entries(stats).sort((a, b) => {
+    if (a[0] === 'Greetings') return -1
+    if (b[0] === 'Greetings') return 1
+    return b[1].total - a[1].total
+  })
 
   return (
     <div className="learning-paths">
       <div className="learning-paths__header">
         <span className="learning-paths__label">Start Learning</span>
       </div>
-      <div className="learning-paths__chips">
+      <div className="learning-paths__grid">
         {categories.map(([cat, { total, done }]) => {
           const config = CATEGORY_CONFIG[cat] || {
             ...DEFAULT_CONFIG,
@@ -79,11 +84,13 @@ function LearningPaths({ words, completedIds, onSelectCategory }) {
               onClick={() => onSelectCategory(cat)}
               aria-label={`Practice ${config.label} vocabulary, ${done} of ${total} completed`}
             >
-              {isComplete && (
-                <Check size={12} className="path-chip__check" aria-hidden="true" />
-              )}
               <span className="path-chip__name">{config.label}</span>
-              <span className="path-chip__count">{done}/{total}</span>
+              <span className="path-chip__meta">
+                {isComplete && (
+                  <Check size={12} className="path-chip__check" aria-hidden="true" />
+                )}
+                <span className="path-chip__count">{done}/{total}</span>
+              </span>
               <span className="path-chip__progress" aria-hidden="true">
                 <span
                   className="path-chip__progress-fill"

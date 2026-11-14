@@ -1281,36 +1281,51 @@
   background: #C9A84C;
 }
 
-/* Category shortcuts: one wrapping row of chips. Selecting a chip opens
-   that category's study session (no filter state on the home view). */
-.learning-paths__chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
+/* Category shortcuts: an even grid of tiles. Selecting a tile opens that
+   category's study session (no filter state on the home view). */
+.learning-paths__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 1100px;
+  margin: 0 auto;
   padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .learning-paths__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .learning-paths__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .path-chip {
   position: relative;
   overflow: hidden;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.4rem;
-  min-height: 40px;
-  padding: 0.4rem 0.9rem;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 48px;
+  padding: 12px 16px;
   box-sizing: border-box;
-  background: transparent;
-  border: 1px solid rgba(201, 168, 76, 0.55);
-  border-radius: 999px;
+  background: #132030;
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: 8px;
   cursor: pointer;
   font-family: var(--sans);
-  white-space: nowrap;
-  transition: background 0.15s, border-color 0.15s;
+  text-align: left;
+  transition: border-color 0.15s;
 }
 
-.path-chip:hover {
-  background: rgba(201, 168, 76, 0.12);
+.path-chip:hover,
+.path-chip:focus-visible {
   border-color: #C9A84C;
 }
 
@@ -1319,16 +1334,28 @@
   outline-offset: 2px;
 }
 
+/* Long labels wrap inside the tile; never truncated. */
 .path-chip__name {
+  min-width: 0;
+  overflow-wrap: break-word;
   font-size: 0.85rem;
-  font-weight: 700;
-  color: #C9A84C;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #E8DCC8;
+}
+
+.path-chip__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-shrink: 0;
 }
 
 .path-chip__count {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: rgba(232, 220, 200, 0.6);
+  font-size: 0.72rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: rgba(232, 220, 200, 0.55);
 }
 
 .path-chip__check {
@@ -1336,13 +1363,14 @@
   flex-shrink: 0;
 }
 
+/* 2px progress pinned to the bottom edge; no track, so 0% shows nothing.
+   The tile's overflow: hidden clips it to the 8px radius. */
 .path-chip__progress {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   height: 2px;
-  background: rgba(201, 168, 76, 0.18);
 }
 
 .path-chip__progress-fill {
@@ -1352,38 +1380,13 @@
   transition: width 0.3s ease;
 }
 
-/* Greetings: solid gold "start here" accent, same treatment as PRACTICE. */
+/* Greetings: the only tile with gold at rest. */
 .path-chip--start {
-  background: #C9A84C;
   border-color: #C9A84C;
 }
 
-.path-chip--start:hover {
-  background: #E8C97A;
-  border-color: #E8C97A;
-}
-
-.path-chip--start .path-chip__name,
-.path-chip--start .path-chip__check {
-  color: #0D1B2A;
-}
-
-.path-chip--start .path-chip__count {
-  color: rgba(13, 27, 42, 0.65);
-}
-
-.path-chip--start .path-chip__progress {
-  background: rgba(13, 27, 42, 0.2);
-}
-
-.path-chip--start .path-chip__progress-fill {
-  background: #0D1B2A;
-}
-
-@media (max-width: 768px) {
-  .path-chip {
-    min-height: 44px;
-  }
+.path-chip--start .path-chip__name {
+  color: #C9A84C;
 }
 
 .search-bar {
