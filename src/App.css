@@ -1185,6 +1185,13 @@
   color: #1a3a5c;
 }
 
+/* Dark mode: navy text disappears on the navy page; match Start Learning. */
+@media (prefers-color-scheme: dark) {
+  .cultural-values__label {
+    color: #C9A84C;
+  }
+}
+
 .cultural-values__label::before,
 .cultural-values__label::after {
   content: "";
