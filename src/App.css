@@ -1122,8 +1122,10 @@
   color: rgba(255,255,255,0.75);
 }
 
+/* Hidden at every width; the category is still recorded with the
+   word_of_day_viewed event. */
 .wotd__category {
-  display: block;
+  display: none;
   font-family: var(--sans);
   font-size: 0.85rem;
   font-variant-caps: all-small-caps;
@@ -1179,7 +1181,7 @@
     gap: 2px 0.6rem;
   }
 
-  /* Room for label and category on one line; long categories wrap below. */
+  /* Compact label line: no icon, slightly smaller type. */
   .wotd__icon {
     display: none;
   }
@@ -1187,10 +1189,6 @@
   .wotd__label {
     font-size: 0.65rem;
     letter-spacing: 0.08em;
-  }
-
-  .wotd__category {
-    font-size: 0.8rem;
   }
 
   .wotd__term {
