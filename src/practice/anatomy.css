@@ -1,0 +1,805 @@
+/* ─── Anatomy Match ──────────────────────────────────────────────
+   Everything here is scoped to .anatomy-game (imported only by
+   AnatomyGame.jsx). The figure panel is white in both color modes;
+   everything else uses the --ui- theme variables.
+   Above 700px: figure panel on the left, 340px side column on the right.
+   700px and below: word card on top, figure, then a bottom bar with the
+   hint button and the Explore and Play switch. */
+
+body:has(.anatomy-game) #root {
+  width: 100%;
+  max-width: 100%;
+  border-inline: none;
+}
+
+.anatomy-game {
+  --anatomy-good: #1a7a48;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  font-family: var(--sans);
+  text-align: left;
+}
+
+@media (prefers-color-scheme: dark) {
+  .anatomy-game {
+    --anatomy-good: #2dce7a;
+  }
+}
+
+.anatomy-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Header ───────────────────────── */
+
+.anatomy-game__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 24px;
+  background: var(--ui-surface-raised);
+  border-bottom: 1px solid var(--ui-border-card);
+}
+
+.anatomy-game__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.anatomy-game__home {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--ui-home-border);
+  border-radius: 6px;
+  color: var(--ui-text);
+  font-size: 0.85rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.anatomy-game__home:hover {
+  background: var(--ui-home-hover);
+  border-color: var(--ui-accent);
+}
+
+.anatomy-game__title {
+  margin: 0;
+  font-family: var(--heading);
+  font-size: 1.2rem;
+  color: var(--ui-heading);
+  line-height: 1.2;
+}
+
+.anatomy-game__switches {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.anatomy-switch {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--ui-border-card);
+  border-radius: 9px;
+  background: var(--ui-surface-card);
+}
+
+.anatomy-switch__btn {
+  min-height: 44px;
+  min-width: 64px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ui-text);
+  font: 600 0.9rem var(--sans);
+  cursor: pointer;
+}
+
+.anatomy-switch--level .anatomy-switch__btn[aria-pressed='true'] {
+  background: var(--ui-accent);
+  color: #12202C;
+}
+
+.anatomy-switch--mode .anatomy-switch__btn[aria-pressed='true'] {
+  background: var(--ui-heading);
+  color: var(--ui-surface);
+}
+
+.anatomy-game :is(.anatomy-switch__btn, .anatomy-game__home, .anatomy-btn, .anatomy-card, .anatomy-also__btn):focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+
+/* ── Layout ───────────────────────── */
+
+.anatomy-game__main {
+  flex: 1;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 20px 24px 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 20px;
+  align-items: start;
+}
+
+.anatomy-game__panel {
+  position: relative;
+  min-width: 0;
+  container-type: inline-size;
+  padding: 20px 0;
+  background: #FFFFFF;
+  border: 1px solid var(--ui-border-card);
+  border-radius: 14px;
+}
+
+/* ── Figures ──────────────────────── */
+
+/* The gutters either side of each figure hold the labels. The face is
+   sized by the panel width and the window height. Each body figure is a
+   1:3 image cropped to 4% to 88% of its height (the artwork sits inside
+   that band), so --fig-h is the full image height. */
+.anatomy-figs {
+  --gutter: 96px;
+  --face-size: max(200px, min(calc(100cqi - 2 * var(--gutter)), calc(100dvh - 170px), 760px));
+  --fig-h: max(300px, min(calc((100cqi - 3 * var(--gutter)) * 1.5), calc((100dvh - 200px) / 0.84), 1100px));
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--gutter);
+  padding-inline: var(--gutter);
+}
+
+.anatomy-game--body .anatomy-figs {
+  --gutter: 80px;
+}
+
+.anatomy-fig {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.anatomy-fig__crop {
+  overflow: visible;
+}
+
+.anatomy-fig--front .anatomy-fig__crop,
+.anatomy-fig--back .anatomy-fig__crop {
+  width: calc(var(--fig-h) / 3);
+  height: calc(var(--fig-h) * 0.84);
+  overflow-x: visible;
+  overflow-y: clip;
+}
+
+.anatomy-fig__board {
+  position: relative;
+}
+
+.anatomy-fig--face .anatomy-fig__board {
+  width: var(--face-size);
+  height: var(--face-size);
+}
+
+.anatomy-fig--front .anatomy-fig__board,
+.anatomy-fig--back .anatomy-fig__board {
+  width: calc(var(--fig-h) / 3);
+  height: var(--fig-h);
+  margin-top: calc(var(--fig-h) * -0.04);
+}
+
+.anatomy-fig__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.anatomy-fig__caption {
+  margin-top: 8px;
+  font: 700 0.72rem var(--sans);
+  letter-spacing: 0.14em;
+  color: #4A5D73;
+}
+
+.anatomy-fig__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.anatomy-fig__lines line {
+  stroke: #12202C;
+  stroke-opacity: 0.6;
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ── Zones ────────────────────────── */
+
+/* The button is the tap area: the zone's ellipse grown to at least 44px
+   each way (MIN_TAP in anatomyLogic.js). Taps are resolved from the tap
+   position in AnatomyGame.jsx, so overlapping buttons are fine. */
+.anatomy-zone {
+  position: absolute;
+  left: calc(var(--cx) * 1%);
+  top: calc(var(--cy) * 1%);
+  width: max(calc(var(--w) * 1%), 44px);
+  height: max(calc(var(--h) * 1%), 44px);
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.anatomy-zone--box {
+  border-radius: 0;
+}
+
+.anatomy-zone:focus-visible {
+  outline: 2px solid transparent;
+}
+
+/* The drawn shape, the zone's true size. */
+.anatomy-zone__shape {
+  position: absolute;
+  left: calc((var(--cx) - var(--w) / 2) * 1%);
+  top: calc((var(--cy) - var(--h) / 2) * 1%);
+  width: calc(var(--w) * 1%);
+  height: calc(var(--h) * 1%);
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+/* No outline at rest. The zone under the pointer (mouse hover, or while
+   a finger is down) gets a light tint and an edge; AnatomyGame.jsx works
+   out which zone, by the same smallest zone rule as an Explore tap.
+   Highlight edges are two tone so they read on any part of the art: a
+   navy edge (#1a3a5c) for skin, the gold shorts and the white panel, and
+   a white ring outside it for the navy shirt and dark hair. */
+.anatomy-game .anatomy-zone__shape--hover:not(.anatomy-zone__shape--selected, .anatomy-zone__shape--flash, .anatomy-zone__shape--wrong, .anatomy-zone__shape--hint) {
+  background: rgba(255, 255, 255, 0.35);
+  border: 2px solid #1a3a5c;
+  box-shadow: 0 0 0 2px #FFFFFF;
+}
+
+/* Entering Explore: every zone shows a lighter version once, then fades. */
+.anatomy-figs--intro .anatomy-zone__shape:not(.anatomy-zone__shape--selected) {
+  animation: anatomy-intro 1.4s ease-out;
+}
+
+@keyframes anatomy-intro {
+  0%, 55% {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: #1a3a5c;
+    box-shadow: 0 0 0 1.5px #FFFFFF;
+  }
+  100% {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: 0 0 0 1.5px transparent;
+  }
+}
+
+.anatomy-game .anatomy-zone__shape--selected {
+  border: 2px solid #1a3a5c;
+  background: rgba(201, 168, 76, 0.45);
+  box-shadow: 0 0 0 2px #FFFFFF;
+}
+
+/* Correct: every zone of the found word fills green, holds, then fades
+   out completely over 1.5s. AnatomyGame.jsx removes the class at the
+   same time, or sooner when Next word is pressed. */
+.anatomy-game .anatomy-zone__shape--flash {
+  border: 2.5px solid #1a7a48;
+  background: rgba(45, 206, 122, 0.3);
+  animation: anatomy-found 1.5s ease-out forwards;
+}
+
+@keyframes anatomy-found {
+  0%, 70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* A found part afterwards: a small solid green dot where its label line
+   ends, with a white edge. No fill, no outline. */
+.anatomy-found-dot {
+  position: absolute;
+  left: calc(var(--cx) * 1%);
+  top: calc(var(--cy) * 1%);
+  width: 8px;
+  height: 8px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #1a7a48;
+  box-shadow: 0 0 0 1.5px #FFFFFF;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Hint: a gold edge inside a navy edge, over a slowly pulsing white tint.
+   A thin white ring outside the navy keeps the edge at 3:1 on mid browns
+   (hair, eyelashes) and the grey iris, where gold and navy both fall short. */
+.anatomy-game .anatomy-zone__shape--hint {
+  background: rgba(255, 255, 255, 0.35);
+  border: 2px solid #C9A84C;
+  box-shadow: 0 0 0 2px #1a3a5c, 0 0 0 3.5px #FFFFFF;
+  animation: anatomy-pulse 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes anatomy-pulse {
+  from { background-color: rgba(255, 255, 255, 0.2); }
+  to { background-color: rgba(255, 255, 255, 0.5); }
+}
+
+.anatomy-game .anatomy-zone__shape--wrong {
+  border: 2.5px solid #e07b39;
+  background: rgba(224, 123, 57, 0.4);
+  box-shadow: 0 0 0 1.5px #12202C;
+  animation: anatomy-shake 0.4s ease-in-out;
+}
+
+/* Keyboard focus: a navy ring with a white gap, visible on skin, the
+   navy shirt and the white panel. */
+.anatomy-game .anatomy-zone:focus-visible + .anatomy-zone__shape {
+  outline: 3px solid #12202C;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #FFFFFF;
+}
+
+@keyframes anatomy-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(2px); }
+}
+
+/* ── Labels ───────────────────────── */
+
+/* Each label sits in the gutter beside the image, against the image
+   edge. A label wider than the gutter extends back over the image
+   instead of past the panel (safe alignment). */
+.anatomy-label-slot {
+  position: absolute;
+  width: var(--gutter);
+  box-sizing: border-box;
+  display: flex;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.anatomy-label-slot--left {
+  right: 100%;
+  padding-right: 4px;
+  justify-content: safe flex-end;
+}
+
+.anatomy-label-slot--right {
+  left: 100%;
+  padding-left: 4px;
+  flex-direction: row-reverse;
+  justify-content: safe flex-end;
+}
+
+.anatomy-label {
+  flex: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 2px 8px;
+  white-space: nowrap;
+  background: #FFFFFF;
+  color: #12202C;
+  border: 1.5px solid #7A5C12;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  font: 700 13px/1.3 var(--sans);
+}
+
+.anatomy-game--play .anatomy-label {
+  border-color: #1a7a48;
+}
+
+.anatomy-label__sub {
+  font-weight: 400;
+  font-size: 11px;
+  color: #4A5D73;
+}
+
+/* ── Correct! pill ────────────────── */
+
+.anatomy-pill {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #1a7a48;
+  color: #FFFFFF;
+  font: 700 0.9rem var(--sans);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Side column ──────────────────── */
+
+.anatomy-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.anatomy-card {
+  padding: 16px 18px;
+  background: var(--ui-surface-card);
+  border: 1px solid var(--ui-border-card);
+  border-radius: 12px;
+}
+
+.anatomy-card--wrong {
+  border-color: var(--ui-danger-text);
+}
+
+.anatomy-card--correct {
+  border-color: var(--anatomy-good);
+}
+
+.anatomy-card__eyebrow {
+  margin: 0 0 6px;
+  font: 800 0.72rem var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ui-accent-text);
+}
+
+.anatomy-card__eyebrow--correct {
+  color: var(--anatomy-good);
+}
+
+.anatomy-card__eyebrow--wrong {
+  color: var(--ui-danger-text);
+}
+
+.anatomy-card__word,
+.anatomy-card__title {
+  margin: 0;
+  font-family: var(--heading);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ui-heading);
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.anatomy-card__title {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.anatomy-card__meaning {
+  margin: 6px 0 0;
+  font-size: 1rem;
+  color: var(--ui-text-muted);
+}
+
+.anatomy-card__meaning--found {
+  font-weight: 700;
+  color: var(--ui-accent-text);
+}
+
+.anatomy-card__text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--ui-text);
+}
+
+.anatomy-card__count {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  color: var(--ui-text-muted);
+}
+
+.anatomy-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.anatomy-card > .anatomy-btn {
+  margin-top: 14px;
+}
+
+.anatomy-also {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ui-border-card);
+}
+
+.anatomy-also__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.anatomy-also__btn {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 4px 10px;
+  box-sizing: border-box;
+  border: 1px solid var(--ui-border-card);
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.anatomy-also__btn:hover {
+  background: var(--ui-hover);
+  border-color: var(--ui-accent);
+}
+
+.anatomy-also__word {
+  font-family: var(--heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ui-heading);
+}
+
+.anatomy-also__meaning {
+  font-size: 0.9rem;
+  color: var(--ui-text-muted);
+}
+
+.anatomy-stars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.anatomy-star {
+  color: var(--ui-text-muted);
+  fill: none;
+}
+
+.anatomy-star--on {
+  color: var(--ui-accent);
+  fill: var(--ui-accent);
+}
+
+.anatomy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font: 700 1rem var(--sans);
+  cursor: pointer;
+}
+
+.anatomy-btn--primary {
+  background: var(--ui-accent);
+  border: 1px solid var(--ui-accent);
+  color: #12202C;
+}
+
+.anatomy-btn--primary:hover {
+  background: #D8B95C;
+}
+
+.anatomy-btn--outline {
+  background: transparent;
+  border: 1.5px solid var(--ui-text);
+  color: var(--ui-text);
+}
+
+.anatomy-btn--outline:hover {
+  background: var(--ui-hover);
+}
+
+/* The phone bottom bar is hidden above 700px. */
+.anatomy-game__bottom {
+  display: none;
+}
+
+/* ── Debug overlay (?zones=1 only) ── */
+/* Solid line: the drawn shape. Dotted line: the enlarged tap area. */
+
+.anatomy-fig--debug .anatomy-zone {
+  outline: 1.5px dotted #C2185B;
+  outline-offset: -1.5px;
+}
+
+.anatomy-game .anatomy-fig--debug .anatomy-zone__shape {
+  outline: 1.5px solid #1565C0;
+  outline-offset: -1.5px;
+}
+
+.anatomy-debug-name {
+  position: absolute;
+  left: calc(var(--cx) * 1%);
+  top: calc(var(--cy) * 1%);
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  padding: 0 2px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #0D47A1;
+  font: 600 9px/1.1 var(--sans);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ── 700px and below ──────────────── */
+
+@media (max-width: 700px) {
+  .anatomy-game__header {
+    padding: 8px 12px;
+  }
+
+  .anatomy-game__brand {
+    gap: 8px;
+  }
+
+  .anatomy-game__title {
+    font-size: 0.95rem;
+  }
+
+  .anatomy-switch__btn {
+    min-width: 56px;
+    padding: 0 10px;
+  }
+
+  .anatomy-game__mode-top {
+    display: none;
+  }
+
+  .anatomy-game__main {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 12px calc(84px + env(safe-area-inset-bottom));
+  }
+
+  /* Cards above the figure, progress below it. */
+  .anatomy-side {
+    display: contents;
+  }
+
+  .anatomy-card--primary {
+    order: 1;
+  }
+
+  .anatomy-game__panel {
+    order: 2;
+    padding: 14px 0;
+  }
+
+  .anatomy-card--secondary {
+    order: 3;
+  }
+
+  .anatomy-side__hint {
+    display: none;
+  }
+
+  .anatomy-card {
+    padding: 12px 14px;
+  }
+
+  .anatomy-card__word {
+    font-size: 1.9rem;
+  }
+
+  .anatomy-figs {
+    --gutter: 48px;
+    --face-size: calc(100cqi - 2 * var(--gutter));
+    --fig-h: calc((100cqi - 3 * var(--gutter)) * 1.5);
+  }
+
+  .anatomy-game--body .anatomy-figs {
+    --gutter: 34px;
+  }
+
+  .anatomy-label {
+    padding: 1px 6px;
+    font-size: 11px;
+  }
+
+  .anatomy-label__sub {
+    font-size: 10px;
+  }
+
+  .anatomy-game__bottom {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 10px 12px max(10px, env(safe-area-inset-bottom));
+    background: var(--ui-surface-raised);
+    border-top: 1px solid var(--ui-border-card);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  .anatomy-game__bottom-hint {
+    flex: 1;
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anatomy-zone__shape {
+    transition: none;
+  }
+
+  .anatomy-game .anatomy-zone__shape--wrong,
+  .anatomy-game .anatomy-zone__shape--flash,
+  .anatomy-figs--intro .anatomy-zone__shape:not(.anatomy-zone__shape--selected) {
+    animation: none;
+  }
+
+  /* A steady tint instead of the pulse. */
+  .anatomy-game .anatomy-zone__shape--hint {
+    animation: none;
+    background: rgba(255, 255, 255, 0.35);
+  }
+}
