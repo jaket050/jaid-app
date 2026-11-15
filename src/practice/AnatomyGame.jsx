@@ -41,12 +41,12 @@ function AnatomyGame() {
   }
 
   return (
-    <div className="muni-game">
+    <div className="muni-game anatomy-game">
       <header className="match-game__header">
         <a className="match-game__home" href="/practice">← Modes</a>
-        <span className="match-game__brand">JAID</span>
+        <h1 className="match-game__brand anatomy-game__title">Anatomy Match</h1>
         <span className="match-game__progress">
-          Anatomy · {lockedIds.size}/{ANATOMY_SPOTS.length} matched
+          {lockedIds.size} of {ANATOMY_SPOTS.length} matched
         </span>
       </header>
 
@@ -54,7 +54,7 @@ function AnatomyGame() {
         <div className="match-game__overlay">
           <h2 className="match-game__overlay-title">All {ANATOMY_SPOTS.length} placed!</h2>
           <p className="match-game__overlay-text">
-            You correctly matched every CHamoru body-part name to its spot on the figure.
+            You correctly matched every CHamoru body part name to its spot on the figure.
           </p>
           <button className="match-game__btn" onClick={reset}>Play again</button>
           <a className="match-game__btn" href="/practice" style={{ marginTop: '0.5rem' }}>
@@ -63,13 +63,13 @@ function AnatomyGame() {
         </div>
       ) : (
         <>
-          <p className="match-game__instructions">
+          <p className="match-game__instructions anatomy-game__instructions">
             {activeNameId
               ? 'Now tap its spot on the figure.'
               : 'Select a CHamoru name, then tap its spot on the figure.'}
           </p>
-          <div className="muni-game__layout">
-            <div className="muni-game__names">
+          <div className="anatomy-game__layout">
+            <div className="anatomy-game__words" role="group" aria-label="CHamoru words">
               {ANATOMY_SPOTS.map((s) => {
                 const isLocked   = lockedIds.has(s.id)
                 const isSelected = activeNameId === s.id
@@ -94,7 +94,7 @@ function AnatomyGame() {
               })}
             </div>
 
-            <div className="muni-game__map-wrap">
+            <div className="anatomy-game__panel">
               <AnatomyBoard
                 lockedIds={lockedIds}
                 wrongId={wrongId}

@@ -571,47 +571,117 @@ body:has(.muni-game) #root {
 }
 
 /* ─── Anatomy Match game ───────────────────────────────────────── */
-/* Reuses .muni-game / .muni-game__layout / .muni-game__names / .muni-name
-   for the page shell and name list — only the tap-target surface differs
-   (three <img>s with absolutely-positioned dots instead of an SVG map).
-   Default (wide-viewport) layout: all three boards side by side in one
-   row, sized by height so a typical laptop screen — now that #root isn't
-   capping the width above — can fit the whole name list and all three
-   diagrams without scrolling. Below 768px there isn't enough width for
-   that, so it falls back to face-on-top / front+back-row-below instead
-   (see the media query at the bottom of this section). */
+/* Scoped to .anatomy-game so the Municipality game that shares the
+   .muni-game shell and .muni-name chips is unchanged.
+   Desktop: centered container, 280px two column word grid on the left,
+   one white board panel on the right. 601 to 1024px: one page scroll,
+   words above the panel. 600px and below: the words sit in a tray pinned
+   to the bottom of the screen and the board scrolls above it. */
 
-.anatomy-boards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  width: 100%;
+.muni-game.anatomy-game {
+  height: auto;
+  min-height: 100dvh;
+  overflow: visible;
+  --tray-h: 0px;
 }
 
-/* On wide viewports this is unwrapped via display:contents so front/back
-   become direct flex items of .anatomy-boards, sitting in the same row
-   as face. The media query below turns it back into a real row-within-
-   the-column for the narrow/stacked layout. */
+.anatomy-game__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.anatomy-game__instructions {
+  margin: 1rem auto 0.75rem;
+}
+
+.anatomy-game__layout {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ── Word chips ─────────── */
+
+.anatomy-game__words {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  align-content: start;
+}
+
+/* Never split a CHamoru word: no word-break here, unlike the shared chip. */
+.anatomy-game .muni-name {
+  min-height: 44px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  text-align: center;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: manual;
+}
+
+.anatomy-game .muni-name:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+
+/* ── Board panel ────────── */
+
+/* One white panel in both color modes. It is a size container, so the
+   figures can size themselves from its width (cqi). Transparent PNGs of
+   the same dimensions drop straight in. */
+.anatomy-game__panel {
+  container-type: inline-size;
+  background: #FFFFFF;
+  border: 1px solid var(--ui-border-card);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+/* Face is 1:1 and drawn at 0.62 of the body height; front and back are
+   1:3. The row is 0.62h + 2 x h/3 = 1.2867h wide plus two gaps, so the
+   height is capped by the panel width, the viewport height and 540px. */
+.anatomy-boards {
+  --fig-gap: 1.25rem;
+  --fig-h: max(260px, min(540px, calc(100dvh - 230px), calc((100cqi - 2 * var(--fig-gap)) / 1.2867)));
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--fig-gap);
+}
+
 .anatomy-boards__row {
   display: contents;
 }
 
+/* The board box always matches its image's aspect ratio, so markers placed
+   as percentages of the box stay exactly on their spots at any size. */
 .anatomy-board {
   position: relative;
-  display: inline-block;
-  max-width: 100%;
+  flex: none;
 }
 
-/* width:100%/height:100% + an explicit aspect-ratio matching the source
-   image (below) keeps the board's box and the image's rendered box
-   identical at all times. Dots are positioned as % of .anatomy-board, so
-   any mismatch between that box and the visible picture (e.g. the old
-   height:100%/width:auto/max-width:100% combo letterboxing under
-   object-fit:contain when width got clamped) would silently misalign
-   every dot — aspect-ratio removes the mismatch instead of the symptom. */
+.anatomy-board--face {
+  height: calc(var(--fig-h) * 0.62);
+  aspect-ratio: 1 / 1; /* anatomy-face.png is 1254×1254 */
+}
+
+.anatomy-board--front,
+.anatomy-board--back {
+  height: var(--fig-h);
+  aspect-ratio: 1 / 3; /* anatomy-figure-front/back.png are 512×1536 */
+}
+
 .anatomy-board__image {
   display: block;
   width: 100%;
@@ -624,173 +694,192 @@ body:has(.muni-game) #root {
   cursor: crosshair;
 }
 
-/* Face is 1:1 and front/back are 1:3, so at equal heights face's width is
-   always exactly 3x each front/back's width (60% of the row) no matter
-   what the shared height value is — that's what made face dominant.
-   Deliberately mismatched heights below break that: shrinking face's
-   height shrinks its width directly (it's square), while giving
-   front/back their own taller height grows their width independently.
-   44vh / 84vh puts face at ~44% of the row and front+back at ~28% each. */
-.anatomy-board--face {
-  height: 44vh;
-  aspect-ratio: 1 / 1; /* anatomy-face.png is 1254×1254 */
-}
+/* ── Markers ────────────── */
 
-/* Front/back are narrow portrait crops (single figure, not the combined
-   image). Sized by height, same as face, now that a full row has room —
-   the 768px media query below switches them back to width-driven sizing
-   for the stacked mobile layout, where height-driven would make them
-   comically tall. */
-.anatomy-board--front,
-.anatomy-board--back {
-  height: 84vh;
-  aspect-ratio: 1 / 3; /* anatomy-figure-front/back.png are 512×1536 */
-}
-
-/* Star tap markers — two stacked clip-path layers (a slightly larger dark
-   outline star behind a smaller solid-color fill star) instead of an SVG,
-   so every state below only has to swap two background-colors. Solid fill
-   (not the old semi-transparent green) is deliberate: transparency is what
-   let the previous dots blend into skin/navy/gold-shorts backgrounds. */
+/* The button is the 44px tap area, centered on the spot; the ring inside
+   is what shows. Overlapping tap areas are resolved in AnatomyBoard.jsx. */
 .anatomy-dot {
   position: absolute;
+  width: 44px;
+  height: 44px;
   transform: translate(-50%, -50%);
-  cursor: pointer;
+  display: grid;
+  place-items: center;
   padding: 0;
   background: transparent;
   border: none;
-  transition: transform 0.1s;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.anatomy-dot::before,
-.anatomy-dot::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-
-.anatomy-dot::before {
-  width: 145%;
-  height: 145%;
-  transform: translate(-50%, -50%);
+.anatomy-dot__ring {
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 3px solid #C9A84C;
   background: #12202C;
+  box-shadow: 0 0 0 2px #FFFFFF, 0 1px 4px rgba(0, 0, 0, 0.35);
+  transition: transform 0.12s, box-shadow 0.12s, background 0.12s;
 }
 
-/* White fill (not gold) is the persistent default — gold reads great on
-   skin and navy but nearly disappears against the gold shorts, exactly
-   the blending problem this redesign is meant to fix. Gold is instead
-   reserved for the hover accent below, a transient cursor-driven state
-   rather than something that ever sits statically on the shorts. */
-.anatomy-dot::after {
-  width: 100%;
-  height: 100%;
-  transform: translate(-50%, -50%);
-  background: #FFFFFF;
+.anatomy-dot--face .anatomy-dot__ring {
+  width: 18px;
+  height: 18px;
+  border-width: 2.5px;
 }
 
-.anatomy-dot--face {
-  width: 9px;
-  height: 9px;
+/* A word is selected: every open marker glows gold. */
+.anatomy-board--active .anatomy-dot:not(.anatomy-dot--locked) .anatomy-dot__ring {
+  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 5px rgba(201, 168, 76, 0.6);
 }
 
-.anatomy-dot--front,
-.anatomy-dot--back {
-  width: 7px;
-  height: 7px;
-}
-
-.anatomy-board--active .anatomy-dot:not(.anatomy-dot--locked) {
-  filter: drop-shadow(0 0 2px #E8C97A) drop-shadow(0 0 2px #E8C97A);
-}
-
-.anatomy-dot:hover:not(.anatomy-dot--locked) {
-  transform: translate(-50%, -50%) scale(1.5);
-}
-
-.anatomy-dot:hover:not(.anatomy-dot--locked)::after {
-  background: #E8C97A;
+.anatomy-dot:hover:not(:disabled) .anatomy-dot__ring {
+  transform: scale(1.15);
+  background: #C9A84C;
 }
 
 .anatomy-dot:focus-visible {
-  outline: 2px solid #E8C97A;
-  outline-offset: 2px;
+  outline: 2px solid transparent;
 }
 
+.anatomy-dot:focus-visible .anatomy-dot__ring {
+  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 5px #0D1B2A;
+}
+
+/* Matched markers let taps pass through to any neighbor underneath. */
 .anatomy-dot--locked {
   cursor: default;
+  pointer-events: none;
 }
 
-.anatomy-dot--locked::before {
+.anatomy-dot--locked .anatomy-dot__ring {
+  border-color: #2dce7a;
   background: #12522f;
 }
 
-.anatomy-dot--locked::after {
-  background: #2dce7a;
-}
-
-.anatomy-dot--wrong {
+.anatomy-dot--wrong .anatomy-dot__ring {
+  border-color: #e07b39;
+  background: #5c2b0a;
   animation: match-shake 0.4s ease-in-out;
 }
 
-.anatomy-dot--wrong::before {
-  background: #5c2b0a;
+/* ── 601 to 1024px: one page scroll, words above the panel ── */
+
+@media (max-width: 1024px) {
+  .anatomy-game__instructions {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    max-width: none;
+    margin: 0;
+    padding: 0.6rem 1rem;
+    background: var(--ui-surface);
+  }
+
+  .anatomy-game__layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 0.5rem 1.25rem 2rem;
+  }
+
+  .anatomy-game__words {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .anatomy-boards {
+    --fig-h: max(200px, min(540px, calc((100cqi - 2 * var(--fig-gap)) / 1.2867)));
+  }
 }
 
-.anatomy-dot--wrong::after {
-  background: #e07b39;
-}
+/* ── 600px and below: word tray pinned to the bottom ── */
 
-@media (max-width: 768px) {
-  /* Not enough width for a 4-up row (names + 3 boards) — fall back to
-     face-on-top, front+back-row-below, all sized by width again. */
+@media (max-width: 600px) {
+  .muni-game.anatomy-game {
+    --tray-h: 118px;
+  }
+
+  .anatomy-game__layout {
+    padding: 0.5rem 12px calc(var(--tray-h) + env(safe-area-inset-bottom));
+  }
+
+  .anatomy-game__words {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    grid-template-columns: none;
+    grid-template-rows: repeat(2, 44px);
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: 6px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding: 8px 12px max(8px, env(safe-area-inset-bottom));
+    background: var(--ui-surface-raised);
+    border-top: 1px solid var(--ui-border-card);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  .anatomy-game .anatomy-game__words .muni-name {
+    min-height: 44px;
+    padding: 0 0.85rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  /* Matched words move to the end of the tray and dim. */
+  .anatomy-game__words .muni-name--locked {
+    order: 1;
+    opacity: 0.55;
+  }
+
+  .anatomy-game__words .muni-name--selected {
+    box-shadow: 0 0 0 2px var(--ui-accent);
+  }
+
+  .anatomy-game__panel {
+    padding: 0.75rem;
+  }
+
+  /* Face full width, then the two bodies side by side on one baseline. */
   .anatomy-boards {
     flex-direction: column;
-    gap: 0.6rem;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .anatomy-board--face {
+    width: 100%;
+    height: auto;
   }
 
   .anatomy-boards__row {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 0.6rem;
-    width: 100%;
-  }
-
-  .anatomy-board--face {
-    height: 32vh;
-    width: auto;
+    align-items: flex-end;
+    gap: 12px;
   }
 
   .anatomy-board--front,
   .anatomy-board--back {
+    flex: 1 1 0;
+    width: auto;
     height: auto;
-    width: 55%;
-    max-width: 260px;
   }
 }
 
-@media (max-width: 600px) {
-  .anatomy-board--face {
-    height: 28vh;
+@media (prefers-reduced-motion: reduce) {
+  .anatomy-dot__ring {
+    transition: none;
   }
 
-  .anatomy-board--front,
-  .anatomy-board--back {
-    width: 62%;
-    max-width: 220px;
+  .anatomy-dot--wrong .anatomy-dot__ring,
+  .anatomy-game .muni-name--wrong {
+    animation: none;
   }
 
-  .anatomy-dot--face {
-    width: 8px;
-    height: 8px;
-  }
-
-  .anatomy-dot--front,
-  .anatomy-dot--back {
-    width: 6px;
-    height: 6px;
+  .anatomy-dot:hover:not(:disabled) .anatomy-dot__ring {
+    transform: none;
   }
 }
