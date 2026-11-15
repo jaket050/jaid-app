@@ -462,6 +462,13 @@
     gap: 1rem;
     padding: 1.5rem 16px 2rem;
   }
+
+  /* Crosses the bright boat wake on phones; no overlay, just a firmer line. */
+  .hero-eyebrow {
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+  }
 }
 
 .study-mode__header {
@@ -1191,17 +1198,9 @@
     letter-spacing: 0.08em;
   }
 
-  .wotd__term {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: baseline;
-    gap: 0 0.6rem;
-  }
-
   .wotd__word {
     font-size: 1.75rem;
-    margin: 0;
+    margin: 0 0 4px;
   }
 }
 
