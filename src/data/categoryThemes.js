@@ -9,8 +9,8 @@ export const CATEGORY_THEMES = [
   { name: 'Home and Daily Life', categories: ['Home', 'Food', 'Drinks', 'School', 'Money', 'Technology', 'Vehicles'] },
   { name: 'Land and Nature', categories: ['Land', 'Islands', 'Places', 'Animals', 'Plants', 'Nature', 'Weather', 'Water'] },
   { name: 'Time and Numbers', categories: ['Time', 'Days of the Week', 'Months of the Year', 'Numbers Prisente', 'Numbers Ansiånu', 'Years and Centuries'] },
-  { name: 'Faith and Culture', categories: ['Holidays and Religion', 'Baptism', 'Culture', 'Values'] },
-  { name: 'Civic Life', categories: ['Government', 'Legal', 'Self Determination'] },
+  { name: 'Faith and Culture', categories: ['Holidays and Religion', 'Baptism', 'Culture', 'Values', 'Self Determination'] },
+  { name: 'Civic Life', categories: ['Government', 'Legal'] },
   { name: 'Language Building Blocks', categories: ['Verbs', 'Adjectives', 'Pronouns'] },
 ]
 
