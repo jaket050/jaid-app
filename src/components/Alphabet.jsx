@@ -1,72 +1,192 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { X } from 'lucide-react'
 import { chamorroAlphabet, vowels, pronunciationNotes } from '../data/alphabet'
 
-function Alphabet({ onExit }) {
-  const [flippedCards, setFlippedCards] = useState(new Set())
+// Above this width the details panel is a side column with a letter always
+// selected; at or below it the panel is a sheet pinned to the bottom.
+const DESKTOP_QUERY = '(min-width: 1025px)'
+const isDesktopNow = () => typeof window !== 'undefined' && window.matchMedia(DESKTOP_QUERY).matches
 
-  const toggleCard = (letter) => {
-    setFlippedCards(prev => {
-      const next = new Set(prev)
-      if (next.has(letter)) {
-        next.delete(letter)
-      } else {
-        next.add(letter)
-      }
-      return next
-    })
+const FILTERS = [
+  { value: 'all', label: 'All' },
+  { value: 'vowel', label: 'Vowels' },
+  { value: 'consonant', label: 'Consonants' },
+]
+
+// A letter stored with its name in brackets, like the glottal stop, shows
+// the mark large and the bracketed name as a small label. Both parts come
+// straight from the stored string; other letters have no brackets.
+function splitLetter(letter) {
+  const m = letter.match(/^(.*?)\s*\((.+)\)$/)
+  return m ? { mark: m[1], label: m[2] } : { mark: letter, label: null }
+}
+
+const isVowel = (item) => vowels.includes(item.letter)
+
+function LetterDetail({ item }) {
+  const { mark, label } = splitLetter(item.letter)
+  return (
+    <div className={`alphabet-detail__body${isVowel(item) ? ' alphabet-detail__body--vowel' : ''}`}>
+      <div className="alphabet-detail__head">
+        <span className={`alphabet-detail__letter${label ? ' alphabet-detail__letter--mark' : ''}`}>{mark}</span>
+        <span className="alphabet-detail__labels">
+          {label && <span className="alphabet-detail__name">{label}</span>}
+          <span className="alphabet-detail__type">{item.type}</span>
+        </span>
+      </div>
+      <p className="alphabet-detail__pronunciation">{item.pronunciation}</p>
+      {item.example ? (
+        <p className="alphabet-detail__example">
+          <span className="alphabet-detail__chamorro">{item.example}</span>
+          <span className="alphabet-detail__english">{item.exampleEnglish}</span>
+        </p>
+      ) : (
+        <p className="alphabet-detail__pending">Example coming soon</p>
+      )}
+      {item.note && <p className="alphabet-detail__note">{item.note}</p>}
+    </div>
+  )
+}
+
+function Alphabet({ onExit }) {
+  const [isDesktop, setIsDesktop] = useState(isDesktopNow)
+  const [filter, setFilter] = useState('all')
+  // Desktop opens with the first letter selected, so the panel is never
+  // empty; phones open with nothing selected and no sheet.
+  const [selected, setSelected] = useState(() => (isDesktopNow() ? chamorroAlphabet[0].letter : null))
+  const [sheetH, setSheetH] = useState(0)
+  const sheetRef = useRef(null)
+
+  const visible = chamorroAlphabet.filter((item) => filter === 'all' || item.type === filter)
+  const selectedItem = chamorroAlphabet.find((item) => item.letter === selected) ?? null
+
+  // Follow the breakpoint. Moving to desktop with nothing selected selects
+  // the first visible letter.
+  useEffect(() => {
+    const mq = window.matchMedia(DESKTOP_QUERY)
+    const onChange = () => {
+      setIsDesktop(mq.matches)
+      if (mq.matches) setSelected((prev) => prev ?? chamorroAlphabet[0].letter)
+    }
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  // On phones, Escape closes the sheet.
+  useEffect(() => {
+    if (isDesktop || !selected) return
+    const onKey = (e) => { if (e.key === 'Escape') setSelected(null) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [isDesktop, selected])
+
+  // The sheet's height, so the page can pad its bottom and the sheet never
+  // covers the last row of cards or the notes.
+  useEffect(() => {
+    const el = sheetRef.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => setSheetH(entry.borderBoxSize?.[0]?.blockSize ?? entry.target.offsetHeight))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [isDesktop, selected])
+
+  function changeFilter(value) {
+    setFilter(value)
+    const nowVisible = chamorroAlphabet.filter((item) => value === 'all' || item.type === value)
+    if (selected && !nowVisible.some((item) => item.letter === selected)) {
+      // Desktop keeps a letter selected; phones close the sheet.
+      setSelected(isDesktop ? nowVisible[0]?.letter ?? null : null)
+    }
   }
 
+  function pressLetter(letter) {
+    if (!isDesktop && selected === letter) setSelected(null)
+    else setSelected(letter)
+  }
+
+  const sheetOpen = !isDesktop && selectedItem
+  const showPanel = isDesktop || sheetOpen
+
   return (
-    <div className="alphabet-page">
+    <div
+      className="alphabet-page"
+      style={sheetOpen && sheetH ? { paddingBottom: `${sheetH}px` } : undefined}
+    >
       <div className="study-mode__header">
         <button className="btn-exit-study" onClick={onExit}>← Home</button>
         <span className="study-mode__brand">JAID</span>
-        <span className="study-mode__progress">I Atfabetu</span>
+        <span className="study-mode__progress" aria-hidden="true" />
       </div>
 
       <div className="alphabet-content">
         <div className="alphabet-intro">
-          <h2 className="alphabet-intro__title">I Atfabetu</h2>
+          <h1 className="alphabet-intro__title">I Atfabetu</h1>
           <p className="alphabet-intro__sub">The CHamoru Alphabet</p>
           <p className="alphabet-intro__meta">24 letters · 6 vowels · 18 consonants</p>
         </div>
 
-        <div className="alphabet-grid">
-          {chamorroAlphabet.map((item) => (
-            <div
-              key={item.letter}
-              className="alphabet-flip-container"
-              onClick={() => toggleCard(item.letter)}
+        <div className="alphabet-filter">
+          {FILTERS.map((f) => (
+            <button
+              key={f.value}
+              type="button"
+              className="alphabet-filter__btn"
+              aria-pressed={filter === f.value}
+              onClick={() => changeFilter(f.value)}
             >
-              <div className={`alphabet-flip-inner ${flippedCards.has(item.letter) ? 'is-flipped' : ''}`}>
-
-                <div className={`alphabet-card alphabet-card--front ${vowels.includes(item.letter) ? 'alphabet-card--vowel' : ''}`}>
-                  <span className="alphabet-card__letter">{item.letter}</span>
-                  <span className="alphabet-card__type">{item.type}</span>
-                  <p className="alphabet-card__tap-hint">Tap to learn</p>
-                </div>
-
-                <div className={`alphabet-card alphabet-card--back ${vowels.includes(item.letter) ? 'alphabet-card--vowel' : ''}`}>
-                  <span className="alphabet-card__letter alphabet-card__letter--small">{item.letter}</span>
-                  <p className="alphabet-card__pronunciation">{item.pronunciation}</p>
-                  {item.example ? (
-                    <div className="alphabet-card__example">
-                      <span className="alphabet-card__chamorro">{item.example}</span>
-                      <span className="alphabet-card__english">{item.exampleEnglish}</span>
-                    </div>
-                  ) : (
-                    <p className="alphabet-card__pending">Example coming soon</p>
-                  )}
-                  {item.note && (
-                    <p className="alphabet-card__note">{item.note}</p>
-                  )}
-                  <p className="alphabet-card__tap-hint">Tap to flip back</p>
-                </div>
-
-              </div>
-            </div>
+              {f.label}
+            </button>
           ))}
         </div>
+
+        <div className="alphabet-main">
+          <div className="alphabet-grid">
+            {visible.map((item) => {
+              const { mark, label } = splitLetter(item.letter)
+              const isSelected = item.letter === selected
+              return (
+                <button
+                  key={item.letter}
+                  type="button"
+                  className={`alphabet-card${isVowel(item) ? ' alphabet-card--vowel' : ''}${isSelected ? ' alphabet-card--selected' : ''}`}
+                  aria-pressed={isSelected}
+                  aria-controls="alphabet-detail"
+                  onClick={() => pressLetter(item.letter)}
+                >
+                  <span className={`alphabet-card__letter${label ? ' alphabet-card__letter--mark' : ''}`}>{mark}</span>
+                  {label && <span className="alphabet-card__name">{label}</span>}
+                  <span className="alphabet-card__type">{item.type}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {showPanel && (
+            <aside
+              id="alphabet-detail"
+              ref={sheetRef}
+              className={`alphabet-detail${isDesktop ? '' : ' alphabet-detail--sheet'}`}
+            >
+              {!isDesktop && (
+                <button
+                  type="button"
+                  className="alphabet-detail__close"
+                  aria-label="Close"
+                  onClick={() => setSelected(null)}
+                >
+                  <X size={22} aria-hidden="true" />
+                </button>
+              )}
+              {selectedItem && <LetterDetail item={selectedItem} />}
+            </aside>
+          )}
+        </div>
+
+        {/* Always present, so the new letter is announced when the panel
+            changes or the sheet opens. Text comes from the data. */}
+        <p className="alphabet-sr-only" aria-live="polite">
+          {selectedItem ? `${selectedItem.letter}, ${selectedItem.type}. ${selectedItem.pronunciation}` : ''}
+        </p>
 
         <div className="pronunciation-notes">
           <h3 className="pronunciation-notes__title">Pronunciation Guide</h3>
