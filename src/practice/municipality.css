@@ -1,0 +1,922 @@
+/* ─── Municipalities map game ────────────────────────────────────
+   Everything here is scoped to .muni-match (imported only by
+   MunicipalityGame.jsx). The page chrome follows anatomy.css; the map
+   panel is the same in light and dark mode: navy ocean, land in four
+   close greens (no two neighbors share one) and dark green borders at
+   4:1 or more against every green.
+   Above 700px: map panel on the left, 340px side column on the right.
+   700px and below: card on top, map, inset, then a bottom bar with the
+   hint button and the Explore and Play switch. */
+
+body:has(.muni-match) #root {
+  width: 100%;
+  max-width: 100%;
+  border-inline: none;
+}
+
+.muni-match {
+  --muni-good: #1a7a48;
+  /* Height left for the map views above 700px: header, page padding and
+     panel padding. */
+  --budget: calc(100dvh - 150px);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  font-family: var(--sans);
+  text-align: left;
+}
+
+@media (prefers-color-scheme: dark) {
+  .muni-match {
+    --muni-good: #2dce7a;
+  }
+}
+
+.muni-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Header ───────────────────────── */
+
+.muni-match__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 24px;
+  background: var(--ui-surface-raised);
+  border-bottom: 1px solid var(--ui-border-card);
+}
+
+.muni-match__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.muni-match__home {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--ui-home-border);
+  border-radius: 6px;
+  color: var(--ui-text);
+  font-size: 0.85rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.muni-match__home:hover {
+  background: var(--ui-home-hover);
+  border-color: var(--ui-accent);
+}
+
+.muni-match__title {
+  margin: 0;
+  font-family: var(--heading);
+  font-size: 1.2rem;
+  letter-spacing: normal;
+  color: var(--ui-heading);
+  line-height: 1.2;
+}
+
+.muni-match__switches {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.muni-switch {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--ui-border-card);
+  border-radius: 9px;
+  background: var(--ui-surface-card);
+}
+
+.muni-switch__btn {
+  min-height: 44px;
+  min-width: 60px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ui-text);
+  font: 600 0.9rem var(--sans);
+  cursor: pointer;
+}
+
+.muni-switch--level .muni-switch__btn[aria-pressed='true'] {
+  background: var(--ui-accent);
+  color: #12202C;
+}
+
+.muni-switch--mode .muni-switch__btn[aria-pressed='true'] {
+  background: var(--ui-heading);
+  color: var(--ui-surface);
+}
+
+.muni-match :is(.muni-switch__btn, .muni-match__home, .muni-btn, .muni-card):focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+
+/* ── Layout ───────────────────────── */
+
+.muni-match__main {
+  flex: 1;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 16px 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* The map panel: navy ocean in both color modes. A size container, so
+   each map view can size itself from the panel width (cqi). */
+.muni-match__panel {
+  position: relative;
+  min-width: 0;
+  container-type: inline-size;
+  padding: 16px;
+  background: #1B3A57;
+  border: 1px solid var(--ui-border-card);
+  border-radius: 14px;
+}
+
+.muni-views {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* A map view keeps its frame's aspect ratio (--ar, set inline) and is as
+   large as the panel width (--avail-w) and the window height (--max-h)
+   allow. */
+.muni-view {
+  --avail-w: 100cqi;
+  --max-h: var(--budget);
+  --h: min(var(--max-h), calc(var(--avail-w) / var(--ar)));
+  position: relative;
+  flex: none;
+  width: calc(var(--h) * var(--ar));
+  height: var(--h);
+}
+
+/* Central: the main map above the zoomed view at every width. The wide
+   main map takes up to 35% of the height, the zoomed view the rest. */
+.muni-match--central .muni-view--main {
+  --max-h: calc((var(--budget) - 12px) * 0.35);
+}
+
+.muni-match--central .muni-view--inset {
+  --avail-w: calc(100cqi - 4px);
+  --max-h: calc((var(--budget) - 12px) * 0.65);
+}
+
+/* All: the zoomed view to the left of the main map above 700px, so the
+   lines to it leave the outline's west side and run over the ocean and
+   the south, never across the north of the island. */
+.muni-match--all .muni-views {
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+
+/* All: the main map gets 60% of the width, the zoomed view the rest. */
+.muni-match--all .muni-view--main {
+  --avail-w: 60cqi;
+}
+
+.muni-match--all .muni-view--inset {
+  --avail-w: calc(40cqi - 16px);
+}
+
+.muni-view--inset {
+  border: 2px solid #FFFFFF;
+  border-radius: 6px;
+  box-sizing: content-box;
+  overflow: hidden;
+}
+
+.muni-view__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Map ──────────────────────────── */
+
+.muni-ocean {
+  fill: #1B3A57;
+}
+
+.muni-region {
+  stroke: #24511F;
+  stroke-width: 1.25;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+  outline: none;
+}
+
+/* Four close greens; SHADES in municipalityMapData.js keeps neighbors apart. */
+.muni-region--shade-0 { fill: #8CCB76; }
+.muni-region--shade-1 { fill: #B0DA8A; }
+.muni-region--shade-2 { fill: #72BA63; }
+.muni-region--shade-3 { fill: #C8E6A6; }
+
+/* A found place (Play): a deeper, richer green than any land shade, for
+   the rest of the level. */
+.muni-region--found { fill: #2E8B3E; }
+
+/* Places outside the level: a muted gray green, and taps there do nothing. */
+.muni-region--out {
+  fill: #5E7362;
+  stroke: #3F5244;
+}
+
+.muni-inset-outline rect {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.muni-inset-outline__halo {
+  stroke: #12202C;
+  stroke-width: 4;
+}
+
+.muni-inset-outline__line {
+  stroke: #FFFFFF;
+  stroke-width: 2;
+}
+
+/* Highlights: a stack of strokes over the region (outer ring, edge, inner
+   edge) with a tint fill. Edges are two tone so they read on sand and on
+   the ocean: navy for the land, white for the water. */
+.muni-hl {
+  pointer-events: none;
+}
+
+.muni-hl path {
+  fill: none;
+  stroke: none;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.muni-hl--hover .muni-hl__ring {
+  fill: rgba(255, 255, 255, 0.35);
+  stroke: #FFFFFF;
+  stroke-width: 6;
+}
+
+.muni-hl--hover .muni-hl__edge,
+.muni-hl--selected .muni-hl__edge {
+  stroke: #1a3a5c;
+  stroke-width: 2.5;
+}
+
+.muni-hl--selected .muni-hl__ring {
+  fill: rgba(201, 168, 76, 0.45);
+  stroke: #FFFFFF;
+  stroke-width: 6;
+}
+
+/* Hint: a gold edge inside a navy edge, inside a white ring, over a
+   slowly pulsing white tint. */
+.muni-hl--hint .muni-hl__ring {
+  fill: rgba(255, 255, 255, 0.35);
+  stroke: #FFFFFF;
+  stroke-width: 9;
+  animation: muni-pulse 1.6s ease-in-out infinite alternate;
+}
+
+.muni-hl--hint .muni-hl__edge {
+  stroke: #1a3a5c;
+  stroke-width: 5.5;
+}
+
+.muni-hl--hint .muni-hl__inner {
+  stroke: #C9A84C;
+  stroke-width: 2;
+}
+
+@keyframes muni-pulse {
+  from { fill: rgba(255, 255, 255, 0.2); }
+  to { fill: rgba(255, 255, 255, 0.55); }
+}
+
+.muni-hl--wrong .muni-hl__ring {
+  fill: rgba(224, 123, 57, 0.45);
+  stroke: #12202C;
+  stroke-width: 5.5;
+}
+
+.muni-hl--wrong .muni-hl__edge {
+  stroke: #e07b39;
+  stroke-width: 2.5;
+}
+
+/* Correct: the place fills a much lighter, brighter green with a dark
+   green edge, holds, then fades out completely over 1.5s.
+   MunicipalityGame.jsx removes it at the same time, or sooner when Next
+   place is pressed. */
+.muni-hl--flash {
+  animation: muni-found 1.5s ease-out forwards;
+}
+
+.muni-hl--flash .muni-hl__ring {
+  fill: #E6FFD4;
+}
+
+.muni-hl--flash .muni-hl__edge {
+  stroke: #1F5A1E;
+  stroke-width: 3;
+}
+
+@keyframes muni-found {
+  0%, 70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Keyboard focus: a thick navy ring with a white outer edge. */
+.muni-hl--focus .muni-hl__ring {
+  stroke: #FFFFFF;
+  stroke-width: 10;
+}
+
+.muni-hl--focus .muni-hl__edge {
+  stroke: #12202C;
+  stroke-width: 5;
+}
+
+/* ── Labels, check marks and numbers ─ */
+
+/* A found place's check mark: white with a navy edge. */
+.muni-check {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.muni-check path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.muni-check__edge {
+  stroke: #1a3a5c;
+  stroke-width: 6;
+}
+
+.muni-check__mark {
+  stroke: #FFFFFF;
+  stroke-width: 2.75;
+}
+
+/* "Show all names": a numbered dot on each place too small to hold its
+   name (NUMBER_DOT_PX in municipalityLogic.js). */
+.muni-number {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid #1a3a5c;
+  color: #1a3a5c;
+  font: 800 13px/20px var(--sans);
+  text-align: center;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* A name label beside its place points at it: a short line to a dot on
+   the place's widest point. */
+.muni-pointer line {
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.muni-pointer__halo {
+  stroke: #FFFFFF;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.muni-pointer__line {
+  stroke: #12202C;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+}
+
+.muni-place-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid #1a3a5c;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* 18px bold (15px at 700px and below), never smaller. A long name may sit
+   on two lines, broken at its own hyphen or space. The size is estimated
+   in municipalityLogic.js (labelSizePx) for placement. */
+.muni-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3px 8px;
+  white-space: nowrap;
+  background: #FFFFFF;
+  color: #12202C;
+  border: 1.5px solid #7A5C12;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  font: 700 18px/1.25 var(--sans);
+  pointer-events: none;
+}
+
+.muni-match--play .muni-label {
+  border-color: #1F5A1E;
+}
+
+/* ── Zoomed view ──────────────────── */
+
+.muni-zoom-caption {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  z-index: 4;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: #12202C;
+  color: #FFFFFF;
+  font: 700 12px/1.4 var(--sans);
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+
+.muni-zoom-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.muni-zoom-lines__halo {
+  stroke: #12202C;
+  stroke-width: 3.5;
+}
+
+.muni-zoom-lines__line {
+  stroke: #FFFFFF;
+  stroke-width: 1.5;
+}
+
+/* ── Short Explore card (while "Show all names" is on) ── */
+
+.muni-card--compact {
+  padding: 12px 16px;
+}
+
+.muni-card__row {
+  display: flex;
+  gap: 8px;
+}
+
+.muni-card__row .muni-btn {
+  flex: 1 1 auto;
+  width: auto;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+.muni-card__count--small {
+  margin-top: 8px;
+  font-size: 0.82rem;
+}
+
+/* ── Names key ────────────────────── */
+
+.muni-card--key {
+  padding: 10px 14px;
+}
+
+.muni-card--key .muni-card__eyebrow {
+  margin-bottom: 4px;
+}
+
+.muni-key {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.muni-key__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+}
+
+.muni-key__n {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid #1a3a5c;
+  color: #1a3a5c;
+  font: 800 12px/18px var(--sans);
+  text-align: center;
+}
+
+.muni-key__name {
+  min-width: 0;
+  font: 700 18px/1.2 var(--sans);
+  color: var(--ui-text);
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+/* More than 8 names: 15px, one name per line, 24px per row (a 20px line
+   and 20px number badge plus the 4px gap), so the All level's names fit
+   beside the map. */
+.muni-key--small .muni-key__name {
+  font-size: 15px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.muni-key--small .muni-key__n {
+  width: 20px;
+  height: 20px;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+/* ── Correct! pill ────────────────── */
+
+.muni-pill {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #1a7a48;
+  color: #FFFFFF;
+  font: 700 0.9rem var(--sans);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Side column ──────────────────── */
+
+.muni-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Above 700px the side column never runs off the page: it is capped at
+   the window height below the header, and the names key gives up height
+   first, scrolling on its own with a visible scrollbar. */
+@media (min-width: 701px) {
+  .muni-side {
+    max-height: calc(100dvh - 110px);
+  }
+
+  .muni-side > .muni-card {
+    flex: none;
+  }
+
+  .muni-side > .muni-card--key {
+    flex: 0 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ui-accent) transparent;
+  }
+
+  .muni-card--key::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .muni-card--key::-webkit-scrollbar-thumb {
+    background: var(--ui-accent);
+    border-radius: 4px;
+  }
+}
+
+.muni-card {
+  padding: 16px 18px;
+  background: var(--ui-surface-card);
+  border: 1px solid var(--ui-border-card);
+  border-radius: 12px;
+}
+
+.muni-card--wrong {
+  border-color: var(--ui-danger-text);
+}
+
+.muni-card--correct {
+  border-color: var(--muni-good);
+}
+
+.muni-card__eyebrow {
+  margin: 0 0 6px;
+  font: 800 0.72rem var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ui-accent-text);
+}
+
+.muni-card__eyebrow--correct {
+  color: var(--muni-good);
+}
+
+.muni-card__eyebrow--wrong {
+  color: var(--ui-danger-text);
+}
+
+/* Long names may wrap between words or at their own hyphens, never
+   inside a word. */
+.muni-card__word,
+.muni-card__title {
+  margin: 0;
+  font-family: var(--heading);
+  font-size: clamp(1.9rem, 2.8vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.12;
+  color: var(--ui-heading);
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: manual;
+}
+
+.muni-card__title {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.muni-card__text {
+  margin: 6px 0 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--ui-text);
+}
+
+.muni-card__eyebrow + .muni-card__text {
+  margin-top: 0;
+}
+
+.muni-btn + .muni-card__count {
+  margin-top: 14px;
+}
+
+.muni-card__count {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  color: var(--ui-text-muted);
+}
+
+.muni-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.muni-card > .muni-btn {
+  margin-top: 14px;
+}
+
+.muni-stars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.muni-stars--many {
+  gap: 2px;
+}
+
+.muni-star {
+  color: var(--ui-text-muted);
+  fill: none;
+}
+
+.muni-star--on {
+  color: var(--ui-accent);
+  fill: var(--ui-accent);
+}
+
+.muni-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font: 700 1rem var(--sans);
+  cursor: pointer;
+}
+
+.muni-btn--primary {
+  background: var(--ui-accent);
+  border: 1px solid var(--ui-accent);
+  color: #12202C;
+}
+
+.muni-btn--primary:hover {
+  background: #D8B95C;
+}
+
+.muni-btn--outline {
+  background: transparent;
+  border: 1.5px solid var(--ui-text);
+  color: var(--ui-text);
+}
+
+.muni-btn--outline:hover {
+  background: var(--ui-hover);
+}
+
+.muni-match__bottom {
+  display: none;
+}
+
+/* ── 700px and below ──────────────── */
+
+@media (max-width: 700px) {
+  .muni-match__header {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .muni-match__brand {
+    gap: 8px;
+  }
+
+  .muni-match__title {
+    font-size: 0.95rem;
+  }
+
+  .muni-switch__btn {
+    min-width: 52px;
+    padding: 0 8px;
+  }
+
+  .muni-match__mode-top {
+    display: none;
+  }
+
+  .muni-match__main {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 12px calc(84px + env(safe-area-inset-bottom));
+  }
+
+  .muni-side {
+    display: contents;
+  }
+
+  .muni-card--primary {
+    order: 1;
+  }
+
+  .muni-match__panel {
+    order: 2;
+    padding: 8px;
+  }
+
+  /* The names key sits right below the map. */
+  .muni-card--key {
+    order: 3;
+  }
+
+  .muni-card--secondary {
+    order: 4;
+  }
+
+  .muni-key__name {
+    font-size: 15px;
+  }
+
+  .muni-side__hint {
+    display: none;
+  }
+
+  .muni-card {
+    padding: 12px 14px;
+  }
+
+  .muni-card__word {
+    font-size: 1.75rem;
+  }
+
+  /* One column, full width, page scroll instead of a height cap. */
+  .muni-view,
+  .muni-match--central .muni-view--main,
+  .muni-match--central .muni-view--inset,
+  .muni-match--all .muni-view--main,
+  .muni-match--all .muni-view--inset {
+    --avail-w: 100cqi;
+    --max-h: 100000px;
+  }
+
+  /* The inset's 2px white border sits outside its box. */
+  .muni-match .muni-view--inset {
+    --avail-w: calc(100cqi - 4px);
+  }
+
+  .muni-match--all .muni-views {
+    flex-direction: column;
+  }
+
+  .muni-label {
+    font-size: 15px;
+  }
+
+  .muni-match__bottom {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 10px 12px max(10px, env(safe-area-inset-bottom));
+    background: var(--ui-surface-raised);
+    border-top: 1px solid var(--ui-border-card);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  .muni-match__bottom-hint {
+    flex: 1;
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .muni-hl--flash,
+  .muni-hl--hint .muni-hl__ring {
+    animation: none;
+  }
+}

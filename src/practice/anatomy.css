@@ -82,6 +82,7 @@ body:has(.anatomy-game) #root {
   margin: 0;
   font-family: var(--heading);
   font-size: 1.2rem;
+  letter-spacing: normal;
   color: var(--ui-heading);
   line-height: 1.2;
 }
