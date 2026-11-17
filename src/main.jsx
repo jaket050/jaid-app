@@ -2,6 +2,10 @@ import { StrictMode, Suspense, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import { startThemeSync } from './hooks/useTheme'
+
+// Keep the theme in step on every screen: System follows the OS live.
+startThemeSync()
 
 // Admin and practice bundles are lazy-loaded so they don't bloat the learner app.
 // eslint-disable-next-line react-refresh/only-export-components

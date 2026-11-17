@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import WordOfTheDay from './WordOfTheDay'
+import ThemeToggle from './ThemeToggle'
 
 // Animate a number upward over `duration` ms; jump instantly on any decrease.
 function useCountUp(target, duration = 600) {
@@ -41,6 +42,9 @@ function Header({ totalWords, completedCount, words, completedIds, hasPracticedT
       <div className="hero-image-wrapper">
         <img src="/tumon-bay.jpg" alt="Tumon Bay, Guam" className="hero-image" />
         <div className="hero-overlay" />
+        <div className="hero-theme">
+          <ThemeToggle />
+        </div>
         <div className="hero-title-block">
           <p className="hero-eyebrow">Guåhan · CHamoru Language Learning</p>
           <h1>JAID</h1>

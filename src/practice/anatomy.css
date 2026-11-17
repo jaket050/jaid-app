@@ -24,10 +24,8 @@ body:has(.anatomy-game) #root {
   text-align: left;
 }
 
-@media (prefers-color-scheme: dark) {
-  .anatomy-game {
-    --anatomy-good: #2dce7a;
-  }
+:root[data-theme="dark"] .anatomy-game {
+  --anatomy-good: #2dce7a;
 }
 
 .anatomy-sr-only {

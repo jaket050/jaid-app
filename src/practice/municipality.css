@@ -46,10 +46,8 @@ body:has(.muni-match) #root {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .muni-match {
-    --muni-good: #2dce7a;
-  }
+:root[data-theme="dark"] .muni-match {
+  --muni-good: #2dce7a;
 }
 
 .muni-sr-only {

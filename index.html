@@ -4,6 +4,25 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F7FAF9" />
+    <!-- Theme before first paint, so there is no flash of the wrong theme.
+         The stored choice (localStorage "jaid-theme": system, light or dark;
+         default system) becomes data-theme on <html>. The colors match --bg
+         for each theme in src/index.css and THEME_COLOR in src/hooks/useTheme.js. -->
+    <script>
+      (function () {
+        var choice = 'system';
+        try {
+          var stored = localStorage.getItem('jaid-theme');
+          if (stored === 'light' || stored === 'dark' || stored === 'system') choice = stored;
+        } catch (e) {}
+        var dark = choice === 'dark' ||
+          (choice === 'system' && !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', dark ? '#0D2E57' : '#F7FAF9');
+      })();
+    </script>
 
     <title>JAID · Joining Ancestors In Dialogue</title>
     <meta name="description" content="Learn the CHamoru language of Guåhan. Vocabulary sourced from Kumisión i Fino' CHamoru." />
