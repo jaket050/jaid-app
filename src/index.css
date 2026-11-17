@@ -10,10 +10,10 @@
   --code-bg: rgba(11, 122, 106, 0.08);
   --accent: #7A5C12;
   --accent-bg: #FBF3DC;
-  --accent-border: #D0E8E2;
+  --accent-border: #7A5C12;
   --gold: #C4922A;
   --gold-bg: #FBF6ED;
-  --gold-border: rgba(196, 146, 42, 0.4);
+  --gold-border: #7A5C12;
   --gold-text: #6B4F2A;
   --social-bg: rgba(247, 250, 249, 0.5);
   --shadow:
@@ -71,8 +71,9 @@
   --ui-card-selected: #FBF3DC;
   --ui-card-selected-text: #7A5C12;
   --ui-border-card: rgba(26, 58, 92, 0.15);
-  /* On-screen keyboard key edges: 3:1 against the key and the panel. */
-  --ui-key-border: #7F8C99;
+  /* Edges of controls (keyboard keys, the keyboard panel, the search box,
+     category chips, the Continue card): 3:1 against what they sit on. */
+  --ui-control-border: #7F8C99;
   --ui-border-game: rgba(26, 58, 92, 0.2);
   --ui-border-hover: rgba(26, 58, 92, 0.3);
   --ui-ghost-border: rgba(26, 58, 92, 0.35);
@@ -109,10 +110,10 @@
   --code-bg: #1a3d6e;
   --accent: #E8C97A;
   --accent-bg: rgba(201, 168, 76, 0.12);
-  --accent-border: rgba(29, 158, 117, 0.45);
+  --accent-border: #C9A84C;
   --gold: #D4A82A;
   --gold-bg: rgba(212, 168, 42, 0.12);
-  --gold-border: rgba(212, 168, 42, 0.45);
+  --gold-border: #C9A84C;
   --gold-text: #ffffff;
   --social-bg: rgba(22, 58, 107, 0.5);
   --shadow:
@@ -159,7 +160,7 @@
   --ui-card-selected: #243A52;
   --ui-card-selected-text: #E8C97A;
   --ui-border-card: #1E3448;
-  --ui-key-border: rgba(232, 220, 200, 0.45);
+  --ui-control-border: rgba(232, 220, 200, 0.6);
   --ui-border-game: #2D4361;
   --ui-border-hover: rgba(201, 168, 76, 0.45);
   --ui-ghost-border: rgba(255,255,255,0.3);

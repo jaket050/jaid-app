@@ -168,7 +168,7 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  border: 1px solid #C9A84C;
+  border: 1px solid var(--ui-accent-text);
   color: #0D1B2A;
   background: #C9A84C;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
@@ -279,7 +279,7 @@
 
 .progress-bar__fill {
   height: 100%;
-  background: #C9A84C;
+  background: var(--ui-accent-text);
   transition: width 0.3s ease;
 }
 
@@ -983,7 +983,7 @@ body:has(.alphabet-page) #root {
 
 .btn-alphabet {
   background: transparent;
-  border: 1px solid #C9A84C;
+  border: 1px solid var(--ui-accent-text);
   color: var(--ui-accent-text-page);
   padding: 0.5rem 1.1rem;
   border-radius: 4px;
@@ -1021,7 +1021,7 @@ body:has(.alphabet-page) #root {
 
 .btn-match {
   background: transparent;
-  border: 1px solid #C9A84C;
+  border: 1px solid var(--ui-accent-text);
   color: var(--ui-accent-text-page);
   padding: 0.5rem 1.1rem;
   border-radius: 4px;
@@ -1549,7 +1549,7 @@ body:has(.deck-select) #root {
 
 .btn-about-nav {
   background: transparent;
-  border: 1px solid #C9A84C;
+  border: 1px solid var(--ui-accent-text);
   color: var(--ui-accent-text-page);
   padding: 0.5rem 1.1rem;
   border-radius: 4px;
@@ -1847,7 +1847,7 @@ body:has(.deck-select) #root {
   padding: 12px 16px;
   box-sizing: border-box;
   background: var(--ui-surface-raised);
-  border: 1px solid var(--ui-border);
+  border: 1px solid var(--ui-control-border);
   border-radius: 8px;
   cursor: pointer;
   font-family: var(--sans);
@@ -1927,7 +1927,7 @@ body:has(.deck-select) #root {
   padding: 1rem 1.25rem;
   box-sizing: border-box;
   background: var(--ui-surface-raised);
-  border: 1px solid var(--ui-border-strong);
+  border: 1px solid var(--ui-control-border);
   border-radius: 8px;
   cursor: pointer;
   font-family: var(--sans);
@@ -2061,7 +2061,7 @@ body:has(.deck-select) #root {
   padding: 0.75rem 2rem;
   box-sizing: border-box;
   background: transparent;
-  border: 1px solid var(--ui-accent);
+  border: 1px solid var(--ui-accent-text);
   border-radius: 8px;
   cursor: pointer;
   font-family: var(--sans);
@@ -2437,7 +2437,7 @@ body:has(.deck-select) #root {
   display: flex;
   align-items: center;
   background: var(--ui-field);
-  border: 1.5px solid var(--ui-border);
+  border: 1.5px solid var(--ui-control-border);
   border-radius: 8px;
   padding: 0.6rem 0.9rem;
   gap: 0.6rem;
@@ -2486,7 +2486,7 @@ body:has(.deck-select) #root {
 
 .search-bar__keyboard {
   background: var(--ui-surface);
-  border: 1px solid var(--ui-border);
+  border: 1px solid var(--ui-control-border);
   border-top: none;
   border-radius: 0 0 8px 8px;
   padding: 0.6rem 0.75rem;
@@ -2513,8 +2513,8 @@ body:has(.deck-select) #root {
 
 .search-bar__key {
   background: var(--ui-surface-card);
-  border: 1px solid var(--ui-key-border);
-  border-bottom: 2px solid var(--ui-key-border);
+  border: 1px solid var(--ui-control-border);
+  border-bottom: 2px solid var(--ui-control-border);
   border-radius: 5px;
   padding: 0.3rem 0.6rem;
   font-family: var(--heading);
@@ -2813,7 +2813,7 @@ body:has(.browse-view) #root {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  border: 1px solid #C9A84C;
+  border: 1px solid var(--ui-accent-text);
   color: var(--ui-accent-text);
   background: transparent;
   transition: background 0.15s, color 0.15s;
