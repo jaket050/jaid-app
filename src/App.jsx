@@ -277,9 +277,9 @@ function App() {
         </>
       )}
       <footer className="browse-footer">
-        <p>Vocabulary sourced from Kumision i Fino' CHamoru</p>
+        <p>Vocabulary sourced from Kumisión i Fino' CHamoru</p>
         <p className="browse-footer__privacy">
-          JAID collects anonymous usage data to help the Kumision i Fino' CHamoru understand diaspora learner needs. No personal information is collected.
+          JAID collects anonymous usage data to help the Kumisión i Fino' CHamoru understand diaspora learner needs. No personal information is collected.
         </p>
       </footer>
       {toast && (

@@ -34,11 +34,11 @@ function About({ onExit }) {
         <div className="about-section">
           <div className="about-section__diamond">◆</div>
           <h2 className="about-section__title">How We Protect the Language</h2>
-          <p className="about-section__body">CHamoru spelling and orthography in JAID follows the official standard established by Kumision i Fino' CHamoru. Vocabulary is sourced exclusively from the Kumision i Fino' CHamoru official dictionary at diksionariu.com and official Kumision publications. Every entry is validated against official Kumision i Fino' CHamoru sources before it appears to any learner. We do not use AI to generate or describe CHamoru language content.</p>
+          <p className="about-section__body">CHamoru spelling and orthography in JAID follows the official standard established by Kumisión i Fino' CHamoru. Vocabulary is sourced exclusively from the Kumisión i Fino' CHamoru official dictionary at diksionariu.com and official Kumisión publications. Every entry is validated against official Kumisión i Fino' CHamoru sources before it appears to any learner. We do not use AI to generate or describe CHamoru language content.</p>
           <p className="about-section__body">
             CHamoru is spoken in both Guåhan and the Northern Mariana
             Islands. JAID currently follows the Guåhan orthography
-            standard established by Kumision i Fino' CHamoru. We
+            standard established by Kumisión i Fino' CHamoru. We
             acknowledge that the Northern Mariana Islands dialect
             carries equal cultural value and aim to represent both
             as JAID grows.
@@ -50,7 +50,7 @@ function About({ onExit }) {
         <div className="about-section">
           <div className="about-section__diamond">◆</div>
           <h2 className="about-section__title">Built With the Community</h2>
-          <p className="about-section__body">JAID is being built in partnership with Kumision i Fino' CHamoru to ensure the app serves current and future generations of CHamoru learners. The people who hold this language guide how it is taught.</p>
+          <p className="about-section__body">JAID is being built in partnership with Kumisión i Fino' CHamoru to ensure the app serves current and future generations of CHamoru learners. The people who hold this language guide how it is taught.</p>
         </div>
 
         <WaveDivider />
