@@ -15,7 +15,7 @@ const SUPABASE_URL = process.env.SUPABASE_URL
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
 
 const ALLOWED_TYPES = ['word', 'phrase', 'saying']
-const DEFAULT_SOURCE = "Kumision i Fino' CHamoru 2025"
+const DEFAULT_SOURCE = "Kumisión i Fino' CHamoru 2025"
 
 function b64urlEncode(buf) {
   return Buffer.from(buf)
