@@ -75,7 +75,7 @@
      category chips, the Continue card): 3:1 against what they sit on. */
   --ui-control-border: #7F8C99;
   --ui-border-game: var(--ui-control-border);
-  --ui-border-hover: rgba(26, 58, 92, 0.3);
+  --ui-border-hover: var(--ui-accent-text);
   --ui-ghost-border: rgba(26, 58, 92, 0.35);
   --ui-ghost-hover: rgba(26, 58, 92, 0.06);
   --ui-home-border: var(--ui-control-border);
@@ -162,7 +162,7 @@
   --ui-border-card: #1E3448;
   --ui-control-border: rgba(232, 220, 200, 0.6);
   --ui-border-game: var(--ui-control-border);
-  --ui-border-hover: rgba(201, 168, 76, 0.45);
+  --ui-border-hover: var(--ui-accent-text);
   --ui-ghost-border: rgba(255,255,255,0.3);
   --ui-ghost-hover: rgba(255,255,255,0.1);
   --ui-home-border: var(--ui-control-border);

@@ -326,6 +326,11 @@
   border-color: var(--ui-border-hover);
 }
 
+.flashcard:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+
 .flashcard__chamorro {
   font-family: var(--heading);
   font-size: 2.4rem;
@@ -3031,8 +3036,13 @@ body:has(.app-status) #root {
 }
 
 .quiz-option:hover:not(:disabled) {
-  border-color: var(--ui-accent);
+  border-color: var(--ui-accent-text);
   transform: translateY(-2px);
+}
+
+.quiz-option:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
 }
 
 .quiz-option:disabled {
