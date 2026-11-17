@@ -17,8 +17,13 @@ body:has(.muni-match) #root {
 .muni-match {
   --muni-good: #1a7a48;
   /* Height left for the map views above 700px: header, page padding and
-     panel padding. */
-  --budget: calc(100dvh - 150px);
+     panel padding. vh first, for browsers without dvh. */
+  --budget: calc(100vh - 150px);
+  /* The panel's content width. Fallback for browsers without container
+     units: worked out from the window (the 1440px page, its 48px padding,
+     the 340px side column, the 20px gap, the 2px border and 32px padding). */
+  --panel-w: calc(min(1440px, 100vw) - 442px);
+  min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -26,6 +31,19 @@ body:has(.muni-match) #root {
   color: var(--ui-text);
   font-family: var(--sans);
   text-align: left;
+}
+
+@supports (height: 1dvh) {
+  .muni-match {
+    --budget: calc(100dvh - 150px);
+  }
+}
+
+/* With container units, the views size from the panel itself. */
+@supports (width: 1cqi) {
+  .muni-match {
+    --panel-w: 100cqi;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -175,7 +193,7 @@ body:has(.muni-match) #root {
    large as the panel width (--avail-w) and the window height (--max-h)
    allow. */
 .muni-view {
-  --avail-w: 100cqi;
+  --avail-w: var(--panel-w);
   --max-h: var(--budget);
   --h: min(var(--max-h), calc(var(--avail-w) / var(--ar)));
   position: relative;
@@ -191,7 +209,7 @@ body:has(.muni-match) #root {
 }
 
 .muni-match--central .muni-view--inset {
-  --avail-w: calc(100cqi - 4px);
+  --avail-w: calc(var(--panel-w) - 4px);
   --max-h: calc((var(--budget) - 12px) * 0.65);
 }
 
@@ -206,11 +224,11 @@ body:has(.muni-match) #root {
 
 /* All: the main map gets 60% of the width, the zoomed view the rest. */
 .muni-match--all .muni-view--main {
-  --avail-w: 60cqi;
+  --avail-w: calc(var(--panel-w) * 0.6);
 }
 
 .muni-match--all .muni-view--inset {
-  --avail-w: calc(40cqi - 16px);
+  --avail-w: calc(var(--panel-w) * 0.4 - 16px);
 }
 
 .muni-view--inset {
@@ -221,6 +239,8 @@ body:has(.muni-match) #root {
 }
 
 .muni-view__svg {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -634,6 +654,7 @@ body:has(.muni-match) #root {
    first, scrolling on its own with a visible scrollbar. */
 @media (min-width: 701px) {
   .muni-side {
+    max-height: calc(100vh - 110px);
     max-height: calc(100dvh - 110px);
   }
 
@@ -824,9 +845,13 @@ body:has(.muni-match) #root {
     display: none;
   }
 
+  /* stretch: the desktop grid's align-items: start would otherwise shrink
+     every card and the map panel to their content's width, and the panel
+     (a size container) to nothing. */
   .muni-match__main {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: 12px;
     padding: 12px 12px calc(84px + env(safe-area-inset-bottom));
   }
@@ -869,19 +894,18 @@ body:has(.muni-match) #root {
     font-size: 1.75rem;
   }
 
-  /* One column, full width, page scroll instead of a height cap. */
-  .muni-view,
-  .muni-match--central .muni-view--main,
-  .muni-match--central .muni-view--inset,
-  .muni-match--all .muni-view--main,
-  .muni-match--all .muni-view--inset {
-    --avail-w: 100cqi;
-    --max-h: 100000px;
+  /* One column, page scroll instead of a height cap. Explicit widths:
+     each view takes the panel's full width and its height follows from
+     the frame's aspect ratio (--ar, set inline). */
+  .muni-match .muni-view {
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--ar);
   }
 
-  /* The inset's 2px white border sits outside its box. */
+  /* The zoomed view's 2px white border sits outside its box. */
   .muni-match .muni-view--inset {
-    --avail-w: calc(100cqi - 4px);
+    width: calc(100% - 4px);
   }
 
   .muni-match--all .muni-views {

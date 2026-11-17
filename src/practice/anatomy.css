@@ -14,6 +14,7 @@ body:has(.anatomy-game) #root {
 
 .anatomy-game {
   --anatomy-good: #1a7a48;
+  min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -162,8 +163,12 @@ body:has(.anatomy-game) #root {
    that band), so --fig-h is the full image height. */
 .anatomy-figs {
   --gutter: 96px;
-  --face-size: max(200px, min(calc(100cqi - 2 * var(--gutter)), calc(100dvh - 170px), 760px));
-  --fig-h: max(300px, min(calc((100cqi - 3 * var(--gutter)) * 1.5), calc((100dvh - 200px) / 0.84), 1100px));
+  /* Fallback for browsers without container units (cqi) or dvh: the
+     panel's width worked out from the window (the 1440px page, its 48px
+     padding, the 340px side column, the 20px gap and the 2px border). */
+  --panel-w: calc(min(1440px, 100vw) - 410px);
+  --face-size: max(200px, min(calc(var(--panel-w) - 2 * var(--gutter)), calc(100vh - 170px), 760px));
+  --fig-h: max(300px, min(calc((var(--panel-w) - 3 * var(--gutter)) * 1.5), calc((100vh - 200px) / 0.84), 1100px));
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -173,6 +178,14 @@ body:has(.anatomy-game) #root {
 
 .anatomy-game--body .anatomy-figs {
   --gutter: 80px;
+}
+
+@supports (width: 1cqi) and (height: 1dvh) {
+  .anatomy-figs {
+    --panel-w: 100cqi;
+    --face-size: max(200px, min(calc(var(--panel-w) - 2 * var(--gutter)), calc(100dvh - 170px), 760px));
+    --fig-h: max(300px, min(calc((var(--panel-w) - 3 * var(--gutter)) * 1.5), calc((100dvh - 200px) / 0.84), 1100px));
+  }
 }
 
 .anatomy-fig {
@@ -211,6 +224,8 @@ body:has(.anatomy-game) #root {
 }
 
 .anatomy-fig__image {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -709,9 +724,13 @@ body:has(.anatomy-game) #root {
     display: none;
   }
 
+  /* stretch: the desktop grid's align-items: start would otherwise shrink
+     every card and the figure panel to their content's width, and the
+     panel (a size container) to nothing. */
   .anatomy-game__main {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: 12px;
     padding: 12px 12px calc(84px + env(safe-area-inset-bottom));
   }
@@ -748,12 +767,58 @@ body:has(.anatomy-game) #root {
 
   .anatomy-figs {
     --gutter: 48px;
-    --face-size: calc(100cqi - 2 * var(--gutter));
-    --fig-h: calc((100cqi - 3 * var(--gutter)) * 1.5);
   }
 
   .anatomy-game--body .anatomy-figs {
     --gutter: 34px;
+  }
+
+  /* Explicit widths on phones; the heights follow from each image's
+     aspect ratio. The face takes the panel's full width (less the label
+     gutters), each body half of it less the gap. */
+  .anatomy-fig--face {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* The crop wrapper needs its own width: the figure centers its children,
+     so a wrapper without one shrinks to its content, and the board's 100%
+     of it is circular and resolves to zero. 100% here is the panel's inner
+     width less the label gutters (the .anatomy-figs padding). */
+  .anatomy-fig--face .anatomy-fig__crop {
+    width: 100%;
+  }
+
+  .anatomy-fig--face .anatomy-fig__board {
+    width: 100%;
+    min-width: 240px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .anatomy-fig--front,
+  .anatomy-fig--back {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  /* The crop shows 84% of the 1:3 image's height: 1 / (3 x 0.84) = 25 / 63.
+     The board's -12% top margin is 4% of its height (3 x its width). */
+  .anatomy-fig--front .anatomy-fig__crop,
+  .anatomy-fig--back .anatomy-fig__crop {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 25 / 63;
+  }
+
+  .anatomy-fig--front .anatomy-fig__board,
+  .anatomy-fig--back .anatomy-fig__board {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 3;
+    margin-top: -12%;
   }
 
   .anatomy-label {
