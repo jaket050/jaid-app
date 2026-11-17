@@ -71,6 +71,8 @@
   --ui-card-selected: #FBF3DC;
   --ui-card-selected-text: #7A5C12;
   --ui-border-card: rgba(26, 58, 92, 0.15);
+  /* On-screen keyboard key edges: 3:1 against the key and the panel. */
+  --ui-key-border: #7F8C99;
   --ui-border-game: rgba(26, 58, 92, 0.2);
   --ui-border-hover: rgba(26, 58, 92, 0.3);
   --ui-ghost-border: rgba(26, 58, 92, 0.35);
@@ -156,6 +158,7 @@
   --ui-card-selected: #243A52;
   --ui-card-selected-text: #E8C97A;
   --ui-border-card: #1E3448;
+  --ui-key-border: rgba(232, 220, 200, 0.45);
   --ui-border-game: #2D4361;
   --ui-border-hover: rgba(201, 168, 76, 0.45);
   --ui-ghost-border: rgba(255,255,255,0.3);

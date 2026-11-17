@@ -85,7 +85,7 @@ function SearchBar({ onSearch }) {
       {showKeyboard && (
         <div className="search-bar__keyboard">
           <span className="search-bar__keyboard-label">
-            CHamoru characters
+            CHamoru Characters
           </span>
           <div className="search-bar__keys">
             {CHAMORU_CHARS.map((item) => (
