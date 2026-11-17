@@ -387,10 +387,7 @@ export default function GuahanMap({ onExit }) {
         <div className={styles.mapColumn}>
           <div className={styles.mapHeader}>
             <p className={styles.eyebrow}>In partnership with the Kumisión i Fino' CHamoru</p>
-            <h1 className={styles.title}>
-              <span>I Tåno'</span>
-              <span>Guåhan</span>
-            </h1>
+            <h1 className={styles.title}>I Tåno' · Guåhan</h1>
             {isSheet && (
               <p className={styles.mapSubtitle}>Tap a municipality to explore its CHamoru name.</p>
             )}
