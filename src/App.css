@@ -1424,11 +1424,48 @@ body:has(.deck-select) #root {
   }
 }
 
+/* About is cream in both themes by design. */
 .about-page {
   min-height: 100dvh;
   background: #f5f0e8;
   display: flex;
   flex-direction: column;
+}
+
+/* Page frame while About is shown: light scrollbar and overscroll, cream
+   behind the page, and no side lines on the #root column. */
+html:root:has(.about-page) {
+  color-scheme: light;
+}
+
+body:has(.about-page) {
+  background: #f5f0e8;
+}
+
+body:has(.about-page) #root {
+  border-inline: none;
+}
+
+/* The shared header, on the cream page in both themes. */
+.about-page .study-mode__header {
+  background: transparent;
+}
+
+.about-page .btn-exit-study {
+  color: #1a3a5c;
+  border-color: rgba(26, 58, 92, 0.6);
+}
+
+.about-page .btn-exit-study:hover {
+  background: rgba(26, 58, 92, 0.06);
+}
+
+.about-page .study-mode__brand {
+  color: #1a3a5c;
+}
+
+.about-page .study-mode__progress {
+  color: #4a5568;
 }
 
 .about-content {
@@ -1458,7 +1495,7 @@ body:has(.deck-select) #root {
   font-family: 'Playfair Display', Georgia, serif;
   font-style: italic;
   font-size: 1.1rem;
-  color: #2d6a4f;
+  color: #7A5C12;
   margin-top: 0.6rem;
   margin-bottom: 1.25rem;
 }
@@ -1488,7 +1525,7 @@ body:has(.deck-select) #root {
 }
 
 .about-section__diamond {
-  color: #2d6a4f;
+  color: #7A5C12;
   font-size: 0.6rem;
   text-align: center;
   margin-bottom: 0.75rem;
@@ -1549,7 +1586,7 @@ body:has(.deck-select) #root {
 
 .about-footer__text {
   font-size: 0.75rem;
-  color: #a0aec0;
+  color: #4a5568;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 0.25rem;
