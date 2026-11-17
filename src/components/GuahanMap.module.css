@@ -1,158 +1,421 @@
+/* I Tåno' map. The ocean and terrain colors are specific to this screen and
+   the same in light and dark mode; the card, controls and focus rings use
+   the --ui- theme variables. Above 1024px the card is a 420px panel to the
+   right of the map; at 1024px and below it is a bottom sheet. */
+
+/* Use the full width instead of the 1126px #root column. */
+:global(body):has(.guahanMapShell) :global(#root) {
+  width: 100%;
+  max-width: 100%;
+  border-inline: none;
+}
+
 .guahanMapShell {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
-  background: radial-gradient(circle at 40% 50%, #1B6CA8 0%, #0D4F8C 50%, #0A3D6E 100%);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(ellipse at 42% 42%, #2A86C5 0%, #1867A8 32%, #0E4F8C 62%, #082F5C 100%);
   color: #E8DCC8;
   font-family: var(--sans);
 }
 
-.mapHeader {
-  padding: 18px 18px 8px;
+.body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 24px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px 24px 24px;
+  box-sizing: border-box;
+  align-items: start;
 }
 
-.eyebrow,
-.panelEyebrow {
-  margin: 0 0 4px;
+.mapColumn {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mapHeader {
+  text-align: center;
+  padding: 4px 12px 8px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: 0.72rem;
   font-weight: 800;
-  color: #C9A84C;
+  color: #E8C97A;
 }
 
-.mapHeader h2 {
-  margin: 0 0 4px;
-  font-size: clamp(1.6rem, 6vw, 2.4rem);
+.title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--heading);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: normal;
   color: #FFFFFF;
 }
 
 .mapSubtitle {
-  margin: 0;
-  font-size: 0.82rem;
+  margin: 8px 0 0;
+  font-size: 0.85rem;
   color: #E8DCC8;
 }
 
+/* The map is as tall as the window allows below the header and title. */
 .mapStage {
-  display: grid;
-  place-items: center;
-  padding: 8px 12px 160px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .guahanSvg {
-  width: min(92vw, 440px);
-  height: auto;
   display: block;
+  width: 100%;
+  height: calc(100vh - 230px);
+  height: calc(100dvh - 230px);
+  min-height: 420px;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.municipality {
-  fill: rgba(136, 233, 168, 0.75);
-  stroke: #5a9e5a;
-  stroke-width: 0.9;
+/* ── Terrain (static layer) ── */
+
+.shadow use {
+  fill: #041A33;
+  fill-opacity: 0.35;
+  stroke: #041A33;
+  stroke-opacity: 0.18;
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+
+.reef use {
+  fill: none;
+  stroke: #63D9CB;
+  stroke-linejoin: round;
+}
+
+.land use {
+  fill: url(#itano-elevation);
+  stroke: none;
+}
+
+.hills ellipse {
+  fill: #1F5A2C;
+  fill-opacity: 0.16;
+}
+
+.borders path {
+  fill: none;
+  stroke: #1F4D24;
+  stroke-opacity: 0.7;
+  stroke-width: 1;
+  stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  cursor: pointer;
-  transition: fill 160ms ease, stroke-width 160ms ease;
+}
+
+/* ── Regions and highlights ── */
+
+/* Transparent and focusable; taps are resolved on the map as a whole. */
+.region {
+  fill: transparent;
+  stroke: none;
+  pointer-events: none;
   outline: none;
 }
 
-.municipality:hover,
-.municipality:focus-visible {
-  fill: rgba(34, 85, 51, 0.90);
-  outline: none;
+.overlay path {
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
 }
 
-.municipality.isActive {
-  fill: rgba(201, 168, 76, 0.75);
-  stroke-width: 1.7;
+.overlayOuter {
+  fill: none;
 }
 
-.centroidDot {
-  fill: #172b1a;
-  stroke: #fff7e8;
-  stroke-width: 2;
-  cursor: pointer;
-  transition: r 160ms ease, fill 160ms ease;
+/* Hover: the place lightens. */
+.hover .overlayOuter {
+  fill: rgba(255, 255, 255, 0.24);
 }
 
-.centroidDot.isActive {
-  fill: #9b3f1d;
+.hover .overlayInner {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 1.5;
 }
 
-.vocabPanel {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transform: translateY(102%);
-  transition: transform 220ms ease;
-  background: rgba(255, 252, 246, 0.98);
-  color: #24170d;
-  border-radius: 24px 24px 0 0;
-  box-shadow: 0 -16px 50px rgba(31, 20, 12, 0.22);
-  padding: 22px 18px 26px;
-  z-index: 20;
+/* Selected: a gold tint with a gold outline, so the terrain shows through.
+   A dark halo under the outline keeps it visible on the light greens. */
+.active .overlayOuter {
+  fill: rgba(232, 201, 122, 0.4);
+  stroke: #12202C;
+  stroke-opacity: 0.55;
+  stroke-width: 5;
 }
 
-.vocabPanel.isOpen {
-  transform: translateY(0);
+.active .overlayInner {
+  fill: none;
+  stroke: #E8C97A;
+  stroke-width: 2.5;
 }
 
-.vocabPanel h3 {
-  margin: 0 42px 4px 0;
-  font-size: 1.55rem;
+/* Keyboard focus: a white ring around a navy ring. */
+.focus .overlayOuter {
+  fill: none;
+  stroke: #FFFFFF;
+  stroke-width: 7;
 }
 
-.centroidText {
-  margin: 0 0 14px;
-  font-size: 0.82rem;
-  color: #6f5a46;
+.focus .overlayInner {
+  fill: none;
+  stroke: #0D1B2A;
+  stroke-width: 3.5;
 }
 
-.closePanel {
+.zoomOut {
   position: absolute;
-  right: 16px;
-  top: 14px;
-  width: 34px;
-  height: 34px;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--ui-border-card);
   border-radius: 999px;
-  border: 0;
-  background: #eee1cf;
-  font-size: 1.45rem;
+  background: var(--ui-surface-card);
+  color: var(--ui-heading);
+  font: 700 0.9rem var(--sans);
   cursor: pointer;
-  line-height: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-.deckGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
+/* ── Card ── */
 
-.vocabCard {
-  border: 1px solid #d8c4a8;
-  background: #fff7e8;
+.panel {
+  position: sticky;
+  top: 16px;
+  min-height: 220px;
+  padding: 24px 24px 28px;
+  box-sizing: border-box;
+  background: var(--ui-surface-card);
+  color: var(--ui-text);
+  border: 1px solid var(--ui-border-card);
   border-radius: 16px;
-  padding: 14px 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   text-align: left;
-  font-weight: 800;
-  color: #24170d;
 }
 
-.emptyDeck {
-  font-size: 0.85rem;
-  color: #6f5a46;
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ui-hover);
+  color: var(--ui-heading);
+  cursor: pointer;
+}
+
+.zoomOut:focus-visible,
+.close:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+
+.idle {
+  display: grid;
+  place-items: center;
+  min-height: 170px;
+}
+
+.idleText {
   margin: 0;
+  font-size: 0.95rem;
+  color: var(--ui-text-muted);
+  text-align: center;
 }
 
-@media (min-width: 760px) {
-  .vocabPanel {
-    left: 50%;
-    right: auto;
-    width: min(460px, 90vw);
-    transform: translate(-50%, 102%);
+.cardName {
+  margin: 0 48px 4px 0;
+  font-family: var(--heading);
+  font-size: 2.1rem;
+  line-height: 1.15;
+  letter-spacing: normal;
+  color: var(--ui-heading);
+}
+
+.cardSecondName {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ui-text-muted);
+}
+
+.goldRule {
+  width: 56px;
+  height: 2px;
+  margin: 14px 0 18px;
+  border: 0;
+  background: var(--ui-accent);
+}
+
+.preparing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.seal {
+  width: 36px;
+  height: 36px;
+}
+
+.seal circle {
+  fill: none;
+  stroke: var(--ui-accent);
+  stroke-width: 1.5;
+}
+
+.seal path {
+  fill: var(--ui-accent);
+}
+
+.preparingTitle {
+  margin: 4px 0 0;
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ui-heading);
+}
+
+.preparingText {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ui-text);
+}
+
+/* Future content: shown only when it exists. */
+.photo {
+  margin: 0 0 16px;
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.photo figcaption {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--ui-text-muted);
+}
+
+.section h3 {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ui-accent-text);
+}
+
+.section p {
+  margin: 0 0 12px;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.vocab {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vocab li {
+  padding: 6px 12px;
+  border: 1px solid var(--ui-border-card);
+  border-radius: 999px;
+  font-weight: 700;
+  color: var(--ui-heading);
+}
+
+/* ── 1024px and below: the card is a bottom sheet ── */
+
+@media (max-width: 1024px) {
+  .body {
+    display: block;
+    padding: 8px 12px 16px;
   }
 
-  .vocabPanel.isOpen {
-    transform: translate(-50%, 0);
+  .guahanSvg {
+    height: calc(100vh - 210px);
+    height: calc(100dvh - 210px);
+    min-height: 380px;
+  }
+
+  .sheet {
+    position: fixed;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    min-height: 0;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 8px 20px max(20px, env(safe-area-inset-bottom));
+    border-radius: 20px 20px 0 0;
+    border-bottom: 0;
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+  }
+
+  .sheet .close {
+    top: 14px;
+  }
+
+  .handle {
+    display: grid;
+    place-items: center;
+    height: 28px;
+    margin: 0 auto 4px;
+    width: 96px;
+    cursor: grab;
+    touch-action: none;
+  }
+
+  .handle span {
+    width: 44px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--ui-border-card);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet {
+    transition: none;
   }
 }
