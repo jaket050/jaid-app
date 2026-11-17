@@ -1013,6 +1013,71 @@ body:has(.alphabet-page) #root {
   }
 }
 
+/* ── Numbers page ── */
+/* Reuses the alphabet page's layout and classes. A number card holds two
+   CHamoru forms, some of them five word phrases, so rows grow with their
+   text (the longest wraps to two lines and needs about 135px), and phones
+   use two columns: in three, the longest form would wrap to three lines. */
+.numbers-page .alphabet-grid {
+  grid-auto-rows: minmax(7rem, auto);
+}
+
+.numbers-card__form {
+  max-width: 100%;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.numbers-card__form--minor {
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ui-text-muted);
+}
+
+.numbers-detail__note-system {
+  font-weight: 700;
+}
+
+/* Values past the 1 to 21 run (38), below the grid where the alphabet page
+   has its pronunciation notes. The panel itself is .pronunciation-notes. */
+.numbers-bigger__example {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.numbers-bigger__value {
+  flex: none;
+  min-width: 3.5rem;
+  font-family: var(--heading);
+  font-size: 2.6rem;
+  line-height: 1;
+  text-align: center;
+  color: var(--ui-heading);
+}
+
+.numbers-bigger__forms {
+  min-width: 0;
+}
+
+.numbers-bigger__forms .alphabet-detail__example:last-child {
+  margin-bottom: 0;
+}
+
+.numbers-bigger__pending {
+  font-style: italic;
+  color: var(--ui-text-muted);
+}
+
+@media (max-width: 600px) {
+  .numbers-page .alphabet-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(6.5rem, auto);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .alphabet-card {
     transition: none;

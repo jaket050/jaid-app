@@ -6,6 +6,7 @@ import StudyMode from './components/StudyMode'
 import DeckSelect from './components/DeckSelect'
 import QuizMode from './components/QuizMode'
 import Alphabet from './components/Alphabet'
+import Numbers from './components/Numbers'
 import About from './components/About'
 import CulturalValues from './components/CulturalValues'
 import LearningPaths from './components/LearningPaths'
@@ -147,6 +148,12 @@ function App() {
   if (view === "alphabet") {
     return (
       <Alphabet onExit={() => setView("browse")} />
+    )
+  }
+
+  if (view === "numbers") {
+    return (
+      <Numbers words={words} onExit={() => setView("browse")} />
     )
   }
 
