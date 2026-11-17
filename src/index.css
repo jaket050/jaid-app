@@ -3,13 +3,13 @@
 :root {
   --text: #0D1A14;
   --text-h: #0D1A14;
-  --text-secondary: #4A8A80;
+  --text-secondary: #4A5D73;
   --bg: #F7FAF9;
   --card-bg: #ffffff;
   --border: #D0E8E2;
   --code-bg: rgba(11, 122, 106, 0.08);
-  --accent: #0B7A6A;
-  --accent-bg: #EEF7F5;
+  --accent: #7A5C12;
+  --accent-bg: #FBF3DC;
   --accent-border: #D0E8E2;
   --gold: #C4922A;
   --gold-bg: #FBF6ED;
@@ -102,12 +102,13 @@
 
   --text: #ffffff;
   --text-h: #ffffff;
+  --text-secondary: rgba(232, 220, 200, 0.75);
   --bg: #0D2E57;
   --card-bg: #163A6B;
   --border: #1e4a80;
   --code-bg: #1a3d6e;
-  --accent: #1D9E75;
-  --accent-bg: rgba(29, 158, 117, 0.12);
+  --accent: #E8C97A;
+  --accent-bg: rgba(201, 168, 76, 0.12);
   --accent-border: rgba(29, 158, 117, 0.45);
   --gold: #D4A82A;
   --gold-bg: rgba(212, 168, 42, 0.12);
