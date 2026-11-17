@@ -543,7 +543,7 @@
 .btn-exit-study {
   width: fit-content;
   background: transparent;
-  border: 1px solid var(--ui-ghost-border);
+  border: 1px solid var(--ui-control-border);
   color: var(--ui-heading);
   padding: 0.4rem 0.9rem;
   border-radius: 4px;
@@ -554,6 +554,11 @@
 
 .btn-exit-study:hover {
   background: var(--ui-ghost-hover);
+}
+
+.btn-exit-study:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
 }
 
 .study-mode__brand {
@@ -1458,6 +1463,12 @@ body:has(.about-page) #root {
 
 .about-page .btn-exit-study:hover {
   background: rgba(26, 58, 92, 0.06);
+}
+
+/* Dark gold in both themes: the themed light gold ring nearly vanishes
+   on cream. */
+.about-page .btn-exit-study:focus-visible {
+  outline-color: #7A5C12;
 }
 
 .about-page .study-mode__brand {
