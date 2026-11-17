@@ -96,6 +96,14 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Above 1440px the shared header lines up with the 1440px map area
+   (.body), so the Home button stays over the map's left edge. */
+@media (min-width: 1441px) {
+  .guahanMapShell :global(.study-mode__header) {
+    padding-inline: calc((100% - 1440px) / 2 + 24px);
+  }
+}
+
 /* ── Terrain (static layer) ── */
 
 .shadow use {

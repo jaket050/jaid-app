@@ -11,6 +11,14 @@
   flex-direction: column;
 }
 
+/* Full width instead of the 1126px #root column, so the background runs
+   edge to edge. Kept here because /practice does not load App.css. */
+body:has(.match-game) #root {
+  width: 100%;
+  max-width: 100%;
+  border-inline: none;
+}
+
 /* ─── Header strip ────────────────────────────────────────────── */
 
 .match-game__header {
@@ -353,5 +361,13 @@
 
   .match-mode-card__label {
     font-size: 1.05rem;
+  }
+}
+
+/* Above 1126px the header lines up with the 1126px column used on home,
+   so the Home link sits where it does on the other screens. */
+@media (min-width: 1127px) {
+  .match-game__header {
+    padding-inline: calc((100% - 1126px) / 2 + 1.5rem);
   }
 }

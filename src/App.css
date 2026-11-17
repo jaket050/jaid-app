@@ -2737,6 +2737,33 @@ body:has(.browse-view) #root {
   }
 }
 
+/* ─── Study, Quiz, the library and loading: full width ───────── */
+/* These screens use the full width, like home, so their backgrounds run
+   edge to edge. Each keeps its own content width. The loading and error
+   screens are fixed navy, so they go full width too. */
+body:has(.study-mode) #root,
+body:has(.study-summary) #root,
+body:has(.quiz-mode) #root,
+body:has(.library) #root,
+body:has(.app-status) #root {
+  width: 100%;
+  max-width: 100%;
+  border-inline: none;
+}
+
+/* Above 1126px the shared header lines up with the 1126px column used on
+   home, so the Home button sits in the same place on these screens.
+   I Tåno' follows its own 1440px map area instead (GuahanMap.module.css). */
+@media (min-width: 1127px) {
+  .study-mode .study-mode__header,
+  .quiz-mode .study-mode__header,
+  .deck-select .study-mode__header,
+  .alphabet-page .study-mode__header,
+  .about-page .study-mode__header {
+    padding-inline: calc((100% - 1126px) / 2 + 1.5rem);
+  }
+}
+
 /* ─── Branded loading / error full-screen states ──────────────── */
 
 .app-status {
