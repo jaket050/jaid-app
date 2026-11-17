@@ -242,6 +242,11 @@ function App() {
         <button className="btn-alphabet" onClick={() => setView("alphabet")}>
           I Atfabetu
         </button>
+        {/* Provisional English label: to be replaced by the CHamoru name once
+            the Kumisión i Fino' CHamoru supplies it. */}
+        <button className="btn-about-nav" onClick={() => setView("numbers")}>
+          Numbers
+        </button>
         <button className="btn-about-nav" onClick={() => setView("about")}>
           ABOUT
         </button>

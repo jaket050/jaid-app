@@ -113,10 +113,16 @@ function ordered(item, filter) {
   return order.filter((s) => item[s]).map((s) => [s, item[s]])
 }
 
+// The cultural notes are not shown here. On the Prisente rows the note
+// ("Traditional CHamoru: ...") repeats the Ansiånu form, which this page
+// already shows as first class data, and several of the Prisente notes
+// spell that form differently from the Ansiånu row for the same value; the
+// exact set has not been confirmed against the live data. Hidden pending a
+// ruling from the Kumisión i Fino' CHamoru; the notes stay in the data and
+// still show in Word of the Day and the admin portal.
 function NumberDetail({ item, filter }) {
   const forms = ordered(item, filter)
   const english = (item.prisente ?? item.ansianu).english
-  const notes = forms.filter(([, w]) => w.culturalNote)
   return (
     <div className="alphabet-detail__body">
       <div className="alphabet-detail__head">
@@ -129,12 +135,6 @@ function NumberDetail({ item, filter }) {
         <p key={system} className="alphabet-detail__example">
           <span className="alphabet-detail__chamorro">{w.chamorro}</span>
           <span className="alphabet-detail__english">{SYSTEM_NAMES[system]}</span>
-        </p>
-      ))}
-      {notes.map(([system, w]) => (
-        <p key={system} className="alphabet-detail__note">
-          {notes.length > 1 && <span className="numbers-detail__note-system">{SYSTEM_NAMES[system]}: </span>}
-          {w.culturalNote}
         </p>
       ))}
     </div>

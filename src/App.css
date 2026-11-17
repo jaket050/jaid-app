@@ -1035,10 +1035,6 @@ body:has(.alphabet-page) #root {
   color: var(--ui-text-muted);
 }
 
-.numbers-detail__note-system {
-  font-weight: 700;
-}
-
 /* Values past the 1 to 21 run (38), below the grid where the alphabet page
    has its pronunciation notes. The panel itself is .pronunciation-notes. */
 .numbers-bigger__example {
@@ -1160,13 +1156,18 @@ body:has(.alphabet-page) #root {
 
 }
 
-/* Tab row: one row above 1024px, two rows of three from 541 to 1024px,
-   two columns at 540px and below. */
+/* Tab row: one row above 1024px. From 541 to 1024px, Practice on its own
+   row, then the six other buttons in two rows of three; at 540px and below,
+   Practice on its own row, then three rows of two. */
 @media (min-width: 541px) and (max-width: 1024px) {
   .action-bar {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.75rem;
+  }
+
+  .action-bar .btn-study {
+    grid-column: 1 / -1;
   }
 
   .action-bar .btn-study,
@@ -1182,9 +1183,10 @@ body:has(.alphabet-page) #root {
   }
 }
 
-/* 540px and below: two columns, with Practice and the last button
-   (I Tåno') across both. In three columns PRACTICE (822) wraps below about
-   532px, so the switch comes about 8px above that. */
+/* 540px and below: two columns, Practice across both, then three even rows
+   of two. (540px was set when Practice shared a row in the three column
+   layout and wrapped below about 532px; Practice now spans that layout too,
+   and the switch point is kept where it was.) */
 @media (max-width: 540px) {
   .action-bar {
     display: grid;
@@ -1205,8 +1207,7 @@ body:has(.alphabet-page) #root {
     padding-right: 0.5rem;
   }
 
-  .action-bar .btn-study,
-  .action-bar > :last-child {
+  .action-bar .btn-study {
     grid-column: 1 / -1;
   }
 }
