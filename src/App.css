@@ -67,7 +67,7 @@
 
 .hero-content p { color: rgba(255,255,255,0.5); }
 
-.hero-content .progress { color: rgba(255,255,255,0.6); }
+.hero-content .progress { color: var(--ui-text); font-family: var(--sans); font-weight: 400; }
 
 .hero-content .progress-bar { background: var(--ui-strip-track); flex: 1 1 auto; max-width: 320px; margin: 0; }
 
@@ -2976,19 +2976,16 @@ body:has(.browse-view) #root {
 
 /* ─── Final polish sprint: progress spans, study stats, map preview ─── */
 
-.progress__count {
-  font-family: var(--heading);
-  font-weight: 700;
-  color: var(--ui-accent-text);
-}
-
+.progress__count,
 .progress__total {
+  font-size: 1.1em;
+  font-weight: 700;
   color: var(--ui-text);
 }
 
 .progress__muted {
-  font-size: 0.85em;
-  color: var(--ui-text-soft);
+  font-weight: 400;
+  color: var(--ui-text);
 }
 
 .study-mode__stat-learned {

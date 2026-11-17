@@ -233,7 +233,7 @@ function App() {
           CARD MATCH
         </button>
         <button className="btn-alphabet" onClick={() => setView("alphabet")}>
-          I ATFABETU
+          I Atfabetu
         </button>
         <button className="btn-about-nav" onClick={() => setView("about")}>
           ABOUT
