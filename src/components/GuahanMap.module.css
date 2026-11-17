@@ -55,6 +55,13 @@
   color: #E8C97A;
 }
 
+/* The partnership line is shown exactly as written, not in capitals, so
+   "Kumisión i Fino' CHamoru" keeps its spelling. Size, weight, spacing and
+   color stay those of .eyebrow. */
+.eyebrowAsWritten {
+  text-transform: none;
+}
+
 .title {
   margin: 0;
   font-family: var(--heading);
