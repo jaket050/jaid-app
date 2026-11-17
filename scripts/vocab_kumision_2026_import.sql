@@ -47,7 +47,7 @@ FROM (VALUES
   ('katotse', 'Fourteen (14)', 'Word'),  -- line 84
   ('kinse', 'Fifteen (15)', 'Word'),  -- line 85
   ('disisais', 'Sixteen (16)', 'Word'),  -- line 86 [held]
-  ('disisiette', 'Seventeen (17)', 'Word'),  -- line 87
+  ('disisientte', 'Seventeen (17)', 'Word'),  -- line 87
   ('disiocho', 'Eighteen (18)', 'Word'),  -- line 88 [held]
   ('disinuebi', 'Nineteen (19)', 'Word'),  -- line 89
   ('bente', 'Twenty (20)', 'Word'),  -- line 90
