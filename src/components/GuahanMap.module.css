@@ -52,7 +52,7 @@
   letter-spacing: 0.12em;
   font-size: 0.72rem;
   font-weight: 800;
-  color: #E8C97A;
+  color: #F5E3B0;
 }
 
 /* The partnership line is shown exactly as written, not in capitals, so
@@ -74,7 +74,7 @@
 .mapSubtitle {
   margin: 8px 0 0;
   font-size: 0.85rem;
-  color: #E8DCC8;
+  color: #FFFFFF;
 }
 
 /* The map is as tall as the window allows below the header and title. */

@@ -170,6 +170,17 @@
   --ui-danger-text: #e07b39;
 }
 
+/* Dark mode on the tinted pages (deck picker, alphabet page): the page
+   (#344D6B) is lighter than the dark surface, so muted text and gold
+   labels are raised to keep 4.5:1. */
+:root[data-theme="dark"] :is(.deck-select, .alphabet-page) {
+  --ui-accent-text: #E8C97A;
+  --ui-text-muted: rgba(232, 220, 200, 0.8);
+  --ui-text-count: rgba(232, 220, 200, 0.8);
+  --ui-text-icon: rgba(232, 220, 200, 0.8);
+  --ui-text-note: rgba(232, 220, 200, 0.85);
+}
+
 /* No fade when the theme changes (set briefly by src/hooks/useTheme.js). */
 [data-theme-switching] *,
 [data-theme-switching] *::before,
