@@ -1051,9 +1051,9 @@ body:has(.alphabet-page) #root {
 
 }
 
-/* Tab row: one row above 1024px, two rows of three from 481 to 1024px,
-   sideways scroll at 480px and below. */
-@media (min-width: 481px) and (max-width: 1024px) {
+/* Tab row: one row above 1024px, two rows of three from 541 to 1024px,
+   two columns at 540px and below. */
+@media (min-width: 541px) and (max-width: 1024px) {
   .action-bar {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1073,24 +1073,32 @@ body:has(.alphabet-page) #root {
   }
 }
 
-@media (max-width: 480px) {
+/* 540px and below: two columns, with Practice and the last button
+   (I Tåno') across both. In three columns PRACTICE (822) wraps below about
+   532px, so the switch comes about 8px above that. */
+@media (max-width: 540px) {
   .action-bar {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    flex-wrap: nowrap;
-  }
-
-  .action-bar::-webkit-scrollbar {
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .action-bar .btn-study,
   .action-bar .btn-alphabet,
   .action-bar .btn-match,
   .action-bar .btn-about-nav {
-    flex: 0 0 auto;
-    min-width: 120px;
+    margin-left: 0;
+    min-width: 0;
+    min-height: 44px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .action-bar .btn-study,
+  .action-bar > :last-child {
+    grid-column: 1 / -1;
   }
 }
 /* ─── Deck picker (before Practice and before a quiz) ───────── */
