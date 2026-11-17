@@ -154,11 +154,32 @@ body:has(.match-game) #root {
 }
 
 .match-card--matched {
+  position: relative;
   background: var(--ui-accent);
   border-color: var(--ui-accent-text);
   color: #0D1B2A;
   cursor: default;
   transform: none;
+}
+
+/* Check badge on a matched card's top right corner: 7px outside the card
+   and 11px inside, within the corner's padding, so it never covers the word
+   (at 320px the text starts 11.8px from the right edge and 13.6px from the
+   top). The overhang fits the board padding, the gap between cards and the
+   space under the column title. A ring in the page color sets it off. */
+.match-card__check {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0D1B2A;
+  color: #E8C97A;
+  box-shadow: 0 0 0 2px var(--ui-surface);
+  pointer-events: none;
 }
 
 .match-card--wrong {

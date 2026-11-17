@@ -1,9 +1,21 @@
+import { Check } from 'lucide-react'
+
 function cellClass({ isMatched, isSelected, isWrong }) {
   const classes = ['match-card']
   if (isMatched) classes.push('match-card--matched')
   if (isSelected) classes.push('match-card--selected')
   if (isWrong) classes.push('match-card--wrong')
   return classes.join(' ')
+}
+
+// Non-color sign of a matched card: a check badge on its top right corner,
+// outside the word's box. Screen readers get the button's aria-label.
+function MatchedMark() {
+  return (
+    <span className="match-card__check" aria-hidden="true">
+      <Check size={12} strokeWidth={3} />
+    </span>
+  )
 }
 
 function MatchBoard({
@@ -34,8 +46,10 @@ function MatchBoard({
               })}
               onClick={() => onSelectCh(w.id)}
               disabled={isMatched}
+              aria-label={isMatched ? `${w.chamorro}, matched` : undefined}
             >
               {w.chamorro}
+              {isMatched && <MatchedMark />}
             </button>
           )
         })}
@@ -56,8 +70,10 @@ function MatchBoard({
               })}
               onClick={() => onSelectEn(w.id)}
               disabled={isMatched}
+              aria-label={isMatched ? `${w.english}, matched` : undefined}
             >
               {w.english}
+              {isMatched && <MatchedMark />}
             </button>
           )
         })}
