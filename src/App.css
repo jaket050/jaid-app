@@ -399,7 +399,7 @@
 
 .btn-practice {
   background: transparent;
-  border: 1px solid #C9A84C;
+  border: 1px solid var(--ui-accent-text);
   color: var(--ui-accent-text);
 }
 
@@ -651,7 +651,7 @@ body:has(.alphabet-page) #root {
   width: fit-content;
   margin: 0 auto 1.5rem;
   padding: 3px;
-  border: 1px solid var(--ui-border-card);
+  border: 1px solid var(--ui-control-border);
   border-radius: 9px;
   background: var(--ui-surface-card);
 }
@@ -708,7 +708,7 @@ body:has(.alphabet-page) #root {
   min-height: 44px;
   padding: 0.5rem;
   box-sizing: border-box;
-  border: 1px solid var(--ui-border-card);
+  border: 1px solid var(--ui-control-border);
   border-radius: 10px;
   background: var(--ui-surface-card);
   color: var(--ui-heading);
@@ -1173,7 +1173,7 @@ body:has(.deck-select) #root {
   margin-bottom: 1.75rem;
   box-sizing: border-box;
   background: var(--ui-surface-raised);
-  border: 2px solid var(--ui-accent);
+  border: 2px solid var(--ui-accent-text);
   border-radius: 12px;
   cursor: pointer;
   text-align: left;
@@ -2912,7 +2912,7 @@ body:has(.app-status) #root {
 
 .btn-next-deck {
   background: transparent;
-  border: 1px solid #C9A84C;
+  border: 1px solid var(--ui-accent-text);
   color: var(--ui-accent-text);
   padding: 0.6rem 1.25rem;
   border-radius: 6px;

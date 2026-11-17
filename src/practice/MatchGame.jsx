@@ -68,7 +68,7 @@ const MODE_CONFIG = {
     label: 'Antonyms',
     fetch: fetchAntonyms,
     colBTitle: 'Its Opposite',
-    emptyMessage: 'Antonym pairs are added after Kumisión i Finoʼ CHamoru verification. Check back soon.',
+    emptyMessage: "Antonym pairs are added after Kumisión i Fino' CHamoru verification. Check back soon.",
   },
 }
 

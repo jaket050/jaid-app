@@ -42,7 +42,7 @@
   --ui-text-icon: #4A5D73;
   --ui-text-note: #4A5D73;
   --ui-placeholder: #4A5D73;
-  --ui-border: rgba(26, 58, 92, 0.15);
+  --ui-border: var(--ui-control-border);
   --ui-border-strong: rgba(26, 58, 92, 0.15);
   --ui-divider: rgba(26, 58, 92, 0.15);
   --ui-hover: rgba(26, 58, 92, 0.05);
@@ -74,11 +74,11 @@
   /* Edges of controls (keyboard keys, the keyboard panel, the search box,
      category chips, the Continue card): 3:1 against what they sit on. */
   --ui-control-border: #7F8C99;
-  --ui-border-game: rgba(26, 58, 92, 0.2);
+  --ui-border-game: var(--ui-control-border);
   --ui-border-hover: rgba(26, 58, 92, 0.3);
   --ui-ghost-border: rgba(26, 58, 92, 0.35);
   --ui-ghost-hover: rgba(26, 58, 92, 0.06);
-  --ui-home-border: rgba(26, 58, 92, 0.35);
+  --ui-home-border: var(--ui-control-border);
   --ui-home-hover: rgba(26, 58, 92, 0.06);
   --ui-danger-text: #A3461A;
 
@@ -132,7 +132,7 @@
   --ui-text-icon: rgba(232, 220, 200, 0.6);
   --ui-text-note: rgba(232, 220, 200, 0.75);
   --ui-placeholder: rgba(232, 220, 200, 0.65);
-  --ui-border: rgba(201, 168, 76, 0.25);
+  --ui-border: var(--ui-control-border);
   --ui-border-strong: rgba(201, 168, 76, 0.35);
   --ui-divider: rgba(232, 220, 200, 0.12);
   --ui-hover: rgba(201, 168, 76, 0.06);
@@ -161,11 +161,11 @@
   --ui-card-selected-text: #E8C97A;
   --ui-border-card: #1E3448;
   --ui-control-border: rgba(232, 220, 200, 0.6);
-  --ui-border-game: #2D4361;
+  --ui-border-game: var(--ui-control-border);
   --ui-border-hover: rgba(201, 168, 76, 0.45);
   --ui-ghost-border: rgba(255,255,255,0.3);
   --ui-ghost-hover: rgba(255,255,255,0.1);
-  --ui-home-border: rgba(232, 220, 200, 0.3);
+  --ui-home-border: var(--ui-control-border);
   --ui-home-hover: rgba(232, 220, 200, 0.08);
   --ui-danger-text: #e07b39;
 }

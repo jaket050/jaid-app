@@ -147,18 +147,17 @@ body:has(.match-game) #root {
 
 .match-card--selected {
   background: var(--ui-card-selected);
-  border-color: var(--ui-accent);
+  border-color: var(--ui-accent-text);
   color: var(--ui-card-selected-text);
   transform: scale(1.02);
   box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.22), 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .match-card--matched {
-  background: #2d6a4f;
-  border-color: #2d6a4f;
-  color: #ffffff;
+  background: var(--ui-accent);
+  border-color: var(--ui-accent-text);
+  color: #0D1B2A;
   cursor: default;
-  opacity: 0.85;
   transform: none;
 }
 
