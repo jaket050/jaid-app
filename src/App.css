@@ -553,6 +553,7 @@
   padding: 0.4rem 0.9rem;
   border-radius: 4px;
   cursor: pointer;
+  font-family: var(--sans);
   font-size: 0.85rem;
   letter-spacing: 0.05em;
 }
@@ -580,6 +581,37 @@
   font-size: 0.78rem;
   letter-spacing: 0.05em;
   white-space: nowrap;
+}
+
+/* Study and Quiz header on narrow screens. Below 654px the full back label
+   ("← Back to Holidays and Religion", 275px) cannot stay on one line beside
+   JAID, so up to 680px (26px of margin) JAID is hidden, the label shortens
+   to "← Back" (the button's aria-label keeps the category) and the Study
+   count reads "left" instead of "to go". .wide-only and .narrow-only switch
+   the two wordings. With JAID gone the header uses two columns, so the count
+   stays at the right edge. Other screens keep theirs. */
+.study-mode .narrow-only,
+.quiz-mode .narrow-only {
+  display: none;
+}
+
+@media (max-width: 680px) {
+  .study-mode .study-mode__header,
+  .quiz-mode .study-mode__header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .study-mode .study-mode__brand,
+  .quiz-mode .study-mode__brand,
+  .study-mode .wide-only,
+  .quiz-mode .wide-only {
+    display: none;
+  }
+
+  .study-mode .narrow-only,
+  .quiz-mode .narrow-only {
+    display: inline;
+  }
 }
 
 /* ─── I Atfabetu (alphabet page) ─────────────────────────────── */

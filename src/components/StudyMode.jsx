@@ -74,14 +74,28 @@ function StudyMode({ words, completedIds, toggleId, totalWords, category, onSele
   return (
     <div className="study-mode">
       <div className="study-mode__header">
-        <button className="btn-exit-study" onClick={onExit}>
-          {category && category !== 'all' ? `← Back to ${category}` : '← Home'}
+        {/* On narrow screens the back label shortens to "← Back" and "to go" to
+            "left" (see App.css); the aria-label keeps the category. */}
+        <button
+          className="btn-exit-study"
+          onClick={onExit}
+          aria-label={category && category !== 'all' ? `Back to ${category}` : undefined}
+        >
+          {category && category !== 'all' ? (
+            <>
+              <span className="wide-only">← Back to {category}</span>
+              <span className="narrow-only">← Back</span>
+            </>
+          ) : '← Home'}
         </button>
         <span className="study-mode__brand">JAID</span>
         <span className="study-mode__progress">
           <span className="study-mode__stat-learned">{gotItIds.size} learned</span>
           {' · '}
-          <span className="study-mode__stat-remaining">{queue.length} to go</span>
+          <span className="study-mode__stat-remaining">
+            {queue.length} <span className="wide-only">to go</span>
+            <span className="narrow-only">left</span>
+          </span>
         </span>
       </div>
       <div className="study-mode__card-area">

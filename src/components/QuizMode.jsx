@@ -57,14 +57,23 @@ function QuizMode({ words, category, onSelectDeck, onExit }) {
   const [locked, setLocked] = useState(false)
   const [score, setScore] = useState(0)
 
-  const backLabel = category && category !== 'all' ? `← Back to ${category}` : '← Home'
+  // On narrow screens the label shortens to "← Back" (see App.css); the aria-label
+  // keeps the category for screen readers.
+  const hasCategory = category && category !== 'all'
+  const backLabel = hasCategory ? (
+    <>
+      <span className="wide-only">← Back to {category}</span>
+      <span className="narrow-only">← Back</span>
+    </>
+  ) : '← Home'
+  const backAria = hasCategory ? `Back to ${category}` : undefined
 
   // Guard: not enough data to build a quiz (shouldn't happen — gated at 4+ words).
   if (questions.length === 0) {
     return (
       <div className="quiz-mode">
         <div className="study-mode__header">
-          <button className="btn-exit-study" onClick={onExit}>{backLabel}</button>
+          <button className="btn-exit-study" onClick={onExit} aria-label={backAria}>{backLabel}</button>
           <span className="study-mode__brand">JAID</span>
           <span className="study-mode__progress">Quiz</span>
         </div>
@@ -131,7 +140,7 @@ function QuizMode({ words, category, onSelectDeck, onExit }) {
   return (
     <div className="quiz-mode">
       <div className="study-mode__header">
-        <button className="btn-exit-study" onClick={onExit}>{backLabel}</button>
+        <button className="btn-exit-study" onClick={onExit} aria-label={backAria}>{backLabel}</button>
         <span className="study-mode__brand">JAID</span>
         <span className="study-mode__progress">Question {idx + 1} of {questions.length}</span>
       </div>
