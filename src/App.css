@@ -2580,6 +2580,56 @@ body:has(.deck-select) #root {
   background: var(--ui-page-tint);
 }
 
+/* ─── Home: full width ────────────────────────────────────────── */
+/* Home uses the full width, like the five full width screens, instead of
+   the 1126px #root column. Each section's background runs edge to edge;
+   above 1126px its content stays in the old centered 1126px column. In
+   those rules, calc((100% - 1126px) / 2) is the gap beside that column (a
+   percentage of the full page width), added to each section's own
+   padding. At 1126px and below nothing changes. */
+body:has(.browse-view) #root {
+  width: 100%;
+  max-width: 100%;
+  border-inline: none;
+}
+
+@media (min-width: 1127px) {
+  /* Progress strip, button row, search, results, Start Learning, footer. */
+  .browse-view .hero-content {
+    padding-inline: calc((100% - 1126px) / 2 + 1.5rem);
+  }
+
+  .browse-view .action-bar {
+    padding-inline: calc((100% - 1126px) / 2 + 1.5rem);
+  }
+
+  .browse-view .search-bar {
+    margin-inline: calc((100% - 1126px) / 2 + 1.5rem);
+  }
+
+  .browse-view .card-list {
+    padding-inline: calc((100% - 1126px) / 2 + 32px);
+  }
+
+  .browse-view .learning-paths {
+    padding-inline: calc((100% - 1126px) / 2);
+  }
+
+  .browse-view .browse-footer {
+    padding-inline: calc((100% - 1126px) / 2 + 1rem);
+  }
+
+  /* Core Values has no background of its own (the band is the page
+     tint), and its wreath is sized from the wrapper (120%), so the
+     wrapper stays 1126px wide, centered: wreath and cards keep their
+     size. */
+  .browse-view .cultural-values-wrapper {
+    box-sizing: border-box;
+    max-width: 1126px;
+    margin-inline: auto;
+  }
+}
+
 /* ─── Branded loading / error full-screen states ──────────────── */
 
 .app-status {
