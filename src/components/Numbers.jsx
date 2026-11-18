@@ -25,6 +25,14 @@ const FILTERS = [
 
 const SYSTEM_NAMES = { prisente: 'Prisente', ansianu: 'Ansiånu' }
 
+// Reference shows every form. Practice shows only the numerals; tapping a
+// number reveals its forms in place, and the details panel is hidden since
+// it would give the answer away. The mode is not saved between visits.
+const MODES = [
+  { value: 'reference', label: 'Reference' },
+  { value: 'practice', label: 'Practice' },
+]
+
 const valueOf = (english) => {
   const m = english?.match(/\((\d+)\)/)
   return m ? Number(m[1]) : null
@@ -74,24 +82,51 @@ const BUILD_NOTES = {
   ansianu: null,
 }
 
-function BiggerNumbers({ items, filter }) {
+function BiggerNumbers({ items, filter, practice, revealed, onToggle }) {
   const systems = filter === 'ansianu' ? ['ansianu', 'prisente'] : ['prisente', 'ansianu']
   return (
     <section className="pronunciation-notes numbers-bigger" aria-labelledby="numbers-bigger-title">
       <h3 id="numbers-bigger-title" className="pronunciation-notes__title">Bigger numbers</h3>
-      {items.map((item) => (
-        <div key={item.value} className="numbers-bigger__example">
-          <span className="numbers-bigger__value">{item.value}</span>
-          <div className="numbers-bigger__forms">
-            {ordered(item, filter).map(([system, w]) => (
-              <p key={system} className="alphabet-detail__example">
-                <span className="alphabet-detail__chamorro">{w.chamorro}</span>
-                <span className="alphabet-detail__english">{SYSTEM_NAMES[system]}</span>
-              </p>
-            ))}
-          </div>
-        </div>
-      ))}
+      {items.map((item) => {
+        if (!practice) {
+          return (
+            <div key={item.value} className="numbers-bigger__example">
+              <span className="numbers-bigger__value">{item.value}</span>
+              <div className="numbers-bigger__forms">
+                {ordered(item, filter).map(([system, w]) => (
+                  <p key={system} className="alphabet-detail__example">
+                    <span className="alphabet-detail__chamorro">{w.chamorro}</span>
+                    <span className="alphabet-detail__english">{SYSTEM_NAMES[system]}</span>
+                  </p>
+                ))}
+              </div>
+            </div>
+          )
+        }
+        // Practice: the row is a button; its forms keep their space while
+        // hidden (see .numbers-concealed), so revealing never moves the page.
+        // Spans, not paragraphs, since they sit inside a button.
+        const isRevealed = revealed.has(item.value)
+        return (
+          <button
+            key={item.value}
+            type="button"
+            className="numbers-bigger__example numbers-bigger__example--practice"
+            aria-label={practiceLabel(item, filter, isRevealed)}
+            onClick={() => onToggle(item)}
+          >
+            <span className="numbers-bigger__value">{item.value}</span>
+            <span className={`numbers-bigger__forms${isRevealed ? '' : ' numbers-concealed'}`}>
+              {ordered(item, filter).map(([system, w]) => (
+                <span key={system} className="alphabet-detail__example">
+                  <span className="alphabet-detail__chamorro">{w.chamorro}</span>
+                  <span className="alphabet-detail__english">{SYSTEM_NAMES[system]}</span>
+                </span>
+              ))}
+            </span>
+          </button>
+        )
+      })}
       {systems.map((system) => (
         <div key={system} className="pronunciation-note">
           <span className="pronunciation-note__label">{SYSTEM_NAMES[system]}</span>
@@ -112,6 +147,14 @@ function ordered(item, filter) {
   const order = filter === 'ansianu' ? ['ansianu', 'prisente'] : ['prisente', 'ansianu']
   return order.filter((s) => item[s]).map((s) => [s, item[s]])
 }
+
+// "Prisente: onse. Ansiånu: månot na gai håcha", in the filter's order.
+const formsText = (item, filter) => ordered(item, filter).map(([s, w]) => `${SYSTEM_NAMES[s]}: ${w.chamorro}`).join('. ')
+
+// A Practice card's accessible name: the numeral and whether it is
+// revealed, plus the forms once they are showing.
+const practiceLabel = (item, filter, isRevealed) =>
+  isRevealed ? `${item.value}, revealed. ${formsText(item, filter)}` : `${item.value}, hidden`
 
 // The cultural notes are not shown here. On the Prisente rows the note
 // ("Traditional CHamoru: ...") repeats the Ansiånu form, which this page
@@ -145,6 +188,12 @@ function Numbers({ words, onExit }) {
   const { run: numbers, bigger } = useMemo(() => splitRun(pairNumbers(words)), [words])
   const [isDesktop, setIsDesktop] = useState(isDesktopNow)
   const [filter, setFilter] = useState('all')
+  const [mode, setMode] = useState('reference')
+  // Practice: the values whose forms are showing, and the latest reveal
+  // for the live region.
+  const [revealed, setRevealed] = useState(() => new Set())
+  const [practiceNews, setPracticeNews] = useState('')
+  const practice = mode === 'practice'
   // Desktop opens with the first number selected, so the panel is never
   // empty; phones open with nothing selected and no sheet.
   const [selected, setSelected] = useState(() => (isDesktopNow() ? numbers[0]?.value ?? null : null))
@@ -188,12 +237,59 @@ function Numbers({ words, onExit }) {
     else setSelected(value)
   }
 
-  const sheetOpen = !isDesktop && selectedItem
-  const showPanel = isDesktop || sheetOpen
+  const total = numbers.length + bigger.length
+  const allRevealed = total > 0 && revealed.size === total
+
+  function chooseMode(next) {
+    if (next === mode) return
+    setMode(next)
+    if (next === 'practice') {
+      // Start each drill with every form hidden. On phones, also drop the
+      // selection so the sheet does not reopen on the way back.
+      setRevealed(new Set())
+      setPracticeNews('')
+      if (!isDesktop) setSelected(null)
+    }
+  }
+
+  // A filter change keeps the revealed set (revealed cards show both forms
+  // under any filter) but clears the Practice announcement, which lists the
+  // forms in the previous order.
+  function chooseFilter(next) {
+    setFilter(next)
+    if (practice) setPracticeNews('')
+  }
+
+  function toggleReveal(item) {
+    const next = new Set(revealed)
+    if (next.has(item.value)) {
+      next.delete(item.value)
+      setPracticeNews(`${item.value} hidden`)
+    } else {
+      next.add(item.value)
+      setPracticeNews(`${item.value} revealed. ${formsText(item, filter)}`)
+    }
+    setRevealed(next)
+  }
+
+  // Reveal all and Hide all leave focus where it is; the live region says
+  // what happened.
+  function toggleAll() {
+    if (allRevealed) {
+      setRevealed(new Set())
+      setPracticeNews('All numbers hidden')
+    } else {
+      setRevealed(new Set([...numbers, ...bigger].map((item) => item.value)))
+      setPracticeNews(`${total} numbers revealed`)
+    }
+  }
+
+  const sheetOpen = !practice && !isDesktop && selectedItem
+  const showPanel = !practice && (isDesktop || sheetOpen)
 
   return (
     <div
-      className="alphabet-page numbers-page"
+      className={`alphabet-page numbers-page${practice ? ' numbers-page--practice' : ''}`}
       style={sheetOpen && sheetH ? { paddingBottom: `${sheetH}px` } : undefined}
     >
       <div className="study-mode__header">
@@ -211,6 +307,27 @@ function Numbers({ words, onExit }) {
           </p>
         </div>
 
+        <div className="numbers-mode">
+          <div className="alphabet-filter numbers-mode__toggle" role="group" aria-label="Mode">
+            {MODES.map((m) => (
+              <button
+                key={m.value}
+                type="button"
+                className="alphabet-filter__btn"
+                aria-pressed={mode === m.value}
+                onClick={() => chooseMode(m.value)}
+              >
+                {m.label}
+              </button>
+            ))}
+          </div>
+          {practice && (
+            <button type="button" className="numbers-reveal-all" onClick={toggleAll}>
+              {allRevealed ? 'Hide all' : 'Reveal all'}
+            </button>
+          )}
+        </div>
+
         <div className="alphabet-filter">
           {FILTERS.map((f) => (
             <button
@@ -218,7 +335,7 @@ function Numbers({ words, onExit }) {
               type="button"
               className="alphabet-filter__btn"
               aria-pressed={filter === f.value}
-              onClick={() => setFilter(f.value)}
+              onClick={() => chooseFilter(f.value)}
             >
               {f.label}
             </button>
@@ -231,8 +348,34 @@ function Numbers({ words, onExit }) {
           <div className="alphabet-main">
             <div className="alphabet-grid">
               {numbers.map((item) => {
-                const isSelected = item.value === selected
                 const forms = ordered(item, filter)
+                const formSpans = (hidden) => forms.map(([system, w], i) => (
+                  <span
+                    key={system}
+                    className={`${filter === 'all' || i === 0 ? 'alphabet-card__name numbers-card__form' : 'numbers-card__form numbers-card__form--minor'}${hidden ? ' numbers-concealed' : ''}`}
+                  >
+                    {w.chamorro}
+                  </span>
+                ))
+                if (practice) {
+                  // The forms stay in the card while hidden (visibility only),
+                  // so a card is the same height hidden or revealed and the
+                  // grid never jumps.
+                  const isRevealed = revealed.has(item.value)
+                  return (
+                    <button
+                      key={item.value}
+                      type="button"
+                      className="alphabet-card"
+                      aria-label={practiceLabel(item, filter, isRevealed)}
+                      onClick={() => toggleReveal(item)}
+                    >
+                      <span className="alphabet-card__letter">{item.value}</span>
+                      {formSpans(!isRevealed)}
+                    </button>
+                  )
+                }
+                const isSelected = item.value === selected
                 return (
                   <button
                     key={item.value}
@@ -243,14 +386,7 @@ function Numbers({ words, onExit }) {
                     onClick={() => pressNumber(item.value)}
                   >
                     <span className="alphabet-card__letter">{item.value}</span>
-                    {forms.map(([system, w], i) => (
-                      <span
-                        key={system}
-                        className={filter === 'all' || i === 0 ? 'alphabet-card__name numbers-card__form' : 'numbers-card__form numbers-card__form--minor'}
-                      >
-                        {w.chamorro}
-                      </span>
-                    ))}
+                    {formSpans(false)}
                   </button>
                 )
               })}
@@ -278,14 +414,19 @@ function Numbers({ words, onExit }) {
           </div>
         )}
 
-        {bigger.length > 0 && <BiggerNumbers items={bigger} filter={filter} />}
+        {bigger.length > 0 && (
+          <BiggerNumbers items={bigger} filter={filter} practice={practice} revealed={revealed} onToggle={toggleReveal} />
+        )}
 
         {/* Always present, so the new number is announced when the panel
-            changes or the sheet opens. Text comes from the data. */}
+            changes or the sheet opens, and in Practice what was revealed.
+            Text comes from the data. */}
         <p className="alphabet-sr-only" aria-live="polite">
-          {selectedItem
-            ? `${selectedItem.value}. ${ordered(selectedItem, filter).map(([s, w]) => `${SYSTEM_NAMES[s]}: ${w.chamorro}`).join('. ')}. ${(selectedItem.prisente ?? selectedItem.ansianu).english}`
-            : ''}
+          {practice
+            ? practiceNews
+            : selectedItem
+              ? `${selectedItem.value}. ${formsText(selectedItem, filter)}. ${(selectedItem.prisente ?? selectedItem.ansianu).english}`
+              : ''}
         </p>
       </div>
     </div>

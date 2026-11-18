@@ -1035,6 +1035,71 @@ body:has(.alphabet-page) #root {
   color: var(--ui-text-muted);
 }
 
+/* Reference and Practice. The mode toggle sits above the system filter,
+   with Reveal all beside it in Practice. In Practice the details panel is
+   hidden, so on desktop the grid takes the full width, and hidden forms keep
+   their space (visibility, not display) so cards never change height. */
+.numbers-mode {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0 auto 0.75rem;
+}
+
+.numbers-mode .numbers-mode__toggle {
+  margin: 0;
+}
+
+.numbers-reveal-all {
+  min-width: 7rem; /* fits "Reveal all", so the label swap never moves the toggle */
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--ui-control-border);
+  border-radius: 9px;
+  background: var(--ui-surface-card);
+  color: var(--ui-text);
+  font: 600 0.9rem var(--sans);
+  cursor: pointer;
+}
+
+.numbers-reveal-all:hover {
+  background: var(--ui-card-hover);
+}
+
+.numbers-reveal-all:focus-visible,
+.numbers-bigger__example--practice:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+
+.numbers-page--practice .alphabet-main {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.numbers-concealed {
+  visibility: hidden;
+}
+
+/* The Bigger numbers row as a button in Practice: the same layout as in
+   Reference, with the button's own look reset. */
+.numbers-bigger__example--practice {
+  width: 100%;
+  padding: 0.25rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.numbers-bigger__example--practice .numbers-bigger__forms {
+  display: block;
+}
+
 /* Values past the 1 to 21 run (38), below the grid where the alphabet page
    has its pronunciation notes. The panel itself is .pronunciation-notes. */
 .numbers-bigger__example {
