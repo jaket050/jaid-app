@@ -21,5 +21,5 @@ export const MUNICIPALITIES = [
   { id: 'tamuneng-tomhom',       chamorro: 'Tamuneng-Tomhom',        english: 'Tamuning-Tumon' },
   { id: 'humatak',               chamorro: 'Humåtak',                english: 'Umatac' },
   { id: 'yigu',                  chamorro: 'Yigu',                   english: 'Yigo' },
-  { id: 'yona',                  chamorro: "Yo'ña",                  english: 'Yona' },
+  { id: 'yona',                  chamorro: "Yo'ña",                  english: 'Yoña' },
 ]

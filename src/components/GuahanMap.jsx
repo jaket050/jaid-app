@@ -3,6 +3,8 @@ import { X } from 'lucide-react';
 import { geoMercator, geoPath } from 'd3-geo';
 import { guamMunicipalities } from '../data/guamMunicipalities.generated.js';
 import { MUNICIPALITY_CONTENT } from '../data/municipalityContent.js';
+import { MUNICIPALITIES } from '../data/municipalityGameNames.js';
+import { SUBTITLE_OVERRIDES } from '../data/municipalitySubtitles.js';
 // Read only: the Municipalities game's projected shapes and each region's
 // widest point. Same projection as this screen (the island fitted to
 // 440 by 720), so they line up with the shapes drawn here.
@@ -24,6 +26,9 @@ const CLUSTER_VIEW = {
 const ZOOM_MS = 380;
 
 const FEATURES_BY_ID = new Map(guamMunicipalities.features.map((f) => [f.properties.id, f]));
+// The English gloss for each municipality, from the Kumisión name list the
+// Municipalities game uses (matched by municipality id).
+const GLOSS_BY_ID = new Map(MUNICIPALITIES.map((m) => [m.id, m.english]));
 
 // The shapes as drawn here: the same projection as the game's data, at one
 // decimal place (a tenth of a map unit) to keep the page light. Each shape
@@ -105,7 +110,12 @@ function SealMark() {
 // the "in preparation" state shows instead. Nothing is generated here.
 function MunicipalityCard({ id }) {
   const feature = FEATURES_BY_ID.get(id);
-  const { displayName, censusName, vocabularyDeck } = feature.properties;
+  const { displayName, vocabularyDeck } = feature.properties;
+  // The English line under the name: a hand written override where one
+  // exists, otherwise the English gloss. No Census name fallback: with
+  // neither, the line is left out. It is also left out when it is the same
+  // as the CHamoru name (Piti, Mangilao).
+  const subtitle = SUBTITLE_OVERRIDES[id] ?? GLOSS_BY_ID.get(id) ?? '';
   const content = MUNICIPALITY_CONTENT[id] ?? {};
   const vocabulary = content.vocabulary?.length ? content.vocabulary : (vocabularyDeck?.length ? vocabularyDeck : null);
   const hasContent = Boolean(content.photo || content.history?.length || content.culture?.length || vocabulary);
@@ -113,8 +123,8 @@ function MunicipalityCard({ id }) {
   return (
     <div className={styles.cardBody}>
       <h2 className={styles.cardName} lang="ch">{displayName}</h2>
-      {censusName && censusName !== displayName && (
-        <p className={styles.cardSecondName}>{censusName}</p>
+      {subtitle && subtitle !== displayName && (
+        <p className={styles.cardSecondName}>{subtitle}</p>
       )}
       <hr className={styles.goldRule} />
 
