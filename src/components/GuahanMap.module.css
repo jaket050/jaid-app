@@ -126,11 +126,6 @@
   stroke: none;
 }
 
-.hills ellipse {
-  fill: #1F5A2C;
-  fill-opacity: 0.16;
-}
-
 .borders path {
   fill: none;
   stroke: #1F4D24;

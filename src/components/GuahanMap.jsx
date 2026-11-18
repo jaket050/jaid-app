@@ -50,17 +50,9 @@ const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)'
 // ---------------------------------------------------------------------------
 // Static terrain: drawn once, never re-rendered on hover, selection or zoom.
 // Elevation tint (lighter on the northern plateau, deeper green through the
-// volcanic south), soft hill shading clipped to the land, and a reef halo
-// and shadow drawn as soft low opacity strokes (no SVG filters).
+// volcanic south), and a reef halo and shadow drawn as soft low opacity
+// strokes (no SVG filters).
 // ---------------------------------------------------------------------------
-const HILLS = [
-  { cx: 112, cy: 468, rx: 46, ry: 26, rot: -30 },
-  { cx: 150, cy: 520, rx: 40, ry: 22, rot: -20 },
-  { cx: 96, cy: 566, rx: 34, ry: 18, rot: -35 },
-  { cx: 168, cy: 452, rx: 30, ry: 16, rot: -10 },
-  { cx: 132, cy: 600, rx: 28, ry: 14, rot: -25 },
-];
-
 const Terrain = memo(function Terrain() {
   return (
     <g aria-hidden="true">
@@ -72,9 +64,6 @@ const Terrain = memo(function Terrain() {
           <stop offset="0.7" stopColor="#5FA85E" />
           <stop offset="1" stopColor="#3E8A4C" />
         </linearGradient>
-        <clipPath id="itano-land">
-          {REGIONS.map((r) => shapeRef(r.id))}
-        </clipPath>
       </defs>
 
       {/* Shadow, then the turquoise reef halo in the shallow water. */}
@@ -87,14 +76,9 @@ const Terrain = memo(function Terrain() {
         </g>
       ))}
 
-      {/* Land with the elevation tint, and hill shading clipped to it. */}
+      {/* Land with the elevation tint. */}
       <g className={styles.land}>
         {REGIONS.map((r) => shapeRef(r.id))}
-      </g>
-      <g clipPath="url(#itano-land)" className={styles.hills}>
-        {HILLS.map((h, i) => (
-          <ellipse key={i} cx={h.cx} cy={h.cy} rx={h.rx} ry={h.ry} transform={`rotate(${h.rot} ${h.cx} ${h.cy})`} />
-        ))}
       </g>
 
       {/* Thin borders so each municipality reads as distinct (real paths,
