@@ -190,7 +190,7 @@ WHERE NOT EXISTS (SELECT 1 FROM vocabulary x WHERE x.category = 'Land' AND lower
 INSERT INTO vocabulary (chamorro, english, type, difficulty, category, source, verified)
 SELECT v.chamorro, v.english, v.type, 1, 'Places', 'Kumision i Fino'' CHamoru 2026', false
 FROM (VALUES
-  ('Agaña Heights-Tutuhan', 'Agana Heights-Tutuhan', 'Phrase'),  -- line 246
+  ('Agaña Heights-Tutuhan', 'Agaña Heights-Tutuhan', 'Phrase'),  -- line 246
   ('Mongmong-To''to-Maite''', 'Monmong-Toto-Maite', 'Word')  -- line 253
 ) AS v(chamorro, english, type)
 WHERE NOT EXISTS (SELECT 1 FROM vocabulary x WHERE x.category = 'Places' AND lower(x.chamorro) = lower(v.chamorro));

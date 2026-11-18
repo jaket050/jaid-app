@@ -3,8 +3,8 @@
 // Source: Kumision i Fino' CHamoru, MunicipalitiesofGuam1.pdf (2025)
 
 export const MUNICIPALITIES = [
-  { id: 'hagatna',               chamorro: 'Hagåtña',                english: 'Agana' },
-  { id: 'agana-heights-tutuhan', chamorro: 'Agaña Heights-Tutuhan',  english: 'Agana Heights-Tutuhan' },
+  { id: 'hagatna',               chamorro: 'Hagåtña',                english: 'Agaña' },
+  { id: 'agana-heights-tutuhan', chamorro: 'Agaña Heights-Tutuhan',  english: 'Agaña Heights-Tutuhan' },
   { id: 'hagat',                 chamorro: 'Hågat',                  english: 'Agat' },
   { id: 'assan-maina',           chamorro: "Assan-Ma'ina",           english: 'Asan-Maina' },
   { id: 'barigada',              chamorro: 'Barigåda',               english: 'Barrigada' },
