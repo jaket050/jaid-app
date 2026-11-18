@@ -3020,9 +3020,10 @@ body:has(.app-status) #root {
 /* ─── Sprint additions: streak, learned, hints, toast, celebration ─── */
 
 .hero-streak {
-  font-family: var(--heading);
-  font-weight: 700;
-  font-size: 0.75rem;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  font-style: inherit;
   color: var(--ui-accent-text);
   margin: 0 0.35em 0 0;
   vertical-align: middle;
