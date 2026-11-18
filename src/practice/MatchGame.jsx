@@ -115,6 +115,9 @@ function MatchGame({ mode = 'kinship' }) {
   useSessionId()
 
   const config = MODE_CONFIG[mode] ?? MODE_CONFIG.kinship
+  // The mode actually played (an unknown mode falls back to kinship), for
+  // the pair events.
+  const modeKey = MODE_CONFIG[mode] ? mode : 'kinship'
 
   const [allWords, setAllWords] = useState([])
   const [loading, setLoading] = useState(true)
@@ -177,15 +180,15 @@ function MatchGame({ mode = 'kinship' }) {
     if (selectedCh === null || selectedEn === null) return
     if (wrongPair) return
     if (selectedCh === selectedEn) {
-      logEvent('card_game_pair_flipped', { word_id: selectedCh, pair_matched: true })
+      logEvent('card_game_pair_flipped', { word_id: selectedCh, pair_matched: true, mode: modeKey })
       setMatchedIds((prev) => new Set(prev).add(selectedCh))
       setSelectedCh(null)
       setSelectedEn(null)
       return
     }
-    logEvent('card_game_pair_flipped', { word_id: selectedCh, pair_matched: false })
+    logEvent('card_game_pair_flipped', { word_id: selectedCh, pair_matched: false, mode: modeKey })
     setWrongPair({ chId: selectedCh, enId: selectedEn })
-  }, [selectedCh, selectedEn, wrongPair])
+  }, [selectedCh, selectedEn, wrongPair, modeKey])
 
   // Clear a wrong pair after the flash timeout.
   useEffect(() => {

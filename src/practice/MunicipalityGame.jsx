@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import { Check, Star } from 'lucide-react'
+import { logEvent } from '../utils/logEvent'
 import {
   INSET,
   LEVELS_WITH_INSET,
@@ -233,6 +234,9 @@ function MunicipalityGame() {
     } else {
       setWrongId(result.zone.id)
     }
+    // Logged here, not in the shared reducer. Places are not vocabulary
+    // rows, so the place asked for goes in item_key.
+    logEvent('answer_submitted', { mode: 'municipality', item_key: targetId, correct: result.correct })
     dispatch({ type: 'tap', result })
   }
 

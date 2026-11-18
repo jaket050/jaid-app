@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import FlashCard from './FlashCard'
 import { nextCategory } from '../utils/learningPath'
+import { logEvent } from '../utils/logEvent'
 
 function shuffle(arr) {
   const out = [...arr]
@@ -59,7 +60,10 @@ function StudyMode({ words, completedIds, toggleId, totalWords, category, onSele
 
   const card = queue[0]
 
+  // Each choice is logged as a self-graded answer: Got it is correct,
+  // Practice more is not.
   const handleGotIt = () => {
+    logEvent('answer_submitted', { mode: 'study', word_id: card.id, correct: true })
     if (!completedIds.has(card.id)) toggleId(card.id)
     setGotItIds(prev => new Set(prev).add(card.id))
     setQueue(prev => prev.slice(1))
@@ -67,6 +71,7 @@ function StudyMode({ words, completedIds, toggleId, totalWords, category, onSele
   }
 
   const handlePracticeMore = () => {
+    logEvent('answer_submitted', { mode: 'study', word_id: card.id, correct: false })
     setQueue(prev => [...prev.slice(1), prev[0]])
     setRevealed(false)
   }

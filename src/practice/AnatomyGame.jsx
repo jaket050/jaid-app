@@ -16,6 +16,7 @@ import {
   startPlay,
 } from './anatomyLogic.js'
 import AnatomyFigure from './AnatomyFigure.jsx'
+import { logEvent } from '../utils/logEvent'
 import './anatomy.css'
 
 const WRONG_FLASH_MS = 500
@@ -228,6 +229,9 @@ function AnatomyGame() {
     } else {
       setWrongZoneId(result.zone.id)
     }
+    // Logged here, not in the reducer, so anatomyLogic.js stays pure. The
+    // word asked for is a vocabulary id (anatomyGameSpots.js).
+    logEvent('answer_submitted', { mode: 'anatomy', word_id: targetId, correct: result.correct })
     dispatch({ type: 'tap', result })
   }
 

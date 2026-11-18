@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Check } from 'lucide-react'
 import { nextCategory } from '../utils/learningPath'
+import { logEvent } from '../utils/logEvent'
 
 const QUESTION_COUNT = 10
 const ADVANCE_MS = 1100
@@ -120,7 +121,9 @@ function QuizMode({ words, category, onSelectDeck, onExit }) {
     if (locked) return
     setSelected(option)
     setLocked(true)
-    if (option === q.correct) setScore((s) => s + 1)
+    const correct = option === q.correct
+    logEvent('answer_submitted', { mode: 'quiz', word_id: q.word.id, correct })
+    if (correct) setScore((s) => s + 1)
     setTimeout(() => {
       setIdx((i) => i + 1)
       setSelected(null)
