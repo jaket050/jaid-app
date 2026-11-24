@@ -237,7 +237,7 @@ function App() {
           className="btn-match"
           onClick={() => { window.location.href = '/practice' }}
         >
-          CARD MATCH
+          GAMES
         </button>
         <button className="btn-alphabet" onClick={() => setView("alphabet")}>
           I Atfabetu

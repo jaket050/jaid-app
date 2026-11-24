@@ -7,25 +7,24 @@ const MODES = [
     slug: 'family',
     label: 'Kinship',
     subtitle: 'Family & relations',
-    count: 46,
+    category: 'family',
   },
   {
     slug: 'weather',
     label: 'Weather',
     subtitle: 'Climate & seasons',
-    count: 43,
+    category: 'weather',
   },
   {
     slug: 'food',
     label: 'Food',
     subtitle: 'CHamoru cuisine',
-    count: 37,
+    category: 'food',
   },
   {
     slug: 'antonyms',
     label: 'Antonyms',
     subtitle: 'Opposites match',
-    count: null,
   },
   {
     slug: 'map',
@@ -41,8 +40,27 @@ const MODES = [
   },
 ]
 
+// Kinship, Weather and Food show how many verified words the game will deal,
+// counted with the same filter as MatchGame.fetchVocab (category, case
+// insensitive, verified only). Antonyms counts verified pairs whose words are
+// both verified. Municipalities and Anatomy are fixed game assets: 19 places
+// (municipalityGameNames.js) and 22 parts (anatomyGameSpots.js).
 function MatchModeSelect() {
   const [pairCount, setPairCount] = useState(null)
+  const [wordCounts, setWordCounts] = useState({})
+
+  useEffect(() => {
+    for (const { category } of MODES.filter((m) => m.category)) {
+      supabase
+        .from('vocabulary')
+        .select('id', { count: 'exact', head: true })
+        .ilike('category', category)
+        .eq('verified', true)
+        .then(({ count }) => {
+          if (count !== null) setWordCounts((prev) => ({ ...prev, [category]: count }))
+        })
+    }
+  }, [])
 
   useEffect(() => {
     supabase
@@ -62,13 +80,13 @@ function MatchModeSelect() {
       <header className="match-game__header">
         <a className="match-game__home" href="/">← Home</a>
         <span className="match-game__brand">JAID</span>
-        <span className="match-game__progress">Card Match</span>
+        <span className="match-game__progress">Games</span>
       </header>
 
       <div className="match-mode-select">
         <h2 className="match-mode-select__title">Choose a Mode</h2>
         <p className="match-mode-select__subtitle">
-          Match CHamoru words to their English meanings — or find their opposites.
+          Match words, place names on the map, and find the parts of the body.
         </p>
 
         <div className="match-mode-select__grid">
@@ -83,6 +101,8 @@ function MatchModeSelect() {
               <span className="match-mode-card__count">
                 {m.slug === 'antonyms'
                   ? (pairCount !== null ? `${pairCount} pairs` : '…')
+                  : m.category
+                  ? (wordCounts[m.category] != null ? `${wordCounts[m.category]} words` : '…')
                   : m.slug === 'map'
                   ? '19 places'
                   : `${m.count} words`}
