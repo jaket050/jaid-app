@@ -396,7 +396,7 @@ function MunicipalityGame() {
     <div className={`muni-match muni-match--${mode} muni-match--${level}`}>
       <header className="muni-match__header">
         <div className="muni-match__brand">
-          <a className="muni-match__home" href="/practice">← Modes</a>
+          <a className="muni-match__home" href="/practice">← Games</a>
           <h1 className="muni-match__title">Municipalities</h1>
         </div>
         <div className="muni-match__switches">

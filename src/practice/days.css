@@ -1,0 +1,288 @@
+/* Days of the Week: drag each CHamoru day onto its English slot. Shares
+   the header, instructions and button from match.css. Sized for K-5 on a
+   tablet first: every card, slot and button is at least 44px each way.
+
+   One row of seven at 720px and wider (tablets in portrait and up), and
+   four columns from 481px to 719px; the tray and the slots share the
+   column count so each card sits above a slot of the same width. At 480px
+   and below (phones, down to 320px) the tray has three columns and each
+   slot is a full width row, day on the left and drop area on the right,
+   which keeps the drag from the tray to the last slot short. */
+
+.days-game .match-game__home {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+.days-board {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+}
+
+.days-board__title {
+  font-family: var(--heading);
+  font-size: 1.8rem;
+  color: var(--ui-heading);
+  margin: 0;
+  text-align: center;
+}
+
+.days-board__instructions {
+  margin-top: 0;
+}
+
+.days-row {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.days-tray__item,
+.days-tray__gap,
+.days-slots__item {
+  min-width: 0;
+}
+
+.days-tray__gap {
+  min-height: 60px;
+}
+
+/* ─── CHamoru cards ───────────────────────────────────────────── */
+
+.days-card {
+  position: relative;
+  width: 100%;
+  min-height: 60px;
+  padding: 0.5rem 0.4rem;
+  box-sizing: border-box;
+  background: var(--ui-surface-card);
+  border: 2px solid var(--ui-border-game);
+  border-radius: 12px;
+  color: var(--ui-text);
+  font-family: var(--heading);
+  font-size: 1.1rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  cursor: grab;
+  /* Touch drags move the card instead of scrolling the page. */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.days-card:hover:not(:disabled) {
+  background: var(--ui-card-hover);
+  border-color: var(--ui-accent);
+}
+
+.days-card:focus-visible,
+.days-slot:focus-visible,
+.days-finish__btn:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+
+.days-card--held {
+  background: var(--ui-card-selected);
+  border-color: var(--ui-accent-text);
+  color: var(--ui-card-selected-text);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.35), 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.days-card--dragging {
+  z-index: 10;
+  cursor: grabbing;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+.days-card--returning {
+  transition: transform 0.18s ease-out;
+}
+
+.days-card--wrong {
+  animation: match-shake 0.4s ease-in-out;
+}
+
+/* ─── English slots ───────────────────────────────────────────── */
+
+.days-slot {
+  width: 100%;
+  min-height: 112px;
+  padding: 0.5rem 0.4rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4rem;
+  background: var(--ui-surface-raised);
+  border: 2px dashed var(--ui-border-game);
+  border-radius: 12px;
+  color: var(--ui-text);
+  font-family: var(--sans);
+  cursor: default;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.days-slot__day {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.days-slot__drop {
+  flex: 1;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.days-game--holding .days-slot:not(.days-slot--correct) {
+  cursor: pointer;
+  border-color: var(--ui-accent-text);
+}
+
+.days-slot--hover {
+  border-style: solid;
+  border-color: var(--ui-accent);
+  background: var(--ui-card-hover);
+}
+
+.days-slot--correct {
+  border-style: solid;
+  border-color: var(--ui-accent);
+  background: rgba(201, 168, 76, 0.22);
+}
+
+.days-slot__word {
+  font-family: var(--heading);
+  font-size: 1.1rem;
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* ─── Finish ──────────────────────────────────────────────────── */
+
+.days-finish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 52px;
+}
+
+.days-finish__text {
+  margin: 0;
+  font-family: var(--heading);
+  font-size: 1.8rem;
+  color: var(--ui-heading);
+}
+
+.days-finish__btn {
+  min-height: 52px;
+  min-width: 180px;
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+.days-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── Narrower screens ────────────────────────────────────────── */
+
+@media (max-width: 719px) {
+  .days-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .days-board {
+    padding: 1rem 1rem 2rem;
+    gap: 1rem;
+  }
+
+  .days-board__title {
+    font-size: 1.4rem;
+  }
+
+  .days-tray {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .days-card,
+  .days-tray__gap {
+    min-height: 56px;
+  }
+
+  .days-card {
+    font-size: 1rem;
+  }
+
+  .days-slots {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.4rem;
+  }
+
+  .days-slot {
+    min-height: 60px;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .days-slot__day {
+    flex: 0 0 6.5rem;
+    text-align: left;
+  }
+
+  .days-slot__drop {
+    min-height: 48px;
+  }
+}
+
+/* No motion: no snap back, no shake (the code also skips the sparkles and
+   the confetti). A correct slot gets a heavier gold border instead. */
+@media (prefers-reduced-motion: reduce) {
+  .days-card,
+  .days-slot,
+  .days-card--returning {
+    transition: none;
+  }
+
+  .days-card--wrong {
+    animation: none;
+  }
+
+  .days-slot--correct {
+    border-width: 4px;
+  }
+}

@@ -38,13 +38,20 @@ const MODES = [
     subtitle: 'Body parts on the figure',
     count: 22,
   },
+  {
+    slug: 'days',
+    label: 'Days',
+    subtitle: 'Order the week',
+    count: 7,
+  },
 ]
 
 // Kinship, Weather and Food show how many verified words the game will deal,
 // counted with the same filter as MatchGame.fetchVocab (category, case
 // insensitive, verified only). Antonyms counts verified pairs whose words are
 // both verified. Municipalities and Anatomy are fixed game assets: 19 places
-// (municipalityGameNames.js) and 22 parts (anatomyGameSpots.js).
+// (municipalityGameNames.js) and 22 parts (anatomyGameSpots.js). Days shows
+// 7 days, the length of a week, not a vocabulary count.
 function MatchModeSelect() {
   const [pairCount, setPairCount] = useState(null)
   const [wordCounts, setWordCounts] = useState({})
@@ -84,9 +91,9 @@ function MatchModeSelect() {
       </header>
 
       <div className="match-mode-select">
-        <h2 className="match-mode-select__title">Choose a Mode</h2>
+        <h2 className="match-mode-select__title">Games</h2>
         <p className="match-mode-select__subtitle">
-          Match words, place names on the map, and find the parts of the body.
+          Practice through matching, placing, and ordering.
         </p>
 
         <div className="match-mode-select__grid">
@@ -105,6 +112,8 @@ function MatchModeSelect() {
                   ? (wordCounts[m.category] != null ? `${wordCounts[m.category]} words` : '…')
                   : m.slug === 'map'
                   ? '19 places'
+                  : m.slug === 'days'
+                  ? `${m.count} days`
                   : `${m.count} words`}
               </span>
             </a>

@@ -326,7 +326,7 @@ function AnatomyGame() {
     <div className={`anatomy-game anatomy-game--${mode} anatomy-game--${level}`}>
       <header className="anatomy-game__header">
         <div className="anatomy-game__brand">
-          <a className="anatomy-game__home" href="/practice">← Modes</a>
+          <a className="anatomy-game__home" href="/practice">← Games</a>
           <h1 className="anatomy-game__title">Anatomy Match</h1>
         </div>
         <div className="anatomy-game__switches">

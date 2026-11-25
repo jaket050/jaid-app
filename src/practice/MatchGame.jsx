@@ -243,7 +243,7 @@ function MatchGame({ mode = 'kinship' }) {
     return (
       <div className="match-game">
         <header className="match-game__header">
-          <a className="match-game__home" href="/practice">← Modes</a>
+          <a className="match-game__home" href="/practice">← Games</a>
           <span className="match-game__brand">JAID</span>
           <span className="match-game__progress">{config.label} Match</span>
         </header>
@@ -255,7 +255,7 @@ function MatchGame({ mode = 'kinship' }) {
   return (
     <div className="match-game">
       <header className="match-game__header">
-        <a className="match-game__home" href="/practice">← Modes</a>
+        <a className="match-game__home" href="/practice">← Games</a>
         <span className="match-game__brand">JAID</span>
         <span className="match-game__progress">
           {config.label} · {matchedIds.size}/{chList.length || 0} matched ·{' '}
@@ -268,7 +268,7 @@ function MatchGame({ mode = 'kinship' }) {
           <div className="match-game__overlay">
             <h2 className="match-game__overlay-title">No {config.label} words yet</h2>
             <p className="match-game__overlay-text">{config.emptyMessage}</p>
-            <a className="match-game__btn" href="/practice">← Choose a mode</a>
+            <a className="match-game__btn" href="/practice">← Games</a>
           </div>
         ) : (
           <div className="match-game__overlay">
