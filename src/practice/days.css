@@ -69,24 +69,40 @@
   box-sizing: border-box;
   background: var(--ui-surface-card);
   border: 2px solid var(--ui-border-game);
+  /* Gold accent along the top, like the tab of an index card. */
+  border-top: 3px solid var(--ui-accent);
+  /* Alternative for comparison: a gold edge on the left instead.
+  border-top: 2px solid var(--ui-border-game);
+  border-left: 3px solid var(--ui-accent); */
   border-radius: 12px;
   color: var(--ui-text);
   font-family: var(--heading);
-  font-size: 1.1rem;
+  /* Same size as a placed word (.days-slot__word, which has the rules). */
+  font-size: clamp(14px, 2.892vw - 6.95px, 17.6px);
   line-height: 1.2;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
   cursor: grab;
   /* Touch drags move the card instead of scrolling the page. */
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+  /* A card lifted off the page. */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
 
 .days-card:hover:not(:disabled) {
   background: var(--ui-card-hover);
   border-color: var(--ui-accent);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Desktop only (a mouse or trackpad): the card rises a little under the
+   pointer. Touch screens skip it, so a tapped card does not stay raised. */
+@media (hover: hover) and (pointer: fine) {
+  .days-card:hover:not(:disabled):not(.days-card--dragging) {
+    transform: translateY(-2px);
+  }
 }
 
 .days-card:focus-visible,
@@ -107,6 +123,9 @@
   z-index: 10;
   cursor: grabbing;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  /* The card follows the pointer exactly; the hover lift's transform
+     transition would make it trail. */
+  transition: none;
 }
 
 .days-card--returning {
@@ -128,8 +147,13 @@
   flex-direction: column;
   align-items: stretch;
   gap: 0.4rem;
-  background: var(--ui-surface-raised);
-  border: 2px dashed var(--ui-border-game);
+  /* An empty slot: a soft gold tint and a thin, faint gold border, so it
+     reads as a place for a card. color-mix follows --ui-accent; the rgba
+     line before it (the same gold) covers browsers without color-mix. */
+  background: rgba(201, 168, 76, 0.1);
+  background: color-mix(in srgb, var(--ui-accent) 10%, transparent);
+  border: 2px solid rgba(201, 168, 76, 0.45);
+  border-color: color-mix(in srgb, var(--ui-accent) 45%, transparent);
   border-radius: 12px;
   color: var(--ui-text);
   font-family: var(--sans);
@@ -137,12 +161,32 @@
   transition: background 0.2s, border-color 0.2s;
 }
 
+/* The English day is the largest text in the slot, on one line, never
+   under 16px, and at least 12px from the slot's border on each side. The
+   label's own padding adds to the slot's 0.4rem to make the 12px; the drop
+   area below keeps the slot's narrower padding, so a placed CHamoru word
+   has the room it had before.
+
+   "Wednesday", the longest, measures 5.615em in Nunito 800. In the row of
+   seven it fits at 16px with that 12px only from about 970px, so from
+   720px to 969px every slot shows the three letter form (Sun, Mon...).
+   From 970px the full names grow with the window, 16px up to 18.9px at
+   about 1100px, the most the 1080px board allows. The size is in px, not
+   rem: the root font is 18px above 1024px (index.css), and the board's
+   rem padding and gaps grow with it, so a rem size there overflowed the
+   slot and lost its centering. The sizes allow for a 17px desktop
+   scrollbar (vw counts it, the layout does not) and keep 3% to spare. */
 .days-slot__day {
-  font-size: 0.95rem;
+  padding-inline: calc(12px - 0.4rem);
+  font-size: clamp(16px, 2.468vw - 8.19px, 18.9px);
   font-weight: 800;
-  letter-spacing: 0.02em;
+  line-height: 1.2;
   text-align: center;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+}
+
+.days-slot__day-short {
+  display: none;
 }
 
 .days-slot__drop {
@@ -160,23 +204,42 @@
 }
 
 .days-slot--hover {
-  border-style: solid;
   border-color: var(--ui-accent);
-  background: var(--ui-card-hover);
+  background: rgba(201, 168, 76, 0.18);
+  background: color-mix(in srgb, var(--ui-accent) 18%, transparent);
 }
 
+/* A filled slot: a stronger gold tint and the full gold border. */
 .days-slot--correct {
-  border-style: solid;
   border-color: var(--ui-accent);
-  background: rgba(201, 168, 76, 0.22);
+  background: rgba(201, 168, 76, 0.25);
+  background: color-mix(in srgb, var(--ui-accent) 25%, transparent);
 }
 
+/* A CHamoru word, on a tray card or placed in a slot, stays on one line
+   at the same size in both. "Damenggo", the longest, measures 4.791em in
+   Playfair Display 400. Sizes are in px because the root font is 18px
+   above 1024px (index.css); they allow for a 17px desktop scrollbar and
+   keep 3% to spare.
+   - Row of seven, 720px to 1024px: a column at 720px holds Damenggo only
+     at 14px, so the size runs 14px at 720px, 16px from about 795px, and
+     17.6px (the old 1.1rem) from about 850px.
+   - Above 1024px: 19.8px, the old 1.1rem at the 18px root.
+   - Four columns (481px to 719px) and the phone tray: see the
+     breakpoints below. */
 .days-slot__word {
   font-family: var(--heading);
-  font-size: 1.1rem;
+  font-size: clamp(14px, 2.892vw - 6.95px, 17.6px);
   line-height: 1.2;
   text-align: center;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+}
+
+@media (min-width: 1025px) {
+  .days-card,
+  .days-slot__word {
+    font-size: 19.8px;
+  }
 }
 
 /* ─── Finish ──────────────────────────────────────────────────── */
@@ -221,6 +284,20 @@
   .days-row {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+
+  /* Four columns: Damenggo fits at 16px at 481px, 17.6px from about
+     510px. */
+  .days-card,
+  .days-slot__word {
+    font-size: clamp(16px, 5.062vw - 8.15px, 17.6px);
+  }
+
+  /* Four columns: full names fit at 16px, with the 12px each side, from
+     577px (481px to 576px use the three letter form, below) and reach
+     1.3rem at about 690px. */
+  .days-slot__day {
+    font-size: clamp(1rem, 4.319vw - 0.5555rem, 1.3rem);
+  }
 }
 
 @media (max-width: 480px) {
@@ -243,8 +320,17 @@
     min-height: 56px;
   }
 
+  /* Phone tray, three columns: Damenggo fits at 15px at 320px, 16px (the
+     old 1rem) from about 335px, with 4px side padding so it still fits
+     when a desktop scrollbar takes 15px. A placed word sits beside the
+     label in a wide row, so it keeps 17.6px. */
   .days-card {
-    font-size: 1rem;
+    padding-inline: 4px;
+    font-size: clamp(15px, 6.749vw - 6.64px, 16px);
+  }
+
+  .days-slot__word {
+    font-size: 17.6px;
   }
 
   .days-slots {
@@ -259,8 +345,12 @@
     padding: 0.3rem 0.5rem;
   }
 
+  /* One slot per row: the 6.5rem (104px) label column holds Wednesday
+     at 1.1rem (99px). */
   .days-slot__day {
     flex: 0 0 6.5rem;
+    padding-inline: 0;
+    font-size: 1.1rem;
     text-align: left;
   }
 
@@ -269,13 +359,36 @@
   }
 }
 
-/* No motion: no snap back, no shake (the code also skips the sparkles and
-   the confetti). A correct slot gets a heavier gold border instead. */
+/* The three letter form where full names cannot fit at 16px with 12px
+   each side (see .days-slot__day). After the breakpoints above so its
+   size wins. */
+@media (min-width: 720px) and (max-width: 969px), (min-width: 481px) and (max-width: 576px) {
+  .days-slot__day {
+    font-size: 1.3rem;
+  }
+
+  .days-slot__day-full {
+    display: none;
+  }
+
+  .days-slot__day-short {
+    display: inline;
+  }
+}
+
+/* No motion: no snap back, no shake, no hover lift (the code also skips
+   the sparkles and the confetti). A correct slot gets a heavier gold
+   border instead. */
 @media (prefers-reduced-motion: reduce) {
   .days-card,
   .days-slot,
   .days-card--returning {
     transition: none;
+  }
+
+  /* Same selector as the lift, so this later rule wins. */
+  .days-card:hover:not(:disabled):not(.days-card--dragging) {
+    transform: none;
   }
 
   .days-card--wrong {

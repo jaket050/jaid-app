@@ -466,7 +466,13 @@ function DaysGame() {
                   onClick={() => onSlotClick(i)}
                   onKeyDown={(e) => onSlotKeyDown(e, i)}
                 >
-                  <span className="days-slot__day">{day}</span>
+                  {/* Full name, or the three letter form (Sun, Mon...) where the
+                      full name cannot fit one line at 16px; days.css picks. The
+                      button's aria-label always gives the full name. */}
+                  <span className="days-slot__day">
+                    <span className="days-slot__day-full">{day}</span>
+                    <span className="days-slot__day-short">{day.slice(0, 3)}</span>
+                  </span>
                   <span className="days-slot__drop">
                     {word && <span className="days-slot__word">{word.chamorro}</span>}
                   </span>
