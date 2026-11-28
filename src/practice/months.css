@@ -1,0 +1,514 @@
+/* Months of the Year: drag each CHamoru month onto its English month on a
+   wheel. Shares the header, instructions and button from match.css, and
+   the look of the Days of the Week game (days.css). Sized for K-5 on a
+   tablet first: every card and position is at least 44px each way.
+
+   Layouts (all sizes in px, because the root font is 18px above 1024px in
+   index.css and the measurements below assume fixed sizes):
+   - 1024px and wider: the tray in two columns beside the wheel.
+   - 720px to 1023px (iPad portrait): the tray in six columns above the
+     wheel.
+   - 481px to 719px: no wheel; the tray in four columns above a grid of
+     positions, three across, in month order.
+   - 480px and below (phones, down to 320px): the tray in three columns
+     above a grid of positions, two across.
+
+   The wheel is a 650px square (720px from 1280px) with each position
+   centered on a circle of radius 42%, January at 12 o'clock; each
+   position is a soft rounded square (see "The friendly ring" below). The
+   longest English name, September, measures 5.219em in Nunito 800 and the
+   longest CHamoru name, Septiembre, 5.180em in Playfair Display; every
+   size below keeps both on one line inside its position and allows for a
+   17px desktop scrollbar. */
+
+.months-game .match-game__home {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+.months-board {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 24px 48px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 24px;
+}
+
+.months-board__title {
+  font-family: var(--heading);
+  font-size: 28px;
+  color: var(--ui-heading);
+  margin: 0;
+  text-align: center;
+}
+
+.months-board__instructions {
+  margin-top: 0;
+}
+
+.months-play {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 24px;
+}
+
+/* ─── Tray of CHamoru cards ───────────────────────────────────── */
+
+.months-tray {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.months-tray__item,
+.months-tray__gap {
+  min-width: 0;
+}
+
+.months-tray__gap {
+  min-height: 60px;
+}
+
+.months-card {
+  position: relative;
+  width: 100%;
+  min-height: 60px;
+  padding: 8px 6px;
+  box-sizing: border-box;
+  background: var(--ui-surface-card);
+  /* A rounded pill that reads as borderless: the sides and bottom keep a
+     faint edge so a white card still shows on the near white page in light
+     mode. The gold top stays. */
+  border: 2px solid rgba(127, 140, 153, 0.35);
+  border-color: color-mix(in srgb, var(--ui-border-game) 35%, transparent);
+  border-top: 3px solid var(--ui-accent);
+  border-radius: 18px;
+  color: var(--ui-text);
+  font-family: var(--heading);
+  /* Six columns: Septiembre fits at 15px at 720px and 17.6px from about
+     775px. */
+  font-size: clamp(15px, 3.121vw - 6.59px, 17.6px);
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: grab;
+  /* Touch drags move the card instead of scrolling the page. */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.months-card:hover:not(:disabled) {
+  background: var(--ui-card-hover);
+  border-color: var(--ui-accent);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Desktop only (a mouse or trackpad): the card rises a little under the
+   pointer. Touch screens skip it, so a tapped card does not stay raised. */
+@media (hover: hover) and (pointer: fine) {
+  .months-card:hover:not(:disabled):not(.is-dragging) {
+    transform: translateY(-2px);
+  }
+}
+
+.months-card:focus-visible,
+.months-pos:focus-visible,
+.months-finish__btn:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+
+.months-card--held {
+  background: var(--ui-card-selected);
+  border-color: var(--ui-accent-text);
+  color: var(--ui-card-selected-text);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.35), 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.months-card.is-dragging {
+  z-index: 10;
+  cursor: grabbing;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  /* The card follows the pointer exactly; the hover lift's transform
+     transition would make it trail. */
+  transition: none;
+}
+
+.months-card.is-returning {
+  transition: transform 0.18s ease-out;
+}
+
+.months-card--wrong {
+  animation: match-shake 0.4s ease-in-out;
+}
+
+/* ─── The wheel of English months ─────────────────────────────── */
+
+.months-wheel {
+  position: relative;
+  flex: none;
+  list-style: none;
+  width: 650px;
+  height: 650px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* The circle the positions sit on (radius 42%, as in WHEEL_SPOTS). */
+.months-wheel::before {
+  content: '';
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  border: 2px solid rgba(201, 168, 76, 0.3);
+  border-color: color-mix(in srgb, var(--ui-accent) 30%, transparent);
+  pointer-events: none;
+}
+
+/* left and top come from the component (WHEEL_SPOTS). */
+.months-wheel__item {
+  position: absolute;
+  width: 112px;
+  height: 80px;
+  transform: translate(-50%, -50%);
+}
+
+.months-pos {
+  width: 100%;
+  height: 100%;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  /* An empty position: a soft gold tint and a thin, faint gold border.
+     The rgba line before each color-mix (the same gold) covers browsers
+     without color-mix. */
+  background: var(--ui-surface);
+  background: rgba(201, 168, 76, 0.1);
+  background: color-mix(in srgb, var(--ui-accent) 10%, var(--ui-surface));
+  border: 2px solid rgba(201, 168, 76, 0.45);
+  border-color: color-mix(in srgb, var(--ui-accent) 45%, transparent);
+  border-radius: 12px;
+  color: var(--ui-text);
+  font-family: var(--sans);
+  cursor: default;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.months-pos__month {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.months-pos__drop {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.months-pos__word {
+  font-family: var(--heading);
+  font-size: 16px;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.months-game--holding .months-pos:not(.months-pos--correct) {
+  cursor: pointer;
+  border-color: var(--ui-accent-text);
+}
+
+.months-pos--hover {
+  border-color: var(--ui-accent);
+  background: rgba(201, 168, 76, 0.18);
+  background: color-mix(in srgb, var(--ui-accent) 18%, var(--ui-surface));
+}
+
+/* A filled position: a stronger gold tint and the full gold border. */
+.months-pos--correct {
+  border-color: var(--ui-accent);
+  background: rgba(201, 168, 76, 0.25);
+  background: color-mix(in srgb, var(--ui-accent) 25%, var(--ui-surface));
+}
+
+/* ─── Finish ──────────────────────────────────────────────────── */
+
+.months-finish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+}
+
+.months-finish__text {
+  margin: 0;
+  font-family: var(--heading);
+  font-size: 28px;
+  color: var(--ui-heading);
+}
+
+.months-finish__btn {
+  min-height: 52px;
+  min-width: 180px;
+  font-size: 16px;
+  margin-top: 0;
+}
+
+.months-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── The friendly ring (720px and wider) ─────────────────────── */
+
+/* On the wheel each position is a soft rounded square, 96px (104px from
+   1280px), tinted by season. Squares, not circles: the drop test uses
+   each position's rectangle (usePlacementGame.js), so the boxes must not
+   overlap anywhere, and the widest box that clears its neighbours on this
+   wheel is about 99px (110px); a circle that size cannot hold a 16px
+   September. The 24px corner radius stays clear of the two text lines, so
+   both use the full width: September and Septiembre keep 16px (17px on
+   the larger wheel) on one line with about 4px (5px) each side. None of
+   this applies to the grid below 720px. */
+@media (min-width: 720px) {
+  .months-wheel__item {
+    width: 96px;
+    height: 96px;
+  }
+
+  .months-pos {
+    border-radius: 24px;
+    padding: 0;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  /* An empty drop area keeps the word's line, so the month name stays put
+     when a word lands. */
+  .months-pos__drop {
+    flex: none;
+    min-height: 20px;
+  }
+
+  /* Season tints on empty positions, a soft wash of 20% over the page
+     color. A filled position turns gold, and a hovered one gold too, as
+     before. */
+  .months-pos--winter:not(.months-pos--correct):not(.months-pos--hover) {
+    background: rgba(111, 168, 220, 0.2);
+    background: color-mix(in srgb, #6FA8DC 20%, var(--ui-surface));
+  }
+
+  .months-pos--spring:not(.months-pos--correct):not(.months-pos--hover) {
+    background: rgba(124, 196, 127, 0.2);
+    background: color-mix(in srgb, #7CC47F 20%, var(--ui-surface));
+  }
+
+  .months-pos--summer:not(.months-pos--correct):not(.months-pos--hover) {
+    background: rgba(242, 201, 76, 0.2);
+    background: color-mix(in srgb, #F2C94C 20%, var(--ui-surface));
+  }
+
+  .months-pos--fall:not(.months-pos--correct):not(.months-pos--hover) {
+    background: rgba(232, 150, 74, 0.2);
+    background: color-mix(in srgb, #E8964A 20%, var(--ui-surface));
+  }
+
+  /* The celebration pulse on a correct drop (MonthsGame.jsx adds the
+     class). */
+  .months-wheel--pulse {
+    animation: months-wheel-pulse 0.2s ease-in-out;
+  }
+}
+
+@keyframes months-wheel-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* ─── Wide screens: the tray beside the wheel ─────────────────── */
+
+@media (min-width: 1024px) {
+  .months-play {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .months-tray {
+    flex: 1;
+    min-width: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .months-card {
+    font-size: 19.8px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .months-wheel {
+    width: 720px;
+    height: 720px;
+  }
+
+  .months-wheel__item {
+    width: 104px;
+    height: 104px;
+  }
+
+  .months-pos__drop {
+    min-height: 21px;
+  }
+
+  .months-pos__month,
+  .months-pos__word {
+    font-size: 17px;
+  }
+}
+
+/* ─── Below 720px: a grid of positions instead of the wheel ───── */
+
+@media (max-width: 719px) {
+  .months-tray {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  /* Four columns: Septiembre fits at 15px at 481px and 17.6px from about
+     535px. */
+  .months-card {
+    font-size: clamp(15px, 4.681vw - 7.44px, 17.6px);
+  }
+
+  .months-wheel {
+    width: auto;
+    height: auto;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .months-wheel::before {
+    display: none;
+  }
+
+  /* The inline left and top do nothing once the item is not positioned. */
+  .months-wheel__item {
+    position: static;
+    width: auto;
+    height: auto;
+    min-width: 0;
+    transform: none;
+  }
+
+  .months-pos {
+    min-height: 96px;
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .months-pos__drop {
+    min-height: 44px;
+  }
+
+  .months-pos__month,
+  .months-pos__word {
+    font-size: 17.6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .months-board {
+    padding: 16px 16px 32px;
+    gap: 16px;
+  }
+
+  .months-board__title {
+    font-size: 22px;
+  }
+
+  .months-play {
+    gap: 16px;
+  }
+
+  .months-tray {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  /* Three columns: Septiembre fits at 14px at 320px (with a desktop
+     scrollbar) and 16px from about 357px, with 4px side padding. */
+  .months-card {
+    min-height: 56px;
+    padding-inline: 4px;
+    font-size: clamp(14px, 6.242vw - 6.3px, 16px);
+  }
+
+  .months-tray__gap {
+    min-height: 56px;
+  }
+
+  .months-wheel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .months-pos__month,
+  .months-pos__word {
+    font-size: 16px;
+  }
+}
+
+/* No motion: no snap back, no shake, no hover lift (the code also skips
+   the sparkles and the confetti). A correct position gets a heavier gold
+   border instead. */
+@media (prefers-reduced-motion: reduce) {
+  .months-card,
+  .months-pos,
+  .months-card.is-returning {
+    transition: none;
+  }
+
+  /* Same selector as the lift, so this later rule wins. */
+  .months-card:hover:not(:disabled):not(.is-dragging) {
+    transform: none;
+  }
+
+  .months-card--wrong,
+  .months-wheel--pulse {
+    animation: none;
+  }
+
+  .months-pos--correct {
+    border-width: 4px;
+  }
+}

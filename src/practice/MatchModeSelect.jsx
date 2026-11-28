@@ -43,6 +43,14 @@ const MODES = [
     label: 'Days',
     subtitle: 'Order the week',
     count: 7,
+    unit: 'days',
+  },
+  {
+    slug: 'months',
+    label: 'Months',
+    subtitle: 'Build the year',
+    count: 12,
+    unit: 'months',
   },
 ]
 
@@ -50,8 +58,9 @@ const MODES = [
 // counted with the same filter as MatchGame.fetchVocab (category, case
 // insensitive, verified only). Antonyms counts verified pairs whose words are
 // both verified. Municipalities and Anatomy are fixed game assets: 19 places
-// (municipalityGameNames.js) and 22 parts (anatomyGameSpots.js). Days shows
-// 7 days, the length of a week, not a vocabulary count.
+// (municipalityGameNames.js) and 22 parts (anatomyGameSpots.js). Days and
+// Months show 7 days and 12 months, the length of a week and a year, not
+// vocabulary counts.
 function MatchModeSelect() {
   const [pairCount, setPairCount] = useState(null)
   const [wordCounts, setWordCounts] = useState({})
@@ -112,8 +121,8 @@ function MatchModeSelect() {
                   ? (wordCounts[m.category] != null ? `${wordCounts[m.category]} words` : '…')
                   : m.slug === 'map'
                   ? '19 places'
-                  : m.slug === 'days'
-                  ? `${m.count} days`
+                  : m.unit
+                  ? `${m.count} ${m.unit}`
                   : `${m.count} words`}
               </span>
             </a>

@@ -20,6 +20,8 @@ const MunicipalityGame = lazy(() => import('./practice/MunicipalityGame.jsx'))
 const AnatomyGame = lazy(() => import('./practice/AnatomyGame.jsx'))
 // eslint-disable-next-line react-refresh/only-export-components
 const DaysGame = lazy(() => import('./practice/DaysGame.jsx'))
+// eslint-disable-next-line react-refresh/only-export-components
+const MonthsGame = lazy(() => import('./practice/MonthsGame.jsx'))
 
 const path = window.location.pathname.replace(/\/+$/, '')
 const isAdmin = path.startsWith('/admin')
@@ -47,6 +49,10 @@ createRoot(document.getElementById('root')).render(
     ) : isPractice && practiceMode === 'days' ? (
       <Suspense fallback={<p>Loading game…</p>}>
         <DaysGame />
+      </Suspense>
+    ) : isPractice && practiceMode === 'months' ? (
+      <Suspense fallback={<p>Loading game…</p>}>
+        <MonthsGame />
       </Suspense>
     ) : isPractice && practiceMode ? (
       <Suspense fallback={<p>Loading game…</p>}>
